@@ -281,6 +281,28 @@
       </div>
     </div>
 
+
+      <div class="item">
+      <!-- Finn prosent av tallet -->
+      <div class="calculator">
+        <h3>Finn rabattert pris</h3>
+        <div class="input-container">
+          <label for="originalPrice"></label>
+          <input type="number" id="originalPrice" placeholder="Pris"/>
+        </div>
+        <div class="input-container">
+          <label for="discountPercentage"></label>
+          <input type="number" id="discountPercentage" placeholder="Rabatt i %" />
+        </div>
+        <button onclick="calculateDiscount()"><h4>Regn ut</h4></button>
+        <h3>Gir en rabattert pris på: <span id="discountedPrice"></span></h3>
+        <h3>Penger spart: <span id="amountSaved"></span></h3> 
+        <h3>Utregning: <span id="Utregning"></span></h3> 
+        <h3 id="Utregning"></h3><!-- This will display the calculation -->
+      </div>
+    </div>
+      
+
     <div class="outro">
       <h2>Prosent og prosentregning: En enkel innføring</h2>
       <p>Prosent er en viktig del av matematikken som hjelper oss med å forstå og uttrykke forhold og sammenhenger i hverdagen. Ordet "prosent" kommer fra det latinske uttrykket "per centum," som betyr "av hundre." Det er nettopp hva prosent handler om - å representere deler av en helhet i forhold til hundre.</p>
@@ -350,6 +372,32 @@
        }
 
 
+/*Kalkuler rabatt*/
+
+function calculateDiscount() {
+  // Get values from input fields
+  const originalPrice = parseFloat(document.getElementById('originalPrice').value);
+  const discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
+
+  // Calculate the discount amount
+  const discountAmount = (originalPrice * discountPercentage) / 100;
+
+  // Calculate the discounted price
+  const discountedPrice = originalPrice - discountAmount;
+
+  // Construct the formula for display
+  const Utregning = `(${originalPrice} * ${discountPercentage}) / 100`;
+
+
+  // Display the results
+  document.getElementById('discountedPrice').textContent = `${discountedPrice.toFixed(2)}`;
+  document.getElementById('amountSaved').textContent = `${discountAmount.toFixed(2)}`;
+  document.getElementById("Utregning").textContent = Utregning;
+
+
+
+
+      
        /* lavaAnimation */
       
        window.lavaAnimation = (function() {
