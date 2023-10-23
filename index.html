@@ -228,14 +228,14 @@
     <hr size="4px" width="200px" color="#000">
 
     <div class="subheader">
-      <h2>Et knippe prosentkalkulatorer som hjelper deg med prosentregning i hverdagen.</h2>
+      <h2>– Et knippe prosentkalkulatorer som hjelper deg med prosentregning i hverdagen.</h2>
     </div>
 
     <div class="accordion">
       <div class="item">
         <!-- Percentage Increase Calculator -->
         <div class="calculator">
-          <h3>Prosentøkning</h3>
+          <h3>Prosentendring</h3>
           <div class="input-container">
            <label for="initialValue"></label>
            <input type="number" id="initialValue" placeholder="Fra"/>
@@ -245,28 +245,9 @@
            <input type="number" id="finalValue" placeholder="Til"/>
           </div>
           <button onclick="calculatePercentageIncrease()"><h4>Regn ut</h4></button>
-          <h3>Gir en prosentvis økning på: <span id="percentageIncreaseResult"></span>%</h3>
+          <h3>Gir en prosentvis endring på: <span id="percentageIncreaseResult"></span>%</h3>
           <h3>Utregning: <span id="calculationDetails"></span></h3> 
           <h3 id="calculationDetails"></h3><!-- This will display the calculation -->
-        </div>
-      </div>
-
-      <div class="item">
-        <!-- Percentage Decrease Calculator -->
-        <div class="calculator">
-          <h3>Prosentnedgang</h3>
-          <div class="input-container">
-           <label for="initialValue2"></label>
-           <input type="number" id="initialValue2" placeholder="Fra"/>
-          </div>
-          <div class="input-container">
-           <label for="finalValue2"></label>
-           <input type="number" id="finalValue2" placeholder="Til"/>
-          </div>
-          <button onclick="calculatePercentageDecrease()"><h4>Regn ut</h4></button>
-          <h3>Gir en prosentvis nedgang på: <span id="percentageDecreaseResult"></span>%</h3>
-          <h3>Utregning: <span id="calculationDetail"></span></h3> 
-          <h3 id="calculationDetail"></h3><!-- This will display the calculation -->
         </div>
       </div>
     
@@ -343,24 +324,7 @@
          document.getElementById("calculationDetails").textContent = calculationDetails;  // Set the calculation to the new element
       }
 
-      function calculatePercentageDecrease() {
-        const initialValue = parseFloat(
-          document.getElementById("initialValue2").value
-        );
-        const finalValue = parseFloat(
-          document.getElementById("finalValue2").value
-        );
-        const percentageDecrease =
-          ((initialValue - finalValue) / initialValue) * 100;
-
-          // Construct the formula for display
-        const percentageDecreaseResult = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100 = ${percentageDecrease.toFixed(2)}%`;
-        const calculationDetail = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100`;
-
-         document.getElementById("percentageDecreaseResult").textContent = percentageDecrease.toFixed(2);
-         document.getElementById("calculationDetail").textContent = calculationDetail;  // Set the calculation to the new element
-
-      }
+    
 
       function calculatePercentageOfTotal() {
        const partValue = parseFloat(document.getElementById("partValue").value);
