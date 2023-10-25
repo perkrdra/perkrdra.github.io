@@ -589,27 +589,33 @@ function calculateDiscount() {
     }),
     (e.prototype.renderMetaballs = function() {
       for (var t, i = 0; (t = this.balls[i++]); ) t.move();
-      for (
-        this.iter++,
-          this.sign = -this.sign,
-          this.paint = !1,
-          o.fillStyle = this.metaFill,
-          o.beginPath(),
-          i = 0;
-        (t = this.balls[i++]);
 
-      ) {
+    this.iter++,
+    this.sign = -this.sign,
+    this.paint = !1,
+
+    // Setting up shadow
+    o.shadowColor = 'rgba(0, 0, 0, 0.2)';
+    o.shadowBlur = 10;
+    o.shadowOffsetX = 5;
+    o.shadowOffsetY = 5;
+
+    o.fillStyle = this.metaFill,
+    o.beginPath(),
+    i = 0;
+
+    for (; (t = this.balls[i++]); ) {
         var s = [
-          Math.round(t.pos.x / this.step),
-          Math.round(t.pos.y / this.step),
-          !1
+            Math.round(t.pos.x / this.step),
+            Math.round(t.pos.y / this.step),
+            !1
         ];
         do s = this.marchingSquares(s);
         while (s);
         this.paint &&
-          (o.fill(), o.closePath(), o.beginPath(), (this.paint = !1));
-      }
-    });
+        (o.fill(), o.closePath(), o.beginPath(), (this.paint = !1));
+    }
+});
   var r = function(t, i, s, h, e) {
     var r = o.createRadialGradient(t / 1, i / 1, 0, t / 1, i / 1, s);
     return r.addColorStop(0, h), r.addColorStop(1, e), r;
