@@ -39,7 +39,7 @@
       }
 
       h2 {
-        font-size: 24px;
+        font-size: 28px;
         font-weight: 400;
         line-height: 38px;
         color: #000;
@@ -48,7 +48,7 @@
       }
 
       h3 {
-        font-size: 22px;
+        font-size: 24px;
         font-weight: 400;
         line-height: 36px;
         color: #000;
@@ -57,7 +57,7 @@
       }
 
       h4 {
-        font-size: 18px;
+        font-size: 22px;
         font-weight: 400;
         margin: auto;
       }
@@ -115,7 +115,7 @@
 
       .item {
         padding: 5px;
-        border-radius: 5px;
+        border-radius: 50px;
         border: none; /* remove default borders */
         background-color: #f9a66c;
         opacity: 100%;
@@ -158,13 +158,13 @@
       }
 
       input[type="number"] {
-        width: 70%;
+        width: 60%;
         background-color: #ffe88b;
         padding: 10px;
         margin-top: 10px;
         margin-bottom: 20px;
-        border-radius: 5px;
-        font-size: 18px;
+        border-radius: 10px;
+        font-size: 22px;
         border: none; /* remove default borders */
         box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;     
  
@@ -175,9 +175,9 @@
       }
 
       .input-container {
-        display: inline-block;
-        margin-right: 5px;
-        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         
       }
 
@@ -185,11 +185,12 @@
         padding: 10px 30px;
         background-color: #95f0a9;
         color: #000;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
         margin-left: auto;
         margin-right: auto;
         margin-top: 30px;
+        margin-bottom: 30px;
         border: none; /* remove default borders */
         box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;     
  
@@ -237,8 +238,8 @@
       <div class="item">
         <!-- Percentage Increase Calculator -->
         <div class="calculator">
-          <h3>Prosentendring</h3>
           <div class="input-container">
+            <h2>Prosentendring</h2>
            <label for="initialValue"></label>
            <input type="number" id="initialValue" placeholder="Fra"/>
           </div>
@@ -246,10 +247,12 @@
            <label for="finalValue"></label>
            <input type="number" id="finalValue" placeholder="Til"/>
           </div>
+          <div class="input-container">
           <button onclick="calculatePercentageIncrease()"><h4>Regn ut</h4></button>
-          <h3>Gir en prosentvis endring på: <span id="percentageIncreaseResult"></span>%</h3>
+          <h3>Prosentvis endring: <span id="percentageIncreaseResult"></span>%</h3>
           <h3>Utregning: <span id="calculationDetails"></span></h3> 
           <h3 id="calculationDetails"></h3><!-- This will display the calculation -->
+        </div>
         </div>
       </div>
     
