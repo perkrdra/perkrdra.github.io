@@ -260,8 +260,8 @@
       <div class="item">
       <!-- Finn prosent av tallet -->
       <div class="calculator">
-        <h3>Prosentandel av verdi</h3>
         <div class="input-container">
+          <h3>Prosentandel av verdi</h3>
           <label for="partValue"></label>
           <input type="number" id="partValue" placeholder="Hva er"/>
         </div>
@@ -269,19 +269,21 @@
           <label for="totalValue"></label>
           <input type="number" id="totalValue" placeholder="av tallet"/>
         </div>
+        <div class="input-container">
         <button onclick="calculatePercentageOfTotal()"><h4>Regn ut</h4></button>
         <h3>Gir en andel på: <span id="percentageOfTotalResult"></span>%</h3>
         <h3>Utregning: <span id="calculationDetai"></span></h3> 
         <h3 id="calculationDetai"></h3><!-- This will display the calculation -->
       </div>
     </div>
+      </div>
 
 
       <div class="item">
       <!-- Finn prosent av tallet -->
       <div class="calculator">
-        <h3>Rabattert pris</h3>
         <div class="input-container">
+          <h3>Rabattert pris</h3>
           <label for="originalPrice"></label>
           <input type="number" id="originalPrice" placeholder="Pris"/>
         </div>
@@ -289,6 +291,7 @@
           <label for="discountPercentage"></label>
           <input type="number" id="discountPercentage" placeholder="Rabatt i %" />
         </div>
+        <div class="input-container">
         <button onclick="calculateDiscount()"><h4>Regn ut</h4></button>
         <h3>Gir en rabattert pris på: <span id="discountedPrice"></span></h3>
         <h3>Penger spart: <span id="amountSaved"></span></h3> 
@@ -296,6 +299,7 @@
         <h3 id="Utregning"></h3><!-- This will display the calculation -->
       </div>
     </div>
+        </div>
       
 
     <div class="outro">
