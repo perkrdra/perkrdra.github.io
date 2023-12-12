@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="nb">
+<html lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400&family=Roboto:wght@400;700;900&family=Slackey&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap"
+      rel="stylesheet"
+    />
     <title>Prosentregning</title>
-    <meta name="description" content="Prosent, prosentregning og prosentkalkulatorer for skoler, bedrifter og hen i gata.">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta
+      name="description"
+      content="Prosent, prosentregning og prosentkalkulatorer for skoler, bedrifter og hen i gata."
+    />
 
     <style>
       /*
@@ -19,8 +24,9 @@
       10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
       */
       /*
-      MAIN COLOR: #087f5b
-      GREY COLOR: #343a40
+      MAIN COLOR: #ffe88b
+      Secondary COLOR: #f9a66c
+      Secondary COLOR: #95f0a9
        */
 
       * {
@@ -30,43 +36,54 @@
       }
 
       h1 {
-        font-family: Slackey, serif;
+        font-family: "Roboto", sans-serif;
         font-size: 42px;
-        font-weight: 300;
+        font-weight: 900;
         line-height: 60px;
-        color: #000;
+        color: #000000;
         margin-bottom: 10px;
       }
 
       h2 {
-        font-size: 28px;
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
         font-weight: 400;
-        line-height: 38px;
+        line-height: 24px;
         color: #000;
         margin-bottom: 20px;
-        opacity: 90%;
       }
 
       h3 {
-        font-size: 24px;
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
         font-weight: 400;
-        line-height: 36px;
+        line-height: 22px;
         color: #000;
-        margin-bottom: 10px;
-        opacity: 90%;
+        margin-bottom: 20px;
+        opacity: 100%;
       }
 
       h4 {
-        font-size: 22px;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
         font-weight: 400;
         margin: auto;
       }
 
+      h5 {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 18px;
+        opacity: 80%;
+      }
+
       p {
-        font-size: 18px;
-        font-family: roboto, serif;
-        line-height: 24px;
-        opacity: 90%;
+        font-family: "Russo One", sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+        opacity: 100%;
       }
 
       body {
@@ -76,21 +93,15 @@
         background: #ffe88b;
       }
 
-      hr {
-        align-items: center; 
-        }
-      
-
       .header {
-        width: 800px;
+        width: 600px;
         opacity: 90%;
         margin: 0 auto;
         text-align: center;
       }
 
-
       .subheader {
-        width: 800px;
+        width: 600px;
         font-size: 24px;
         font-weight: 900;
         opacity: 90%;
@@ -105,212 +116,271 @@
         height: 100%;
       }
 
-      .accordion {
-        width: 500px;
-        margin: 50px auto;
+      .container {
+        width: 400px;
+        margin: 40px auto;
+
+        /* FLEXBOX */
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        align-items: center;
+        justify-content: space-between;
       }
 
       .item {
-        padding: 5px;
-        border-radius: 50px;
-        border: none; /* remove default borders */
+        border-radius: 10px;
+        border-color: #000;
         background-color: #f9a66c;
         opacity: 100%;
-        grid-template-columns: auto auto auto;
-        column-gap: 24px;
-        row-gap: 12px;
-        align-items: center;
-        margin-bottom: 30px;
-        box-shadow: rgba(40, 40, 73, 0.15) 0px 30px 80px -20px, rgba(0, 0, 0, 0.3) 0px 20px 50px -30px, rgba(10, 27, 54, 0.25) 0px -2px 6px 0px inset;     
-
+        border: none; /* remove default borders */
+        box-shadow: rgba(50, 50, 50, 0.5) 0px 10px 20px -20px,
+          rgba(0, 0, 0, 0.3) 0px 10px 10px -30px,
+          rgba(10, 37, 64, 0.25) 0px -2px 2px 0px inset;
       }
 
       .outro {
-        margin-top: 50px;
-        margin-bottom: 50px;
+        margin: 80px auto;
+        width: 600px;
+        align-items: center;
       }
 
       .number {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 500;
         color: #000;
       }
 
       .text {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 400;
         color: #000;
       }
 
       .calculator {
-        margin: 10px;
-        padding: 20px;
-        border-radius: 5px;
+        padding: 50px;
       }
 
       label {
-        display: block;
+        /*         display: inline-block;
+ */
         margin-top: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
 
       input[type="number"] {
-        width: 50%;
+        width: 200px;
         background-color: #ffe88b;
         padding: 10px;
         margin-top: 10px;
         margin-bottom: 20px;
         border-radius: 10px;
-        font-size: 22px;
+        font-size: 16px;
         border: none; /* remove default borders */
-        box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
- 
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
+          0 1px 2px 0 rgba(0, 0, 0, 0.11);
       }
 
       ::-webkit-input-placeholder {
-       color: #000;
+        color: #000;
       }
 
-      .input-container {
+      .input-group {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        
+        gap: 1rem; /* This adds some space between the items */
       }
 
       button {
+        width: 100px;
         padding: 10px;
-        width: 50%;
         background-color: #95f0a9;
         color: #000;
         border-radius: 10px;
         cursor: pointer;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left: 1rem;
+        font: 18px;
         border: none; /* remove default borders */
-        box-shadow: 0 3px 7px 0 rgba(0, 0, 0, .13), 0 1px 2px 0 rgba(0, 0, 0, .11);
- 
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
+          0 1px 2px 0 rgba(0, 0, 0, 0.11);
       }
 
-      @media (max-width:800px) {
+      @media (max-width: 800px) {
+        .header {
+          width: 100%;
+        }
 
-      .header { 
-        width: 100%;
+        h1 {
+          font-size: 1.6rem;
+        }
+
+        .subheader {
+          width: 100%;
+        }
+
+        .container {
+          width: 100%;
+          padding: 20px;
+        }
       }
-
-      h1 {
-        font-size: 1.6rem;
-      }
-
-      .subheader { 
-        width: 100%;
-      }
-
-      .accordion {
-        width: 100%;
-        padding: 20px;
-      }
-
-     }
-      
     </style>
   </head>
 
+  <canvas id="lamp-anim" class="lamp-anim" width="auto" height="auto"></canvas>
 
   <body>
-   <canvas id="lamp-anim" class="lamp-anim" width="1500px" height="auto"></canvas>
-    
     <div class="header">
       <h1>PROSENTREGNING.NO</h1>
     </div>
 
-    <hr size="4px" width="200px" color="#000">
+    <hr size="4px" width="200px" color="#000" />
 
-    <div class="subheader">
-      <h2>– Et knippe prosentkalkulatorer som hjelper deg med prosentregning i hverdagen.</h2>
-    </div>
+    <div class="subheader"></div>
 
-    <div class="accordion">
+    <div class="container">
       <div class="item">
         <!-- Percentage Increase Calculator -->
         <div class="calculator">
-          <div class="input-container">
-            <h2>Prosentendring</h2>
-           <label for="initialValue"></label>
-           <input type="number" id="initialValue" placeholder="Fra"/>
+          <h2>Finn prosentendring</h2>
+          <div class="input-group">
+            <label for="initialValue"></label>
+            <input type="number" id="initialValue" placeholder="Fra" />
+            <label for="finalValue"></label>
+            <input type="number" id="finalValue" placeholder="Til" />
+            <button onclick="calculatePercentageIncrease()">
+              <h4>Regn ut</h4>
+            </button>
           </div>
-          <div class="input-container">
-           <label for="finalValue"></label>
-           <input type="number" id="finalValue" placeholder="Til"/>
-          </div>
-          <div class="input-container">
-          <button onclick="calculatePercentageIncrease()"><h4>Regn ut</h4></button>
-          <h3>Prosentvis endring: <span id="percentageIncreaseResult"></span>%</h3>
-          <h3>Utregning: <span id="calculationDetails"></span></h3> 
-          <h3 id="calculationDetails"></h3><!-- This will display the calculation -->
+          <h3>
+            Prosentvis endring: <span id="percentageIncreaseResult"></span>%
+          </h3>
+          <h3>Utregning: <span id="calculationDetails"></span></h3>
+          <h3 id="calculationDetails"></h3>
+          <!-- This will display the calculation -->
         </div>
-        </div>
-      </div>
-    
-
-      <div class="item">
-      <!-- Finn prosent av tallet -->
-      <div class="calculator">
-        <div class="input-container">
-          <h2>Prosentandel av verdi</h2>
-          <label for="partValue"></label>
-          <input type="number" id="partValue" placeholder="Hva er"/>
-        </div>
-        <div class="input-container">
-          <label for="totalValue"></label>
-          <input type="number" id="totalValue" placeholder="av tallet"/>
-        </div>
-        <div class="input-container">
-        <button onclick="calculatePercentageOfTotal()"><h4>Regn ut</h4></button>
-        <h3>Gir en andel på: <span id="percentageOfTotalResult"></span>%</h3>
-        <h3>Utregning: <span id="calculationDetai"></span></h3> 
-        <h3 id="calculationDetai"></h3><!-- This will display the calculation -->
       </div>
     </div>
-      </div>
 
-
+    <div class="container">
       <div class="item">
-      <!-- Finn prosent av tallet -->
-      <div class="calculator">
-        <div class="input-container">
-          <h2>Rabattert pris</h2>
-          <label for="originalPrice"></label>
-          <input type="number" id="originalPrice" placeholder="Pris"/>
+        <!-- Finn prosent av tallet -->
+        <div class="calculator">
+          <h2>Finn prosentandel av tallet</h2>
+          <!-- Wrapping div for alignment -->
+          <div class="input-group">
+            <!-- <div class="input-container"> -->
+            <label for="partValue"></label>
+            <input type="number" id="partValue" placeholder="Del av tallet" />
+            <label for="totalValue"></label>
+            <input type="number" id="totalValue" placeholder="Hele tallet" />
+            <button onclick="calculatePercentageOfTotal()">
+              <h4>Regn ut</h4>
+            </button>
+          </div>
+          <div class="output-container">
+            <h3>
+              Gir en andel på: <span id="percentageOfTotalResult"></span>%
+            </h3>
+            <h3>Utregning: <span id="calculationDetai"></span></h3>
+            <h3 id="calculationDetai"></h3>
+          </div>
         </div>
-        <div class="input-container">
-          <label for="discountPercentage"></label>
-          <input type="number" id="discountPercentage" placeholder="Rabatt i %" />
-        </div>
-        <div class="input-container">
-        <button onclick="calculateDiscount()"><h4>Regn ut</h4></button>
-        <h3>Gir en rabattert pris på: <span id="discountedPrice"></span></h3>
-        <h3>Penger spart: <span id="amountSaved"></span></h3> 
-        <h3>Utregning: <span id="Utregning"></span></h3> 
-        <h3 id="Utregning"></h3><!-- This will display the calculation -->
       </div>
     </div>
+
+    <div class="container">
+      <div class="item">
+        <!-- Regne rabatt -->
+        <div class="calculator">
+          <h2>Hvordan regne ut rabatt</h2>
+          <div class="input-group">
+            <label for="originalPrice"></label>
+            <input type="number" id="originalPrice" placeholder="Vareverdi" />
+
+            <label for="discountPercentage"></label>
+            <input type="number" id="discountPercentage" placeholder="Rabatt" />
+
+            <button onclick="calculateDiscount()"><h4>Regn ut</h4></button>
+          </div>
+          <h3>Gir en rabattert pris på: <span id="discountedPrice"></span></h3>
+          <h3>Penger spart: <span id="amountSaved"></span></h3>
+          <h3>Utregning: <span id="Utregning"></span></h3>
+          <h3 id="Utregning"></h3>
         </div>
-      
+      </div>
+    </div>
+
+    <!-- Finne del av taller -->
+    <div class="container">
+      <div class="item">
+        <div class="calculator">
+          <div class="input-container">
+            <h2>Finn delen av tallet</h2>
+            <div class="input-group">
+              <label for="baseNumber"></label>
+              <input
+                type="number"
+                id="baseNumber"
+                placeholder="Prosent av tallet"
+              />
+
+              <label for="percentageValue"></label>
+              <input
+                type="number"
+                id="percentageValue"
+                placeholder="Hele tallet"
+              />
+
+              <button onclick="calculatePercentageOfNumber()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Svar: <span id="percentageResult"></span></h3>
+            <h3>Utregning: <span id="calculationD"></span></h3>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="outro">
       <h2>Prosent og prosentregning: En enkel innføring</h2>
-      <p>Prosent er en viktig del av matematikken som hjelper oss med å forstå og uttrykke forhold og sammenhenger i hverdagen. Ordet "prosent" kommer fra det latinske uttrykket "per centum," som betyr "av hundre." Det er nettopp hva prosent handler om - å representere deler av en helhet i forhold til hundre.</p>
-      <p>Når vi snakker om prosent, deler vi en størrelse inn i hundre like deler, og deretter uttrykker vi hvor mange av disse delene som representerer det vi vil måle. For eksempel, hvis du har en kake delt inn i 100 like biter og tar 25 av dem, har du spist 25 prosent av kaken.</p>
-      <p>Prosentregning hjelper oss med å utføre beregninger som involverer prosenter. Dette kan være nyttig i mange situasjoner, som å beregne rabatter i butikker, vurdere økonomisk vekst, eller forstå hvor mye en investering kan øke over tid.</p>
-      <p>Grunnleggende prosentregning inkluderer å finne prosentandelen av en verdi, beregne økninger eller reduksjoner i prosent, og utføre enkle sammenligninger mellom prosentandeler. Med noen enkle verktøy og forståelse for prosent, kan du løse mange praktiske problemer og ta informerte beslutninger i hverdagen.</p>
-      <p>Så, prosent og prosentregning er nyttige verktøy som gjør det enkelt å forstå og arbeide med tall i ulike sammenhenger. Nå som du har fått en kort introduksjon, kan du begynne å utforske mer om dette spennende emnet og bruke det til å løse problemer og ta beslutninger som gjør livet ditt litt enklere!</p>
-      <p>Jeg håper denne introduksjonen hjelper deg med å forstå det grunnleggende om prosent og prosentregning!</p>
-    </div>
-
+      <p>
+        Prosent er en viktig del av matematikken som hjelper oss med å forstå og
+        uttrykke forhold og sammenhenger i hverdagen. Ordet "prosent" kommer fra
+        det latinske uttrykket "per centum," som betyr "av hundre." Det er
+        nettopp hva prosent handler om - å representere deler av en helhet i
+        forhold til hundre.
+      </p>
+      <p>
+        Når vi snakker om prosent, deler vi en størrelse inn i hundre like
+        deler, og deretter uttrykker vi hvor mange av disse delene som
+        representerer det vi vil måle. For eksempel, hvis du har en kake delt
+        inn i 100 like biter og tar 25 av dem, har du spist 25 prosent av kaken.
+      </p>
+      <p>
+        Prosentregning hjelper oss med å utføre beregninger som involverer
+        prosenter. Dette kan være nyttig i mange situasjoner, som å beregne
+        rabatter i butikker, vurdere økonomisk vekst, eller forstå hvor mye en
+        investering kan øke over tid.
+      </p>
+      <p>
+        Grunnleggende prosentregning inkluderer å finne prosentandelen av en
+        verdi, beregne økninger eller reduksjoner i prosent, og utføre enkle
+        sammenligninger mellom prosentandeler. Med noen enkle verktøy og
+        forståelse for prosent, kan du løse mange praktiske problemer og ta
+        informerte beslutninger i hverdagen.
+      </p>
+      <p>
+        Så, prosent og prosentregning er nyttige verktøy som gjør det enkelt å
+        forstå og arbeide med tall i ulike sammenhenger. Nå som du har fått en
+        kort introduksjon, kan du begynne å utforske mer om dette spennende
+        emnet og bruke det til å løse problemer og ta beslutninger som gjør
+        livet ditt litt enklere!
+      </p>
+      <p>
+        Jeg håper denne introduksjonen hjelper deg med å forstå det
+        grunnleggende om prosent og prosentregning!
+      </p>
     </div>
 
     <script>
@@ -324,331 +394,356 @@
         const percentageIncrease =
           ((finalValue - initialValue) / initialValue) * 100;
 
-          // Construct the formula for display
-        const percentageIncreaseResult = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100 = ${percentageIncrease.toFixed(2)}%`;
+        // Construct the formula for display
+        const percentageIncreaseResult = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100 = ${percentageIncrease.toFixed(
+          2
+        )}%`;
         const calculationDetails = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100`;
 
-         document.getElementById("percentageIncreaseResult").textContent = percentageIncrease.toFixed(2);
-         document.getElementById("calculationDetails").textContent = calculationDetails;  // Set the calculation to the new element
+        document.getElementById("percentageIncreaseResult").textContent =
+          percentageIncrease.toFixed(2);
+        document.getElementById("calculationDetails").textContent =
+          calculationDetails; // Set the calculation to the new element
       }
-
-    
 
       function calculatePercentageOfTotal() {
-       const partValue = parseFloat(document.getElementById("partValue").value);
-       const totalValue = parseFloat(document.getElementById("totalValue").value);
+        const partValue = parseFloat(
+          document.getElementById("partValue").value
+        );
+        const totalValue = parseFloat(
+          document.getElementById("totalValue").value
+        );
 
-       // Check if partValue and totalValue are valid numbers
+        // Check if partValue and totalValue are valid numbers
         if (isNaN(partValue) || isNaN(totalValue) || totalValue === 0) {
-        alert("Invalid input values.");
-        return;
+          alert("Invalid input values.");
+          return;
         }
 
-      const percentageOfTotal = (partValue / totalValue) * 100;
+        const percentageOfTotal = (partValue / totalValue) * 100;
 
-       // Construct the formula for display
-       const percentageOfTotalResult = `${percentageOfTotal.toFixed(2)}`;
-       const calculationDetai = `( ${partValue} / ${totalValue}) * 100`;
+        // Construct the formula for display
+        const percentageOfTotalResult = `${percentageOfTotal.toFixed(2)}`;
+        const calculationDetai = `(${partValue} / ${totalValue}) * 100`;
 
-       document.getElementById("percentageOfTotalResult").textContent = percentageOfTotalResult;
-       document.getElementById("calculationDetai").textContent = calculationDetai;
-       }
+        document.getElementById("percentageOfTotalResult").textContent =
+          percentageOfTotalResult;
+        document.getElementById("calculationDetai").textContent =
+          calculationDetai;
+      }
 
+      /*Kalkuler rabatt*/
 
-/*Kalkuler rabatt*/
+      function calculateDiscount() {
+        // Get values from input fields
+        const originalPrice = parseFloat(
+          document.getElementById("originalPrice").value
+        );
+        const discountPercentage = parseFloat(
+          document.getElementById("discountPercentage").value
+        );
 
-function calculateDiscount() {
-  // Get values from input fields
-  const originalPrice = parseFloat(document.getElementById('originalPrice').value);
-  const discountPercentage = parseFloat(document.getElementById('discountPercentage').value);
+        // Calculate the discount amount
+        const discountAmount = (originalPrice * discountPercentage) / 100;
 
-  // Calculate the discount amount
-  const discountAmount = (originalPrice * discountPercentage) / 100;
+        // Calculate the discounted price
+        const discountedPrice = originalPrice - discountAmount;
 
-  // Calculate the discounted price
-  const discountedPrice = originalPrice - discountAmount;
+        // Construct the formula for display
+        const Utregning = `(${originalPrice} * ${discountPercentage}) / 100`;
 
-  // Construct the formula for display
-  const Utregning = `(${originalPrice} * ${discountPercentage}) / 100`;
+        // Display the results
+        document.getElementById(
+          "discountedPrice"
+        ).textContent = `${discountedPrice.toFixed(2)}`;
+        document.getElementById(
+          "amountSaved"
+        ).textContent = `${discountAmount.toFixed(2)}`;
+        document.getElementById("Utregning").textContent = Utregning;
+      }
 
+      function calculatePercentageOfNumber() {
+        // Get values from input fields
+        let baseNumber = parseFloat(
+          document.getElementById("baseNumber").value
+        );
+        let percentageValue =
+          parseFloat(document.getElementById("percentageValue").value) / 100;
 
-  // Display the results
-  document.getElementById('discountedPrice').textContent = `${discountedPrice.toFixed(2)}`;
-  document.getElementById('amountSaved').textContent = `${discountAmount.toFixed(2)}`;
-  document.getElementById("Utregning").textContent = Utregning;
-  }
+        // Check if inputs are numbers
+        if (isNaN(baseNumber) || isNaN(percentageValue)) {
+          alert("Please enter valid numbers.");
+          return;
+        }
 
+        // Calculate the result
+        let result = baseNumber * percentageValue;
 
+        // Display results
+        document.getElementById("percentageResult").textContent =
+          result.toFixed(2);
+        document.getElementById(
+          "calculationD"
+        ).textContent = `${baseNumber} * ${percentageValue} = ${result.toFixed(
+          2
+        )}`;
+      }
 
-      
-       /* lavaAnimation */
-      
-       window.lavaAnimation = (function() {
+      /* lavaAnimation */
+
+      window.lavaAnimation = (function () {
         "use strict";
-         var t,
-           i = {
-             screen: {
-             elem: null,
-             callback: null,
-             ctx: null,
-             width: 0,
-             height: 0,
-             left: 0,
-             top: 0,
-             init: function(t, i, s) {
-               return (
-               (this.elem = document.getElementById(t)),
-               (this.callback = i || null),
-               "CANVAS" == this.elem.tagName &&
-               (this.ctx = this.elem.getContext("2d")),
-               window.addEventListener(
-               "resize",
-               function() {
-                this.resize();
-              }.bind(this),
-              !1
-            ),
-            (this.elem.onselectstart = function() {
-              return !1;
-            }),
-            (this.elem.ondrag = function() {
-              return !1;
-            }),
-            s && this.resize(),
-            this
-          );
-        },
-        resize: function() {
-          var t = this.elem;
-          for (
-            this.width = t.offsetWidth,
-              this.height = t.offsetHeight,
-              this.left = 0,
-              this.top = 0;
-            null != t;
-            t = t.offsetParent
-          )
-            (this.left += t.offsetLeft), (this.top += t.offsetTop);
-          this.ctx &&
-            ((this.elem.width = this.width), (this.elem.height = this.height)),
-            this.callback && this.callback();
+        var t,
+          i = {
+            screen: {
+              elem: null,
+              callback: null,
+              ctx: null,
+              width: 0,
+              height: 0,
+              left: 0,
+              top: 0,
+              init: function (t, i, s) {
+                return (
+                  (this.elem = document.getElementById(t)),
+                  (this.callback = i || null),
+                  "CANVAS" == this.elem.tagName &&
+                    (this.ctx = this.elem.getContext("2d")),
+                  window.addEventListener(
+                    "resize",
+                    function () {
+                      this.resize();
+                    }.bind(this),
+                    !1
+                  ),
+                  (this.elem.onselectstart = function () {
+                    return !1;
+                  }),
+                  (this.elem.ondrag = function () {
+                    return !1;
+                  }),
+                  s && this.resize(),
+                  this
+                );
+              },
+              resize: function () {
+                var t = this.elem;
+                for (
+                  this.width = t.offsetWidth,
+                    this.height = t.offsetHeight,
+                    this.left = 0,
+                    this.top = 0;
+                  null != t;
+                  t = t.offsetParent
+                )
+                  (this.left += t.offsetLeft), (this.top += t.offsetTop);
+                this.ctx &&
+                  ((this.elem.width = this.width),
+                  (this.elem.height = this.height)),
+                  this.callback && this.callback();
+              },
+            },
+          },
+          s = function (t, i) {
+            (this.x = t),
+              (this.y = i),
+              (this.magnitude = t * t + i * i),
+              (this.computed = 0),
+              (this.force = 0);
+          };
+        s.prototype.add = function (t) {
+          return new s(this.x + t.x, this.y + t.y);
+        };
+        var h = function (t) {
+          var i = 0.1,
+            h = 1.5;
+          (this.vel = new s(
+            (Math.random() > 0.5 ? 1 : -1) * (0.2 + 0.25 * Math.random()),
+            (Math.random() > 0.5 ? 1 : -1) * (0.2 + Math.random())
+          )),
+            (this.pos = new s(
+              0.2 * t.width + Math.random() * t.width * 0.6,
+              0.2 * t.height + Math.random() * t.height * 0.6
+            )),
+            (this.size =
+              t.wh / 15 + (Math.random() * (h - i) + i) * (t.wh / 15)),
+            (this.width = t.width),
+            (this.height = t.height);
+        };
+        h.prototype.move = function () {
+          this.pos.x >= this.width - this.size
+            ? (this.vel.x > 0 && (this.vel.x = -this.vel.x),
+              (this.pos.x = this.width - this.size))
+            : this.pos.x <= this.size &&
+              (this.vel.x < 0 && (this.vel.x = -this.vel.x),
+              (this.pos.x = this.size)),
+            this.pos.y >= this.height - this.size
+              ? (this.vel.y > 0 && (this.vel.y = -this.vel.y),
+                (this.pos.y = this.height - this.size))
+              : this.pos.y <= this.size &&
+                (this.vel.y < 0 && (this.vel.y = -this.vel.y),
+                (this.pos.y = this.size)),
+            (this.pos = this.pos.add(this.vel));
+        };
+        var e = function (t, i, e, n, a) {
+          (this.step = 5),
+            (this.width = t),
+            (this.height = i),
+            (this.wh = Math.min(t, i)),
+            (this.sx = Math.floor(this.width / this.step)),
+            (this.sy = Math.floor(this.height / this.step)),
+            (this.paint = !1),
+            (this.metaFill = r(t, i, t, n, a)),
+            (this.plx = [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0]),
+            (this.ply = [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]),
+            (this.mscases = [0, 3, 0, 3, 1, 3, 0, 3, 2, 2, 0, 2, 1, 1, 0]),
+            (this.ix = [
+              1, 0, -1, 0, 0, 1, 0, -1, -1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1,
+            ]),
+            (this.grid = []),
+            (this.balls = []),
+            (this.iter = 0),
+            (this.sign = 1);
+          for (var o = 0; o < (this.sx + 2) * (this.sy + 2); o++)
+            this.grid[o] = new s(
+              (o % (this.sx + 2)) * this.step,
+              Math.floor(o / (this.sx + 2)) * this.step
+            );
+          for (var l = 0; e > l; l++) this.balls[l] = new h(this);
+        };
+        (e.prototype.computeForce = function (t, i, s) {
+          var h,
+            e = s || t + i * (this.sx + 2);
+          if (0 === t || 0 === i || t === this.sx || i === this.sy)
+            h = 0.6 * this.sign;
+          else {
+            h = 0;
+            for (var r, n = this.grid[e], a = 0; (r = this.balls[a++]); )
+              h +=
+                (r.size * r.size) /
+                (-2 * n.x * r.pos.x -
+                  2 * n.y * r.pos.y +
+                  r.pos.magnitude +
+                  n.magnitude);
+            h *= this.sign;
+          }
+          return (this.grid[e].force = h), h;
+        }),
+          (e.prototype.marchingSquares = function (t) {
+            var i = t[0],
+              s = t[1],
+              h = t[2],
+              e = i + s * (this.sx + 2);
+            if (this.grid[e].computed === this.iter) return !1;
+            for (var r, n = 0, a = 0; 4 > a; a++) {
+              var l =
+                  i + this.ix[a + 12] + (s + this.ix[a + 16]) * (this.sx + 2),
+                d = this.grid[l].force;
+              ((d > 0 && this.sign < 0) || (0 > d && this.sign > 0) || !d) &&
+                (d = this.computeForce(
+                  i + this.ix[a + 12],
+                  s + this.ix[a + 16],
+                  l
+                )),
+                Math.abs(d) > 1 && (n += Math.pow(2, a));
+            }
+            if (15 === n) return [i, s - 1, !1];
+            5 === n
+              ? (r = 2 === h ? 3 : 1)
+              : 10 === n
+              ? (r = 3 === h ? 0 : 2)
+              : ((r = this.mscases[n]), (this.grid[e].computed = this.iter));
+            var p =
+              this.step /
+              (Math.abs(
+                Math.abs(
+                  this.grid[
+                    i +
+                      this.plx[4 * r + 2] +
+                      (s + this.ply[4 * r + 2]) * (this.sx + 2)
+                  ].force
+                ) - 1
+              ) /
+                Math.abs(
+                  Math.abs(
+                    this.grid[
+                      i +
+                        this.plx[4 * r + 3] +
+                        (s + this.ply[4 * r + 3]) * (this.sx + 2)
+                    ].force
+                  ) - 1
+                ) +
+                1);
+            return (
+              o.lineTo(
+                this.grid[
+                  i + this.plx[4 * r] + (s + this.ply[4 * r]) * (this.sx + 2)
+                ].x +
+                  this.ix[r] * p,
+                this.grid[
+                  i +
+                    this.plx[4 * r + 1] +
+                    (s + this.ply[4 * r + 1]) * (this.sx + 2)
+                ].y +
+                  this.ix[r + 4] * p
+              ),
+              (this.paint = !0),
+              [i + this.ix[r + 4], s + this.ix[r + 8], r]
+            );
+          }),
+          (e.prototype.renderMetaballs = function () {
+            for (var t, i = 0; (t = this.balls[i++]); ) t.move();
+
+            this.iter++,
+              (this.sign = -this.sign),
+              (this.paint = !1),
+              // Setting up shadow
+              (o.shadowColor = "rgba(0, 0, 0, 0.2)");
+            o.shadowBlur = 10;
+            o.shadowOffsetX = 2;
+            o.shadowOffsetY = 2;
+
+            (o.fillStyle = this.metaFill), o.beginPath(), (i = 0);
+
+            for (; (t = this.balls[i++]); ) {
+              var s = [
+                Math.round(t.pos.x / this.step),
+                Math.round(t.pos.y / this.step),
+                !1,
+              ];
+              do s = this.marchingSquares(s);
+              while (s);
+              this.paint &&
+                (o.fill(), o.closePath(), o.beginPath(), (this.paint = !1));
+            }
+          });
+
+        var r = function (t, i, s, h, e) {
+          var r = o.createRadialGradient(t / 1, i / 1, 0, t / 1, i / 1, s);
+          return r.addColorStop(0, h), r.addColorStop(1, e), r;
+        };
+        if (document.getElementById("lamp-anim")) {
+          var n = function () {
+              requestAnimationFrame(n),
+                o.clearRect(0, 0, a.width, a.height),
+                t.renderMetaballs();
+            },
+            a = i.screen.init("lamp-anim", null, !0),
+            o = a.ctx;
+          a.resize(), (t = new e(a.width, a.height, 6, "#f9a66c", "#f9a66c"));
         }
+        return { run: n };
+      })();
+
+      if (document.getElementById("lamp-anim")) {
+        lavaAnimation.run();
       }
-    },
-    s = function(t, i) {
-      (this.x = t),
-        (this.y = i),
-        (this.magnitude = t * t + i * i),
-        (this.computed = 0),
-        (this.force = 0);
-    };
-  s.prototype.add = function(t) {
-    return new s(this.x + t.x, this.y + t.y);
-  };
-  var h = function(t) {
-    var i = 0.1,
-      h = 1.5;
-    (this.vel = new s(
-      (Math.random() > 0.5 ? 1 : -1) * (0.2 + 0.25 * Math.random()),
-      (Math.random() > 0.5 ? 1 : -1) * (0.2 + Math.random())
-    )),
-      (this.pos = new s(
-        0.2 * t.width + Math.random() * t.width * 0.6,
-        0.2 * t.height + Math.random() * t.height * 0.6
-      )),
-      (this.size = t.wh / 15 + (Math.random() * (h - i) + i) * (t.wh / 15)),
-      (this.width = t.width),
-      (this.height = t.height);
-  };
-  h.prototype.move = function() {
-    this.pos.x >= this.width - this.size
-      ? (this.vel.x > 0 && (this.vel.x = -this.vel.x),
-        (this.pos.x = this.width - this.size))
-      : this.pos.x <= this.size &&
-        (this.vel.x < 0 && (this.vel.x = -this.vel.x),
-        (this.pos.x = this.size)),
-      this.pos.y >= this.height - this.size
-        ? (this.vel.y > 0 && (this.vel.y = -this.vel.y),
-          (this.pos.y = this.height - this.size))
-        : this.pos.y <= this.size &&
-          (this.vel.y < 0 && (this.vel.y = -this.vel.y),
-          (this.pos.y = this.size)),
-      (this.pos = this.pos.add(this.vel));
-  };
-  var e = function(t, i, e, n, a) {
-    (this.step = 5),
-      (this.width = t),
-      (this.height = i),
-      (this.wh = Math.min(t, i)),
-      (this.sx = Math.floor(this.width / this.step)),
-      (this.sy = Math.floor(this.height / this.step)),
-      (this.paint = !1),
-      (this.metaFill = r(t, i, t, n, a)),
-      (this.plx = [0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0]),
-      (this.ply = [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]),
-      (this.mscases = [0, 3, 0, 3, 1, 3, 0, 3, 2, 2, 0, 2, 1, 1, 0]),
-      (this.ix = [
-        1,
-        0,
-        -1,
-        0,
-        0,
-        1,
-        0,
-        -1,
-        -1,
-        0,
-        1,
-        0,
-        0,
-        1,
-        1,
-        0,
-        0,
-        0,
-        1,
-        1
-      ]),
-      (this.grid = []),
-      (this.balls = []),
-      (this.iter = 0),
-      (this.sign = 1);
-    for (var o = 0; o < (this.sx + 2) * (this.sy + 2); o++)
-      this.grid[o] = new s(
-        (o % (this.sx + 2)) * this.step,
-        Math.floor(o / (this.sx + 2)) * this.step
-      );
-    for (var l = 0; e > l; l++) this.balls[l] = new h(this);
-  };
-  (e.prototype.computeForce = function(t, i, s) {
-    var h,
-      e = s || t + i * (this.sx + 2);
-    if (0 === t || 0 === i || t === this.sx || i === this.sy)
-      h = 0.6 * this.sign;
-    else {
-      h = 0;
-      for (var r, n = this.grid[e], a = 0; (r = this.balls[a++]); )
-        h +=
-          r.size *
-          r.size /
-          (-2 * n.x * r.pos.x -
-            2 * n.y * r.pos.y +
-            r.pos.magnitude +
-            n.magnitude);
-      h *= this.sign;
-    }
-    return (this.grid[e].force = h), h;
-  }),
-    (e.prototype.marchingSquares = function(t) {
-      var i = t[0],
-        s = t[1],
-        h = t[2],
-        e = i + s * (this.sx + 2);
-      if (this.grid[e].computed === this.iter) return !1;
-      for (var r, n = 0, a = 0; 4 > a; a++) {
-        var l = i + this.ix[a + 12] + (s + this.ix[a + 16]) * (this.sx + 2),
-          d = this.grid[l].force;
-        ((d > 0 && this.sign < 0) || (0 > d && this.sign > 0) || !d) &&
-          (d = this.computeForce(i + this.ix[a + 12], s + this.ix[a + 16], l)),
-          Math.abs(d) > 1 && (n += Math.pow(2, a));
-      }
-      if (15 === n) return [i, s - 1, !1];
-      5 === n
-        ? (r = 2 === h ? 3 : 1)
-        : 10 === n
-          ? (r = 3 === h ? 0 : 2)
-          : ((r = this.mscases[n]), (this.grid[e].computed = this.iter));
-      var p =
-        this.step /
-        (Math.abs(
-          Math.abs(
-            this.grid[
-              i +
-                this.plx[4 * r + 2] +
-                (s + this.ply[4 * r + 2]) * (this.sx + 2)
-            ].force
-          ) - 1
-        ) /
-          Math.abs(
-            Math.abs(
-              this.grid[
-                i +
-                  this.plx[4 * r + 3] +
-                  (s + this.ply[4 * r + 3]) * (this.sx + 2)
-              ].force
-            ) - 1
-          ) +
-          1);
-      return (
-        o.lineTo(
-          this.grid[i + this.plx[4 * r] + (s + this.ply[4 * r]) * (this.sx + 2)]
-            .x +
-            this.ix[r] * p,
-          this.grid[
-            i + this.plx[4 * r + 1] + (s + this.ply[4 * r + 1]) * (this.sx + 2)
-          ].y +
-            this.ix[r + 4] * p
-        ),
-        (this.paint = !0),
-        [i + this.ix[r + 4], s + this.ix[r + 8], r]
-      );
-    }),
-    (e.prototype.renderMetaballs = function() {
-      for (var t, i = 0; (t = this.balls[i++]); ) t.move();
-
-    this.iter++,
-    this.sign = -this.sign,
-    this.paint = !1,
-
-    // Setting up shadow
-    o.shadowColor = 'rgba(0, 0, 0, 0.2)';
-    o.shadowBlur = 10;
-    o.shadowOffsetX = 2;
-    o.shadowOffsetY = 2;
-
-    o.fillStyle = this.metaFill,
-    o.beginPath(),
-    i = 0;
-
-    for (; (t = this.balls[i++]); ) {
-        var s = [
-            Math.round(t.pos.x / this.step),
-            Math.round(t.pos.y / this.step),
-            !1
-        ];
-        do s = this.marchingSquares(s);
-        while (s);
-        this.paint &&
-        (o.fill(), o.closePath(), o.beginPath(), (this.paint = !1));
-    }
-});
-  var r = function(t, i, s, h, e) {
-    var r = o.createRadialGradient(t / 1, i / 1, 0, t / 1, i / 1, s);
-    return r.addColorStop(0, h), r.addColorStop(1, e), r;
-  };
-  if (document.getElementById("lamp-anim")) {
-    var n = function() {
-        requestAnimationFrame(n),
-          o.clearRect(0, 0, a.width, a.height),
-          t.renderMetaballs();
-      },
-      a = i.screen.init("lamp-anim", null, !0),
-      o = a.ctx;
-    a.resize(), (t = new e(a.width, a.height, 6, "#f9a66c", "#f9a66c"));
-  }
-  return { run: n };
-})();
-
-if (document.getElementById("lamp-anim")) {
-  lavaAnimation.run();
-}
-     setTimeout(function() {
-       $(".js-works-d-list").addClass("is-loaded");
+      setTimeout(function () {
+        $(".js-works-d-list").addClass("is-loaded");
       }, 150);
-
-      
     </script>
   </body>
 </html>
+
 
 
