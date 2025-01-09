@@ -17,215 +17,474 @@
     />
 
     <style>
-      /*
-      SPACING SYSTEM (px)
-      2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
-      FONT SIZE SYSTEM (px)
-      10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
-      */
-      /*
-      MAIN COLOR: #ffe88b
-      Secondary COLOR: #f9a66c
-      Secondary COLOR: #95f0a9
-       */
+              /*
+                   SPACING SYSTEM (px)
+                   2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+                   FONT SIZE SYSTEM (px)
+                   10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+                   */
+              /*
+                   MAIN COLOR: #ffe88b
+                   Secondary COLOR: #f9a66c
+                   Secondary COLOR: #95f0a9
+                    */
 
-      * {
-        margin: 10;
-        padding: 10;
-        box-sizing: border-box;
+              /* Base styles remain the same but with responsive adjustments */
+
+              * {
+                margin: 10;
+                padding: 10;
+                box-sizing: border-box;
+              }
+
+              h1 {
+                font-family: "Roboto", sans-serif;
+                font-size: 42px;
+                font-weight: 900;
+                line-height: 60px;
+                color: #000000;
+                margin-bottom: 10px;
+              }
+
+              h2 {
+                font-family: "Roboto", sans-serif;
+                font-size: 28px;
+                font-weight: 400;
+                line-height: 32px;
+                color: #000;
+                margin-bottom: 20px;
+              }
+
+              h3 {
+                font-family: "Roboto", sans-serif;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 22px;
+                color: #000;
+                margin-bottom: 20px;
+                opacity: 100%;
+              }
+
+              h4 {
+                font-family: "Roboto", sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 28px;
+                margin: auto;
+              }
+
+              h5 {
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                color: #000000;
+                margin-bottom: 18px;
+                opacity: 80%;
+              }
+
+              p {
+                font-family: "Russo One", sans-serif;
+                font-size: 20px;
+                line-height: 24px;
+                opacity: 100%;
+              }
+
+              body {
+                font-family: "Roboto", serif;
+                color: #000;
+                line-height: 1;
+                background: #ffe88b;
+              }
+
+              /* Making header and subheader responsive */
+              .header {
+                width: 90%; /* Changed from fixed 600px */
+                max-width: 600px;
+                opacity: 90%;
+                margin: 0 auto;
+                text-align: center;
+              }
+
+              .subheader {
+                width: 90%; /* Changed from fixed 600px */
+                max-width: 600px;
+                font-size: 24px;
+                font-weight: 400;
+                opacity: 90%;
+                margin: 0 auto;
+                text-align: center;
+              }
+
+              canvas {
+                position: absolute;
+                z-index: -1;
+                width: 100%;
+                height: 100%;
+              }
+
+              .container {
+                width: 90%; /* Changed from fixed 1200px */
+                max-width: 1200px;
+                margin: auto;
+                display: grid;
+                grid-template-columns: 1fr; /* Single column by default */
+                gap: 20px;
+                padding: 20px;
+              }
+
+              .item {
+                border-radius: 8em 4em;
+                border-color: #000;
+                background-color: #f9a66c;
+                opacity: 100%;
+                border: none; /* remove default borders */
+                box-shadow: rgba(50, 50, 50, 0.5) 0px 10px 20px -20px,
+                  rgba(0, 0, 0, 0.3) 0px 10px 10px -30px,
+                  rgba(10, 37, 64, 0.25) 0px -2px 2px 0px inset;
+              }
+
+              /* Styling for the item containers */
+                .item1, .item3 {
+                display: grid;
+                grid-template-columns: 1fr; /* Single column by default */
+                gap: 20px;
+                }
+
+              .item2,
+              .item4 {
+                flex: 1;
+                padding: 40px;
+              }
+
+              .outro {
+                margin: 80px auto;
+                width: 90%; /* Changed from fixed 600px */
+                max-width: 600px;
+                align-items: center;
+              }
+
+              .number {
+                font-size: 24px;
+                font-weight: 500;
+                color: #000;
+              }
+
+              .text {
+                font-size: 14px;
+                font-weight: 400;
+                color: #000;
+              }
+
+              .calculator {
+                padding: 70px;
+              }
+
+              label {
+                margin-top: 10px;
+                margin-bottom: 10px;
+              }
+
+              input[type="number"] {
+                flex: 1; /* Allows inputs to grow and fill available space */
+                min-width: 150px; /* Prevents inputs from becoming too narrow */
+                background-color: #ffe88b;
+                padding: 15px;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                border-radius: 10px;
+                font-size: 16px;
+                border: none; /* remove default borders */
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
+                  0 1px 2px 0 rgba(0, 0, 0, 0.11);
+              }
+
+              input {
+                margin-right: 0px;
+              }
+
+              ::-webkit-input-placeholder {
+                color: #000;
+              }
+
+              .input-group {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-end; /* This aligns items at their bottom edge */
+                gap: 10px;
+              }
+
+              button {
+                width: auto; /* Changed from fixed width */
+                min-width: 100px;
+                padding: 10px;
+                background-color: #95f0a9;
+                color: #000;
+                border-radius: 10px;
+                cursor: pointer;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                font: 18px;
+                border: none; /* remove default borders */
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
+                  0 1px 2px 0 rgba(0, 0, 0, 0.11);
+              }
+
+              /* Styles for the distribution calculator */
+        #valueInputs {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        .distribution-input-group {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .distribution-input-group input {
+          flex: 1;
+        }
+
+        .percentage-result {
+          min-width: 60px;
+          font-family: "Roboto", sans-serif;
+          font-size: 16px;
+        }
+
+        .distribution-controls {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        .control-button {
+          flex: 1;
+          background-color: #95f0a9;
+          color: #000;
+          border: none;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+        }
+
+        .distribution-results {
+          margin-top: 20px;
+        }
+
+
+        /* Styles for the markup/margin calculator */
+        .markup-input-group {
+          display: flex;
+          align-items: flex-end;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        .markup-input-group label {
+          font-family: "Roboto", sans-serif;
+          font-size: 14px;
+          color: #000;
+          margin-bottom: 5px;
+        }
+
+        .calculation-type {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        .type-button {
+          flex: 1;
+          padding: 10px;
+          background-color: #ffe88b;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .type-button.active {
+          background-color: #95f0a9;
+        }
+
+        .results-section {
+          margin-top: 20px;
+        }
+
+
+        /* Styles for the MVA calculator */
+
+        .tax-input-group {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 20px;
+          align-items: center; /* Changed from flex-end to center for consistent alignment */
+        }
+
+        .tax-input-group input, .tax-rate-select {
+          height: 42px; /* Consistent height for all inputs */
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: #ffe88b;
+          font-family: "Roboto", sans-serif;
+          font-size: 16px;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+          flex: 1;
+          min-width: 150px; /* Ensures inputs don't get too narrow */
+        }
+
+        /* Specific styling for the select to match other inputs exactly */
+      .tax-rate-select {
+        appearance: none; /* Removes default select styling */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+        padding-right: 30px; /* Makes space for the dropdown arrow */
       }
 
-      h1 {
-        font-family: "Roboto", sans-serif;
-        font-size: 42px;
-        font-weight: 900;
-        line-height: 60px;
-        color: #000000;
-        margin-bottom: 10px;
-      }
+        .custom-rate-input {
+          flex: 1;
+          padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: #ffe88b;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+        }
 
-      h2 {
-        font-family: "Roboto", sans-serif;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 24px;
-        color: #000;
-        margin-bottom: 20px;
-      }
+        .hidden {
+          display: none;
+        }
 
-      h3 {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 22px;
-        color: #000;
-        margin-bottom: 20px;
-        opacity: 100%;
-      }
+        .tax-calculation-type {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
 
-      h4 {
-        font-family: "Roboto", sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        margin: auto;
-      }
+        .tax-type-button {
+          flex: 1;
+          padding: 10px;
+          background-color: #ffe88b;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
 
-      h5 {
-        font-family: "Roboto", sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        color: #000000;
-        margin-bottom: 18px;
-        opacity: 80%;
-      }
+        .tax-type-button.active {
+          background-color: #95f0a9;
+        }
 
-      p {
-        font-family: "Russo One", sans-serif;
-        font-size: 16px;
-        line-height: 20px;
-        opacity: 100%;
-      }
-
-      body {
-        font-family: "Roboto", serif;
-        color: #000;
-        line-height: 1;
-        background: #ffe88b;
-      }
-
-      .header {
-        width: 600px;
-        opacity: 90%;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .subheader {
-        width: 600px;
-        font-size: 24px;
-        font-weight: 900;
-        opacity: 90%;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      canvas {
-        position: absolute;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-      }
-
-      .container {
-        width: 400px;
-        margin: 40px auto;
-
-        /* FLEXBOX */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .item {
-        border-radius: 10px;
-        border-color: #000;
-        background-color: #f9a66c;
-        opacity: 100%;
-        border: none; /* remove default borders */
-        box-shadow: rgba(50, 50, 50, 0.5) 0px 10px 20px -20px,
-          rgba(0, 0, 0, 0.3) 0px 10px 10px -30px,
-          rgba(10, 37, 64, 0.25) 0px -2px 2px 0px inset;
-      }
-
-      .outro {
-        margin: 80px auto;
-        width: 600px;
-        align-items: center;
-      }
-
-      .number {
-        font-size: 24px;
-        font-weight: 500;
-        color: #000;
-      }
-
-      .text {
-        font-size: 14px;
-        font-weight: 400;
-        color: #000;
-      }
-
-      .calculator {
-        padding: 30px;
-      }
-
-      label {
-        /*         display: inline-block;
- */
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-
-      input[type="number"] {
-        width: 200px;
-        background-color: #ffe88b;
-        padding: 10px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-        font-size: 16px;
-        border: none; /* remove default borders */
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
-          0 1px 2px 0 rgba(0, 0, 0, 0.11);
-      }
-
-      ::-webkit-input-placeholder {
-        color: #000;
-      }
-
-      .input-group {
-        display: flex;
-      }
-
-      input {
-        margin-right: 10px;
-      }
-
-      button {
-        width: 100px;
-        padding: 10px;
-        background-color: #95f0a9;
-        color: #000;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        margin-left: 1rem;
-        font: 18px;
-        border: none; /* remove default borders */
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
-          0 1px 2px 0 rgba(0, 0, 0, 0.11);
-      }
-
-      @media (max-width: 800px) {
-        .header {
+        .calculate-button {
           width: 100%;
+          margin-bottom: 20px;
         }
 
-        h1 {
-          font-size: 1.6rem;
+        .tax-results {
+          margin-top: 20px;
         }
 
-        .subheader {
-          width: 100%;
-        }
 
-        .container {
-          width: 100%;
-          padding: 20px;
-        }
-      }
+
+
+
+              /* Desktop layout adjustments */
+                @media (min-width: 1024px) { /* This targets desktop screens */
+                .item1, .item3 {
+                grid-template-columns: 1fr 1fr; /* Two equal columns on desktop */
+                }
+
+              @media (max-width: 800px) {
+                .item1,
+                .item3 {
+                  flex-direction: row; /* Create two columns on larger screens */
+                  justify-content: space-between;
+                }
+                h1 {
+                  font-size: 32px;
+                  line-height: 1.2;
+                }
+
+                h2 {
+                  font-size: 24px;
+                }
+
+                h3 {
+                  font-size: 16px;
+                }
+
+                p {
+                  font-size: 16px;
+                  line-height: 1.4;
+                }
+
+                /* Adjustments for calculator sections */
+                .calculator {
+                  padding: 40px;
+                }
+
+                /* Layout adjustments */
+                .item1,
+                .item3 {
+                  flex-direction: column;
+                }
+
+                .item {
+                  width: calc(50% - 10px); /* Take up half the space minus gap */
+                }
+              }
+
+              @media (max-width: 600px) {
+                h1 {
+                  font-size: 28px;
+                }
+
+                .input-group {
+                  flex-direction: column;
+                }
+
+                input[type="number"] {
+                  width: 100%;
+                }
+
+                button {
+                  width: 100%;
+                  margin-left: 0;
+                }
+                .markup-input-group {
+                  flex-direction: column;
+                  align-items: stretch;
+                }
+                .markup-input-group input,
+                .markup-input-group button {
+                  width: 100%;
+                }
+                .tax-input-group {
+                  flex-direction: column;
+                  align-items: stretch;
+                }
+
+                .tax-rate-select,
+                .custom-rate-input {
+                  width: 100%;
+                }
+                .distribution-input-group {
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                }
+
+                .control-button {
+                  width: 100%;
+                }
+              }
     </style>
   </head>
 
@@ -238,108 +497,334 @@
 
     <hr size="4px" width="200px" color="#000" />
 
-    <div class="subheader"></div>
-
-    <div class="container">
-      <div class="item">
-        <!-- Percentage Increase Calculator -->
-        <div class="calculator">
-          <h2>Finn prosentendring</h2>
-          <div class="input-group">
-            <label for="initialValue"></label>
-            <input type="number" id="initialValue" placeholder="Fra" />
-            <label for="finalValue"></label>
-            <input type="number" id="finalValue" placeholder="Til" />
-            <button onclick="calculatePercentageIncrease()">
-              <h4>Regn ut</h4>
-            </button>
-          </div>
-          <h3>
-            Prosentvis endring: <span id="percentageIncreaseResult"></span>%
-          </h3>
-          <h3>Utregning: <span id="calculationDetails"></span></h3>
-          <h3 id="calculationDetails"></h3>
-          <!-- This will display the calculation -->
-        </div>
-      </div>
+    <div class="subheader">
+      <p>
+        Enkel og nøyaktig prosentregning for alle formål. Regn ut prosent,
+        rabatt, økning og reduksjon med våre kalkulatorer.
+      </p>
     </div>
 
     <div class="container">
-      <div class="item">
-        <!-- Finn prosent av tallet -->
-        <div class="calculator">
-          <h2>Finn prosentandel av tallet</h2>
-          <!-- Wrapping div for alignment -->
-          <div class="input-group">
-            <!-- <div class="input-container"> -->
-            <label for="partValue"></label>
-            <input type="number" id="partValue" placeholder="Del av tallet" />
-            <label for="totalValue"></label>
-            <input type="number" id="totalValue" placeholder="Hele tallet" />
-            <button onclick="calculatePercentageOfTotal()">
-              <h4>Regn ut</h4>
-            </button>
-          </div>
-          <div class="output-container">
-            <h3>
-              Gir en andel på: <span id="percentageOfTotalResult"></span>%
-            </h3>
-            <h3>Utregning: <span id="calculationDetai"></span></h3>
-            <h3 id="calculationDetai"></h3>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="item">
-        <!-- Regne rabatt -->
-        <div class="calculator">
-          <h2>Hvordan regne ut rabatt</h2>
-          <div class="input-group">
-            <label for="originalPrice"></label>
-            <input type="number" id="originalPrice" placeholder="Vareverdi" />
-
-            <label for="discountPercentage"></label>
-            <input type="number" id="discountPercentage" placeholder="Rabatt" />
-
-            <button onclick="calculateDiscount()"><h4>Regn ut</h4></button>
-          </div>
-          <h3>Gir en rabattert pris på: <span id="discountedPrice"></span></h3>
-          <h3>Penger spart: <span id="amountSaved"></span></h3>
-          <h3>Utregning: <span id="Utregning"></span></h3>
-          <h3 id="Utregning"></h3>
-        </div>
-      </div>
-    </div>
-
-    <!-- Finne del av taller -->
-    <div class="container">
-      <div class="item">
-        <div class="calculator">
-          <div class="input-container">
-            <h2>Finn del av tallet</h2>
+      <div class="item1">
+        <div class="item">
+          <!-- Percentage Increase Calculator -->
+          <div class="calculator">
+            <h2>Prosentvis endring</h2>
             <div class="input-group">
-              <label for="baseNumber"></label>
-              <input
-                type="number"
-                id="baseNumber"
-                placeholder="Prosent av tallet"
-              />
-
-              <label for="percentageValue"></label>
-              <input
-                type="number"
-                id="percentageValue"
-                placeholder="Hele tallet"
-              />
-
-              <button onclick="calculatePercentageOfNumber()">
+              <label for="initialValue"></label>
+              <input type="number" id="initialValue" placeholder="Fra" />
+              <label for="finalValue"></label>
+              <input type="number" id="finalValue" placeholder="Til" />
+              <button onclick="calculatePercentageIncrease()">
                 <h4>Regn ut</h4>
               </button>
             </div>
-            <h3>Svar: <span id="percentageResult"></span></h3>
-            <h3>Utregning: <span id="calculationD"></span></h3>
+            <h3>
+              Prosentvis endring: <span id="percentageIncreaseResult"></span>%
+            </h3>
+            <h3>Utregning: <span id="calculationDetails"></span></h3>
+            <h3 id="calculationDetails"></h3>
+            <!-- This will display the calculation -->
+          </div>
+        </div>
+
+        <div class="item">
+          <!-- Finn prosent av tallet -->
+          <div class="calculator">
+            <h2>Finn prosentandel av totalen</h2>
+            <!-- Wrapping div for alignment -->
+            <div class="input-group">
+              <!-- <div class="input-container"> -->
+              <label for="partValue"></label>
+              <input
+                type="number"
+                id="partValue"
+                placeholder="Del av totalen"
+              />
+              <label for="totalValue"></label>
+              <input type="number" id="totalValue" placeholder="Totalverdi" />
+              <button onclick="calculatePercentageOfTotal()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <div class="output-container">
+              <h3>
+                Gir en andel på: <span id="percentageOfTotalResult"></span>%
+              </h3>
+              <h3>Utregning: <span id="calculationDetai"></span></h3>
+              <h3 id="calculationDetai"></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item3">
+        <div class="item">
+          <!-- Regne rabatt -->
+          <div class="calculator">
+            <h2>Hvordan regne ut rabatt</h2>
+            <div class="input-group">
+              <label for="originalPrice"></label>
+              <input
+                type="number"
+                id="originalPrice"
+                placeholder="Pris før rabatt"
+              />
+
+              <label for="discountPercentage"></label>
+              <input
+                type="number"
+                id="discountPercentage"
+                placeholder="Rabatt i prosent"
+              />
+
+              <button onclick="calculateDiscount()"><h4>Regn ut</h4></button>
+            </div>
+            <h3>Ny pris: <span id="discountedPrice"></span></h3>
+            <h3>Penger spart: <span id="amountSaved"></span></h3>
+            <h3>Utregning: <span id="Utregning"></span></h3>
+            <h3 id="Utregning"></h3>
+          </div>
+        </div>
+
+        <!-- Finne delen av tallet -->
+
+        <div class="item">
+          <div class="calculator">
+            <div class="input-container">
+              <h2>Finn delen av tallet</h2>
+              <div class="input-group">
+                <label for="baseNumber"></label>
+                <input
+                  type="number"
+                  id="baseNumber"
+                  placeholder="Prosent av tallet"
+                />
+
+                <label for="percentageValue"></label>
+                <input
+                  type="number"
+                  id="percentageValue"
+                  placeholder="Hele tallet"
+                />
+
+                <button onclick="calculatePercentageOfNumber()">
+                  <h4>Regn ut</h4>
+                </button>
+              </div>
+              <p id="error" style="color: red"></p>
+              <h3>Svar: <span id="percentageResult"></span></h3>
+              <h3>Utregning: <span id="calculationD"></span></h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Finn prosentpoeng endring -->
+
+        <div class="item">
+          <div class="calculator">
+            <h2>Prosentpoeng endring</h2>
+            <div class="input-group">
+              <label for="initialPercentage"></label>
+              <input
+                type="number"
+                id="initialPercentage"
+                placeholder="Fra prosent"
+                step="0.1"
+              />
+              <label for="finalPercentage"></label>
+              <input
+                type="number"
+                id="finalPercentage"
+                placeholder="Til prosent"
+                step="0.1"
+              />
+              <button onclick="calculatePercentagePointChange()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>
+              Prosentpoeng endring: <span id="percentagePointResult">0</span>
+            </h3>
+            <h3>
+              Prosentvis endring: <span id="percentageChangeResult">0</span>%
+            </h3>
+            <h3>Utregning: <span id="pointCalculationDetails"></span></h3>
+          </div>
+        </div>
+
+        <!-- Prosentfordeling Kalkulator -->
+        <div class="item">
+          <div class="calculator">
+            <h2>Prosentfordeling</h2>
+
+            <!-- Dynamic input container -->
+            <div id="valueInputs">
+              <!-- Initial three input fields -->
+              <div class="distribution-input-group">
+                <input
+                  type="number"
+                  class="value-input"
+                  placeholder="Verdi 1"
+                />
+                <span class="percentage-result">0%</span>
+              </div>
+              <div class="distribution-input-group">
+                <input
+                  type="number"
+                  class="value-input"
+                  placeholder="Verdi 2"
+                />
+                <span class="percentage-result">0%</span>
+              </div>
+              <div class="distribution-input-group">
+                <input
+                  type="number"
+                  class="value-input"
+                  placeholder="Verdi 3"
+                />
+                <span class="percentage-result">0%</span>
+              </div>
+            </div>
+
+            <!-- Controls for adding/removing fields -->
+            <div class="distribution-controls">
+              <button onclick="addInputField()" class="control-button">
+                <h4>Legg til felt</h4>
+              </button>
+              <button onclick="removeInputField()" class="control-button">
+                <h4>Fjern felt</h4>
+              </button>
+            </div>
+
+            <!-- Results display -->
+            <div class="distribution-results">
+              <h3>Total sum: <span id="totalSum">0</span></h3>
+              <h3>
+                Status: <span id="distributionStatus">Fyll inn verdier</span>
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Påslag- og marginkalkulator -->
+
+        <div class="item">
+          <div class="calculator">
+            <h2>Påslag- og marginkalkulator</h2>
+
+            <!-- Cost input section -->
+            <div class="markup-input-group">
+              <label for="costPrice"></label>
+              <input
+                type="number"
+                id="costPrice"
+                placeholder="Skriv inn innkjøpspris"
+              />
+            </div>
+
+            <!-- Calculation type selector -->
+            <div class="calculation-type">
+              <button
+                onclick="setCalculationType('markup')"
+                id="markupButton"
+                class="type-button active"
+              >
+                <h4>Påslag</h4>
+              </button>
+              <button
+                onclick="setCalculationType('margin')"
+                id="marginButton"
+                class="type-button"
+              >
+                <h4>Margin</h4>
+              </button>
+            </div>
+
+            <!-- Percentage input -->
+            <div class="markup-input-group">
+              <label id="percentageLabel"></label>
+              <input
+                type="number"
+                id="percentageInput"
+                placeholder="Skriv inn prosent"
+              />
+              <button onclick="calculatePrice()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+
+            <!-- Results display -->
+            <div class="results-section">
+              <h3>Salgspris: <span id="sellingPrice">0</span> kr</h3>
+              <h3>Fortjeneste: <span id="profit">0</span> kr</h3>
+              <h3>Margin: <span id="marginResult">0</span>%</h3>
+              <h3>Påslag: <span id="markupResult">0</span>%</h3>
+              <h3><span id="calculation"></span></h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- MVA-kalkulator -->
+
+        <div class="item">
+          <div class="calculator">
+            <h2>MVA-kalkulator</h2>
+
+            <!-- Amount input section -->
+            <div class="tax-input-group">
+              <input
+                type="number"
+                id="baseAmount"
+                placeholder="Skriv inn beløp"
+              />
+
+              <!-- Tax rate selector -->
+              <select id="taxRate" class="tax-rate-select">
+                <option value="25">25% (Standard MVA)</option>
+                <option value="15">15% (Mat og drikke)</option>
+                <option value="12">12% (Transport)</option>
+                <option value="custom">Egendefinert</option>
+              </select>
+
+              <!-- Custom tax rate input (hidden by default) -->
+              <input
+                type="number"
+                id="customTaxRate"
+                placeholder="Skriv inn skatteprosent"
+                class="custom-rate-input hidden"
+              />
+            </div>
+
+            <!-- Calculation type selector -->
+            <div class="tax-calculation-type">
+              <button
+                onclick="setTaxCalculationType('addTax')"
+                id="addTaxButton"
+                class="tax-type-button active"
+              >
+                <h4>Legg til MVA</h4>
+              </button>
+              <button
+                onclick="setTaxCalculationType('removeTax')"
+                id="removeTaxButton"
+                class="tax-type-button"
+              >
+                <h4>Trekk fra MVA</h4>
+              </button>
+            </div>
+
+            <button onclick="calculateTax()" class="calculate-button">
+              <h4>Regn ut</h4>
+            </button>
+
+            <!-- Results display -->
+            <div class="tax-results">
+              <h3>Beløp uten MVA: <span id="amountExclTax">0</span> kr</h3>
+              <h3>MVA beløp: <span id="taxAmount">0</span> kr</h3>
+              <h3>Beløp inkl. MVA: <span id="amountInclTax">0</span> kr</h3>
+              <h3>Utregning: <span id="taxCalculation"></span></h3>
+            </div>
           </div>
         </div>
       </div>
@@ -349,10 +834,7 @@
       <h2>Prosent og prosentregning: En enkel innføring</h2>
       <p>
         Prosent er en viktig del av matematikken som hjelper oss med å forstå og
-        uttrykke forhold og sammenhenger i hverdagen. Ordet "prosent" kommer fra
-        det latinske uttrykket "per centum," som betyr "av hundre." Det er
-        nettopp hva prosent handler om - å representere deler av en helhet i
-        forhold til hundre.
+        uttrykke forhold og sammenhenger i hverdagen.
       </p>
       <p>
         Når vi snakker om prosent, deler vi en størrelse inn i hundre like
@@ -458,38 +940,351 @@
         // Display the results
         document.getElementById(
           "discountedPrice"
-        ).textContent = `${discountedPrice.toFixed(2)}`;
+        ).textContent = `${discountedPrice.toFixed()}`;
         document.getElementById(
           "amountSaved"
-        ).textContent = `${discountAmount.toFixed(2)}`;
+        ).textContent = `${discountAmount.toFixed()}`;
         document.getElementById("Utregning").textContent = Utregning;
       }
+
+      /*Finn del av tallet*/
 
       function calculatePercentageOfNumber() {
         // Get values from input fields
         let baseNumber = parseFloat(
-          document.getElementById("baseNumber").value
+          document.getElementById("baseNumber").value.trim()
         );
         let percentageValue =
-          parseFloat(document.getElementById("percentageValue").value) / 100;
+          parseFloat(document.getElementById("percentageValue").value.trim()) /
+          100;
 
         // Check if inputs are numbers
         if (isNaN(baseNumber) || isNaN(percentageValue)) {
-          alert("Please enter valid numbers.");
+          document.getElementById("error").textContent =
+            "Please enter valid numbers.";
           return;
         }
+        document.getElementById("error").textContent = ""; // Clear any previous errors
 
         // Calculate the result
         let result = baseNumber * percentageValue;
 
         // Display results
-        document.getElementById("percentageResult").textContent =
-          result.toFixed(2);
-        document.getElementById(
-          "calculationD"
-        ).textContent = `${baseNumber} * ${percentageValue} = ${result.toFixed(
-          2
-        )}`;
+        const resultElement = document.getElementById("percentageResult");
+        const calculationElement = document.getElementById("calculationD");
+
+        if (resultElement && calculationElement) {
+          resultElement.textContent = result.toFixed(); // Two decimal places
+
+          // Display the calculation details
+          calculationElement.innerHTML = `${baseNumber} × ${percentageValue} = ${(
+            baseNumber * percentageValue
+          ).toFixed(2)}`;
+        } else {
+          console.error(
+            "Result or calculation elements are missing in the HTML."
+          );
+        }
+      }
+
+      function calculatePercentagePointChange() {
+        // Get input values and convert to numbers
+        const initialPercentage = parseFloat(
+          document.getElementById("initialPercentage").value
+        );
+        const finalPercentage = parseFloat(
+          document.getElementById("finalPercentage").value
+        );
+
+        // Check if inputs are valid numbers
+        if (isNaN(initialPercentage) || isNaN(finalPercentage)) {
+          alert("Vennligst fyll inn begge feltene med gyldige tall");
+          return;
+        }
+
+        // Calculate percentage point change (simple subtraction)
+        const percentagePointChange = finalPercentage - initialPercentage;
+
+        // Calculate percentage change ((new - old) / old * 100)
+        const percentageChange =
+          initialPercentage !== 0
+            ? ((finalPercentage - initialPercentage) /
+                Math.abs(initialPercentage)) *
+              100
+            : 0; // Handle division by zero case
+
+        // Create explanation text
+        const calculationDetails = `${finalPercentage}% - ${initialPercentage}% = ${percentagePointChange} prosentpoeng`;
+
+        // Update the display
+        document.getElementById("percentagePointResult").textContent =
+          percentagePointChange.toFixed(1) + " prosentpoeng";
+        document.getElementById("percentageChangeResult").textContent =
+          percentageChange.toFixed(1);
+        document.getElementById("pointCalculationDetails").textContent =
+          calculationDetails;
+      }
+
+      // Keep track of the number of input fields
+      let inputFieldCount = 3;
+
+      // Function to calculate percentages
+      function calculateDistribution() {
+        // Get all input values
+        const inputs = document.querySelectorAll(".value-input");
+        const values = Array.from(inputs).map(
+          (input) => parseFloat(input.value) || 0
+        );
+
+        // Calculate total
+        const total = values.reduce((sum, value) => sum + value, 0);
+
+        // Update total sum display
+        document.getElementById("totalSum").textContent = total.toFixed(2);
+
+        // Calculate and update percentages for each input
+        const percentageSpans = document.querySelectorAll(".percentage-result");
+        values.forEach((value, index) => {
+          const percentage = total === 0 ? 0 : (value / total) * 100;
+          percentageSpans[index].textContent = percentage.toFixed(1) + "%";
+        });
+
+        // Update status message
+        const statusElement = document.getElementById("distributionStatus");
+        if (total === 0) {
+          statusElement.textContent = "Fyll inn verdier";
+          statusElement.style.color = "#000";
+        } else {
+          statusElement.textContent = "Prosentfordeling beregnet";
+          statusElement.style.color = "#000";
+        }
+      }
+
+      // Function to add a new input field
+      function addInputField() {
+        if (inputFieldCount >= 10) {
+          alert("Maksimalt 10 felt tillatt");
+          return;
+        }
+
+        inputFieldCount++;
+        const container = document.getElementById("valueInputs");
+
+        const newGroup = document.createElement("div");
+        newGroup.className = "distribution-input-group";
+
+        newGroup.innerHTML = `
+        <input type="number" class="value-input" placeholder="Verdi ${inputFieldCount}" />
+        <span class="percentage-result">0%</span>
+    `;
+
+        container.appendChild(newGroup);
+
+        // Add event listener to new input
+        newGroup
+          .querySelector(".value-input")
+          .addEventListener("input", calculateDistribution);
+      }
+
+      // Function to remove the last input field
+      function removeInputField() {
+        if (inputFieldCount <= 2) {
+          alert("Minimum 3 felt kreves");
+          return;
+        }
+
+        const container = document.getElementById("valueInputs");
+        container.removeChild(container.lastChild);
+        inputFieldCount--;
+        calculateDistribution();
+      }
+
+      // Add event listeners to initial input fields
+      document.addEventListener("DOMContentLoaded", function () {
+        const inputs = document.querySelectorAll(".value-input");
+        inputs.forEach((input) => {
+          input.addEventListener("input", calculateDistribution);
+        });
+      });
+
+      let calculationType = "markup"; // Default calculation type
+
+      // Function to switch between markup and margin calculations
+      function setCalculationType(type) {
+        calculationType = type;
+
+        // Update button states
+        document
+          .getElementById("markupButton")
+          .classList.toggle("active", type === "markup");
+        document
+          .getElementById("marginButton")
+          .classList.toggle("active", type === "margin");
+
+        // Update input label
+        const label = document.getElementById("percentageLabel");
+        label.textContent = type === "markup" ? "" : "";
+
+        // Clear previous calculations
+        clearResults();
+      }
+
+      // Function to clear all result fields
+      function clearResults() {
+        document.getElementById("sellingPrice").textContent = "0";
+        document.getElementById("profit").textContent = "0";
+        document.getElementById("marginResult").textContent = "0";
+        document.getElementById("markupResult").textContent = "0";
+        document.getElementById("calculation").textContent = "";
+      }
+
+      // Main calculation function
+      function calculatePrice() {
+        // Get input values
+        const costPrice = parseFloat(
+          document.getElementById("costPrice").value
+        );
+        const percentage = parseFloat(
+          document.getElementById("percentageInput").value
+        );
+
+        // Validate inputs
+        if (isNaN(costPrice) || isNaN(percentage)) {
+          alert("Vennligst fyll inn både innkjøpspris og prosent");
+          return;
+        }
+
+        // Perform calculations based on type
+        let sellingPrice, profit, margin, markup;
+
+        if (calculationType === "markup") {
+          // Calculate from markup percentage
+          markup = percentage;
+          sellingPrice = costPrice * (1 + markup / 100);
+          profit = sellingPrice - costPrice;
+          margin = (profit / sellingPrice) * 100;
+        } else {
+          // Calculate from margin percentage
+          margin = percentage;
+          sellingPrice = costPrice / (1 - margin / 100);
+          profit = sellingPrice - costPrice;
+          markup = (profit / costPrice) * 100;
+        }
+
+        // Create calculation explanation
+        let calculation;
+        if (calculationType === "markup") {
+          calculation = `Salgspris = Innkjøpspris × (1 + påslag%) = ${costPrice.toFixed(
+            2
+          )} × (1 + ${markup.toFixed(1)}%) = ${sellingPrice.toFixed(2)}`;
+        } else {
+          calculation = `Salgspris = Innkjøpspris ÷ (1 - margin%) = ${costPrice.toFixed(
+            2
+          )} ÷ (1 - ${margin.toFixed(1)}%) = ${sellingPrice.toFixed(2)}`;
+        }
+
+        // Update display
+        document.getElementById("sellingPrice").textContent =
+          sellingPrice.toFixed(2);
+        document.getElementById("profit").textContent = profit.toFixed(2);
+        document.getElementById("marginResult").textContent = margin.toFixed(1);
+        document.getElementById("markupResult").textContent = markup.toFixed(1);
+        document.getElementById("calculation").textContent = calculation;
+      }
+
+      // Keep track of current calculation type
+      let taxCalculationType = "addTax";
+
+      // Function to handle tax rate selection changes
+      document.addEventListener("DOMContentLoaded", function () {
+        const taxRateSelect = document.getElementById("taxRate");
+        const customTaxRate = document.getElementById("customTaxRate");
+
+        taxRateSelect.addEventListener("change", function () {
+          // Show/hide custom rate input based on selection
+          if (this.value === "custom") {
+            customTaxRate.classList.remove("hidden");
+          } else {
+            customTaxRate.classList.add("hidden");
+          }
+        });
+      });
+
+      // Function to switch between adding and removing tax
+      function setTaxCalculationType(type) {
+        taxCalculationType = type;
+
+        // Update button states
+        document
+          .getElementById("addTaxButton")
+          .classList.toggle("active", type === "addTax");
+        document
+          .getElementById("removeTaxButton")
+          .classList.toggle("active", type === "removeTax");
+
+        // Clear previous calculations
+        clearTaxResults();
+      }
+
+      // Function to clear all result fields
+      function clearTaxResults() {
+        document.getElementById("amountExclTax").textContent = "0";
+        document.getElementById("taxAmount").textContent = "0";
+        document.getElementById("amountInclTax").textContent = "0";
+        document.getElementById("taxCalculation").textContent = "";
+      }
+
+      // Main calculation function
+      function calculateTax() {
+        // Get input values
+        const baseAmount = parseFloat(
+          document.getElementById("baseAmount").value
+        );
+        let taxRate;
+
+        // Get tax rate (either from select or custom input)
+        const taxRateSelect = document.getElementById("taxRate");
+        if (taxRateSelect.value === "custom") {
+          taxRate = parseFloat(document.getElementById("customTaxRate").value);
+        } else {
+          taxRate = parseFloat(taxRateSelect.value);
+        }
+
+        // Validate inputs
+        if (isNaN(baseAmount) || isNaN(taxRate)) {
+          alert("Vennligst fyll inn både beløp og skatteprosent");
+          return;
+        }
+
+        let amountExclTax, amountInclTax, taxAmount, calculation;
+
+        if (taxCalculationType === "addTax") {
+          // Adding tax to base amount
+          amountExclTax = baseAmount;
+          taxAmount = baseAmount * (taxRate / 100);
+          amountInclTax = baseAmount + taxAmount;
+
+          calculation = `${baseAmount.toFixed(2)} + (${baseAmount.toFixed(
+            2
+          )} × ${taxRate}%) = ${amountInclTax.toFixed(2)}`;
+        } else {
+          // Removing tax from base amount
+          amountInclTax = baseAmount;
+          amountExclTax = baseAmount / (1 + taxRate / 100);
+          taxAmount = amountInclTax - amountExclTax;
+
+          calculation = `${baseAmount.toFixed(
+            2
+          )} ÷ (1 + ${taxRate}%) = ${amountExclTax.toFixed(2)}`;
+        }
+
+        // Update display
+        document.getElementById("amountExclTax").textContent =
+          amountExclTax.toFixed(2);
+        document.getElementById("taxAmount").textContent = taxAmount.toFixed(2);
+        document.getElementById("amountInclTax").textContent =
+          amountInclTax.toFixed(2);
+        document.getElementById("taxCalculation").textContent = calculation;
       }
 
       /* lavaAnimation */
@@ -733,7 +1528,7 @@
             },
             a = i.screen.init("lamp-anim", null, !0),
             o = a.ctx;
-          a.resize(), (t = new e(a.width, a.height, 6, "#f9a66c", "#f9a66c"));
+          a.resize(), (t = new e(a.width, a.height, 6, "#ffe88b", "#ffe88b"));
         }
         return { run: n };
       })();
@@ -747,6 +1542,5 @@
     </script>
   </body>
 </html>
-
 
 
