@@ -897,6 +897,61 @@
             </div>
           </div>
         </div>
+
+        <!-- Feriepengekalkulator -->
+        <div class="item">
+          <div class="calculator">
+            <h2>Feriepengekalkulator</h2>
+
+            <div class="input-group">
+              <label for="holidayBase"></label>
+              <input
+                type="number"
+                id="holidayBase"
+                placeholder="Fjorårets lønnsgrunnlag"
+              />
+
+              <select id="holidayRate" class="tax-rate-select">
+                <option value="10.2">10,2% (4 uker ferie)</option>
+                <option value="12">12% (5 uker ferie)</option>
+                <option value="custom">Egendefinert</option>
+              </select>
+
+              <input
+                type="number"
+                id="holidayCustomRate"
+                placeholder="Egendefinert sats (%)"
+                class="custom-rate-input hidden"
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="holidayMonthly"></label>
+              <input
+                type="number"
+                id="holidayMonthly"
+                placeholder="Månedslønn (for trekk)"
+              />
+              <label for="holidaySubtractSalary" class="text">
+                <input
+                  type="checkbox"
+                  id="holidaySubtractSalary"
+                  checked
+                  style="width: 18px; height: 18px; margin-right: 8px"
+                />
+                Trekk en månedslønn ved ferie
+              </label>
+              <button onclick="calculateHolidayPay()"><h4>Regn ut</h4></button>
+            </div>
+
+            <div class="tax-results">
+              <h3>Feriepenger: <span id="holidayGross">0</span> kr</h3>
+              <h3>Trekk (månedslønn): <span id="holidayDeduction">0</span> kr</h3>
+              <h3>Utbetaling: <span id="holidayNet">0</span> kr</h3>
+              <h3>Utregning: <span id="holidayCalculation"></span></h3>
+            </div>
+          </div>
+        </div>
         
         <!-- Interest Rate Calculator -->
 <div class="item">
@@ -1438,6 +1493,58 @@
         document.getElementById("taxCalculation").textContent = calculation;
       }
 
+      // Handle holiday rate select
+      document.addEventListener("DOMContentLoaded", function () {
+        const holidayRateSelect = document.getElementById("holidayRate");
+        const holidayCustomRate = document.getElementById("holidayCustomRate");
+
+        holidayRateSelect.addEventListener("change", function () {
+          if (this.value === "custom") {
+            holidayCustomRate.classList.remove("hidden");
+          } else {
+            holidayCustomRate.classList.add("hidden");
+          }
+        });
+      });
+
+      // Feriepengeberegning
+      function calculateHolidayPay() {
+        const base = parseFloat(document.getElementById("holidayBase").value);
+        const rateSelect = document.getElementById("holidayRate");
+        const customRate = parseFloat(
+          document.getElementById("holidayCustomRate").value
+        );
+        const monthly = parseFloat(
+          document.getElementById("holidayMonthly").value
+        );
+        const subtractSalary = document.getElementById(
+          "holidaySubtractSalary"
+        ).checked;
+
+        let rate = rateSelect.value === "custom" ? customRate : parseFloat(rateSelect.value);
+
+        if (isNaN(base) || isNaN(rate)) {
+          alert("Vennligst fyll inn grunnlag og sats");
+          return;
+        }
+
+        const feriepenger = base * (rate / 100);
+        const deduction = subtractSalary && !isNaN(monthly) ? monthly : 0;
+        const net = feriepenger - deduction;
+
+        const format = (value) => Math.round(value).toLocaleString("no");
+
+        let calc = `${base.toFixed(2)} × ${rate}% = ${feriepenger.toFixed(2)}`;
+        if (subtractSalary) {
+          calc += `, minus månedslønn ${deduction.toFixed(2)}`;
+        }
+
+        document.getElementById("holidayGross").textContent = format(feriepenger);
+        document.getElementById("holidayDeduction").textContent = format(deduction);
+        document.getElementById("holidayNet").textContent = format(net);
+        document.getElementById("holidayCalculation").textContent = calc;
+      }
+
       // Update display values for sliders
 function updatePrincipal(value) {
   document.getElementById('principalAmountValue').textContent = Number(value).toLocaleString('no');
@@ -1454,8 +1561,8 @@ function updateTimePeriod(value) {
   calculateInterest();
 }
 
-// Function to clear all result fields
-function clearResults() {
+// Function to clear loan result fields
+function clearInterestResults() {
   document.getElementById('finalAmount').textContent = '0';
   document.getElementById('totalInterest').textContent = '0';
   document.getElementById('interestCalculation').textContent = '';
