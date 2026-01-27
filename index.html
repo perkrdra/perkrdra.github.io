@@ -191,6 +191,22 @@
                 padding: 70px;
               }
 
+              .info-badge {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: #000;
+                color: #ffe88b;
+                font-family: "Roboto", sans-serif;
+                font-size: 12px;
+                font-weight: 700;
+                margin-left: 6px;
+                cursor: help;
+              }
+
               label {
                 margin-top: 10px;
                 margin-bottom: 10px;
@@ -931,7 +947,7 @@
               <input
                 type="number"
                 id="holidayMonthly"
-                placeholder="Månedslønn (for trekk)"
+                placeholder="Månedslønn (for trekk/5. uke)"
               />
               <label for="holidaySubtractSalary" class="text">
                 <input
@@ -947,7 +963,17 @@
 
             <div class="tax-results">
               <h3>Feriepenger: <span id="holidayGross">0</span> kr</h3>
-              <h3>Trekk (månedslønn): <span id="holidayDeduction">0</span> kr</h3>
+              <h3>Trekk (månedslønn): <span id="holidayDeductionBase">0</span> kr</h3>
+              <h3>
+                Ekstra trekk 5. uke:
+                <span id="holidayDeductionExtra">0</span> kr
+                <span
+                  class="info-badge"
+                  title="5 uker ferie betyr 25 virkedager. Vanlig månedslønn dekker ca. 21,67 dager, så det trekkes et tillegg på 4/26 av månedslønnen for å dekke differansen."
+                  aria-label="Info om ekstra trekk for 5. ferieuke"
+                >i</span>
+              </h3>
+              <h3>Sum trekk: <span id="holidayDeductionTotal">0</span> kr</h3>
               <h3>Utbetaling: <span id="holidayNet">0</span> kr</h3>
               <h3>Utregning: <span id="holidayCalculation"></span></h3>
             </div>
@@ -1529,19 +1555,34 @@
           return;
         }
 
+        if (subtractSalary && isNaN(monthly)) {
+          alert("Vennligst fyll inn månedslønn for trekk");
+          return;
+        }
+
         const feriepenger = base * (rate / 100);
-        const deduction = subtractSalary && !isNaN(monthly) ? monthly : 0;
-        const net = feriepenger - deduction;
+
+        // Base deduction is one month's salary; for 5 uker (12%) an extra 4/26 is typically deducted
+        const deductionBase = subtractSalary ? monthly : 0;
+        const deductionExtra = subtractSalary && rateSelect.value === "12" ? monthly * (4 / 26) : 0;
+        const deductionTotal = deductionBase + deductionExtra;
+
+        const net = feriepenger - deductionTotal;
 
         const format = (value) => Math.round(value).toLocaleString("no");
 
         let calc = `${base.toFixed(2)} × ${rate}% = ${feriepenger.toFixed(2)}`;
         if (subtractSalary) {
-          calc += `, minus månedslønn ${deduction.toFixed(2)}`;
+          calc += `, minus månedslønn ${deductionBase.toFixed(2)}`;
+          if (deductionExtra > 0) {
+            calc += ` og ekstra trekk (4/26) ${deductionExtra.toFixed(2)}`;
+          }
         }
 
         document.getElementById("holidayGross").textContent = format(feriepenger);
-        document.getElementById("holidayDeduction").textContent = format(deduction);
+        document.getElementById("holidayDeductionBase").textContent = format(deductionBase);
+        document.getElementById("holidayDeductionExtra").textContent = format(deductionExtra);
+        document.getElementById("holidayDeductionTotal").textContent = format(deductionTotal);
         document.getElementById("holidayNet").textContent = format(net);
         document.getElementById("holidayCalculation").textContent = calc;
       }
