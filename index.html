@@ -920,11 +920,12 @@
           <div class="calculator">
             <h2>Feriepengekalkulator</h2>
 
-            <div class="input-group">
+            <div class="holiday-group">
               <label for="holidayBase"></label>
               <input
                 type="number"
                 id="holidayBase"
+                class="holiday-input"
                 placeholder="Fjorårets lønnsgrunnlag"
               />
 
@@ -938,23 +939,24 @@
                 type="number"
                 id="holidayCustomRate"
                 placeholder="Egendefinert sats (%)"
-                class="custom-rate-input hidden"
+                class="custom-rate-input holiday-input hidden"
               />
             </div>
 
-            <div class="input-group">
+            <div class="holiday-group">
               <label for="holidayMonthly"></label>
               <input
                 type="number"
                 id="holidayMonthly"
+                class="holiday-input"
                 placeholder="Månedslønn (for trekk/5. uke)"
               />
-              <label for="holidaySubtractSalary" class="text">
+              <label for="holidaySubtractSalary" class="inline-check">
                 <input
                   type="checkbox"
                   id="holidaySubtractSalary"
                   checked
-                  style="width: 18px; height: 18px; margin-right: 8px"
+                  style="width: 18px; height: 18px;"
                 />
                 Trekk en månedslønn ved ferie
               </label>
