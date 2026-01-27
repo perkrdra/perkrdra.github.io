@@ -466,6 +466,18 @@
                 grid-template-columns: 1fr 1fr; /* Two equal columns on desktop */
                 }
 
+            /* Ultra-wide layout for 27" screens and above */
+            @media (min-width: 1600px) {
+              .container {
+                max-width: 1600px;
+              }
+
+              .item1,
+              .item3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+              }
+            }
+
               @media (max-width: 800px) {
                 .item1,
                 .item3 {
