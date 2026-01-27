@@ -105,6 +105,7 @@
                 color: #000;
                 line-height: 1;
                 background: #ffe88b;
+                padding-top: 48px; /* restore breathing room at top */
               }
 
               /* Making header and subheader responsive */
@@ -136,7 +137,7 @@
               .container {
                 width: 90%; /* Changed from fixed 1200px */
                 max-width: 1200px;
-                margin: auto;
+                margin: 64px auto 96px; /* add space above/below calculators */
                 display: grid;
                 grid-template-columns: 1fr; /* Single column by default */
                 gap: 20px;
@@ -168,7 +169,7 @@
               }
 
               .outro {
-                margin: 80px auto;
+                margin: 140px auto 100px; /* more separation from calculators */
                 width: 90%; /* Changed from fixed 600px */
                 max-width: 600px;
                 align-items: center;
