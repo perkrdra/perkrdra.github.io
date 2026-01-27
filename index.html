@@ -191,6 +191,25 @@
                 padding: 70px;
               }
 
+              .holiday-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: center;
+              }
+
+              .holiday-input {
+                height: 42px;
+                padding: 10px;
+                flex: 1;
+                min-width: 220px;
+              }
+
+              .holiday-group .tax-rate-select {
+                flex: 1;
+                min-width: 220px;
+              }
+
               .info-badge {
                 display: inline-flex;
                 align-items: center;
@@ -951,16 +970,17 @@
                 class="holiday-input"
                 placeholder="Månedslønn (for trekk/5. uke)"
               />
-              <label for="holidaySubtractSalary" class="inline-check">
-                <input
-                  type="checkbox"
-                  id="holidaySubtractSalary"
-                  checked
-                  style="width: 18px; height: 18px;"
-                />
-                Trekk en månedslønn ved ferie
-              </label>
               <button onclick="calculateHolidayPay()"><h4>Regn ut</h4></button>
+            </div>
+
+            <div class="inline-check" style="margin-top: 8px;">
+              <input
+                type="checkbox"
+                id="holidaySubtractSalary"
+                checked
+                style="width: 18px; height: 18px;"
+              />
+              Trekk en månedslønn ved ferie
             </div>
 
             <div class="tax-results">
@@ -1653,7 +1673,6 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
               width: 0,
               height: 0,
               left: 0,
-              top: 0,
               init: function (t, i, s) {
                 return (
                   (this.elem = document.getElementById(t)),
