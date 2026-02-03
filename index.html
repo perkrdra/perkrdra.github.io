@@ -208,8 +208,9 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 10px;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: flex-start; /* keep fields left-aligned */
+                width: 100%; /* ensure groups span full row for consistent starts */
               }
 
               .holiday-input {
@@ -217,11 +218,17 @@
                 padding: 10px;
                 flex: 1 1 220px; /* match distribution inputs: fill row but start aligned */
                 min-width: 220px;
+                max-width: 320px;
               }
 
               .holiday-group .tax-rate-select {
                 flex: 1 1 220px; /* match distribution inputs */
                 min-width: 220px;
+                max-width: 320px;
+              }
+
+              .holiday-group button {
+                flex: 0 0 auto; /* prevent buttons from stretching the row */
               }
 
               .info-badge {
