@@ -208,23 +208,21 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 10px;
-                align-items: flex-start;
-                justify-content: flex-start; /* keep fields left-aligned */
-                width: 100%; /* ensure groups span full row for consistent starts */
+                align-items: stretch; /* make children align from the left edge */
+                justify-content: flex-start;
+                width: 100%;
               }
 
               .holiday-input {
                 height: 42px;
                 padding: 10px;
-                flex: 1 1 220px; /* match distribution inputs: fill row but start aligned */
+                flex: 1 1 240px; /* stretch evenly like distribution inputs */
                 min-width: 220px;
-                max-width: 320px;
               }
 
               .holiday-group .tax-rate-select {
-                flex: 1 1 220px; /* match distribution inputs */
+                flex: 1 1 240px; /* match distribution inputs */
                 min-width: 220px;
-                max-width: 320px;
               }
 
               .holiday-group button {
