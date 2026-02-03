@@ -196,17 +196,18 @@
                 flex-wrap: wrap;
                 gap: 10px;
                 align-items: center;
+                justify-content: flex-start; /* keep fields left-aligned */
               }
 
               .holiday-input {
                 height: 42px;
                 padding: 10px;
-                flex: 1;
+                flex: 0 0 auto; /* avoid stretching so they stay left */
                 min-width: 220px;
               }
 
               .holiday-group .tax-rate-select {
-                flex: 1;
+                flex: 0 0 auto;
                 min-width: 220px;
               }
 
@@ -454,6 +455,7 @@
 
 .custom-slider {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   height: 8px;
   border-radius: 4px;
