@@ -205,28 +205,27 @@
               }
 
               .holiday-group {
-                display: flex;
-                flex-wrap: wrap;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
                 gap: 10px;
-                align-items: stretch; /* make children align from the left edge */
-                justify-content: flex-start;
+                align-items: stretch;
                 width: 100%;
               }
 
               .holiday-input {
                 height: 42px;
                 padding: 10px;
-                flex: 1 1 240px; /* stretch evenly like distribution inputs */
-                min-width: 220px;
+                width: 100%;
+                flex: none;
               }
 
               .holiday-group .tax-rate-select {
-                flex: 1 1 240px; /* match distribution inputs */
-                min-width: 220px;
+                width: 100%;
+                flex: none;
               }
 
               .holiday-group button {
-                flex: 0 0 auto; /* prevent buttons from stretching the row */
+                width: 100%;
               }
 
               .info-badge {
