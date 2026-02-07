@@ -963,6 +963,51 @@
           </div>
         </div>
 
+        <!-- Prosent av prosent kalkulator -->
+        <div class="item">
+          <div class="calculator">
+            <h2>Prosent av prosent</h2>
+            <div class="input-group">
+              <label for="basePercent"></label>
+              <input
+                type="number"
+                id="basePercent"
+                placeholder="Første prosent"
+                step="0.1"
+              />
+              <label for="percentOfPercent"></label>
+              <input
+                type="number"
+                id="percentOfPercent"
+                placeholder="Andre prosent"
+                step="0.1"
+              />
+              <button onclick="calculatePercentOfPercent()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>
+              Resultat: <span id="percentOfPercentResult">0</span>%
+            </h3>
+            <h3>Utregning: <span id="percentOfPercentCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 20% av 15% = 3%.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('percentOfPercent')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
         <!-- Påslag- og marginkalkulator -->
 
         <div class="item">
@@ -1869,6 +1914,27 @@ function calculateInterest() {
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
 
+// Prosent av prosent
+function calculatePercentOfPercent() {
+  const basePercent = parseFloat(
+    document.getElementById('basePercent').value
+  );
+  const percentOfPercent = parseFloat(
+    document.getElementById('percentOfPercent').value
+  );
+
+  if (isNaN(basePercent) || isNaN(percentOfPercent)) {
+    alert('Vennligst fyll inn begge prosenter');
+    return;
+  }
+
+  const result = (basePercent * percentOfPercent) / 100;
+  document.getElementById('percentOfPercentResult').textContent =
+    result.toFixed(2).replace(/\.00$/, '');
+  document.getElementById('percentOfPercentCalculation').textContent =
+    `${percentOfPercent}% av ${basePercent}% = ${result.toFixed(2)}%`;
+}
+
 // Apply example values per calculator
 function applyExample(type) {
   switch (type) {
@@ -1949,6 +2015,12 @@ function applyExample(type) {
       updatePrincipal(principal);
       updateInterestRate(rate);
       updateTimePeriod(years);
+      break;
+    }
+    case 'percentOfPercent': {
+      document.getElementById('basePercent').value = 15;
+      document.getElementById('percentOfPercent').value = 20;
+      calculatePercentOfPercent();
       break;
     }
     default:
