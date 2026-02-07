@@ -2122,7 +2122,7 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
       const t = i / trail.length;
       const alpha = Math.max(0, 0.9 - t * 0.85);
       const width = 8 * (1 - t) + 1.5;
-      ctx.strokeStyle = `rgba(0, 220, 255, ${alpha})`;
+      ctx.strokeStyle = `rgba(149, 240, 169, ${alpha})`;
       ctx.lineWidth = width;
       ctx.beginPath();
       ctx.moveTo(trail[i].x, trail[i].y);
