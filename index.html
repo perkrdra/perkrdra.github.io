@@ -1057,6 +1057,43 @@
           </div>
         </div>
 
+        <!-- Prosent til desimal og brøk -->
+        <div class="item">
+          <div class="calculator">
+            <h2>Prosent til desimal og brøk</h2>
+            <div class="input-group">
+              <label for="percentInput"></label>
+              <input
+                type="number"
+                id="percentInput"
+                placeholder="Skriv inn prosent"
+                step="0.1"
+              />
+              <button onclick="calculatePercentToDecimalFraction()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Desimal: <span id="percentDecimalResult">0</span></h3>
+            <h3>Brøk: <span id="percentFractionResult">0/1</span></h3>
+            <h3>Utregning: <span id="percentToFractionCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 12,5% = 0,125 og 1/8.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('percentToFraction')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
         <!-- Påslag- og marginkalkulator -->
 
         <div class="item">
@@ -2019,6 +2056,53 @@ function calculatePercentOfPercent() {
     `${percentOfPercent}% av ${basePercent}% = ${result.toFixed(2)}%`;
 }
 
+function gcd(a, b) {
+  let x = Math.abs(a);
+  let y = Math.abs(b);
+  while (y !== 0) {
+    const temp = y;
+    y = x % y;
+    x = temp;
+  }
+  return x;
+}
+
+function formatDecimal(value) {
+  const fixed = value.toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
+  return fixed.replace('.', ',');
+}
+
+// Prosent til desimal og brøk
+function calculatePercentToDecimalFraction() {
+  const rawValue = document.getElementById('percentInput').value;
+  const normalized = rawValue.replace(',', '.');
+  const percent = parseFloat(normalized);
+
+  if (isNaN(percent)) {
+    alert('Vennligst fyll inn en prosentverdi');
+    return;
+  }
+
+  const decimal = percent / 100;
+  const decimalText = formatDecimal(decimal);
+
+  const decimalPlaces = normalized.includes('.')
+    ? normalized.split('.')[1].length
+    : 0;
+  const scale = Math.pow(10, decimalPlaces);
+  const numerator = Math.round(percent * scale);
+  const denominator = 100 * scale;
+  const divisor = gcd(numerator, denominator) || 1;
+  const simplifiedNumerator = numerator / divisor;
+  const simplifiedDenominator = denominator / divisor;
+
+  document.getElementById('percentDecimalResult').textContent = decimalText;
+  document.getElementById('percentFractionResult').textContent =
+    `${simplifiedNumerator}/${simplifiedDenominator}`;
+  document.getElementById('percentToFractionCalculation').textContent =
+    `${percent}% = ${decimalText} = ${simplifiedNumerator}/${simplifiedDenominator}`;
+}
+
 // Apply example values per calculator
 function applyExample(type) {
   switch (type) {
@@ -2111,6 +2195,11 @@ function applyExample(type) {
       document.getElementById('basePercent').value = 15;
       document.getElementById('percentOfPercent').value = 20;
       calculatePercentOfPercent();
+      break;
+    }
+    case 'percentToFraction': {
+      document.getElementById('percentInput').value = 12.5;
+      calculatePercentToDecimalFraction();
       break;
     }
     default:
