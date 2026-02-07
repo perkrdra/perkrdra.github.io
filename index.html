@@ -1929,16 +1929,17 @@
         const deductionExtra = subtractSalary && rateSelect.value === "12" ? monthly * (4 / 26) : 0;
         const deductionTotal = deductionBase + deductionExtra;
 
-        const net = feriepenger - deductionTotal;
+        const net = feriepenger;
 
         const format = (value) => Math.round(value).toLocaleString("no");
 
         let calc = `${base.toFixed(2)} × ${rate}% = ${feriepenger.toFixed(2)}`;
         if (subtractSalary) {
-          calc += `, minus månedslønn ${deductionBase.toFixed(2)}`;
+          calc += ` (trekk i lønn: ${deductionBase.toFixed(2)}`;
           if (deductionExtra > 0) {
-            calc += ` og ekstra trekk (4/26) ${deductionExtra.toFixed(2)}`;
+            calc += ` + ekstra trekk (4/26) ${deductionExtra.toFixed(2)}`;
           }
+          calc += `)`;
         }
 
         document.getElementById("holidayGross").textContent = format(feriepenger);
