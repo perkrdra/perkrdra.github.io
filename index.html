@@ -687,31 +687,65 @@
         <div class="item">
           <!-- Percentage Increase Calculator -->
           <div class="calculator">
-            <h2>Prosentvis endring</h2>
+            <h2>Prosentvis økning</h2>
             <div class="input-group">
-              <label for="initialValue"></label>
-              <input type="number" id="initialValue" placeholder="Fra" />
-              <label for="finalValue"></label>
-              <input type="number" id="finalValue" placeholder="Til" />
+              <label for="increaseInitialValue"></label>
+              <input type="number" id="increaseInitialValue" placeholder="Fra" />
+              <label for="increaseFinalValue"></label>
+              <input type="number" id="increaseFinalValue" placeholder="Til" />
               <button onclick="calculatePercentageIncrease()">
                 <h4>Regn ut</h4>
               </button>
             </div>
             <h3>
-              Prosentvis endring: <span id="percentageIncreaseResult"></span>%
+              Prosentvis økning: <span id="percentageIncreaseResult"></span>%
             </h3>
-            <h3>Utregning: <span id="calculationDetails"></span></h3>
-            <!-- This will display the calculation -->
+            <h3>Utregning: <span id="increaseCalculationDetails"></span></h3>
             <details class="example">
               <summary>Se eksempel</summary>
               <div class="example-body">
                 <p class="example-text">
-                  Eksempel: Fra 200 til 250 gir en prosentvis endring på 25%.
+                  Eksempel: Fra 200 til 250 gir en økning på 25%.
                 </p>
                 <button
                   type="button"
                   class="example-apply"
-                  onclick="applyExample('percentageChange')"
+                  onclick="applyExample('percentageIncrease')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <!-- Percentage Decrease Calculator -->
+          <div class="calculator">
+            <h2>Prosentvis nedgang</h2>
+            <div class="input-group">
+              <label for="decreaseInitialValue"></label>
+              <input type="number" id="decreaseInitialValue" placeholder="Fra" />
+              <label for="decreaseFinalValue"></label>
+              <input type="number" id="decreaseFinalValue" placeholder="Til" />
+              <button onclick="calculatePercentageDecrease()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>
+              Prosentvis nedgang: <span id="percentageDecreaseResult"></span>%
+            </h3>
+            <h3>Utregning: <span id="decreaseCalculationDetails"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Fra 250 til 200 gir en nedgang på 20%.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('percentageDecrease')"
                 >
                   <h4>Bruk eksempel</h4>
                 </button>
@@ -1390,24 +1424,60 @@
     <script>
       function calculatePercentageIncrease() {
         const initialValue = parseFloat(
-          document.getElementById("initialValue").value
+          document.getElementById("increaseInitialValue").value
         );
         const finalValue = parseFloat(
-          document.getElementById("finalValue").value
+          document.getElementById("increaseFinalValue").value
         );
+
+        if (isNaN(initialValue) || isNaN(finalValue) || initialValue === 0) {
+          alert("Vennligst fyll inn gyldige tall");
+          return;
+        }
+
+        if (finalValue < initialValue) {
+          alert("Til må være større enn eller lik Fra for økning");
+          return;
+        }
+
         const percentageIncrease =
           ((finalValue - initialValue) / initialValue) * 100;
 
-        // Construct the formula for display
-        const percentageIncreaseResult = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100 = ${percentageIncrease.toFixed(
-          2
-        )}%`;
         const calculationDetails = `(( ${finalValue} - ${initialValue} ) / ${initialValue}) * 100`;
 
         document.getElementById("percentageIncreaseResult").textContent =
           percentageIncrease.toFixed(2);
-        document.getElementById("calculationDetails").textContent =
-          calculationDetails; // Set the calculation to the new element
+        document.getElementById("increaseCalculationDetails").textContent =
+          calculationDetails;
+      }
+
+      function calculatePercentageDecrease() {
+        const initialValue = parseFloat(
+          document.getElementById("decreaseInitialValue").value
+        );
+        const finalValue = parseFloat(
+          document.getElementById("decreaseFinalValue").value
+        );
+
+        if (isNaN(initialValue) || isNaN(finalValue) || initialValue === 0) {
+          alert("Vennligst fyll inn gyldige tall");
+          return;
+        }
+
+        if (finalValue > initialValue) {
+          alert("Til må være mindre enn eller lik Fra for nedgang");
+          return;
+        }
+
+        const percentageDecrease =
+          ((initialValue - finalValue) / initialValue) * 100;
+
+        const calculationDetails = `(( ${initialValue} - ${finalValue} ) / ${initialValue}) * 100`;
+
+        document.getElementById("percentageDecreaseResult").textContent =
+          percentageDecrease.toFixed(2);
+        document.getElementById("decreaseCalculationDetails").textContent =
+          calculationDetails;
       }
 
       function calculatePercentageOfTotal() {
@@ -1947,10 +2017,16 @@ function calculatePercentOfPercent() {
 // Apply example values per calculator
 function applyExample(type) {
   switch (type) {
-    case 'percentageChange': {
-      document.getElementById('initialValue').value = 200;
-      document.getElementById('finalValue').value = 250;
+    case 'percentageIncrease': {
+      document.getElementById('increaseInitialValue').value = 200;
+      document.getElementById('increaseFinalValue').value = 250;
       calculatePercentageIncrease();
+      break;
+    }
+    case 'percentageDecrease': {
+      document.getElementById('decreaseInitialValue').value = 250;
+      document.getElementById('decreaseFinalValue').value = 200;
+      calculatePercentageDecrease();
       break;
     }
     case 'percentageOfTotal': {
