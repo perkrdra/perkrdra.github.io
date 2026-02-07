@@ -294,6 +294,47 @@
                   0 1px 2px 0 rgba(0, 0, 0, 0.11);
               }
 
+              /* Example toggle styles */
+              details.example {
+                margin-top: 12px;
+                background: #ffe88b;
+                border-radius: 14px;
+                padding: 10px 12px;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+              }
+
+              details.example > summary {
+                cursor: pointer;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                list-style: none;
+              }
+
+              details.example > summary::-webkit-details-marker {
+                display: none;
+              }
+
+              .example-body {
+                margin-top: 8px;
+                display: grid;
+                gap: 8px;
+              }
+
+              .example-text {
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                line-height: 20px;
+                opacity: 0.9;
+              }
+
+              .example-apply {
+                width: fit-content;
+                min-width: 0;
+                padding: 8px 12px;
+                font-size: 14px;
+              }
+
               /* Styles for the distribution calculator */
         #valueInputs {
           display: flex;
@@ -652,6 +693,21 @@
             </h3>
             <h3>Utregning: <span id="calculationDetails"></span></h3>
             <!-- This will display the calculation -->
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Fra 200 til 250 gir en prosentvis endring på 25%.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('percentageChange')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -680,6 +736,21 @@
               </h3>
               <h3>Utregning: <span id="calculationDetai"></span></h3>
             </div>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 45 av 180 gir en andel på 25%.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('percentageOfTotal')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
       </div>
@@ -709,6 +780,21 @@
             <h3>Ny pris: <span id="discountedPrice"></span></h3>
             <h3>Penger spart: <span id="amountSaved"></span></h3>
             <h3>Utregning: <span id="Utregning"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 999 kr med 25% rabatt gir ny pris 749 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('discount')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -740,6 +826,21 @@
               <p id="error" style="color: red"></p>
               <h3>Svar: <span id="percentageResult"></span></h3>
               <h3>Utregning: <span id="calculationD"></span></h3>
+              <details class="example">
+                <summary>Se eksempel</summary>
+                <div class="example-body">
+                  <p class="example-text">
+                    Eksempel: 15% av 200 er 30.
+                  </p>
+                  <button
+                    type="button"
+                    class="example-apply"
+                    onclick="applyExample('percentageOfNumber')"
+                  >
+                    <h4>Bruk eksempel</h4>
+                  </button>
+                </div>
+              </details>
             </div>
           </div>
         </div>
@@ -775,6 +876,21 @@
               Prosentvis endring: <span id="percentageChangeResult">0</span>%
             </h3>
             <h3>Utregning: <span id="pointCalculationDetails"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Fra 20% til 27% gir 7 prosentpoeng.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('percentagePoints')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -829,6 +945,21 @@
                 Status: <span id="distributionStatus">Fyll inn verdier</span>
               </h3>
             </div>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 30, 50 og 20 gir 30%, 50% og 20%.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('distribution')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -887,6 +1018,21 @@
               <h3>Påslag: <span id="markupResult">0</span>%</h3>
               <h3><span id="calculation"></span></h3>
             </div>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Innkjøpspris 100 kr med 25% påslag.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('markup')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -950,6 +1096,21 @@
               <h3>Beløp inkl. MVA: <span id="amountInclTax">0</span> kr</h3>
               <h3>Utregning: <span id="taxCalculation"></span></h3>
             </div>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 1 000 kr med 25% MVA gir 1 250 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('tax')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -1018,6 +1179,21 @@
               <h3>Utbetaling: <span id="holidayNet">0</span> kr</h3>
               <h3>Utregning: <span id="holidayCalculation"></span></h3>
             </div>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Lønnsgrunnlag 400 000 kr, sats 12% og månedslønn 35 000 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('holiday')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
         
@@ -1099,6 +1275,21 @@
       <h3>Totalt å tilbakebetale: <span id="totalPayment">0</span> kr</h3>
       <h3>Utregning: <span id="interestCalculation"></span></h3>
     </div>
+    <details class="example">
+      <summary>Se eksempel</summary>
+      <div class="example-body">
+        <p class="example-text">
+          Eksempel: Lån 2 500 000 kr, rente 4,5% og 25 år.
+        </p>
+        <button
+          type="button"
+          class="example-apply"
+          onclick="applyExample('loan')"
+        >
+          <h4>Bruk eksempel</h4>
+        </button>
+      </div>
+    </details>
   </div>
 </div>
       </div>
@@ -1677,6 +1868,93 @@ function calculateInterest() {
 
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
+
+// Apply example values per calculator
+function applyExample(type) {
+  switch (type) {
+    case 'percentageChange': {
+      document.getElementById('initialValue').value = 200;
+      document.getElementById('finalValue').value = 250;
+      calculatePercentageIncrease();
+      break;
+    }
+    case 'percentageOfTotal': {
+      document.getElementById('partValue').value = 45;
+      document.getElementById('totalValue').value = 180;
+      calculatePercentageOfTotal();
+      break;
+    }
+    case 'discount': {
+      document.getElementById('originalPrice').value = 999;
+      document.getElementById('discountPercentage').value = 25;
+      calculateDiscount();
+      break;
+    }
+    case 'percentageOfNumber': {
+      document.getElementById('baseNumber').value = 200;
+      document.getElementById('percentageValue').value = 15;
+      calculatePercentageOfNumber();
+      break;
+    }
+    case 'percentagePoints': {
+      document.getElementById('initialPercentage').value = 20;
+      document.getElementById('finalPercentage').value = 27;
+      calculatePercentagePointChange();
+      break;
+    }
+    case 'distribution': {
+      const inputs = document.querySelectorAll('.value-input');
+      if (inputs[0]) inputs[0].value = 30;
+      if (inputs[1]) inputs[1].value = 50;
+      if (inputs[2]) inputs[2].value = 20;
+      for (let i = 3; i < inputs.length; i += 1) {
+        inputs[i].value = '';
+      }
+      calculateDistribution();
+      break;
+    }
+    case 'markup': {
+      setCalculationType('markup');
+      document.getElementById('costPrice').value = 100;
+      document.getElementById('percentageInput').value = 25;
+      calculatePrice();
+      break;
+    }
+    case 'tax': {
+      setTaxCalculationType('addTax');
+      document.getElementById('baseAmount').value = 1000;
+      const taxRateSelect = document.getElementById('taxRate');
+      taxRateSelect.value = '25';
+      taxRateSelect.dispatchEvent(new Event('change'));
+      calculateTax();
+      break;
+    }
+    case 'holiday': {
+      document.getElementById('holidayBase').value = 400000;
+      const holidayRate = document.getElementById('holidayRate');
+      holidayRate.value = '12';
+      holidayRate.dispatchEvent(new Event('change'));
+      document.getElementById('holidayMonthly').value = 35000;
+      document.getElementById('holidaySubtractSalary').checked = true;
+      calculateHolidayPay();
+      break;
+    }
+    case 'loan': {
+      const principal = 2500000;
+      const rate = 4.5;
+      const years = 25;
+      document.getElementById('principalAmount').value = principal;
+      document.getElementById('interestRate').value = rate;
+      document.getElementById('timePeriod').value = years;
+      updatePrincipal(principal);
+      updateInterestRate(rate);
+      updateTimePeriod(years);
+      break;
+    }
+    default:
+      break;
+  }
+}
 
 
       /* lavaAnimation */
