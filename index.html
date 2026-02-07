@@ -2090,11 +2090,11 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
       trail[i].y += (trail[i - 1].y - trail[i].y) * 0.25;
     }
 
-    // Draw tail
+    // Draw neon tail
     for (let i = trail.length - 1; i >= 1; i -= 1) {
       const t = i / trail.length;
-      const radius = 12 * (1 - t) + 3;
-      const alpha = Math.max(0, 0.85 - t * 0.75);
+      const radius = 10 * (1 - t) + 2;
+      const alpha = Math.max(0, 0.9 - t * 0.8);
       const gradient = ctx.createRadialGradient(
         trail[i].x,
         trail[i].y,
@@ -2103,33 +2103,14 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
         trail[i].y,
         radius
       );
-      gradient.addColorStop(0, `rgba(255, 245, 200, ${alpha})`);
-      gradient.addColorStop(0.5, `rgba(255, 150, 40, ${alpha * 0.95})`);
-      gradient.addColorStop(1, `rgba(200, 30, 10, 0)`);
+      gradient.addColorStop(0, `rgba(120, 255, 255, ${alpha})`);
+      gradient.addColorStop(0.5, `rgba(0, 200, 255, ${alpha * 0.9})`);
+      gradient.addColorStop(1, `rgba(0, 80, 200, 0)`);
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.arc(trail[i].x, trail[i].y, radius, 0, Math.PI * 2);
       ctx.fill();
     }
-
-    // Draw head (fireball)
-    const head = trail[0];
-    const headGradient = ctx.createRadialGradient(
-      head.x,
-      head.y,
-      0,
-      head.x,
-      head.y,
-      16
-    );
-    headGradient.addColorStop(0, 'rgba(255, 255, 230, 1)');
-    headGradient.addColorStop(0.35, 'rgba(255, 200, 80, 0.98)');
-    headGradient.addColorStop(0.75, 'rgba(255, 110, 30, 0.9)');
-    headGradient.addColorStop(1, 'rgba(160, 10, 5, 0)');
-    ctx.fillStyle = headGradient;
-    ctx.beginPath();
-    ctx.arc(head.x, head.y, 16, 0, Math.PI * 2);
-    ctx.fill();
 
     requestAnimationFrame(draw);
   };
