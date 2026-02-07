@@ -2078,8 +2078,8 @@ function calculateInterest() {
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
 
-// Lava cursor with long tail
-(function initLavaCursor() {
+// Neon wand cursor with tail
+(function initWandCursor() {
   if (!window.matchMedia || !window.matchMedia('(pointer: fine)').matches) {
     return;
   }
@@ -2089,6 +2089,10 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
   const ctx = canvas.getContext('2d');
   document.body.appendChild(canvas);
 
+  const wand = document.createElement('div');
+  wand.className = 'wand-cursor';
+  document.body.appendChild(wand);
+
   const resize = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -2096,7 +2100,7 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
   resize();
   window.addEventListener('resize', resize);
 
-  const trailLength = 40;
+  const trailLength = 28;
   const trail = Array.from({ length: trailLength }, () => ({ x: 0, y: 0 }));
   const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
@@ -2116,27 +2120,22 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
       trail[i].y += (trail[i - 1].y - trail[i].y) * 0.25;
     }
 
-    // Draw neon tail
+    // Draw neon tail as a glowing line
+    ctx.lineCap = 'round';
     for (let i = trail.length - 1; i >= 1; i -= 1) {
       const t = i / trail.length;
-      const radius = 10 * (1 - t) + 2;
-      const alpha = Math.max(0, 0.9 - t * 0.8);
-      const gradient = ctx.createRadialGradient(
-        trail[i].x,
-        trail[i].y,
-        0,
-        trail[i].x,
-        trail[i].y,
-        radius
-      );
-      gradient.addColorStop(0, `rgba(120, 255, 255, ${alpha})`);
-      gradient.addColorStop(0.5, `rgba(0, 200, 255, ${alpha * 0.9})`);
-      gradient.addColorStop(1, `rgba(0, 80, 200, 0)`);
-      ctx.fillStyle = gradient;
+      const alpha = Math.max(0, 0.9 - t * 0.85);
+      const width = 8 * (1 - t) + 1.5;
+      ctx.strokeStyle = `rgba(0, 220, 255, ${alpha})`;
+      ctx.lineWidth = width;
       ctx.beginPath();
-      ctx.arc(trail[i].x, trail[i].y, radius, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(trail[i].x, trail[i].y);
+      ctx.lineTo(trail[i - 1].x, trail[i - 1].y);
+      ctx.stroke();
     }
+
+    // Move wand element
+    wand.style.transform = `translate(${trail[0].x}px, ${trail[0].y}px) rotate(-20deg)`;
 
     requestAnimationFrame(draw);
   };
