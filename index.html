@@ -117,6 +117,19 @@
                 padding-top: 48px; /* restore breathing room at top */
               }
 
+              @media (pointer: fine) {
+                body {
+                  cursor: none;
+                }
+
+                .lava-cursor {
+                  position: fixed;
+                  inset: 0;
+                  z-index: 9999;
+                  pointer-events: none;
+                }
+              }
+
               /* Making header and subheader responsive */
               .header {
                 width: 90%; /* Changed from fixed 600px */
@@ -2034,6 +2047,91 @@ function calculateInterest() {
 
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
+
+// Lava cursor with long tail
+(function initLavaCursor() {
+  if (!window.matchMedia || !window.matchMedia('(pointer: fine)').matches) {
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'lava-cursor';
+  const ctx = canvas.getContext('2d');
+  document.body.appendChild(canvas);
+
+  const resize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+  resize();
+  window.addEventListener('resize', resize);
+
+  const trailLength = 40;
+  const trail = Array.from({ length: trailLength }, () => ({ x: 0, y: 0 }));
+  const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+  window.addEventListener('mousemove', (event) => {
+    target.x = event.clientX;
+    target.y = event.clientY;
+  });
+
+  const draw = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Smoothly follow the cursor
+    trail[0].x += (target.x - trail[0].x) * 0.35;
+    trail[0].y += (target.y - trail[0].y) * 0.35;
+    for (let i = 1; i < trail.length; i += 1) {
+      trail[i].x += (trail[i - 1].x - trail[i].x) * 0.25;
+      trail[i].y += (trail[i - 1].y - trail[i].y) * 0.25;
+    }
+
+    // Draw tail
+    for (let i = trail.length - 1; i >= 1; i -= 1) {
+      const t = i / trail.length;
+      const radius = 18 * (1 - t) + 4;
+      const alpha = Math.max(0, 0.6 - t * 0.6);
+      const gradient = ctx.createRadialGradient(
+        trail[i].x,
+        trail[i].y,
+        0,
+        trail[i].x,
+        trail[i].y,
+        radius
+      );
+      gradient.addColorStop(0, `rgba(255, 230, 160, ${alpha})`);
+      gradient.addColorStop(0.5, `rgba(255, 120, 30, ${alpha * 0.8})`);
+      gradient.addColorStop(1, `rgba(200, 30, 10, 0)`);
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(trail[i].x, trail[i].y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Draw head (fireball)
+    const head = trail[0];
+    const headGradient = ctx.createRadialGradient(
+      head.x,
+      head.y,
+      0,
+      head.x,
+      head.y,
+      24
+    );
+    headGradient.addColorStop(0, 'rgba(255, 255, 220, 0.95)');
+    headGradient.addColorStop(0.4, 'rgba(255, 180, 60, 0.9)');
+    headGradient.addColorStop(0.75, 'rgba(255, 90, 20, 0.75)');
+    headGradient.addColorStop(1, 'rgba(160, 10, 5, 0)');
+    ctx.fillStyle = headGradient;
+    ctx.beginPath();
+    ctx.arc(head.x, head.y, 24, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(draw);
+  };
+
+  draw();
+})();
 
 // Prosent av prosent
 function calculatePercentOfPercent() {
