@@ -296,7 +296,8 @@
                 flex: 1; /* Allows inputs to grow and fill available space */
                 min-width: 150px; /* Prevents inputs from becoming too narrow */
                 background-color: #ffe88b;
-                padding: 15px;
+                height: 42px;
+                padding: 10px;
                 margin-top: 10px;
                 margin-bottom: 20px;
                 border-radius: 10px;
@@ -672,10 +673,13 @@
 
                 .input-group {
                   flex-direction: column;
+                  gap: 6px;
                 }
 
                 input[type="number"] {
                   width: 100%;
+                  margin-top: 6px;
+                  margin-bottom: 12px;
                 }
 
                 button {
@@ -685,6 +689,7 @@
                 .markup-input-group {
                   flex-direction: column;
                   align-items: stretch;
+                  gap: 6px;
                 }
                 .markup-input-group input,
                 .markup-input-group button {
@@ -693,6 +698,7 @@
                 .tax-input-group {
                   flex-direction: column;
                   align-items: stretch;
+                  gap: 6px;
                 }
 
                 .tax-rate-select,
@@ -702,6 +708,15 @@
                 .distribution-input-group {
                   flex-direction: row;
                   flex-wrap: wrap;
+                  gap: 6px;
+                }
+
+                #valueInputs {
+                  gap: 6px;
+                }
+
+                .holiday-group {
+                  gap: 6px;
                 }
 
                 .control-button {
