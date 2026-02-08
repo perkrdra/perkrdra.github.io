@@ -109,6 +109,26 @@
                 background: #000;
               }
 
+              .result-pop {
+                display: inline-block;
+                animation: resultPop 450ms ease;
+              }
+
+              @keyframes resultPop {
+                0% {
+                  transform: scale(1);
+                  text-shadow: none;
+                }
+                45% {
+                  transform: scale(1.06);
+                  text-shadow: 0 0 12px rgba(149, 240, 169, 0.9);
+                }
+                100% {
+                  transform: scale(1);
+                  text-shadow: none;
+                }
+              }
+
               body {
                 font-family: "Roboto", serif;
                 color: #000;
@@ -307,6 +327,7 @@
               button {
                 width: auto; /* Changed from fixed width */
                 min-width: 100px;
+                height: 42px;
                 padding: 10px;
                 background-color: #95f0a9;
                 color: #000;
@@ -1504,6 +1525,16 @@
     </div>
 
     <script>
+      function triggerResultFeedback(elements) {
+        const list = Array.isArray(elements) ? elements : [elements];
+        list.forEach((element) => {
+          if (!element) return;
+          element.classList.remove("result-pop");
+          void element.offsetWidth;
+          element.classList.add("result-pop");
+        });
+      }
+
       function calculatePercentageIncrease() {
         const initialValue = parseFloat(
           document.getElementById("increaseInitialValue").value
@@ -1531,6 +1562,10 @@
           percentageIncrease.toFixed(2);
         document.getElementById("increaseCalculationDetails").textContent =
           calculationDetails;
+
+        triggerResultFeedback(
+          document.getElementById("percentageIncreaseResult")
+        );
       }
 
       function calculatePercentageDecrease() {
@@ -1560,6 +1595,10 @@
           percentageDecrease.toFixed(2);
         document.getElementById("decreaseCalculationDetails").textContent =
           calculationDetails;
+
+        triggerResultFeedback(
+          document.getElementById("percentageDecreaseResult")
+        );
       }
 
       function calculatePercentageOfTotal() {
@@ -1586,6 +1625,10 @@
           percentageOfTotalResult;
         document.getElementById("calculationDetai").textContent =
           calculationDetai;
+
+        triggerResultFeedback(
+          document.getElementById("percentageOfTotalResult")
+        );
       }
 
       /*Kalkuler rabatt*/
@@ -1616,6 +1659,11 @@
           "amountSaved"
         ).textContent = `${discountAmount.toFixed()}`;
         document.getElementById("Utregning").textContent = Utregning;
+
+        triggerResultFeedback([
+          document.getElementById("discountedPrice"),
+          document.getElementById("amountSaved"),
+        ]);
       }
 
       /*Finn del av tallet*/
@@ -1651,6 +1699,8 @@
           calculationElement.innerHTML = `${baseNumber} × ${percentageValue} = ${(
             baseNumber * percentageValue
           ).toFixed(2)}`;
+
+          triggerResultFeedback(resultElement);
         } else {
           console.error(
             "Result or calculation elements are missing in the HTML."
@@ -1694,6 +1744,11 @@
           percentageChange.toFixed(1);
         document.getElementById("pointCalculationDetails").textContent =
           calculationDetails;
+
+        triggerResultFeedback([
+          document.getElementById("percentagePointResult"),
+          document.getElementById("percentageChangeResult"),
+        ]);
       }
 
       // Keep track of the number of input fields
@@ -1729,6 +1784,11 @@
           statusElement.textContent = "Prosentfordeling beregnet";
           statusElement.style.color = "#000";
         }
+
+        triggerResultFeedback([
+          document.getElementById("totalSum"),
+          ...Array.from(percentageSpans),
+        ]);
       }
 
       // Function to add a new input field
@@ -1861,6 +1921,13 @@
         document.getElementById("marginResult").textContent = margin.toFixed(1);
         document.getElementById("markupResult").textContent = markup.toFixed(1);
         document.getElementById("calculation").textContent = calculation;
+
+        triggerResultFeedback([
+          document.getElementById("sellingPrice"),
+          document.getElementById("profit"),
+          document.getElementById("marginResult"),
+          document.getElementById("markupResult"),
+        ]);
       }
 
       // Keep track of current calculation type
@@ -1956,6 +2023,12 @@
         document.getElementById("amountInclTax").textContent =
           amountInclTax.toFixed(2);
         document.getElementById("taxCalculation").textContent = calculation;
+
+        triggerResultFeedback([
+          document.getElementById("amountExclTax"),
+          document.getElementById("taxAmount"),
+          document.getElementById("amountInclTax"),
+        ]);
       }
 
       // Handle holiday rate select
@@ -2023,6 +2096,13 @@
         document.getElementById("holidayDeductionExtra").textContent = format(deductionExtra);
         document.getElementById("holidayDeductionTotal").textContent = format(deductionTotal);
         document.getElementById("holidayCalculation").textContent = calc;
+
+        triggerResultFeedback([
+          document.getElementById("holidayGross"),
+          document.getElementById("holidayDeductionBase"),
+          document.getElementById("holidayDeductionExtra"),
+          document.getElementById("holidayDeductionTotal"),
+        ]);
       }
 
       // Update display values for sliders
@@ -2070,6 +2150,12 @@ function calculateInterest() {
   document.getElementById('totalInterest').textContent = Math.round(totalInterest).toLocaleString('no');
   document.getElementById('totalPayment').textContent = Math.round(totalPayment).toLocaleString('no');
   document.getElementById('interestCalculation').textContent = calculation;
+
+  triggerResultFeedback([
+    document.getElementById('finalAmount'),
+    document.getElementById('totalInterest'),
+    document.getElementById('totalPayment'),
+  ]);
 }
 
 // Initialize calculation on page load
@@ -2159,6 +2245,10 @@ function calculatePercentOfPercent() {
     result.toFixed(2).replace(/\.00$/, '');
   document.getElementById('percentOfPercentCalculation').textContent =
     `${percentOfPercent}% av ${basePercent}% = ${result.toFixed(2)}%`;
+
+  triggerResultFeedback(
+    document.getElementById('percentOfPercentResult')
+  );
 }
 
 function gcd(a, b) {
@@ -2206,6 +2296,11 @@ function calculatePercentToDecimalFraction() {
     `${simplifiedNumerator}/${simplifiedDenominator}`;
   document.getElementById('percentToFractionCalculation').textContent =
     `${percent}% = ${decimalText} = ${simplifiedNumerator}/${simplifiedDenominator}`;
+
+  triggerResultFeedback([
+    document.getElementById('percentDecimalResult'),
+    document.getElementById('percentFractionResult'),
+  ]);
 }
 
 // Apply example values per calculator
