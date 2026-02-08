@@ -2576,6 +2576,79 @@ function applyExample(type) {
   }
 }
 
+function checkQuiz() {
+  const form = document.getElementById('quizForm');
+  if (!form) return;
+
+  const questions = form.querySelectorAll('.quiz-question');
+  let correctCount = 0;
+  let allAnswered = true;
+
+  questions.forEach((question) => {
+    const selected = question.querySelector('input[type="radio"]:checked');
+    const options = question.querySelectorAll('input[type="radio"]');
+
+    options.forEach((option) => {
+      const label = option.closest('.quiz-option');
+      if (label) {
+        label.classList.remove('correct', 'incorrect');
+      }
+    });
+
+    if (!selected) {
+      allAnswered = false;
+      return;
+    }
+
+    const correctOption = question.querySelector(
+      'input[type="radio"][data-correct="true"]'
+    );
+
+    if (correctOption && selected === correctOption) {
+      correctCount += 1;
+    }
+
+    options.forEach((option) => {
+      const label = option.closest('.quiz-option');
+      if (!label) return;
+
+      if (option.dataset.correct === 'true') {
+        label.classList.add('correct');
+      } else if (selected === option) {
+        label.classList.add('incorrect');
+      }
+    });
+  });
+
+  const result = document.getElementById('quizResult');
+  if (!result) return;
+
+  if (!allAnswered) {
+    result.textContent = 'Velg svar på alle spørsmål.';
+    triggerResultFeedback(result);
+    return;
+  }
+
+  result.textContent = `Du fikk ${correctCount} av ${questions.length} riktige.`;
+  triggerResultFeedback(result);
+}
+
+function resetQuiz() {
+  const form = document.getElementById('quizForm');
+  if (!form) return;
+
+  form.reset();
+
+  form.querySelectorAll('.quiz-option').forEach((label) => {
+    label.classList.remove('correct', 'incorrect');
+  });
+
+  const result = document.getElementById('quizResult');
+  if (result) {
+    result.textContent = '';
+  }
+}
+
 
       /* lavaAnimation */
 
