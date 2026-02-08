@@ -515,6 +515,75 @@
                 min-height: 22px;
               }
 
+              .rpg-quiz {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+              }
+
+              .rpg-intro {
+                font-size: 16px;
+                line-height: 1.5;
+              }
+
+              .rpg-panel {
+                background: #ffe88b;
+                border-radius: 14px;
+                padding: 16px;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+              }
+
+              .rpg-progress {
+                width: 100%;
+                height: 10px;
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 999px;
+                overflow: hidden;
+              }
+
+              .rpg-bar {
+                height: 100%;
+                width: 0%;
+                background: #95f0a9;
+                transition: width 0.3s ease;
+              }
+
+              .rpg-status {
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                opacity: 0.85;
+                min-height: 20px;
+              }
+
+              .rpg-question {
+                font-family: "Roboto", sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+              }
+
+              .rpg-choices {
+                display: grid;
+                gap: 8px;
+              }
+
+              .rpg-choice {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.5);
+                padding: 8px 10px;
+                border-radius: 10px;
+              }
+
+              .rpg-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+              }
+
         .control-button {
           flex: 1;
           background-color: #95f0a9;
@@ -1925,6 +1994,39 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="item">
+        <div class="calculator rpg-quiz">
+          <h2>Nattvakten: Redningsoppdrag</h2>
+          <p class="rpg-intro">
+            En person er fanget i en mørk kjeller. Hver riktige prosent‑utregning
+            låser opp en del av utgangen. Kan du hjelpe vedkommende å bli befridd?
+          </p>
+          <div class="rpg-panel">
+            <div class="rpg-progress">
+              <div class="rpg-bar" id="rpgBar"></div>
+            </div>
+            <div class="rpg-status" id="rpgStatus">
+              Trykk start for å begynne oppdraget.
+            </div>
+            <div class="rpg-question" id="rpgQuestion"></div>
+            <div class="rpg-choices" id="rpgChoices"></div>
+            <div class="rpg-actions">
+              <button type="button" onclick="startRpgQuiz()">
+                <h4>Start</h4>
+              </button>
+              <button type="button" onclick="submitRpgAnswer()">
+                <h4>Svar</h4>
+              </button>
+              <button type="button" class="quiz-reset" onclick="resetRpgQuiz()">
+                <h4>Start på nytt</h4>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="outro">
       <h2>Prosent og prosentregning: En enkel innføring</h2>
       <p>
@@ -2916,6 +3018,149 @@ function resetQuiz() {
   const result = document.getElementById('quizResult');
   if (result) {
     result.textContent = '';
+  }
+}
+
+const rpgQuestions = [
+  {
+    question: 'Kodelås 1: Hva er 20% av 150?',
+    options: ['25', '30', '35'],
+    correct: 1,
+    success: 'Riktig! En hengelås faller i gulvet.',
+    fail: 'Feil. Metallisk knirking i mørket... Prøv igjen.',
+  },
+  {
+    question: 'Kodelås 2: 45 av 180 er hvor mange prosent?',
+    options: ['20%', '25%', '30%'],
+    correct: 1,
+    success: 'Riktig! En dør åpner seg på gløtt.',
+    fail: 'Feil. Det blir kaldere i rommet.',
+  },
+  {
+    question: 'Kodelås 3: 12% MVA av 2 500 kr er:',
+    options: ['250 kr', '300 kr', '350 kr'],
+    correct: 1,
+    success: 'Riktig! Et lys blinker i trappen.',
+    fail: 'Feil. Du hører et dunk i veggen.',
+  },
+  {
+    question: 'Kodelås 4: Et beløp går fra 800 til 680. Nedgang i prosent?',
+    options: ['10%', '15%', '20%'],
+    correct: 2,
+    success: 'Riktig! En kjetting løsner.',
+    fail: 'Feil. Tiden tikker høyere.',
+  },
+  {
+    question: 'Kodelås 5: 5% av 4 000 er:',
+    options: ['150', '200', '250'],
+    correct: 1,
+    success: 'Riktig! Utgangen er åpen.',
+    fail: 'Feil. En skygge glir forbi.',
+  },
+];
+
+const rpgState = {
+  index: -1,
+  score: 0,
+  started: false,
+};
+
+function renderRpgQuestion(message) {
+  const status = document.getElementById('rpgStatus');
+  const question = document.getElementById('rpgQuestion');
+  const choices = document.getElementById('rpgChoices');
+  const bar = document.getElementById('rpgBar');
+
+  if (!status || !question || !choices || !bar) return;
+
+  if (rpgState.index >= rpgQuestions.length) {
+    question.textContent = 'Oppdrag fullført.';
+    choices.innerHTML = '';
+    bar.style.width = '100%';
+    status.textContent = `Du reddet den fangede. ${rpgState.score} av ${rpgQuestions.length} riktige.`;
+    triggerResultFeedback(status);
+    return;
+  }
+
+  const progress = Math.max(0, rpgState.index) / rpgQuestions.length;
+  bar.style.width = `${Math.round(progress * 100)}%`;
+
+  const current = rpgQuestions[rpgState.index];
+  question.textContent = current.question;
+  choices.innerHTML = current.options
+    .map(
+      (option, index) => `
+        <label class="rpg-choice">
+          <input type="radio" name="rpgChoice" value="${index}" /> ${option}
+        </label>
+      `
+    )
+    .join('');
+
+  if (message) {
+    status.textContent = message;
+    triggerResultFeedback(status);
+  }
+}
+
+function startRpgQuiz() {
+  rpgState.index = 0;
+  rpgState.score = 0;
+  rpgState.started = true;
+  renderRpgQuestion('Du hører en svak bankelyd bak en dør.');
+}
+
+function submitRpgAnswer() {
+  const status = document.getElementById('rpgStatus');
+  if (!rpgState.started) {
+    startRpgQuiz();
+    return;
+  }
+
+  const selected = document.querySelector('input[name="rpgChoice"]:checked');
+  if (!selected) {
+    if (status) {
+      status.textContent = 'Velg et svar før du låser opp.';
+      triggerResultFeedback(status);
+    }
+    return;
+  }
+
+  const current = rpgQuestions[rpgState.index];
+  const selectedIndex = Number(selected.value);
+  if (selectedIndex === current.correct) {
+    rpgState.score += 1;
+    rpgState.index += 1;
+    renderRpgQuestion(current.success);
+  } else {
+    if (status) {
+      status.textContent = current.fail;
+      triggerResultFeedback(status);
+    }
+  }
+}
+
+function resetRpgQuiz() {
+  rpgState.index = -1;
+  rpgState.score = 0;
+  rpgState.started = false;
+
+  const status = document.getElementById('rpgStatus');
+  const question = document.getElementById('rpgQuestion');
+  const choices = document.getElementById('rpgChoices');
+  const bar = document.getElementById('rpgBar');
+
+  if (status) {
+    status.textContent = 'Trykk start for å begynne oppdraget.';
+  }
+  if (question) {
+    question.textContent = '';
+  }
+  if (choices) {
+    choices.innerHTML = '';
+  }
+  if (bar) {
+    bar.style.width = '0%';
   }
 }
 
