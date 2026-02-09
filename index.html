@@ -2014,10 +2014,10 @@
         <div class="calculator rpg-quiz">
           <h2>Nattvakten: Redningsoppdrag</h2>
           <p class="rpg-intro">
-            En gammel matematikklærer er fanget i Singulariteten. Ingen trodde
-            oppgaven hans kunne løses, men da han klarte det, slo noe underlig
-            tilbake. Hunden hans og undulaten venter. Du må løse 10 oppgaver for
-            å sy ham ut av Singulariteten. Går du videre, skjer det på eget ansvar.
+            En OG matematikklærer er fanget i Singulariteten. Ingen trodde
+            oppgaven hans kunne løses, men da han klarte det, slo noe helt
+            sus tilbake. Hunden hans og undulaten venter. Du må løse 10 oppgaver
+            for å sy ham ut av Singulariteten. Går du videre, skjer det på eget ansvar.
           </p>
           <div class="rpg-panel">
             <div class="rpg-progress">
@@ -3092,71 +3092,71 @@ const rpgQuestions = [
     question: 'Port 1: Hva er 20% av 150?',
     options: ['25', '30', '35'],
     correct: 1,
-    success: 'Riktig! Et ekko svarer fra Singulariteten.',
-    fail: 'Feil. Den gamle læreren hvisker: “Prøv igjen.”',
+    success: 'Riktig! Et ekko svarer fra Singulariteten. Litt gåsehud.',
+    fail: 'Feil. Læreren hvisker: “Prøv igjen.”',
   },
   {
     question: 'Port 2: 45 av 180 er hvor mange prosent?',
     options: ['20%', '25%', '30%'],
     correct: 1,
-    success: 'Riktig! Hunden bjeffer i det fjerne.',
-    fail: 'Feil. En kald bris slukker lyset.',
+    success: 'Riktig! Hunden bjeffer i det fjerne. Du er på sporet.',
+    fail: 'Feil. En kald bris slukker lyset. Prøv igjen.',
   },
   {
     question: 'Port 3: 12% MVA av 2 500 kr er:',
     options: ['250 kr', '300 kr', '350 kr'],
     correct: 1,
-    success: 'Riktig! Undulaten kvitrer svakt.',
-    fail: 'Feil. Det knitrer i veggene.',
+    success: 'Riktig! Undulaten kvitrer svakt. Lyd av håp.',
+    fail: 'Feil. Det knitrer i veggene. Oops.',
   },
   {
     question: 'Port 4: Et beløp går fra 800 til 680. Nedgang i prosent?',
     options: ['10%', '15%', '20%'],
     correct: 2,
-    success: 'Riktig! En lenke sprekker.',
-    fail: 'Feil. Tallene glipper fra deg.',
+    success: 'Riktig! En lenke sprekker. Du ser et glimt av utgangen.',
+    fail: 'Feil. Tallene glipper fra deg. Fokus!',
   },
   {
     question: 'Port 5: 5% av 4 000 er:',
     options: ['150', '200', '250'],
     correct: 1,
-    success: 'Riktig! Et lys tegner en sirkel på gulvet.',
-    fail: 'Feil. Singulæriteten pulserer.',
+    success: 'Riktig! Et lys tegner en sirkel på gulvet. Glow‑up.',
+    fail: 'Feil. Singulæriteten pulserer. Ikke la den vinne.',
   },
   {
     question: 'Port 6: 30% av 90 er:',
     options: ['24', '27', '30'],
     correct: 1,
-    success: 'Riktig! Den gamle læreren får tilbake stemmen.',
-    fail: 'Feil. En svak skygge passerer.',
+    success: 'Riktig! Læreren får tilbake stemmen. “Du klarer dette.”',
+    fail: 'Feil. En svak skygge passerer. Litt creepy.',
   },
   {
     question: 'Port 7: 18 av 240 er hvor mange prosent?',
     options: ['5%', '7.5%', '10%'],
     correct: 1,
-    success: 'Riktig! Hunden nærmer seg døråpningen.',
-    fail: 'Feil. Et metallisk hyl.',
+    success: 'Riktig! Hunden nærmer seg døråpningen. Good boy.',
+    fail: 'Feil. Et metallisk hyl. Skjerpings.',
   },
   {
     question: 'Port 8: 2 000 kr med 25% MVA gir:',
     options: ['2 250 kr', '2 500 kr', '2 600 kr'],
     correct: 1,
-    success: 'Riktig! Du ser konturen av læreren.',
-    fail: 'Feil. Døren slamrer igjen.',
+    success: 'Riktig! Du ser konturen av læreren. Nesten der.',
+    fail: 'Feil. Døren slamrer igjen. Ikke gi opp.',
   },
   {
     question: 'Port 9: Økning fra 120 til 156 er hvor mange prosent?',
     options: ['20%', '25%', '30%'],
     correct: 2,
-    success: 'Riktig! En siste lås gir etter.',
-    fail: 'Feil. Tallene forvrenges.',
+    success: 'Riktig! En siste lås gir etter. Heartbeat ↑',
+    fail: 'Feil. Tallene forvrenges. Pust og prøv igjen.',
   },
   {
     question: 'Port 10: 12% feriepenger av 300 000 kr er:',
     options: ['30 000 kr', '36 000 kr', '42 000 kr'],
     correct: 1,
-    success: 'Riktig! Du syr læreren ut av Singulariteten.',
-    fail: 'Feil. Du må holde fokus.',
+    success: 'Riktig! Du syr læreren ut av Singulariteten. GG!',
+    fail: 'Feil. Du må holde fokus. En siste innsats.',
   },
 ];
 
@@ -3199,7 +3199,7 @@ function renderRpgQuestion(message) {
     question.textContent = 'Oppdrag fullført.';
     choices.innerHTML = '';
     bar.style.width = '100%';
-    status.textContent = `Du reddet den gamle matematikklæreren. ${rpgState.score} av ${rpgQuestions.length} riktige.`;
+    status.textContent = `Du reddet den gamle matematikklæreren. ${rpgState.score} av ${rpgQuestions.length} riktige. GG!`;
     triggerResultFeedback(status);
     return;
   }
