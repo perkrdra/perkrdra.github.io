@@ -2014,10 +2014,10 @@
         <div class="calculator rpg-quiz">
           <h2>Nattvakten: Redningsoppdrag</h2>
           <p class="rpg-intro">
-            En person er fanget i en mørk kjeller. Hver riktige prosent‑utregning
-            låser opp en del av utgangen. Du finner en bønn om hjelp skjult i en
-            kalkulator – følg den og hent koden fra quizen. Går du videre, skjer
-            det på eget ansvar.
+            En gammel matematikklærer er fanget i Singulariteten. Ingen trodde
+            oppgaven hans kunne løses, men da han klarte det, slo noe underlig
+            tilbake. Hunden hans og undulaten venter. Du må løse 10 oppgaver for
+            å sy ham ut av Singulariteten. Går du videre, skjer det på eget ansvar.
           </p>
           <div class="rpg-panel">
             <div class="rpg-progress">
@@ -3089,39 +3089,74 @@ function getRpgUnlockCode() {
 
 const rpgQuestions = [
   {
-    question: 'Kodelås 1: Hva er 20% av 150?',
+    question: 'Port 1: Hva er 20% av 150?',
     options: ['25', '30', '35'],
     correct: 1,
-    success: 'Riktig! En hengelås faller i gulvet.',
-    fail: 'Feil. Metallisk knirking i mørket... Prøv igjen.',
+    success: 'Riktig! Et ekko svarer fra Singulariteten.',
+    fail: 'Feil. Den gamle læreren hvisker: “Prøv igjen.”',
   },
   {
-    question: 'Kodelås 2: 45 av 180 er hvor mange prosent?',
+    question: 'Port 2: 45 av 180 er hvor mange prosent?',
     options: ['20%', '25%', '30%'],
     correct: 1,
-    success: 'Riktig! En dør åpner seg på gløtt.',
-    fail: 'Feil. Det blir kaldere i rommet.',
+    success: 'Riktig! Hunden bjeffer i det fjerne.',
+    fail: 'Feil. En kald bris slukker lyset.',
   },
   {
-    question: 'Kodelås 3: 12% MVA av 2 500 kr er:',
+    question: 'Port 3: 12% MVA av 2 500 kr er:',
     options: ['250 kr', '300 kr', '350 kr'],
     correct: 1,
-    success: 'Riktig! Et lys blinker i trappen.',
-    fail: 'Feil. Du hører et dunk i veggen.',
+    success: 'Riktig! Undulaten kvitrer svakt.',
+    fail: 'Feil. Det knitrer i veggene.',
   },
   {
-    question: 'Kodelås 4: Et beløp går fra 800 til 680. Nedgang i prosent?',
+    question: 'Port 4: Et beløp går fra 800 til 680. Nedgang i prosent?',
     options: ['10%', '15%', '20%'],
     correct: 2,
-    success: 'Riktig! En kjetting løsner.',
-    fail: 'Feil. Tiden tikker høyere.',
+    success: 'Riktig! En lenke sprekker.',
+    fail: 'Feil. Tallene glipper fra deg.',
   },
   {
-    question: 'Kodelås 5: 5% av 4 000 er:',
+    question: 'Port 5: 5% av 4 000 er:',
     options: ['150', '200', '250'],
     correct: 1,
-    success: 'Riktig! Utgangen er åpen.',
-    fail: 'Feil. En skygge glir forbi.',
+    success: 'Riktig! Et lys tegner en sirkel på gulvet.',
+    fail: 'Feil. Singulæriteten pulserer.',
+  },
+  {
+    question: 'Port 6: 30% av 90 er:',
+    options: ['24', '27', '30'],
+    correct: 1,
+    success: 'Riktig! Den gamle læreren får tilbake stemmen.',
+    fail: 'Feil. En svak skygge passerer.',
+  },
+  {
+    question: 'Port 7: 18 av 240 er hvor mange prosent?',
+    options: ['5%', '7.5%', '10%'],
+    correct: 1,
+    success: 'Riktig! Hunden nærmer seg døråpningen.',
+    fail: 'Feil. Et metallisk hyl.',
+  },
+  {
+    question: 'Port 8: 2 000 kr med 25% MVA gir:',
+    options: ['2 250 kr', '2 500 kr', '2 600 kr'],
+    correct: 1,
+    success: 'Riktig! Du ser konturen av læreren.',
+    fail: 'Feil. Døren slamrer igjen.',
+  },
+  {
+    question: 'Port 9: Økning fra 120 til 156 er hvor mange prosent?',
+    options: ['20%', '25%', '30%'],
+    correct: 2,
+    success: 'Riktig! En siste lås gir etter.',
+    fail: 'Feil. Tallene forvrenges.',
+  },
+  {
+    question: 'Port 10: 12% feriepenger av 300 000 kr er:',
+    options: ['30 000 kr', '36 000 kr', '42 000 kr'],
+    correct: 1,
+    success: 'Riktig! Du syr læreren ut av Singulariteten.',
+    fail: 'Feil. Du må holde fokus.',
   },
 ];
 
@@ -3164,7 +3199,7 @@ function renderRpgQuestion(message) {
     question.textContent = 'Oppdrag fullført.';
     choices.innerHTML = '';
     bar.style.width = '100%';
-    status.textContent = `Du reddet den fangede. ${rpgState.score} av ${rpgQuestions.length} riktige.`;
+    status.textContent = `Du reddet den gamle matematikklæreren. ${rpgState.score} av ${rpgQuestions.length} riktige.`;
     triggerResultFeedback(status);
     return;
   }
