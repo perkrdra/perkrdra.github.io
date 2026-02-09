@@ -951,7 +951,11 @@
             <h2>Prosentvis økning</h2>
             <div class="input-group">
               <label for="increaseInitialValue"></label>
-              <input type="number" id="increaseInitialValue" placeholder="Fra" />
+              <input
+                type="number"
+                id="increaseInitialValue"
+                placeholder="Hjelp, hjelp … ta quizen!"
+              />
               <label for="increaseFinalValue"></label>
               <input type="number" id="increaseFinalValue" placeholder="Til" />
               <button onclick="calculatePercentageIncrease()">
@@ -1689,6 +1693,7 @@
                 <h2>Prosent-quiz</h2>
                 <p class="quiz-intro">
                   Test deg selv med noen raske spørsmål om prosentregning.
+                  Fullfør quizen for å få koden som låser opp redningsoppdraget.
                   Trykk for å åpne.
                 </p>
               </div>
@@ -2004,13 +2009,15 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container hidden" id="rpgSection">
       <div class="item">
         <div class="calculator rpg-quiz">
           <h2>Nattvakten: Redningsoppdrag</h2>
           <p class="rpg-intro">
             En person er fanget i en mørk kjeller. Hver riktige prosent‑utregning
-            låser opp en del av utgangen. Kan du hjelpe vedkommende å bli befridd?
+            låser opp en del av utgangen. Du finner en bønn om hjelp skjult i en
+            kalkulator – følg den og hent koden fra quizen. Går du videre, skjer
+            det på eget ansvar.
           </p>
           <div class="rpg-panel">
             <div class="rpg-progress">
@@ -2023,7 +2030,7 @@
               <input
                 type="text"
                 id="rpgCodeInput"
-                placeholder="Skriv inn kode for å låse opp"
+                placeholder="Skriv inn koden for å redde Gunnar"
               />
               <button type="button" onclick="unlockRpgQuiz()">
                 <h4>Lås opp</h4>
@@ -3026,12 +3033,28 @@ function checkQuiz() {
   result.textContent = `Du fikk ${correctCount} av ${questions.length} riktige.`;
   triggerResultFeedback(result);
 
-  const unlockCode = getRpgUnlockCode();
-  if (codeBox) {
-    codeBox.textContent = `Kode for redningsoppdraget: ${unlockCode}`;
-    triggerResultFeedback(codeBox);
+  if (correctCount === questions.length) {
+    const unlockCode = getRpgUnlockCode();
+    if (codeBox) {
+      codeBox.textContent = `Kode for redningsoppdraget: ${unlockCode}`;
+      triggerResultFeedback(codeBox);
+    }
+    localStorage.setItem('rpgUnlockCode', unlockCode);
+
+    const rpgSection = document.getElementById('rpgSection');
+    if (rpgSection) {
+      rpgSection.classList.remove('hidden');
+    }
+
+    const rpgStatus = document.getElementById('rpgStatus');
+    if (rpgStatus) {
+      rpgStatus.textContent =
+        'Mørket våkner. Skriv inn koden for å redde Gunnar. Du går videre på eget ansvar.';
+      triggerResultFeedback(rpgStatus);
+    }
+  } else if (codeBox) {
+    codeBox.textContent = 'Få alle riktige for å låse opp redningsoppdraget.';
   }
-  localStorage.setItem('rpgUnlockCode', unlockCode);
 }
 
 function resetQuiz() {
@@ -3052,6 +3075,11 @@ function resetQuiz() {
   const codeBox = document.getElementById('quizCode');
   if (codeBox) {
     codeBox.textContent = '';
+  }
+
+  const rpgSection = document.getElementById('rpgSection');
+  if (rpgSection) {
+    rpgSection.classList.add('hidden');
   }
 }
 
