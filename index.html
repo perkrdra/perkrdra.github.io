@@ -1994,6 +1994,7 @@
                 </button>
               </div>
               <div class="quiz-result" id="quizResult"></div>
+              <div class="quiz-result" id="quizCode"></div>
             </form>
           </details>
         </div>
@@ -2014,6 +2015,16 @@
             </div>
             <div class="rpg-status" id="rpgStatus">
               Trykk start for å begynne oppdraget.
+            </div>
+            <div class="rpg-actions">
+              <input
+                type="text"
+                id="rpgCodeInput"
+                placeholder="Skriv inn kode for å låse opp"
+              />
+              <button type="button" onclick="unlockRpgQuiz()">
+                <h4>Lås opp</h4>
+              </button>
             </div>
             <div class="rpg-question" id="rpgQuestion"></div>
             <div class="rpg-choices" id="rpgChoices"></div>
@@ -2999,16 +3010,25 @@ function checkQuiz() {
   });
 
   const result = document.getElementById('quizResult');
+  const codeBox = document.getElementById('quizCode');
   if (!result) return;
 
   if (!allAnswered) {
     result.textContent = 'Velg svar på alle spørsmål.';
+    if (codeBox) codeBox.textContent = '';
     triggerResultFeedback(result);
     return;
   }
 
   result.textContent = `Du fikk ${correctCount} av ${questions.length} riktige.`;
   triggerResultFeedback(result);
+
+  const unlockCode = getRpgUnlockCode();
+  if (codeBox) {
+    codeBox.textContent = `Kode for redningsoppdraget: ${unlockCode}`;
+    triggerResultFeedback(codeBox);
+  }
+  localStorage.setItem('rpgUnlockCode', unlockCode);
 }
 
 function resetQuiz() {
@@ -3025,6 +3045,15 @@ function resetQuiz() {
   if (result) {
     result.textContent = '';
   }
+
+  const codeBox = document.getElementById('quizCode');
+  if (codeBox) {
+    codeBox.textContent = '';
+  }
+}
+
+function getRpgUnlockCode() {
+  return 'NATT-2026';
 }
 
 const rpgQuestions = [
@@ -3069,7 +3098,28 @@ const rpgState = {
   index: -1,
   score: 0,
   started: false,
+  unlocked: false,
 };
+
+function unlockRpgQuiz() {
+  const input = document.getElementById('rpgCodeInput');
+  const status = document.getElementById('rpgStatus');
+  if (!input || !status) return;
+
+  const savedCode = localStorage.getItem('rpgUnlockCode') || '';
+  const expectedCode = savedCode || getRpgUnlockCode();
+  const value = input.value.trim().toUpperCase();
+
+  if (value === expectedCode) {
+    rpgState.unlocked = true;
+    status.textContent = 'Oppdraget er låst opp. Trykk start.';
+    triggerResultFeedback(status);
+    return;
+  }
+
+  status.textContent = 'Feil kode. Fullfør quizen for å få riktig kode.';
+  triggerResultFeedback(status);
+}
 
 function renderRpgQuestion(message) {
   const status = document.getElementById('rpgStatus');
@@ -3110,6 +3160,14 @@ function renderRpgQuestion(message) {
 }
 
 function startRpgQuiz() {
+  if (!rpgState.unlocked) {
+    const status = document.getElementById('rpgStatus');
+    if (status) {
+      status.textContent = 'Skriv inn kode for å låse opp oppdraget.';
+      triggerResultFeedback(status);
+    }
+    return;
+  }
   rpgState.index = 0;
   rpgState.score = 0;
   rpgState.started = true;
