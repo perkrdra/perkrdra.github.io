@@ -954,6 +954,12 @@
               <input
                 type="number"
                 id="increaseInitialValue"
+                placeholder="Fra"
+                data-help-text="Hjelp, hjelp … ta quizen!"
+              />
+              <input
+                type="number"
+                id="increaseInitialValue"
                 placeholder="Hjelp, hjelp … ta quizen!"
               />
               <label for="increaseFinalValue"></label>
@@ -3258,6 +3264,50 @@ function resetRpgQuiz() {
     bar.style.width = '0%';
   }
 }
+
+function initHelpTypewriter() {
+  const input = document.getElementById('increaseInitialValue');
+  if (!input) return;
+
+  const helpText = input.dataset.helpText || 'Hjelp, hjelp … ta quizen!';
+  const defaultPlaceholder = input.getAttribute('placeholder') || '';
+  let index = 0;
+  let direction = 1;
+  let timerId = null;
+
+  const tick = () => {
+    if (document.activeElement === input || input.value.trim().length > 0) {
+      input.setAttribute('placeholder', defaultPlaceholder);
+      return;
+    }
+
+    const slice = helpText.slice(0, index);
+    input.setAttribute('placeholder', slice || defaultPlaceholder);
+
+    if (direction > 0 && index >= helpText.length) {
+      direction = -1;
+    } else if (direction < 0 && index <= 0) {
+      direction = 1;
+    }
+
+    index += direction;
+  };
+
+  if (timerId) {
+    clearInterval(timerId);
+  }
+  timerId = setInterval(tick, 120);
+
+  input.addEventListener('focus', () => {
+    input.setAttribute('placeholder', defaultPlaceholder);
+  });
+
+  input.addEventListener('blur', () => {
+    index = 0;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initHelpTypewriter);
 
 
       /* lavaAnimation */
