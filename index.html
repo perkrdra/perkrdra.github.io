@@ -782,6 +782,60 @@
   opacity: 0.7;
 }
 
+              /* Prosent-trener og FAQ */
+              .trainer-meta {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 8px;
+                margin: 12px 0 6px;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+              }
+
+              .trainer-card {
+                background: #ffe88b;
+                border-radius: 14px;
+                padding: 16px;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+                display: grid;
+                gap: 10px;
+              }
+
+              .trainer-feedback,
+              .trainer-summary {
+                min-height: 24px;
+                font-family: "Roboto", sans-serif;
+                font-size: 15px;
+              }
+
+              .faq-list {
+                display: grid;
+                gap: 10px;
+              }
+
+              .faq-item {
+                background: #ffe88b;
+                border-radius: 14px;
+                padding: 12px 14px;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+              }
+
+              .faq-item > summary {
+                list-style: none;
+                cursor: pointer;
+                font-weight: 500;
+              }
+
+              .faq-item > summary::-webkit-details-marker {
+                display: none;
+              }
+
+              .faq-body {
+                margin-top: 8px;
+                font-size: 15px;
+                line-height: 1.4;
+              }
+
 
 
               /* Desktop layout adjustments */
@@ -2005,6 +2059,67 @@
               <div class="quiz-result" id="quizCode"></div>
             </form>
           </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="item">
+        <div class="calculator">
+          <h2>Prosent-trener</h2>
+          <div class="calculation-type">
+            <button id="trainerEasy" class="type-button active" onclick="setTrainerMode('easy')">
+              <h4>Lett</h4>
+            </button>
+            <button id="trainerHard" class="type-button" onclick="setTrainerMode('hard')">
+              <h4>Vanskelig</h4>
+            </button>
+          </div>
+          <div class="trainer-meta">
+            <div>Modus: <span id="trainerModeLabel">Lett</span></div>
+            <div>Timer: <span id="trainerTimer">120</span> s</div>
+            <div>Poeng: <span id="trainerScore">0</span></div>
+            <div>Streak: <span id="trainerStreak">0</span></div>
+          </div>
+          <div class="trainer-card">
+            <h3 id="trainerQuestion">Trykk start for å begynne</h3>
+            <input type="number" id="trainerAnswer" placeholder="Skriv svaret" />
+            <div class="quiz-actions">
+              <button type="button" onclick="startTrainer()"><h4>Start</h4></button>
+              <button type="button" onclick="submitTrainerAnswer()"><h4>Svar</h4></button>
+              <button type="button" class="quiz-reset" onclick="skipTrainerQuestion()"><h4>Hopp over</h4></button>
+            </div>
+            <div class="trainer-feedback" id="trainerFeedback"></div>
+            <div class="trainer-summary" id="trainerSummary"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="calculator">
+          <h2>Ofte stilte spørsmål</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Hvordan regner jeg prosent baklengs?</summary>
+              <div class="faq-body">Del prisen inkl. prosent på (1 + prosent/100). Eksempel: 625 kr med 25% MVA → 625 / 1.25 = 500 kr.</div>
+            </details>
+            <details class="faq-item">
+              <summary>Hva er forskjell på prosent og prosentpoeng?</summary>
+              <div class="faq-body">Prosentpoeng er absolutt forskjell mellom to prosenter. Fra 20% til 27% er 7 prosentpoeng, men 35% relativ økning.</div>
+            </details>
+            <details class="faq-item">
+              <summary>Hvordan regner jeg MVA begge veier?</summary>
+              <div class="faq-body">Legg til: beløp × (1 + sats). Trekk fra: beløp / (1 + sats). For 12%: ×1.12 eller /1.12.</div>
+            </details>
+            <details class="faq-item">
+              <summary>Hva er effektiv rabatt ved flere rabatter?</summary>
+              <div class="faq-body">Rabatter ganger hverandre. 30% og så 20% gir pris 0.7 × 0.8 = 0.56 → samlet rabatt 44%.</div>
+            </details>
+            <details class="faq-item">
+              <summary>Hvordan konverterer jeg prosent til brøk og desimal?</summary>
+              <div class="faq-body">Del på 100 for desimal. Skriv som brøk og forkort: 12,5% = 0,125 = 1/8.</div>
+            </details>
+          </div>
         </div>
       </div>
     </div>
@@ -3348,6 +3463,189 @@ function initHelpTypewriter() {
 }
 
 document.addEventListener('DOMContentLoaded', initHelpTypewriter);
+
+      /* Prosent-trener */
+      const trainerQuestions = {
+        easy: [
+          { question: 'Hva er 25% av 200?', answer: 50 },
+          { question: 'Pris 800 kr med 10% rabatt?', answer: 720 },
+          { question: 'Økning fra 50 til 65 i prosent?', answer: 30 },
+          { question: '12 av 80 er hvor mange prosent?', answer: 15 },
+          { question: '15% av 400?', answer: 60 },
+          { question: 'Pris 1200 kr med 25% rabatt?', answer: 900 },
+          { question: 'Pris inkl. 25% MVA er 1250. Eks MVA?', answer: 1000 },
+          { question: 'Nedgang fra 900 til 765 i prosent?', answer: 15 },
+          { question: '20% av 15% er', answer: 3 },
+          { question: '0,4 som prosent?', answer: 40 },
+        ],
+        hard: [
+          { question: 'Faller 20% og stiger 25%. Total endring i prosent?', answer: 0 },
+          { question: 'Rabatt 30% og deretter 20%. Samlet rabatt?', answer: 44 },
+          { question: 'Påslag 25% på kost 100. Margin i prosent?', answer: 20 },
+          { question: '1% per måned effektiv årlig vekst?', answer: 12.68 },
+          { question: 'Pris inkl. 25% MVA er 625. Eks MVA?', answer: 500 },
+          { question: '12% årlig i to år. Total vekst i prosent?', answer: 25.44 },
+          { question: 'Øker 10% tre ganger. Samlet prosentøkning?', answer: 33.1 },
+          { question: 'Fra 18% til 27% er økningen i prosentpoeng?', answer: 9 },
+          { question: '5% nominell kvartalsvis. Effektiv årlig prosent?', answer: 5.1 },
+          { question: 'Markedsandel 12% til 9%. Prosentvis endring?', answer: -25 },
+        ],
+      };
+
+      const trainerState = {
+        mode: 'easy',
+        pool: [],
+        index: 0,
+        score: 0,
+        streak: 0,
+        timer: null,
+        timeLeft: 120,
+        started: false,
+      };
+
+      function shuffle(array) {
+        const copy = [...array];
+        for (let i = copy.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function setTrainerMode(mode) {
+        trainerState.mode = mode;
+        document.getElementById('trainerModeLabel').textContent =
+          mode === 'easy' ? 'Lett' : 'Vanskelig';
+        document.getElementById('trainerEasy').classList.toggle('active', mode === 'easy');
+        document.getElementById('trainerHard').classList.toggle('active', mode === 'hard');
+        resetTrainer(false);
+      }
+
+      function resetTrainer(keepMode) {
+        if (trainerState.timer) {
+          clearInterval(trainerState.timer);
+          trainerState.timer = null;
+        }
+        trainerState.score = 0;
+        trainerState.streak = 0;
+        trainerState.timeLeft = 120;
+        trainerState.started = false;
+        trainerState.pool = shuffle(trainerQuestions[trainerState.mode]);
+        trainerState.index = 0;
+        document.getElementById('trainerTimer').textContent = trainerState.timeLeft;
+        document.getElementById('trainerScore').textContent = trainerState.score;
+        document.getElementById('trainerStreak').textContent = trainerState.streak;
+        document.getElementById('trainerFeedback').textContent = '';
+        document.getElementById('trainerSummary').textContent = '';
+        document.getElementById('trainerAnswer').value = '';
+        if (!keepMode) {
+          document.getElementById('trainerQuestion').textContent = 'Trykk start for å begynne';
+        }
+      }
+
+      function startTrainer() {
+        resetTrainer(true);
+        trainerState.started = true;
+        document.getElementById('trainerSummary').textContent = '';
+        nextTrainerQuestion();
+        trainerState.timer = setInterval(() => {
+          trainerState.timeLeft -= 1;
+          if (trainerState.timeLeft <= 0) {
+            trainerState.timeLeft = 0;
+            updateTrainerMeta();
+            endTrainer();
+            return;
+          }
+          updateTrainerMeta();
+        }, 1000);
+      }
+
+      function updateTrainerMeta() {
+        document.getElementById('trainerTimer').textContent = trainerState.timeLeft;
+        document.getElementById('trainerScore').textContent = trainerState.score;
+        document.getElementById('trainerStreak').textContent = trainerState.streak;
+      }
+
+      function nextTrainerQuestion() {
+        if (trainerState.index >= trainerState.pool.length) {
+          trainerState.pool = shuffle(trainerQuestions[trainerState.mode]);
+          trainerState.index = 0;
+        }
+        const current = trainerState.pool[trainerState.index];
+        document.getElementById('trainerQuestion').textContent = current.question;
+        document.getElementById('trainerFeedback').textContent = '';
+        document.getElementById('trainerAnswer').value = '';
+        document.getElementById('trainerAnswer').focus();
+      }
+
+      function nearlyEqual(expected, value) {
+        const tolerance = Math.max(0.05, Math.abs(expected) * 0.01);
+        return Math.abs(expected - value) <= tolerance;
+      }
+
+      function submitTrainerAnswer() {
+        if (!trainerState.started) {
+          startTrainer();
+          return;
+        }
+
+        const current = trainerState.pool[trainerState.index];
+        const raw = document.getElementById('trainerAnswer').value.trim();
+        const given = parseFloat(raw.replace(',', '.'));
+
+        if (isNaN(given)) {
+          document.getElementById('trainerFeedback').textContent = 'Skriv et tall.';
+          return;
+        }
+
+        if (nearlyEqual(current.answer, given)) {
+          trainerState.score += 1;
+          trainerState.streak += 1;
+          document.getElementById('trainerFeedback').textContent = 'Riktig!';
+        } else {
+          trainerState.streak = 0;
+          document.getElementById('trainerFeedback').textContent = `Feil. Riktig svar: ${current.answer}`;
+        }
+
+        trainerState.index += 1;
+        updateTrainerMeta();
+        triggerResultFeedback(document.getElementById('trainerFeedback'));
+        nextTrainerQuestion();
+      }
+
+      function skipTrainerQuestion() {
+        if (!trainerState.started) {
+          startTrainer();
+          return;
+        }
+        trainerState.streak = 0;
+        trainerState.index += 1;
+        updateTrainerMeta();
+        nextTrainerQuestion();
+      }
+
+      function endTrainer() {
+        if (trainerState.timer) {
+          clearInterval(trainerState.timer);
+          trainerState.timer = null;
+        }
+        trainerState.started = false;
+        const totalAsked = trainerState.index;
+        const summary = `Tid ute. Poeng: ${trainerState.score} av ${totalAsked}.`;
+        document.getElementById('trainerSummary').textContent = summary;
+        triggerResultFeedback(document.getElementById('trainerSummary'));
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          submitTrainerAnswer();
+        }
+        if (event.key === ' ' && document.activeElement !== document.getElementById('trainerAnswer')) {
+          startTrainer();
+        }
+      });
+
+      resetTrainer(false);
 
 
       /* lavaAnimation */
