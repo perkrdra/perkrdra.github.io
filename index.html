@@ -2887,9 +2887,9 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
   const draw = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Smoothly follow the cursor
-    trail[0].x += (target.x - trail[0].x) * 0.35;
-    trail[0].y += (target.y - trail[0].y) * 0.35;
+    // Anchor head of trail directly under pointer to avoid offset
+    trail[0].x = target.x;
+    trail[0].y = target.y;
     for (let i = 1; i < trail.length; i += 1) {
       trail[i].x += (trail[i - 1].x - trail[i].x) * 0.25;
       trail[i].y += (trail[i - 1].y - trail[i].y) * 0.25;
