@@ -2877,11 +2877,15 @@ document.addEventListener('DOMContentLoaded', calculateInterest);
 
   const trailLength = 28;
   const trail = Array.from({ length: trailLength }, () => ({ x: 0, y: 0 }));
-  const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+  const offset = { x: 12, y: 14 };
+  const target = {
+    x: window.innerWidth / 2 + offset.x,
+    y: window.innerHeight / 2 + offset.y,
+  };
 
   window.addEventListener('mousemove', (event) => {
-    target.x = event.clientX;
-    target.y = event.clientY;
+    target.x = event.clientX + offset.x;
+    target.y = event.clientY + offset.y;
   });
 
   const draw = () => {
