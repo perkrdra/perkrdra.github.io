@@ -820,6 +820,7 @@
               .faq-list {
                 display: grid;
                 gap: 10px;
+                grid-template-columns: 1fr;
               }
 
               .faq-item {
@@ -843,6 +844,12 @@
                 margin-top: 8px;
                 font-size: 15px;
                 line-height: 1.4;
+              }
+
+              @media (min-width: 900px) {
+                .faq-list {
+                  grid-template-columns: repeat(2, minmax(240px, 1fr));
+                }
               }
 
 
