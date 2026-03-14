@@ -708,6 +708,23 @@
           display: none;
         }
 
+        .faq-list {
+          display: flex;
+          flex-wrap: nowrap;
+          gap: 12px;
+          overflow-x: auto;
+          padding-bottom: 6px;
+        }
+
+        .faq-item {
+          min-width: 260px;
+        }
+
+        .faq-read-more {
+          align-self: flex-start;
+          margin-top: 0;
+        }
+
         .tax-calculation-type {
           display: flex;
           gap: 10px;
@@ -1855,11 +1872,11 @@
             <summary>
               <div class="quiz-question">
                 <h2>Prosent-quiz</h2>
-                <p class="quiz-intro">
+            <details class="faq-item faq-extra hidden">
                   Fullfør quizen for å få koden som låser opp redningsoppdraget.
                   Trykk for å åpne — på eget ansvar.
                 </p>
-              </div>
+            <details class="faq-item faq-extra hidden">
             </summary>
             <form id="quizForm" class="quiz-form">
               <div class="quiz-question">
@@ -1867,19 +1884,10 @@
                 <label class="quiz-option">
                   <input type="radio" name="q1" value="a" /> 40
                 </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q1" value="b" data-correct="true" />
-                  50
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q1" value="c" /> 60
-                </label>
-              </div>
-
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  2. Du får 10% rabatt på 800 kr. Hva blir prisen?
                 </h3>
+          <button type="button" class="faq-read-more" id="faqToggle" data-expanded="false">
+            <h4>Les mer</h4>
+          </button>
                 <label class="quiz-option">
                   <input type="radio" name="q2" value="a" /> 700 kr
                 </label>
