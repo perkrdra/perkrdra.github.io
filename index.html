@@ -1672,6 +1672,7 @@
                 >i</span>
               </h3>
               <h3>Sum trekk: <span id="holidayDeductionTotal">0</span> kr</h3>
+              <h3>Netto utbetalt: <span id="holidayNet">0</span> kr</h3>
               <h3>Utregning: <span id="holidayCalculation"></span></h3>
             </div>
             <details class="example">
@@ -2820,7 +2821,7 @@
         const deductionExtra = subtractSalary && rateSelect.value === "12" ? monthly * (4 / 26) : 0;
         const deductionTotal = deductionBase + deductionExtra;
 
-        const net = feriepenger;
+        const net = feriepenger - deductionTotal;
 
         const format = (value) => Math.round(value).toLocaleString("no");
 
@@ -2837,13 +2838,15 @@
         document.getElementById("holidayDeductionBase").textContent = format(deductionBase);
         document.getElementById("holidayDeductionExtra").textContent = format(deductionExtra);
         document.getElementById("holidayDeductionTotal").textContent = format(deductionTotal);
-        document.getElementById("holidayCalculation").textContent = calc;
+        document.getElementById("holidayNet").textContent = format(net);
+        document.getElementById("holidayCalculation").textContent = `${calc}. Netto: ${net.toFixed(2)}`;
 
         triggerResultFeedback([
           document.getElementById("holidayGross"),
           document.getElementById("holidayDeductionBase"),
           document.getElementById("holidayDeductionExtra"),
           document.getElementById("holidayDeductionTotal"),
+          document.getElementById("holidayNet"),
         ]);
       }
 
