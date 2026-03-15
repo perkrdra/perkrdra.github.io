@@ -710,14 +710,15 @@
 
         .faq-list {
           display: flex;
-          flex-wrap: nowrap;
-          gap: 12px;
-          overflow-x: auto;
-          padding-bottom: 6px;
+          flex-direction: column;
+          gap: 10px;
+          overflow: visible;
+          padding-bottom: 0;
         }
 
         .faq-item {
-          min-width: 260px;
+          min-width: auto;
+          width: 100%;
         }
 
         .faq-read-more {
@@ -837,9 +838,9 @@
               }
 
               .faq-list {
-                display: grid;
+                display: flex;
+                flex-direction: column;
                 gap: 10px;
-                grid-template-columns: 1fr;
               }
 
               .faq-item {
@@ -867,7 +868,7 @@
 
               @media (min-width: 900px) {
                 .faq-list {
-                  grid-template-columns: repeat(2, minmax(240px, 1fr));
+                  flex-direction: column;
                 }
               }
 
@@ -1865,7 +1866,7 @@
             </details>
           </div>
           <button type="button" class="faq-read-more" id="faqToggle" data-expanded="false">
-            <h4>Les mer</h4>
+            <h4>Se flere</h4>
           </button>
         </div>
       </div>
@@ -1890,7 +1891,7 @@
                 </label>
                 </h3>
           <button type="button" class="faq-read-more" id="faqToggle" data-expanded="false">
-            <h4>Les mer</h4>
+            <h4>Se flere</h4>
           </button>
                 <label class="quiz-option">
                   <input type="radio" name="q2" value="a" /> 700 kr
