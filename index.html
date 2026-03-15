@@ -149,6 +149,13 @@
                 max-width: 1200px;
                 margin: 20px auto 12px;
                 padding: 8px 6px;
+                transition: transform 180ms ease, opacity 180ms ease;
+              }
+
+              .top-nav.collapsed {
+                transform: translateY(-110%);
+                opacity: 0;
+                pointer-events: none;
               }
 
               .top-nav a {
@@ -915,10 +922,20 @@
               }
 
               .approach-steps {
-                margin: 8px 0 12px;
-                padding-left: 18px;
+                margin: 10px 0 14px;
+                padding-left: 0;
                 display: grid;
-                gap: 6px;
+                gap: 8px;
+                list-style: none;
+              }
+
+              .approach-steps li {
+                background: #ffe88b;
+                border-radius: 12px;
+                padding: 10px 12px;
+                font-size: 15px;
+                line-height: 1.5;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
               }
 
               .approach-actions {
@@ -1080,10 +1097,12 @@
                 }
 
                 .to-top {
-                  right: 12px;
-                  bottom: 12px;
-                  padding: 10px 12px;
-                  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+                  position: static;
+                  width: 100%;
+                  max-width: 320px;
+                  margin: 18px auto 0;
+                  padding: 12px 14px;
+                  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
                 }
 
                 h2 {
@@ -3978,6 +3997,23 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
 
         document.addEventListener('DOMContentLoaded', () => {
           renderApproach(approachIndex);
+        });
+
+        /* Collapse top nav on scroll down */
+        document.addEventListener('DOMContentLoaded', () => {
+          const nav = document.querySelector('.top-nav');
+          if (!nav) return;
+          let lastScrollY = window.scrollY;
+
+          window.addEventListener('scroll', () => {
+            const current = window.scrollY;
+            if (current > 120 && current > lastScrollY + 4) {
+              nav.classList.add('collapsed');
+            } else {
+              nav.classList.remove('collapsed');
+            }
+            lastScrollY = current;
+          });
         });
 
         /* FAQ toggle: show/hide extra questions */
