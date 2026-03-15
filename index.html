@@ -138,6 +138,68 @@
                 scroll-behavior: smooth;
               }
 
+              .top-nav {
+                position: sticky;
+                top: 12px;
+                z-index: 20;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+                width: 92%;
+                max-width: 1200px;
+                margin: 28px auto 12px;
+                padding: 14px 16px;
+                background: rgba(249, 166, 108, 0.92);
+                border-radius: 28px;
+                box-shadow: rgba(50, 50, 50, 0.35) 0px 10px 20px -18px,
+                  rgba(0, 0, 0, 0.16) 0px 12px 18px -20px,
+                  rgba(10, 37, 64, 0.2) 0px -2px 2px 0px inset;
+                backdrop-filter: blur(4px);
+              }
+
+              .top-nav a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 14px;
+                background: #ffe88b;
+                border-radius: 999px;
+                color: #000;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 15px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+                transition: transform 120ms ease, box-shadow 120ms ease,
+                  background-color 120ms ease;
+              }
+
+              .top-nav a:hover,
+              .top-nav a:focus-visible {
+                background: #95f0a9;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+                transform: translateY(-1px);
+              }
+
+              .to-top {
+                position: fixed;
+                right: 18px;
+                bottom: 18px;
+                padding: 12px 16px;
+                background: #95f0a9;
+                color: #000;
+                border-radius: 14px;
+                font-weight: 700;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+                border: none;
+              }
+
+              .to-top:hover,
+              .to-top:focus-visible {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+              }
+
               @media (pointer: fine) {
                 body {
                   cursor: auto;
@@ -960,6 +1022,19 @@
                   line-height: 1.2;
                 }
 
+                .top-nav {
+                  position: sticky;
+                  top: 8px;
+                  margin: 20px auto 10px;
+                  padding: 12px 12px;
+                  gap: 8px;
+                }
+
+                .top-nav a {
+                  flex: 1 1 calc(50% - 10px);
+                  font-size: 14px;
+                }
+
                 h2 {
                   font-size: 24px;
                 }
@@ -992,6 +1067,27 @@
               @media (max-width: 600px) {
                 h1 {
                   font-size: 28px;
+                }
+
+                .top-nav {
+                  position: static;
+                  width: 94%;
+                  padding: 10px 12px;
+                  gap: 8px;
+                  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+                }
+
+                .top-nav a {
+                  flex: 1 1 100%;
+                  text-align: center;
+                  padding: 10px 12px;
+                }
+
+                .to-top {
+                  right: 12px;
+                  bottom: 12px;
+                  padding: 10px 12px;
+                  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
                 }
 
                 h2 {
@@ -3666,99 +3762,100 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
         document.getElementById('trainerHard').classList.toggle('active', mode === 'hard');
         resetTrainer(false);
 
-          /* Pedagogiske tilnærminger for hoderegning */
-          const approaches = [
-            {
-              title: '10%-trikset + skalering',
-              summary: 'Finn 10% raskt (del på 10) og skaler opp eller ned.',
-              steps: [
-                'Del tallet på 10 for å få 10%.',
-                'Gang 10%-tallet med 2 for 20%, med 5 for 50%, eller del på 2 for 5%.',
-                'Kombiner: 15% = 10% + 5%, 25% = 20% + 5%.'
-              ],
-              hint: 'Fungerer ekstra godt på runde tall (ender på 0).'
-            },
-            {
-              title: 'Faktor-forskyvning',
-              summary: 'Bruk (1 ± p/100) som faktor i hodet.',
-              steps: [
-                '20% ned = gang med 0,8. 20% opp = gang med 1,2.',
-                'Del opp faktoren: 1,12 = 1 + 0,1 + 0,02 → legg på 10% og så 2%.',
-                'For små prosenter: 3% ≈ legg til 3 per 100, eller 30 per 1000.'
-              ],
-              hint: 'Bruk når du kjenner faktorene (0,8, 1,25, 1,12, etc.).'
-            },
-            {
-              title: 'Bytt rekkefølge for enklere tall',
-              summary: 'Utnytt kommutativitet: p% av n = n% av p.',
-              steps: [
-                '12% av 50 = 50% av 12 = 6.',
-                '18% av 200 = 200% av 18 ÷ 2 = 36.',
-                '25% av 64 = 64% av 25 = 16.'
-              ],
-              hint: 'Snu brøken når ett av tallene er “snilt”.'
-            },
-            {
-              title: 'Halver og legg til',
-              summary: 'Spesielt for 15%, 12,5% og 7,5%.',
-              steps: [
-                '15% = 10% + halvparten av 10%.',
-                '12,5% = 1/8: del på 2, del på 2, del på 2 igjen.',
-                '7,5% = 15% ÷ 2: ta 10%, halvér, legg til 2,5%.'
-              ],
-              hint: 'Bra når tallet er lett å halvere flere ganger.'
-            },
-            {
-              title: 'Brøkblikk',
-              summary: 'Se prosenten som brøk og bruk divisjoner i hodet.',
-              steps: [
-                '25% = 1/4 → del tallet på 4.',
-                '20% = 1/5 → del på 5 (f.eks. 1/5 av 150 = 30).',
-                '12,5% = 1/8 → del på 2 tre ganger.'
-              ],
-              hint: 'Bruk når prosenten er en kjent brøk.'
-            }
-          ];
 
-          let approachIndex = 0;
-
-          function renderApproach(index) {
-            const title = document.getElementById('approachTitle');
-            const summary = document.getElementById('approachSummary');
-            const steps = document.getElementById('approachSteps');
-            const hint = document.getElementById('approachHint');
-            if (!title || !summary || !steps || !hint) return;
-
-            const item = approaches[index];
-            title.textContent = item.title;
-            summary.textContent = item.summary;
-            steps.innerHTML = item.steps
-              .map((step) => `<li>${step}</li>`)
-              .join('');
-            hint.textContent = item.hint;
+        /* Pedagogiske tilnærminger for hoderegning */
+        const approaches = [
+          {
+            title: '10%-trikset + skalering',
+            summary: 'Finn 10% raskt (del på 10) og skaler opp eller ned.',
+            steps: [
+              'Del tallet på 10 for å få 10%.',
+              'Gang 10%-tallet med 2 for 20%, med 5 for 50%, eller del på 2 for 5%.',
+              'Kombiner: 15% = 10% + 5%, 25% = 20% + 5%.'
+            ],
+            hint: 'Fungerer ekstra godt på runde tall (ender på 0).'
+          },
+          {
+            title: 'Faktor-forskyvning',
+            summary: 'Bruk (1 ± p/100) som faktor i hodet.',
+            steps: [
+              '20% ned = gang med 0,8. 20% opp = gang med 1,2.',
+              'Del opp faktoren: 1,12 = 1 + 0,1 + 0,02 → legg på 10% og så 2%.',
+              'For små prosenter: 3% ≈ legg til 3 per 100, eller 30 per 1000.'
+            ],
+            hint: 'Bruk når du kjenner faktorene (0,8, 1,25, 1,12, etc.).'
+          },
+          {
+            title: 'Bytt rekkefølge for enklere tall',
+            summary: 'Utnytt kommutativitet: p% av n = n% av p.',
+            steps: [
+              '12% av 50 = 50% av 12 = 6.',
+              '18% av 200 = 200% av 18 ÷ 2 = 36.',
+              '25% av 64 = 64% av 25 = 16.'
+            ],
+            hint: 'Snu brøken når ett av tallene er “snilt”.'
+          },
+          {
+            title: 'Halver og legg til',
+            summary: 'Spesielt for 15%, 12,5% og 7,5%.',
+            steps: [
+              '15% = 10% + halvparten av 10%.',
+              '12,5% = 1/8: del på 2, del på 2, del på 2 igjen.',
+              '7,5% = 15% ÷ 2: ta 10%, halvér, legg til 2,5%.'
+            ],
+            hint: 'Bra når tallet er lett å halvere flere ganger.'
+          },
+          {
+            title: 'Brøkblikk',
+            summary: 'Se prosenten som brøk og bruk divisjoner i hodet.',
+            steps: [
+              '25% = 1/4 → del tallet på 4.',
+              '20% = 1/5 → del på 5 (f.eks. 1/5 av 150 = 30).',
+              '12,5% = 1/8 → del på 2 tre ganger.'
+            ],
+            hint: 'Bruk når prosenten er en kjent brøk.'
           }
+        ];
 
-          function nextApproach() {
-            approachIndex = (approachIndex + 1) % approaches.length;
-            renderApproach(approachIndex);
+        let approachIndex = 0;
+
+        function renderApproach(index) {
+          const title = document.getElementById('approachTitle');
+          const summary = document.getElementById('approachSummary');
+          const steps = document.getElementById('approachSteps');
+          const hint = document.getElementById('approachHint');
+          if (!title || !summary || !steps || !hint) return;
+
+          const item = approaches[index];
+          title.textContent = item.title;
+          summary.textContent = item.summary;
+          steps.innerHTML = item.steps
+            .map((step) => `<li>${step}</li>`)
+            .join('');
+          hint.textContent = item.hint;
+        }
+
+        function nextApproach() {
+          approachIndex = (approachIndex + 1) % approaches.length;
+          renderApproach(approachIndex);
+        }
+
+        function previousApproach() {
+          approachIndex = (approachIndex - 1 + approaches.length) % approaches.length;
+          renderApproach(approachIndex);
+        }
+
+        function shuffleApproach() {
+          const current = approachIndex;
+          while (approaches.length > 1 && approachIndex === current) {
+            approachIndex = Math.floor(Math.random() * approaches.length);
           }
+          renderApproach(approachIndex);
+        }
 
-          function previousApproach() {
-            approachIndex = (approachIndex - 1 + approaches.length) % approaches.length;
-            renderApproach(approachIndex);
-          }
-
-          function shuffleApproach() {
-            const current = approachIndex;
-            while (approaches.length > 1 && approachIndex === current) {
-              approachIndex = Math.floor(Math.random() * approaches.length);
-            }
-            renderApproach(approachIndex);
-          }
-
-          document.addEventListener('DOMContentLoaded', () => {
-            renderApproach(approachIndex);
-          });
+        document.addEventListener('DOMContentLoaded', () => {
+          renderApproach(approachIndex);
+        });
       }
 
       function resetTrainer(keepMode) {
