@@ -135,6 +135,7 @@
                 line-height: 1;
                 background: #ffe88b;
                 padding-top: 48px; /* restore breathing room at top */
+                scroll-behavior: smooth;
               }
 
               @media (pointer: fine) {
@@ -153,6 +154,7 @@
                   display: none;
                 }
 
+
                 .wand-cursor::after {
                   display: none;
                 }
@@ -162,6 +164,7 @@
               .header {
                 width: 90%; /* Changed from fixed 600px */
                 max-width: 600px;
+
                 opacity: 90%;
                 margin: 0 auto;
                 text-align: center;
@@ -174,6 +177,7 @@
                 font-weight: 400;
                 opacity: 90%;
                 margin: 0 auto;
+
                 text-align: center;
               }
 
@@ -1075,7 +1079,7 @@
 
   <canvas id="lamp-anim" class="lamp-anim" width="auto" height="auto"></canvas>
 
-  <body>
+  <body id="top">
     <div class="header">
       <h1>PROSENTREGNING.NO</h1>
     </div>
@@ -1089,11 +1093,28 @@
       </p>
     </div>
 
+    <nav class="top-nav">
+      <a href="#calc-increase">Økning</a>
+      <a href="#calc-decrease">Nedgang</a>
+      <a href="#calc-total">Andel av total</a>
+      <a href="#calc-discount">Rabatt</a>
+      <a href="#calc-part">Del av tallet</a>
+      <a href="#calc-point">Prosentpoeng</a>
+      <a href="#calc-distribution">Fordeling</a>
+      <a href="#calc-markup">Påslag/Margin</a>
+      <a href="#calc-tax">MVA</a>
+      <a href="#calc-holiday">Feriepenger</a>
+      <a href="#calc-loan">Lån</a>
+      <a href="#calc-trainer">Prosent-trener</a>
+      <a href="#calc-approach">Hoderegning</a>
+      <a href="#calc-faq">FAQ</a>
+    </nav>
+
     <div class="container">
       <div class="item1">
         <div class="item">
           <!-- Percentage Increase Calculator -->
-          <div class="calculator">
+          <div class="calculator" id="calc-increase">
             <h2>Prosentvis økning</h2>
             <div class="input-group">
               <label for="increaseInitialValue"></label>
@@ -1133,7 +1154,7 @@
 
         <div class="item">
           <!-- Percentage Decrease Calculator -->
-          <div class="calculator">
+          <div class="calculator" id="calc-decrease">
             <h2>Prosentvis nedgang</h2>
             <div class="input-group">
               <label for="decreaseInitialValue"></label>
@@ -1168,7 +1189,7 @@
 
         <div class="item">
           <!-- Finn prosent av tallet -->
-          <div class="calculator">
+          <div class="calculator" id="calc-total">
             <h2>Finn prosentandel av totalen</h2>
             <!-- Wrapping div for alignment -->
             <div class="input-group">
@@ -1213,7 +1234,7 @@
       <div class="item3">
         <div class="item">
           <!-- Regne rabatt -->
-          <div class="calculator">
+          <div class="calculator" id="calc-discount">
             <h2>Hvordan regne ut rabatt</h2>
             <div class="input-group">
               <label for="originalPrice"></label>
@@ -1256,7 +1277,7 @@
         <!-- Finne delen av tallet -->
 
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-part">
             <div class="input-container">
               <h2>Finn delen av tallet</h2>
               <div class="input-group">
@@ -1303,7 +1324,7 @@
         <!-- Finn prosentpoeng endring -->
 
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-point">
             <h2>Prosentpoeng endring</h2>
             <div class="input-group">
               <label for="initialPercentage"></label>
@@ -1351,7 +1372,7 @@
 
         <!-- Prosentfordeling Kalkulator -->
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-distribution">
             <h2>Prosentfordeling</h2>
 
             <!-- Dynamic input container -->
@@ -1503,7 +1524,7 @@
         <!-- Påslag- og marginkalkulator -->
 
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-markup">
             <h2>Påslag- og marginkalkulator</h2>
 
             <!-- Cost input section -->
@@ -1576,7 +1597,7 @@
         <!-- MVA-kalkulator -->
 
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-tax">
             <h2>MVA-kalkulator</h2>
 
             <!-- Amount input section -->
@@ -1653,7 +1674,7 @@
 
         <!-- Feriepengekalkulator -->
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-holiday">
             <h2>Feriepengekalkulator</h2>
 
             <div class="holiday-group">
@@ -1737,7 +1758,7 @@
         
         <!-- Interest Rate Calculator -->
 <div class="item">
-  <div class="calculator">
+  <div class="calculator" id="calc-loan">
     <h2>Lånekalkulator</h2>
     
     <!-- Loan Amount Slider -->
@@ -1835,7 +1856,7 @@
 
     <div class="container info-grid">
       <div class="item">
-        <div class="calculator">
+        <div class="calculator" id="calc-trainer">
           <h2>Prosent-trener</h2>
           <div class="calculation-type">
             <button id="trainerEasy" class="type-button active" onclick="setTrainerMode('easy')">
@@ -1866,7 +1887,7 @@
       </div>
 
       <div class="item">
-        <div class="calculator" id="approachCard">
+        <div class="calculator" id="calc-approach" aria-labelledby="approachTitle" aria-describedby="approachSummary">
           <h2 id="approachTitle">Hoderegning: prosentmetoder</h2>
           <p id="approachSummary">Enkle mentale snarveier for prosentregning.</p>
           <ul id="approachSteps" class="approach-steps"></ul>
@@ -1880,7 +1901,7 @@
       </div>
 
       <div class="item">
-        <div class="calculator">
+        <div class="calculator" id="calc-faq">
           <h2>Ofte stilte spørsmål</h2>
           <div class="faq-list">
             <details class="faq-item">
@@ -2319,6 +2340,8 @@
         grunnleggende om prosent og prosentregning!
       </p>
     </div>
+
+    <button class="to-top" onclick="scrollToTop()">Til toppen</button>
 
     <script>
       function triggerResultFeedback(elements) {
@@ -3103,6 +3126,10 @@ function calculatePercentToDecimalFraction() {
     document.getElementById('percentDecimalResult'),
     document.getElementById('percentFractionResult'),
   ]);
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Apply example values per calculator
