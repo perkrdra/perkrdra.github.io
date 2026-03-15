@@ -815,19 +815,42 @@
               .trainer-meta {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 8px;
-                margin: 12px 0 6px;
+                gap: 10px;
+                margin: 14px 0 10px;
+                padding: 10px 12px;
+                border-radius: 12px;
+                background: rgba(255, 232, 139, 0.6);
                 font-family: "Roboto", sans-serif;
                 font-size: 14px;
               }
 
               .trainer-card {
                 background: #ffe88b;
-                border-radius: 14px;
-                padding: 16px;
-                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+                border-radius: 16px;
+                padding: 20px;
+                box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.12);
                 display: grid;
-                gap: 10px;
+                gap: 12px;
+              }
+
+              .trainer-card h3 {
+                margin: 0;
+                line-height: 1.35;
+              }
+
+              .trainer-card input {
+                width: 100%;
+              }
+
+              .trainer-card .quiz-actions {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+              }
+
+              .trainer-card .quiz-actions button {
+                flex: 1;
+                min-width: 140px;
               }
 
               .trainer-feedback,
