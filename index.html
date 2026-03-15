@@ -140,44 +140,39 @@
 
               .top-nav {
                 position: sticky;
-                top: 12px;
-                z-index: 20;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
+                top: 0;
+                z-index: 50;
+                display: grid;
+                grid-template-columns: repeat(7, minmax(0, 1fr));
+                gap: 8px 10px;
                 width: 92%;
                 max-width: 1200px;
-                margin: 28px auto 12px;
-                padding: 14px 16px;
-                background: rgba(249, 166, 108, 0.92);
-                border-radius: 28px;
-                box-shadow: rgba(50, 50, 50, 0.35) 0px 10px 20px -18px,
-                  rgba(0, 0, 0, 0.16) 0px 12px 18px -20px,
-                  rgba(10, 37, 64, 0.2) 0px -2px 2px 0px inset;
-                backdrop-filter: blur(4px);
+                margin: 20px auto 12px;
+                padding: 8px 6px;
               }
 
               .top-nav a {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                padding: 10px 14px;
-                background: #ffe88b;
-                border-radius: 999px;
+                padding: 8px 10px;
+                background: transparent;
+                border-radius: 12px;
                 color: #000;
                 text-decoration: none;
                 font-weight: 600;
-                font-size: 15px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+                font-size: 14px;
+                border: 1px solid rgba(0, 0, 0, 0.08);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
                 transition: transform 120ms ease, box-shadow 120ms ease,
-                  background-color 120ms ease;
+                  background-color 120ms ease, border-color 120ms ease;
               }
 
               .top-nav a:hover,
               .top-nav a:focus-visible {
-                background: #95f0a9;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+                background: rgba(149, 240, 169, 0.2);
+                border-color: rgba(0, 0, 0, 0.16);
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
                 transform: translateY(-1px);
               }
 
@@ -1024,14 +1019,14 @@
 
                 .top-nav {
                   position: sticky;
-                  top: 8px;
+                  top: 0;
                   margin: 20px auto 10px;
-                  padding: 12px 12px;
+                  padding: 10px 8px;
                   gap: 8px;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
                 }
 
                 .top-nav a {
-                  flex: 1 1 calc(50% - 10px);
                   font-size: 14px;
                 }
 
@@ -1070,17 +1065,18 @@
                 }
 
                 .top-nav {
-                  position: static;
+                  position: sticky;
+                  top: 0;
                   width: 94%;
-                  padding: 10px 12px;
-                  gap: 8px;
-                  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+                  padding: 8px 8px;
+                  gap: 6px;
+                  grid-template-columns: repeat(2, minmax(0, 1fr));
+                  box-shadow: none;
                 }
 
                 .top-nav a {
-                  flex: 1 1 100%;
                   text-align: center;
-                  padding: 10px 12px;
+                  padding: 9px 10px;
                 }
 
                 .to-top {
