@@ -1680,7 +1680,7 @@
               <summary>Se eksempel</summary>
               <div class="example-body">
                 <p class="example-text">
-                  Eksempel: Lønnsgrunnlag 400 000 kr, sats 12% og månedslønn 35 000 kr.
+                  Eksempel: Lønnsgrunnlag 660 000 kr (omtrent gjennomsnittslønn), sats 12% og månedslønn 55 000 kr.
                 </p>
                 <button
                   type="button"
@@ -1890,9 +1890,6 @@
                   <input type="radio" name="q1" value="a" /> 40
                 </label>
                 </h3>
-          <button type="button" class="faq-read-more" id="faqToggle" data-expanded="false">
-            <h4>Se flere</h4>
-          </button>
                 <label class="quiz-option">
                   <input type="radio" name="q2" value="a" /> 700 kr
                 </label>
@@ -3120,11 +3117,11 @@ function applyExample(type) {
       break;
     }
     case 'holiday': {
-      document.getElementById('holidayBase').value = 400000;
+      document.getElementById('holidayBase').value = 660000;
       const holidayRate = document.getElementById('holidayRate');
       holidayRate.value = '12';
       holidayRate.dispatchEvent(new Event('change'));
-      document.getElementById('holidayMonthly').value = 35000;
+      document.getElementById('holidayMonthly').value = 55000;
       document.getElementById('holidaySubtractSalary').checked = true;
       calculateHolidayPay();
       break;
@@ -3703,16 +3700,40 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
         triggerResultFeedback(document.getElementById('trainerSummary'));
       }
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          submitTrainerAnswer();
-        }
-        if (event.key === ' ' && document.activeElement !== document.getElementById('trainerAnswer')) {
-          startTrainer();
-        }
-      });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+            submitTrainerAnswer();
+          }
+          if (event.key === ' ' && document.activeElement !== document.getElementById('trainerAnswer')) {
+            startTrainer();
+          }
+        });
 
-      resetTrainer(false);
+        resetTrainer(false);
+
+        /* FAQ toggle: show/hide extra questions */
+        document.addEventListener('DOMContentLoaded', () => {
+          const toggle = document.getElementById('faqToggle');
+          const extraItems = Array.from(document.querySelectorAll('.faq-item.faq-extra'));
+          const label = toggle ? toggle.querySelector('h4') : null;
+
+          if (!toggle || extraItems.length === 0) return;
+
+          const setExpanded = (expanded) => {
+            extraItems.forEach((item) => item.classList.toggle('hidden', !expanded));
+            toggle.dataset.expanded = expanded ? 'true' : 'false';
+            if (label) {
+              label.textContent = expanded ? 'Se færre' : 'Se flere';
+            }
+          };
+
+          setExpanded(false);
+
+          toggle.addEventListener('click', () => {
+            const expanded = toggle.dataset.expanded === 'true';
+            setExpanded(!expanded);
+          });
+        });
 
 
       /* lavaAnimation */
