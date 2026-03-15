@@ -853,6 +853,23 @@
                 min-width: 140px;
               }
 
+              .approach-steps {
+                margin: 8px 0 12px;
+                padding-left: 18px;
+                display: grid;
+                gap: 6px;
+              }
+
+              .approach-actions {
+                gap: 8px;
+                flex-wrap: wrap;
+              }
+
+              .approach-actions button {
+                flex: 1;
+                min-width: 140px;
+              }
+
               .trainer-feedback,
               .trainer-summary {
                 min-height: 24px;
@@ -1845,6 +1862,20 @@
             <div class="trainer-feedback" id="trainerFeedback"></div>
             <div class="trainer-summary" id="trainerSummary"></div>
           </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="calculator" id="approachCard">
+          <h2 id="approachTitle">Hoderegning: prosentmetoder</h2>
+          <p id="approachSummary">Enkle mentale snarveier for prosentregning.</p>
+          <ul id="approachSteps" class="approach-steps"></ul>
+          <div class="quiz-actions approach-actions">
+            <button type="button" onclick="previousApproach()"><h4>Forrige</h4></button>
+            <button type="button" onclick="nextApproach()"><h4>Neste</h4></button>
+            <button type="button" onclick="shuffleApproach()"><h4>Overrask</h4></button>
+          </div>
+          <div class="trainer-summary" id="approachHint"></div>
         </div>
       </div>
 
@@ -3607,6 +3638,100 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
         document.getElementById('trainerEasy').classList.toggle('active', mode === 'easy');
         document.getElementById('trainerHard').classList.toggle('active', mode === 'hard');
         resetTrainer(false);
+
+          /* Pedagogiske tilnærminger for hoderegning */
+          const approaches = [
+            {
+              title: '10%-trikset + skalering',
+              summary: 'Finn 10% raskt (del på 10) og skaler opp eller ned.',
+              steps: [
+                'Del tallet på 10 for å få 10%.',
+                'Gang 10%-tallet med 2 for 20%, med 5 for 50%, eller del på 2 for 5%.',
+                'Kombiner: 15% = 10% + 5%, 25% = 20% + 5%.'
+              ],
+              hint: 'Fungerer ekstra godt på runde tall (ender på 0).'
+            },
+            {
+              title: 'Faktor-forskyvning',
+              summary: 'Bruk (1 ± p/100) som faktor i hodet.',
+              steps: [
+                '20% ned = gang med 0,8. 20% opp = gang med 1,2.',
+                'Del opp faktoren: 1,12 = 1 + 0,1 + 0,02 → legg på 10% og så 2%.',
+                'For små prosenter: 3% ≈ legg til 3 per 100, eller 30 per 1000.'
+              ],
+              hint: 'Bruk når du kjenner faktorene (0,8, 1,25, 1,12, etc.).'
+            },
+            {
+              title: 'Bytt rekkefølge for enklere tall',
+              summary: 'Utnytt kommutativitet: p% av n = n% av p.',
+              steps: [
+                '12% av 50 = 50% av 12 = 6.',
+                '18% av 200 = 200% av 18 ÷ 2 = 36.',
+                '25% av 64 = 64% av 25 = 16.'
+              ],
+              hint: 'Snu brøken når ett av tallene er “snilt”.'
+            },
+            {
+              title: 'Halver og legg til',
+              summary: 'Spesielt for 15%, 12,5% og 7,5%.',
+              steps: [
+                '15% = 10% + halvparten av 10%.',
+                '12,5% = 1/8: del på 2, del på 2, del på 2 igjen.',
+                '7,5% = 15% ÷ 2: ta 10%, halvér, legg til 2,5%.'
+              ],
+              hint: 'Bra når tallet er lett å halvere flere ganger.'
+            },
+            {
+              title: 'Brøkblikk',
+              summary: 'Se prosenten som brøk og bruk divisjoner i hodet.',
+              steps: [
+                '25% = 1/4 → del tallet på 4.',
+                '20% = 1/5 → del på 5 (f.eks. 1/5 av 150 = 30).',
+                '12,5% = 1/8 → del på 2 tre ganger.'
+              ],
+              hint: 'Bruk når prosenten er en kjent brøk.'
+            }
+          ];
+
+          let approachIndex = 0;
+
+          function renderApproach(index) {
+            const title = document.getElementById('approachTitle');
+            const summary = document.getElementById('approachSummary');
+            const steps = document.getElementById('approachSteps');
+            const hint = document.getElementById('approachHint');
+            if (!title || !summary || !steps || !hint) return;
+
+            const item = approaches[index];
+            title.textContent = item.title;
+            summary.textContent = item.summary;
+            steps.innerHTML = item.steps
+              .map((step) => `<li>${step}</li>`)
+              .join('');
+            hint.textContent = item.hint;
+          }
+
+          function nextApproach() {
+            approachIndex = (approachIndex + 1) % approaches.length;
+            renderApproach(approachIndex);
+          }
+
+          function previousApproach() {
+            approachIndex = (approachIndex - 1 + approaches.length) % approaches.length;
+            renderApproach(approachIndex);
+          }
+
+          function shuffleApproach() {
+            const current = approachIndex;
+            while (approaches.length > 1 && approachIndex === current) {
+              approachIndex = Math.floor(Math.random() * approaches.length);
+            }
+            renderApproach(approachIndex);
+          }
+
+          document.addEventListener('DOMContentLoaded', () => {
+            renderApproach(approachIndex);
+          });
       }
 
       function resetTrainer(keepMode) {
