@@ -3606,6 +3606,8 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+let sequentialQuizState = null;
+
 // Apply example values per calculator
 function applyExample(type) {
   switch (type) {
@@ -3723,6 +3725,108 @@ function applyExample(type) {
   }
 }
 
+function renderQuizOutcome(correctCount, totalQuestions) {
+  const result = document.getElementById('quizResult');
+  const codeBox = document.getElementById('quizCode');
+  if (!result) return;
+
+  result.textContent = `Du fikk ${correctCount} av ${totalQuestions} riktige.`;
+  triggerResultFeedback(result);
+
+  if (correctCount === totalQuestions) {
+    const unlockCode = getRpgUnlockCode();
+    if (codeBox) {
+      codeBox.textContent = `Kode for redningsoppdraget: ${unlockCode}`;
+      triggerResultFeedback(codeBox);
+    }
+    localStorage.setItem('rpgUnlockCode', unlockCode);
+
+    const rpgSection = document.getElementById('rpgSection');
+    if (rpgSection) {
+      rpgSection.classList.remove('hidden');
+    }
+
+    const rpgStatus = document.getElementById('rpgStatus');
+    if (rpgStatus) {
+      rpgStatus.textContent =
+        'Mørket våkner. Skriv inn koden for å redde Gunnar. Du går videre på eget ansvar.';
+      triggerResultFeedback(rpgStatus);
+    }
+  } else if (codeBox) {
+    codeBox.textContent = 'Få alle riktige for å låse opp redningsoppdraget.';
+  }
+}
+
+function initSequentialQuiz() {
+  const form = document.getElementById('quizForm');
+  if (!form) return;
+
+  const questions = Array.from(form.querySelectorAll('.quiz-question'));
+  if (!questions.length) return;
+
+  sequentialQuizState = {
+    currentIndex: 0,
+    answered: 0,
+    correct: 0,
+    done: false,
+    questions,
+  };
+
+  questions.forEach((question, index) => {
+    question.classList.toggle('hidden', index !== 0);
+
+    const options = question.querySelectorAll('input[type="radio"]');
+    options.forEach((option) => {
+      option.checked = false;
+      option.disabled = false;
+      if (option.dataset.seqBound === 'true') return;
+      option.dataset.seqBound = 'true';
+      option.addEventListener('change', () => {
+        const state = sequentialQuizState;
+        if (!state || state.done || state.currentIndex !== index) return;
+
+        const selected = question.querySelector('input[type="radio"]:checked');
+        if (!selected) return;
+
+        const correctOption = question.querySelector(
+          'input[type="radio"][data-correct="true"]'
+        );
+
+        options.forEach((currentOption) => {
+          currentOption.disabled = true;
+          const label = currentOption.closest('.quiz-option');
+          if (!label) return;
+          label.classList.remove('correct', 'incorrect');
+          if (currentOption.dataset.correct === 'true') {
+            label.classList.add('correct');
+          } else if (currentOption === selected) {
+            label.classList.add('incorrect');
+          }
+        });
+
+        state.answered += 1;
+        if (correctOption && selected === correctOption) {
+          state.correct += 1;
+        }
+
+        if (state.currentIndex < state.questions.length - 1) {
+          setTimeout(() => {
+            question.classList.add('hidden');
+            state.currentIndex += 1;
+            state.questions[state.currentIndex].classList.remove('hidden');
+          }, 320);
+          return;
+        }
+
+        state.done = true;
+        renderQuizOutcome(state.correct, state.questions.length);
+      });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initSequentialQuiz);
+
 function checkQuiz() {
   const form = document.getElementById('quizForm');
   if (!form) return;
@@ -3768,41 +3872,17 @@ function checkQuiz() {
   });
 
   const result = document.getElementById('quizResult');
-  const codeBox = document.getElementById('quizCode');
   if (!result) return;
 
   if (!allAnswered) {
     result.textContent = 'Velg svar på alle spørsmål.';
+    const codeBox = document.getElementById('quizCode');
     if (codeBox) codeBox.textContent = '';
     triggerResultFeedback(result);
     return;
   }
 
-  result.textContent = `Du fikk ${correctCount} av ${questions.length} riktige.`;
-  triggerResultFeedback(result);
-
-  if (correctCount === questions.length) {
-    const unlockCode = getRpgUnlockCode();
-    if (codeBox) {
-      codeBox.textContent = `Kode for redningsoppdraget: ${unlockCode}`;
-      triggerResultFeedback(codeBox);
-    }
-    localStorage.setItem('rpgUnlockCode', unlockCode);
-
-    const rpgSection = document.getElementById('rpgSection');
-    if (rpgSection) {
-      rpgSection.classList.remove('hidden');
-    }
-
-    const rpgStatus = document.getElementById('rpgStatus');
-    if (rpgStatus) {
-      rpgStatus.textContent =
-        'Mørket våkner. Skriv inn koden for å redde Gunnar. Du går videre på eget ansvar.';
-      triggerResultFeedback(rpgStatus);
-    }
-  } else if (codeBox) {
-    codeBox.textContent = 'Få alle riktige for å låse opp redningsoppdraget.';
-  }
+  renderQuizOutcome(correctCount, questions.length);
 }
 
 function resetQuiz() {
@@ -3829,6 +3909,8 @@ function resetQuiz() {
   if (rpgSection) {
     rpgSection.classList.add('hidden');
   }
+
+  initSequentialQuiz();
 }
 
 function getRpgUnlockCode() {
@@ -4220,16 +4302,19 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
         triggerResultFeedback(document.getElementById('trainerSummary'));
       }
 
-        document.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-            submitTrainerAnswer();
-          }
-          if (event.key === ' ' && document.activeElement !== document.getElementById('trainerAnswer')) {
-            startTrainer();
-          }
-        });
+        const trainerMounted = !!document.getElementById('trainerQuestion');
+        if (trainerMounted) {
+          document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+              submitTrainerAnswer();
+            }
+            if (event.key === ' ' && document.activeElement !== document.getElementById('trainerAnswer')) {
+              startTrainer();
+            }
+          });
 
-        resetTrainer(false);
+          resetTrainer(false);
+        }
 
         /* Pedagogiske tilnærminger for hoderegning */
         const approaches = [
