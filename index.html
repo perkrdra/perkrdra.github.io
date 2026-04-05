@@ -395,9 +395,7 @@
                 border-radius: 10px;
                 font-size: 16px;
                 border: none; /* remove default borders */
-                box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
-                  rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
-                  rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
               }
 
               input {
@@ -466,9 +464,7 @@
                 margin-bottom: 20px;
                 font: 18px;
                 border: none; /* remove default borders */
-                box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
-                  rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
-                  rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
               }
 
               button h4 {
@@ -743,9 +739,7 @@
           border-radius: 10px;
           padding: 10px;
           cursor: pointer;
-          box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
-            rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
-            rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
         }
 
         .distribution-results {
@@ -819,9 +813,7 @@
           background-color: #ffe88b;
           font-family: "Roboto", sans-serif;
           font-size: 16px;
-          box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
-            rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
-            rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
           flex: 1;
           min-width: 150px; /* Ensures inputs don't get too narrow */
         }
@@ -845,9 +837,7 @@
           border-radius: 10px;
           border: none;
           background-color: #ffe88b;
-          box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
-            rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
-            rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
         }
 
         .hidden {
@@ -4196,8 +4186,8 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           return new s(this.x + t.x, this.y + t.y);
         };
         var h = function (t) {
-          var i = 0.08,
-            h = 0.65;
+          var i = 0.14,
+            h = 0.95;
           (this.vel = new s(
             (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.07 * Math.random()),
             (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.15 * Math.random())
@@ -4207,7 +4197,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
               0.2 * t.height + Math.random() * t.height * 0.6
             )),
             (this.size =
-              t.wh / 28 + (Math.random() * (h - i) + i) * (t.wh / 24)),
+              t.wh / 22 + (Math.random() * (h - i) + i) * (t.wh / 18)),
             (this.width = t.width),
             (this.height = t.height);
         };
