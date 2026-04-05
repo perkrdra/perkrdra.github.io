@@ -151,7 +151,9 @@
                 padding: 8px 6px;
                 background: #f9a66c;
                 border-radius: 14px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
+                  rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
+                  rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
                 transition: transform 180ms ease, opacity 180ms ease;
               }
 
@@ -393,8 +395,9 @@
                 border-radius: 10px;
                 font-size: 16px;
                 border: none; /* remove default borders */
-                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
-                  0 1px 2px 0 rgba(0, 0, 0, 0.11);
+                box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
+                  rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
+                  rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
               }
 
               input {
@@ -452,6 +455,9 @@
                 min-width: 100px;
                 height: 38px;
                 padding: 10px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
                 background-color: #95f0a9;
                 color: #000;
                 border-radius: 10px;
@@ -460,8 +466,14 @@
                 margin-bottom: 20px;
                 font: 18px;
                 border: none; /* remove default borders */
-                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13),
-                  0 1px 2px 0 rgba(0, 0, 0, 0.11);
+                box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
+                  rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
+                  rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
+              }
+
+              button h4 {
+                margin: 0;
+                line-height: 1;
               }
 
               /* Example toggle styles */
@@ -731,7 +743,9 @@
           border-radius: 10px;
           padding: 10px;
           cursor: pointer;
-          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+          box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
+            rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
+            rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
         }
 
         .distribution-results {
@@ -805,7 +819,9 @@
           background-color: #ffe88b;
           font-family: "Roboto", sans-serif;
           font-size: 16px;
-          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+          box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
+            rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
+            rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
           flex: 1;
           min-width: 150px; /* Ensures inputs don't get too narrow */
         }
@@ -829,7 +845,9 @@
           border-radius: 10px;
           border: none;
           background-color: #ffe88b;
-          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+          box-shadow: rgba(0, 0, 0, 0.22) 0 18px 30px -18px,
+            rgba(0, 0, 0, 0.16) 0 10px 18px -14px,
+            rgba(10, 37, 64, 0.3) 0 -2px 2px 0 inset;
         }
 
         .hidden {
@@ -4178,8 +4196,8 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           return new s(this.x + t.x, this.y + t.y);
         };
         var h = function (t) {
-          var i = 0.18,
-            h = 1.1;
+          var i = 0.08,
+            h = 0.65;
           (this.vel = new s(
             (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.07 * Math.random()),
             (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.15 * Math.random())
@@ -4189,7 +4207,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
               0.2 * t.height + Math.random() * t.height * 0.6
             )),
             (this.size =
-              t.wh / 20 + (Math.random() * (h - i) + i) * (t.wh / 16)),
+              t.wh / 28 + (Math.random() * (h - i) + i) * (t.wh / 24)),
             (this.width = t.width),
             (this.height = t.height);
         };
@@ -4353,7 +4371,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
             },
             a = i.screen.init("lamp-anim", null, !0),
             o = a.ctx;
-          a.resize(), (t = new e(a.width, a.height, 30, "#ffe88b", "#ffe88b"));
+          a.resize(), (t = new e(a.width, a.height, 26, "#ffe88b", "#ffe88b"));
         }
         return { run: n };
       })();
