@@ -349,6 +349,17 @@
                 width: 100%;
               }
 
+              #calc-holiday .holiday-group {
+                gap: 8px;
+              }
+
+              #calc-holiday .holiday-group input[type="number"],
+              #calc-holiday .holiday-group .tax-rate-select,
+              #calc-holiday .holiday-group button {
+                margin-top: 0;
+                margin-bottom: 0;
+              }
+
               .info-badge {
                 display: inline-flex;
                 align-items: center;
@@ -456,7 +467,7 @@
               details.example {
                 margin-top: 12px;
                 background: transparent;
-                border-radius: 14px;
+                border-radius: 4em 8em;
                 padding: 10px 12px;
                 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
                 text-align: center;
@@ -4161,8 +4172,8 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           var i = 0.1,
             h = 0.8;
           (this.vel = new s(
-            (Math.random() > 0.5 ? 1 : -1) * (0.08 + 0.12 * Math.random()),
-            (Math.random() > 0.5 ? 1 : -1) * (0.08 + 0.35 * Math.random())
+            (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.07 * Math.random()),
+            (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.15 * Math.random())
           )),
             (this.pos = new s(
               0.2 * t.width + Math.random() * t.width * 0.6,
