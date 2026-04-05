@@ -679,7 +679,7 @@
               .quiz-question {
                 border: none;
                 padding: 14px;
-                background: #ffe88b;
+                background: transparent;
                 border-radius: 12px;
                 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
                 display: flex;
@@ -928,7 +928,7 @@
 
         .faq-read-more {
           align-self: flex-start;
-          margin-top: 0;
+          margin-top: 12px;
         }
 
         .tax-calculation-type {
@@ -1080,7 +1080,8 @@
                 margin-bottom: 12px;
                 padding: 10px 12px;
                 border-radius: 10px;
-                background: rgba(255, 255, 255, 0.45);
+                background: transparent;
+                border: 1px solid rgba(0, 0, 0, 0.2);
                 line-height: 1.45;
               }
 
@@ -1097,7 +1098,8 @@
                 position: relative;
                 padding: 10px 12px 10px 44px;
                 border-radius: 10px;
-                background: rgba(255, 255, 255, 0.45);
+                background: transparent;
+                border: 1px solid rgba(0, 0, 0, 0.2);
                 font-size: 15px;
                 line-height: 1.5;
               }
@@ -1142,7 +1144,8 @@
                 margin-top: 4px;
                 padding: 10px 12px;
                 border-radius: 10px;
-                background: rgba(255, 255, 255, 0.45);
+                background: transparent;
+                border: 1px solid rgba(0, 0, 0, 0.2);
               }
 
               .faq-list {
@@ -4421,16 +4424,28 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           if (!nav) return;
           let lastScrollY = window.scrollY;
           const collapseOffset = 40;
+          let upwardDistance = 0;
+          const mobileRevealThreshold = 90;
+          const desktopRevealThreshold = 30;
 
           window.addEventListener('scroll', () => {
             const current = window.scrollY;
-            const scrollingDown = current > lastScrollY;
+            const delta = current - lastScrollY;
+            const scrollingDown = delta > 0;
             const farEnough = current > collapseOffset;
+            const revealThreshold = window.matchMedia('(max-width: 800px)').matches
+              ? mobileRevealThreshold
+              : desktopRevealThreshold;
 
             if (scrollingDown && farEnough) {
+              upwardDistance = 0;
               nav.classList.add('collapsed');
-            } else if (!scrollingDown) {
-              nav.classList.remove('collapsed');
+            } else if (delta < 0) {
+              upwardDistance += Math.abs(delta);
+              if (current <= collapseOffset || upwardDistance >= revealThreshold) {
+                nav.classList.remove('collapsed');
+                upwardDistance = 0;
+              }
             }
 
             lastScrollY = current;
