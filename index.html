@@ -334,7 +334,7 @@
               }
 
               .holiday-input {
-                height: 42px;
+                height: 38px;
                 padding: 10px;
                 width: 100%;
                 flex: none;
@@ -384,8 +384,9 @@
               input[type="number"] {
                 flex: 1; /* Allows inputs to grow and fill available space */
                 min-width: 150px; /* Prevents inputs from becoming too narrow */
+                max-width: 320px;
                 background-color: #ffe88b;
-                height: 42px;
+                height: 38px;
                 padding: 10px;
                 margin-top: 10px;
                 margin-bottom: 20px;
@@ -449,7 +450,7 @@
               button {
                 width: auto; /* Changed from fixed width */
                 min-width: 100px;
-                height: 42px;
+                height: 38px;
                 padding: 10px;
                 background-color: #95f0a9;
                 color: #000;
@@ -468,7 +469,7 @@
                 margin-top: 12px;
                 background: transparent;
                 border-radius: 4em 8em;
-                padding: 10px 12px;
+                padding: 8px 12px 4px;
                 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
                 text-align: center;
                 border: none;
@@ -548,7 +549,7 @@
           display: flex;
           flex-direction: column;
           gap: 6px;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }
 
         .distribution-input-group {
@@ -559,6 +560,8 @@
 
         .distribution-input-group input {
           flex: 1;
+          margin-top: 0;
+          margin-bottom: 0;
         }
 
         .percentage-result {
@@ -571,7 +574,7 @@
           display: flex;
           gap: 6px;
           margin-top: 0;
-          margin-bottom: 12px;
+          margin-bottom: 8px;
         }
 
         .distribution-controls .control-button {
@@ -740,12 +743,18 @@
         .markup-input-group {
           display: flex;
           align-items: flex-end;
-          gap: 10px;
-          margin-bottom: 20px;
+          gap: 6px;
+          margin-bottom: 10px;
           width: 100%;
           margin-left: 0;
           padding-left: 0;
           justify-content: flex-start;
+        }
+
+        .markup-input-group input[type="number"],
+        .markup-input-group button {
+          margin-top: 0;
+          margin-bottom: 0;
         }
 
         .markup-input-group label {
@@ -754,8 +763,8 @@
 
         .calculation-type {
           display: flex;
-          gap: 10px;
-          margin-bottom: 20px;
+          gap: 6px;
+          margin-bottom: 10px;
         }
 
         .type-button {
@@ -773,7 +782,7 @@
         }
 
         .results-section {
-          margin-top: 20px;
+          margin-top: 12px;
         }
 
 
@@ -782,13 +791,13 @@
         .tax-input-group {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
-          margin-bottom: 20px;
+          gap: 6px;
+          margin-bottom: 10px;
           align-items: center; /* Changed from flex-end to center for consistent alignment */
         }
 
         .tax-input-group input, .tax-rate-select {
-          height: 42px; /* Consistent height for all inputs */
+          height: 38px; /* Consistent height for all inputs */
           padding: 10px;
           margin: 0;
           border-radius: 10px;
@@ -847,8 +856,8 @@
 
         .tax-calculation-type {
           display: flex;
-          gap: 10px;
-          margin-bottom: 20px;
+          gap: 6px;
+          margin-bottom: 10px;
         }
 
         .tax-type-button {
@@ -867,11 +876,12 @@
 
         .calculate-button {
           width: 100%;
-          margin-bottom: 20px;
+          margin-top: 0;
+          margin-bottom: 10px;
         }
 
         .tax-results {
-          margin-top: 20px;
+          margin-top: 12px;
         }
 
         .slider-container {
@@ -1287,7 +1297,6 @@
                 type="number"
                 id="increaseInitialValue"
                 placeholder="Fra"
-                data-help-text="Hjelp, hjelp … ta quizen!"
               />
               <label for="increaseFinalValue"></label>
               <input
@@ -4169,8 +4178,8 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           return new s(this.x + t.x, this.y + t.y);
         };
         var h = function (t) {
-          var i = 0.1,
-            h = 0.8;
+          var i = 0.18,
+            h = 1.1;
           (this.vel = new s(
             (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.07 * Math.random()),
             (Math.random() > 0.5 ? 1 : -1) * (0.03 + 0.15 * Math.random())
@@ -4180,7 +4189,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
               0.2 * t.height + Math.random() * t.height * 0.6
             )),
             (this.size =
-              t.wh / 26 + (Math.random() * (h - i) + i) * (t.wh / 22)),
+              t.wh / 20 + (Math.random() * (h - i) + i) * (t.wh / 16)),
             (this.width = t.width),
             (this.height = t.height);
         };
@@ -4344,7 +4353,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
             },
             a = i.screen.init("lamp-anim", null, !0),
             o = a.ctx;
-          a.resize(), (t = new e(a.width, a.height, 24, "#ffe88b", "#ffe88b"));
+          a.resize(), (t = new e(a.width, a.height, 30, "#ffe88b", "#ffe88b"));
         }
         return { run: n };
       })();
