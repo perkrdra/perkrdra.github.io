@@ -166,7 +166,7 @@
                 align-items: center;
                 justify-content: center;
                 padding: 8px 10px;
-                background: #fff4b8;
+                background: #ffe88b;
                 border-radius: 12px;
                 color: #000;
                 text-decoration: none;
@@ -319,11 +319,10 @@
               }
 
               .calculator {
-                padding: 70px;
+                padding: 54px 70px 80px;
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
-                padding-bottom: 80px;
               }
 
               .holiday-group {
@@ -4152,18 +4151,18 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           return new s(this.x + t.x, this.y + t.y);
         };
         var h = function (t) {
-          var i = 0.05,
-            h = 0.55;
+          var i = 0.1,
+            h = 0.8;
           (this.vel = new s(
-            (Math.random() > 0.5 ? 1 : -1) * (0.2 + 0.25 * Math.random()),
-            (Math.random() > 0.5 ? 1 : -1) * (0.2 + Math.random())
+            (Math.random() > 0.5 ? 1 : -1) * (0.08 + 0.12 * Math.random()),
+            (Math.random() > 0.5 ? 1 : -1) * (0.08 + 0.35 * Math.random())
           )),
             (this.pos = new s(
               0.2 * t.width + Math.random() * t.width * 0.6,
               0.2 * t.height + Math.random() * t.height * 0.6
             )),
             (this.size =
-              t.wh / 32 + (Math.random() * (h - i) + i) * (t.wh / 26)),
+              t.wh / 26 + (Math.random() * (h - i) + i) * (t.wh / 22)),
             (this.width = t.width),
             (this.height = t.height);
         };
