@@ -419,6 +419,21 @@
                 display: none;
               }
 
+              #calc-percent-fraction .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+              }
+
+              #calc-percent-fraction .input-group input[type="number"] {
+                width: min(420px, 100%);
+                margin-bottom: 0;
+              }
+
+              #calc-percent-fraction .input-group button {
+                margin-top: 0;
+              }
+
               button {
                 width: auto; /* Changed from fixed width */
                 min-width: 100px;
@@ -1621,7 +1636,7 @@
 
         <!-- Prosent til desimal og brøk -->
         <div class="item">
-          <div class="calculator">
+          <div class="calculator" id="calc-percent-fraction">
             <h2>Prosent til desimal og brøk</h2>
             <div class="input-group">
               <label for="percentInput"></label>
