@@ -1275,10 +1275,20 @@
                   font-size: 28px;
                 }
 
+                .header,
+                .subheader,
+                .top-nav,
+                .container {
+                  width: 90%;
+                }
+
+                .container {
+                  padding: 0;
+                }
+
                 .top-nav {
                   position: sticky;
                   top: 0;
-                  width: 94%;
                   padding: 8px 8px;
                   gap: 6px;
                   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1328,6 +1338,12 @@
                 .input-group {
                   flex-direction: column;
                   gap: 6px;
+                }
+
+                .input-group input[type="number"],
+                .input-group button {
+                  width: 100%;
+                  max-width: none;
                 }
 
                 input[type="number"] {
