@@ -1366,6 +1366,8 @@
       <a href="#calc-tax">MVA</a>
       <a href="#calc-holiday">Feriepenger</a>
       <a href="#calc-loan">Lån</a>
+      <a href="#calc-break-even">Break-even</a>
+      <a href="#calc-salary-increase">Lønnsøkning</a>
       <a href="#calc-trainer">Prosent-trener</a>
       <a href="#calc-approach">Hoderegning</a>
       <a href="#calc-faq">FAQ</a>
@@ -2127,6 +2129,106 @@
     </details>
   </div>
 </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-break-even">
+            <h2>Break-even kalkulator (dekningspunkt)</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="breakEvenFixedCosts"
+                placeholder="Faste kostnader"
+              />
+              <input
+                type="number"
+                id="breakEvenPrice"
+                placeholder="Salgspris per enhet"
+              />
+              <input
+                type="number"
+                id="breakEvenVariableCost"
+                placeholder="Variable kostnader per enhet"
+              />
+              <button onclick="calculateBreakEven()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>
+              Dekningsbidrag per enhet:
+              <span id="breakEvenContribution">0</span> kr
+            </h3>
+            <h3>
+              Break-even (enheter):
+              <span id="breakEvenUnits">0</span>
+            </h3>
+            <h3>
+              Break-even omsetning:
+              <span id="breakEvenRevenue">0</span> kr
+            </h3>
+            <h3>Utregning: <span id="breakEvenCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Faste kostnader 120 000 kr, salgspris 500 kr,
+                  variable kostnader 300 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('breakEven')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-salary-increase">
+            <h2>Lønnsøkning i kroner og prosent</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="salaryOld"
+                placeholder="Gammel lønn"
+              />
+              <input
+                type="number"
+                id="salaryNew"
+                placeholder="Ny lønn"
+              />
+              <button onclick="calculateSalaryIncrease()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>
+              Økning i kroner:
+              <span id="salaryIncreaseKr">0</span> kr
+            </h3>
+            <h3>
+              Økning i prosent:
+              <span id="salaryIncreasePercent">0</span>%
+            </h3>
+            <h3>Utregning: <span id="salaryIncreaseCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Fra 550 000 kr til 590 000 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('salaryIncrease')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
 
         <section class="loan-side-text" id="calc-intro">
           <h2>Prosent og prosentregning: En enkel innføring</h2>
@@ -3257,6 +3359,78 @@ function calculateInterest() {
   ]);
 }
 
+function calculateBreakEven() {
+  const fixedCosts = parseFloat(
+    document.getElementById('breakEvenFixedCosts').value
+  );
+  const price = parseFloat(document.getElementById('breakEvenPrice').value);
+  const variableCost = parseFloat(
+    document.getElementById('breakEvenVariableCost').value
+  );
+
+  if (isNaN(fixedCosts) || isNaN(price) || isNaN(variableCost)) {
+    alert('Vennligst fyll inn alle feltene');
+    return;
+  }
+
+  if (fixedCosts < 0 || price <= 0 || variableCost < 0) {
+    alert('Verdiene må være gyldige og større enn eller lik 0');
+    return;
+  }
+
+  const contribution = price - variableCost;
+  if (contribution <= 0) {
+    alert('Salgspris må være høyere enn variable kostnader');
+    return;
+  }
+
+  const unitsRaw = fixedCosts / contribution;
+  const units = Math.ceil(unitsRaw);
+  const revenue = units * price;
+
+  const format = (value) => Math.round(value).toLocaleString('no');
+
+  document.getElementById('breakEvenContribution').textContent =
+    format(contribution);
+  document.getElementById('breakEvenUnits').textContent =
+    units.toLocaleString('no');
+  document.getElementById('breakEvenRevenue').textContent =
+    format(revenue);
+  document.getElementById('breakEvenCalculation').textContent =
+    `${fixedCosts.toFixed(2)} / (${price.toFixed(2)} - ${variableCost.toFixed(2)}) = ${unitsRaw.toFixed(2)} enheter (avrundet opp til ${units})`;
+
+  triggerResultFeedback([
+    document.getElementById('breakEvenContribution'),
+    document.getElementById('breakEvenUnits'),
+    document.getElementById('breakEvenRevenue'),
+  ]);
+}
+
+function calculateSalaryIncrease() {
+  const oldSalary = parseFloat(document.getElementById('salaryOld').value);
+  const newSalary = parseFloat(document.getElementById('salaryNew').value);
+
+  if (isNaN(oldSalary) || isNaN(newSalary) || oldSalary <= 0) {
+    alert('Vennligst fyll inn gyldige lønnsverdier');
+    return;
+  }
+
+  const increaseKr = newSalary - oldSalary;
+  const increasePercent = (increaseKr / oldSalary) * 100;
+  const format = (value) => Math.round(value).toLocaleString('no');
+
+  document.getElementById('salaryIncreaseKr').textContent = format(increaseKr);
+  document.getElementById('salaryIncreasePercent').textContent =
+    increasePercent.toFixed(2).replace(/\.00$/, '');
+  document.getElementById('salaryIncreaseCalculation').textContent =
+    `( ${newSalary.toFixed(2)} - ${oldSalary.toFixed(2)} ) / ${oldSalary.toFixed(2)} * 100 = ${increasePercent.toFixed(2)}%`;
+
+  triggerResultFeedback([
+    document.getElementById('salaryIncreaseKr'),
+    document.getElementById('salaryIncreasePercent'),
+  ]);
+}
+
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
 
@@ -3496,6 +3670,19 @@ function applyExample(type) {
       updatePrincipal(principal);
       updateInterestRate(rate);
       updateTimePeriod(years);
+      break;
+    }
+    case 'breakEven': {
+      document.getElementById('breakEvenFixedCosts').value = 120000;
+      document.getElementById('breakEvenPrice').value = 500;
+      document.getElementById('breakEvenVariableCost').value = 300;
+      calculateBreakEven();
+      break;
+    }
+    case 'salaryIncrease': {
+      document.getElementById('salaryOld').value = 550000;
+      document.getElementById('salaryNew').value = 590000;
+      calculateSalaryIncrease();
       break;
     }
     case 'percentOfPercent': {
