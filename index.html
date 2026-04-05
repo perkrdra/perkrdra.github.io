@@ -1036,7 +1036,7 @@
               }
 
               .trainer-card {
-                background: #ffe88b;
+                background: transparent;
                 border-radius: 16px;
                 padding: 20px;
                 box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.12);
@@ -1064,6 +1064,13 @@
                 min-width: 140px;
               }
 
+              .approach-panel {
+                background: #ffe88b;
+                border-radius: 16px;
+                padding: 16px;
+                box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.12);
+              }
+
               .approach-steps {
                 margin: 10px 0 14px;
                 padding-left: 0;
@@ -1073,12 +1080,9 @@
               }
 
               .approach-steps li {
-                background: #ffe88b;
-                border-radius: 12px;
-                padding: 10px 12px;
+                padding: 0;
                 font-size: 15px;
                 line-height: 1.5;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
               }
 
               .approach-actions {
@@ -1105,7 +1109,7 @@
               }
 
               .faq-item {
-                background: #ffe88b;
+                background: transparent;
                 border-radius: 14px;
                 padding: 12px 14px;
                 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
@@ -2306,15 +2310,17 @@
       <div class="item">
         <div class="calculator" id="calc-approach" aria-labelledby="approachHeading approachTitle" aria-describedby="approachSummary">
           <h2 id="approachHeading">Hoderegning</h2>
-          <h3 id="approachTitle">Prosentmetoder</h3>
-          <p id="approachSummary">Enkle mentale snarveier for prosentregning.</p>
-          <ul id="approachSteps" class="approach-steps"></ul>
+          <div class="approach-panel">
+            <h3 id="approachTitle">Prosentmetoder</h3>
+            <p id="approachSummary">Enkle mentale snarveier for prosentregning.</p>
+            <ul id="approachSteps" class="approach-steps"></ul>
+            <div class="trainer-summary" id="approachHint"></div>
+          </div>
           <div class="quiz-actions approach-actions">
             <button type="button" onclick="previousApproach()"><h4>Forrige</h4></button>
             <button type="button" onclick="nextApproach()"><h4>Neste</h4></button>
             <button type="button" onclick="shuffleApproach()"><h4>Overrask</h4></button>
           </div>
-          <div class="trainer-summary" id="approachHint"></div>
         </div>
       </div>
 
