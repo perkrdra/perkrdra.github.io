@@ -1071,8 +1071,8 @@
                 background: transparent;
                 border-radius: 16px;
                 padding: 18px;
-                box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.12);
-                border: 1px solid rgba(0, 0, 0, 0.12);
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+                border: none;
               }
 
               #calc-approach h2 {
@@ -1082,6 +1082,8 @@
               #approachTitle {
                 margin-bottom: 8px;
                 font-weight: 500;
+                font-size: 20px;
+                line-height: 1.3;
               }
 
               #approachSummary {
@@ -1089,8 +1091,11 @@
                 padding: 10px 12px;
                 border-radius: 10px;
                 background: transparent;
-                border: 1px solid rgba(0, 0, 0, 0.2);
-                line-height: 1.45;
+                border: none;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+                font-family: "Roboto", sans-serif;
+                font-size: 15px;
+                line-height: 1.5;
               }
 
               .approach-steps {
@@ -1107,7 +1112,9 @@
                 padding: 10px 12px 10px 44px;
                 border-radius: 10px;
                 background: transparent;
-                border: 1px solid rgba(0, 0, 0, 0.2);
+                border: none;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+                font-family: "Roboto", sans-serif;
                 font-size: 15px;
                 line-height: 1.5;
               }
@@ -1146,6 +1153,7 @@
                 min-height: 24px;
                 font-family: "Roboto", sans-serif;
                 font-size: 15px;
+                line-height: 1.5;
               }
 
               #approachHint {
@@ -1153,7 +1161,8 @@
                 padding: 10px 12px;
                 border-radius: 10px;
                 background: transparent;
-                border: 1px solid rgba(0, 0, 0, 0.2);
+                border: none;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
               }
 
               .faq-list {
@@ -2397,311 +2406,313 @@
 
       <div class="item">
         <div class="calculator quiz">
-          <details class="quiz-details" open>
-            <summary>
-              <div class="quiz-question">
-                <h2>Prosent-quiz</h2>
-            <details class="faq-item faq-extra hidden">
-                  Fullfør quizen for å få koden som låser opp redningsoppdraget.
-                  Trykk for å åpne — på eget ansvar.
-                </p>
-            <details class="faq-item faq-extra hidden">
-            </summary>
-            <form id="quizForm" class="quiz-form">
-              <div class="quiz-question">
-                <h3 class="quiz-heading">1. Hva er 25% av 200?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q1" value="a" /> 40
-                </label>
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q2" value="a" /> 700 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q2" value="b" data-correct="true" />
-                  720 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q2" value="c" /> 760 kr
-                </label>
-              </div>
+          <h2>Prosent-quiz</h2>
+          <p class="quiz-intro">
+            Svar på ett spørsmål om gangen. Når du velger et svar, vises neste spørsmål automatisk.
+          </p>
+          <form id="quizForm" class="quiz-form">
+            <div class="quiz-question">
+              <h3 class="quiz-heading">1. Hva er 25% av 200?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="a" /> 40
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="b" data-correct="true" /> 50
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="c" /> 60
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  3. Økning fra 50 til 65 er hvor mange prosent?
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q3" value="a" /> 20%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q3" value="b" data-correct="true" />
-                  30%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q3" value="c" /> 40%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">2. Pris 800 kr med 10% rabatt blir:</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="a" /> 700 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="b" data-correct="true" />
+                720 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="c" /> 760 kr
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">4. 12 av 80 er hvor mange prosent?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q4" value="a" data-correct="true" />
-                  15%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q4" value="b" /> 12%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q4" value="c" /> 18%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">
+                3. Økning fra 50 til 65 er hvor mange prosent?
+              </h3>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="a" /> 20%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="b" data-correct="true" />
+                30%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="c" /> 40%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">5. Hva er 18% av 350?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q5" value="a" /> 56
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q5" value="b" data-correct="true" />
-                  63
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q5" value="c" /> 72
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">4. 12 av 80 er hvor mange prosent?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="a" data-correct="true" />
+                15%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="b" /> 12%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="c" /> 18%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">6. Hvor mange prosent er 45 av 300?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q6" value="a" /> 12%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q6" value="b" data-correct="true" />
-                  15%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q6" value="c" /> 20%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">5. Hva er 18% av 350?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q5" value="a" /> 56
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q5" value="b" data-correct="true" />
+                63
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q5" value="c" /> 72
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  7. En vare øker fra 400 til 460. Hvor mange prosent økning?
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q7" value="a" /> 12.5%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q7" value="b" data-correct="true" />
-                  15%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q7" value="c" /> 20%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">6. Hvor mange prosent er 45 av 300?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q6" value="a" /> 12%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q6" value="b" data-correct="true" />
+                15%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q6" value="c" /> 20%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  8. En pris går fra 900 til 765. Hvor mange prosent nedgang?
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q8" value="a" /> 10%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q8" value="b" data-correct="true" />
-                  15%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q8" value="c" /> 20%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">
+                7. En vare øker fra 400 til 460. Hvor mange prosent økning?
+              </h3>
+              <label class="quiz-option">
+                <input type="radio" name="q7" value="a" /> 12.5%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q7" value="b" data-correct="true" />
+                15%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q7" value="c" /> 20%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">9. 25% rabatt på 1 200 kr. Hva blir prisen?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q9" value="a" /> 800 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q9" value="b" data-correct="true" />
-                  900 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q9" value="c" /> 960 kr
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">
+                8. En pris går fra 900 til 765. Hvor mange prosent nedgang?
+              </h3>
+              <label class="quiz-option">
+                <input type="radio" name="q8" value="a" /> 10%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q8" value="b" data-correct="true" />
+                15%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q8" value="c" /> 20%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">10. Hva er 7% MVA av 2 000 kr?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q10" value="a" /> 120 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q10" value="b" data-correct="true" />
-                  140 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q10" value="c" /> 160 kr
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">9. 25% rabatt på 1 200 kr. Hva blir prisen?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q9" value="a" /> 800 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q9" value="b" data-correct="true" />
+                900 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q9" value="c" /> 960 kr
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  11. Pris inkl. 25% MVA er 1 250 kr. Hva er pris ekskl. MVA?
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q11" value="a" /> 900 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q11" value="b" data-correct="true" />
-                  1 000 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q11" value="c" /> 1 100 kr
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">10. Hva er 7% MVA av 2 000 kr?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q10" value="a" /> 120 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q10" value="b" data-correct="true" />
+                140 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q10" value="c" /> 160 kr
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">12. Hva er 12% feriepenger av 300 000 kr?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q12" value="a" /> 30 000 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q12" value="b" data-correct="true" />
-                  36 000 kr
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q12" value="c" /> 42 000 kr
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">
+                11. Pris inkl. 25% MVA er 1 250 kr. Hva er pris ekskl. MVA?
+              </h3>
+              <label class="quiz-option">
+                <input type="radio" name="q11" value="a" /> 900 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q11" value="b" data-correct="true" />
+                1 000 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q11" value="c" /> 1 100 kr
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">13. 20% av 15% er hvor mange prosent?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q13" value="a" /> 1%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q13" value="b" data-correct="true" />
-                  3%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q13" value="c" /> 5%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">12. Hva er 12% feriepenger av 300 000 kr?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q12" value="a" /> 30 000 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q12" value="b" data-correct="true" />
+                36 000 kr
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q12" value="c" /> 42 000 kr
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">14. 2.5% som desimal er:</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q14" value="a" /> 0.25
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q14" value="b" data-correct="true" />
-                  0.025
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q14" value="c" /> 0.0025
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">13. 20% av 15% er hvor mange prosent?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q13" value="a" /> 1%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q13" value="b" data-correct="true" />
+                3%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q13" value="c" /> 5%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">15. 0.4 som prosent er:</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q15" value="a" /> 4%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q15" value="b" data-correct="true" />
-                  40%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q15" value="c" /> 400%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">14. 2.5% som desimal er:</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q14" value="a" /> 0.25
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q14" value="b" data-correct="true" />
+                0.025
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q14" value="c" /> 0.0025
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  16. Et beløp øker fra 120 til 150. Hvor mange prosent økning?
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q16" value="a" /> 20%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q16" value="b" data-correct="true" />
-                  25%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q16" value="c" /> 30%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">15. 0.4 som prosent er:</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q15" value="a" /> 4%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q15" value="b" data-correct="true" />
+                40%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q15" value="c" /> 400%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">
-                  17. En pris går fra 500 til 425. Hvor mange prosent nedgang?
-                </h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q17" value="a" /> 10%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q17" value="b" data-correct="true" />
-                  15%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q17" value="c" /> 20%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">
+                16. Et beløp øker fra 120 til 150. Hvor mange prosent økning?
+              </h3>
+              <label class="quiz-option">
+                <input type="radio" name="q16" value="a" /> 20%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q16" value="b" data-correct="true" />
+                25%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q16" value="c" /> 30%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">18. Hva er 5% av 2 400?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q18" value="a" data-correct="true" />
-                  120
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q18" value="b" /> 100
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q18" value="c" /> 140
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">
+                17. En pris går fra 500 til 425. Hvor mange prosent nedgang?
+              </h3>
+              <label class="quiz-option">
+                <input type="radio" name="q17" value="a" /> 10%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q17" value="b" data-correct="true" />
+                15%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q17" value="c" /> 20%
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">19. 30 av 240 er hvor mange prosent?</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q19" value="a" /> 10%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q19" value="b" data-correct="true" />
-                  12.5%
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q19" value="c" /> 15%
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">18. Hva er 5% av 2 400?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q18" value="a" data-correct="true" />
+                120
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q18" value="b" /> 100
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q18" value="c" /> 140
+              </label>
+            </div>
 
-              <div class="quiz-question">
-                <h3 class="quiz-heading">20. 35% av 80 er:</h3>
-                <label class="quiz-option">
-                  <input type="radio" name="q20" value="a" /> 24
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q20" value="b" data-correct="true" />
-                  28
-                </label>
-                <label class="quiz-option">
-                  <input type="radio" name="q20" value="c" /> 32
-                </label>
-              </div>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">19. 30 av 240 er hvor mange prosent?</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q19" value="a" /> 10%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q19" value="b" data-correct="true" />
+                12.5%
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q19" value="c" /> 15%
+              </label>
+            </div>
 
-              <div class="quiz-actions">
-                <button type="button" onclick="checkQuiz()">
-                  <h4>Sjekk svar</h4>
-                </button>
-                <button type="button" class="quiz-reset" onclick="resetQuiz()">
-                  <h4>Prøv igjen</h4>
-                </button>
-              </div>
-              <div class="quiz-result" id="quizResult"></div>
-              <div class="quiz-result" id="quizCode"></div>
-            </form>
-          </details>
+            <div class="quiz-question">
+              <h3 class="quiz-heading">20. 35% av 80 er:</h3>
+              <label class="quiz-option">
+                <input type="radio" name="q20" value="a" /> 24
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q20" value="b" data-correct="true" />
+                28
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q20" value="c" /> 32
+              </label>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" onclick="checkQuiz()">
+                <h4>Sjekk svar</h4>
+              </button>
+              <button type="button" class="quiz-reset" onclick="resetQuiz()">
+                <h4>Prøv igjen</h4>
+              </button>
+            </div>
+            <div class="quiz-result" id="quizResult"></div>
+            <div class="quiz-result" id="quizCode"></div>
+          </form>
         </div>
       </div>
     </div>
