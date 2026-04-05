@@ -133,7 +133,7 @@
                 font-family: "Roboto", serif;
                 color: #000;
                 line-height: 1;
-                background: #ffe88b;
+                background: #f9a66c;
                 padding-top: 48px; /* restore breathing room at top */
                 scroll-behavior: smooth;
               }
@@ -396,12 +396,18 @@
                 display: flex;
                 flex-wrap: wrap;
                 align-items: flex-end; /* This aligns items at their bottom edge */
-                gap: 10px;
+                gap: 4px;
                 width: 100%;
                 margin-left: 0;
                 padding-left: 0;
                 justify-content: flex-start;
                 align-self: stretch;
+              }
+
+              .input-group input[type="number"],
+              .input-group button {
+                margin-top: 0;
+                margin-bottom: 0;
               }
 
               .input-group label {
@@ -502,28 +508,6 @@
                 margin: 0;
                 font-size: 14px;
                 font-weight: 500;
-              }
-
-              /* Trial style: only for the percentage increase inputs */
-              #calc-increase .example-look-input {
-                background: transparent;
-                border: none;
-                border-radius: 14px;
-                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
-                font-family: "Roboto", sans-serif;
-                font-size: 14px;
-                font-weight: 500;
-                padding: 10px 12px;
-              }
-
-              #calc-increase .example-look-input::placeholder {
-                color: #000;
-                opacity: 0.85;
-              }
-
-              #calc-increase .example-look-input:focus-visible {
-                outline: 2px solid rgba(0, 0, 0, 0.35);
-                outline-offset: 2px;
               }
 
               /* Styles for the distribution calculator */
@@ -1263,7 +1247,6 @@
               <input
                 type="number"
                 id="increaseInitialValue"
-                class="example-look-input"
                 placeholder="Fra"
                 data-help-text="Hjelp, hjelp … ta quizen!"
               />
@@ -1271,7 +1254,6 @@
               <input
                 type="number"
                 id="increaseFinalValue"
-                class="example-look-input"
                 placeholder="Til"
               />
               <button onclick="calculatePercentageIncrease()">
