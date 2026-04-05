@@ -271,7 +271,7 @@
               }
 
               .item {
-                border-radius: 8em 4em;
+                border-radius: 4em 8em;
                 border-color: #000;
                 background-color: #f9a66c;
                 opacity: 100%;
@@ -4152,8 +4152,8 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           return new s(this.x + t.x, this.y + t.y);
         };
         var h = function (t) {
-          var i = 0.1,
-            h = 1.5;
+          var i = 0.05,
+            h = 0.55;
           (this.vel = new s(
             (Math.random() > 0.5 ? 1 : -1) * (0.2 + 0.25 * Math.random()),
             (Math.random() > 0.5 ? 1 : -1) * (0.2 + Math.random())
@@ -4163,7 +4163,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
               0.2 * t.height + Math.random() * t.height * 0.6
             )),
             (this.size =
-              t.wh / 15 + (Math.random() * (h - i) + i) * (t.wh / 15)),
+              t.wh / 32 + (Math.random() * (h - i) + i) * (t.wh / 26)),
             (this.width = t.width),
             (this.height = t.height);
         };
@@ -4327,7 +4327,7 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
             },
             a = i.screen.init("lamp-anim", null, !0),
             o = a.ctx;
-          a.resize(), (t = new e(a.width, a.height, 11, "#ffe88b", "#ffe88b"));
+          a.resize(), (t = new e(a.width, a.height, 24, "#ffe88b", "#ffe88b"));
         }
         return { run: n };
       })();
