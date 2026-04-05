@@ -1067,22 +1067,63 @@
               .approach-panel {
                 background: transparent;
                 border-radius: 16px;
-                padding: 16px;
+                padding: 18px;
                 box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.12);
+                border: 1px solid rgba(0, 0, 0, 0.12);
+              }
+
+              #calc-approach h2 {
+                margin-bottom: 10px;
+              }
+
+              #approachTitle {
+                margin-bottom: 8px;
+                font-weight: 500;
+              }
+
+              #approachSummary {
+                margin-bottom: 12px;
+                padding: 10px 12px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.45);
+                line-height: 1.45;
               }
 
               .approach-steps {
-                margin: 10px 0 14px;
+                margin: 0 0 14px;
                 padding-left: 0;
                 display: grid;
-                gap: 8px;
+                gap: 10px;
                 list-style: none;
+                counter-reset: approach-step;
               }
 
               .approach-steps li {
-                padding: 0;
+                position: relative;
+                padding: 10px 12px 10px 44px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.45);
                 font-size: 15px;
                 line-height: 1.5;
+              }
+
+              .approach-steps li::before {
+                counter-increment: approach-step;
+                content: counter(approach-step);
+                position: absolute;
+                left: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: #95f0a9;
+                color: #000;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 700;
               }
 
               .approach-actions {
@@ -1100,6 +1141,13 @@
                 min-height: 24px;
                 font-family: "Roboto", sans-serif;
                 font-size: 15px;
+              }
+
+              #approachHint {
+                margin-top: 4px;
+                padding: 10px 12px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.45);
               }
 
               .faq-list {
@@ -2273,37 +2321,6 @@
     </div>
 
     <div class="container info-grid">
-      <div class="item">
-        <div class="calculator" id="calc-trainer">
-          <h2>Prosent-trener</h2>
-          <div class="calculation-type">
-            <button id="trainerEasy" class="type-button active" onclick="setTrainerMode('easy')">
-              <h4>Lett</h4>
-            </button>
-            <button id="trainerHard" class="type-button" onclick="setTrainerMode('hard')">
-              <h4>Vanskelig</h4>
-            </button>
-          </div>
-          <div class="trainer-meta">
-            <div>Modus: <span id="trainerModeLabel">Lett</span></div>
-            <div>Timer: <span id="trainerTimer">120</span> s</div>
-            <div>Poeng: <span id="trainerScore">0</span></div>
-            <div>Streak: <span id="trainerStreak">0</span></div>
-          </div>
-          <div class="trainer-card">
-            <h3 id="trainerQuestion">Trykk start for å begynne</h3>
-            <input type="number" id="trainerAnswer" placeholder="Skriv svaret" />
-            <div class="quiz-actions">
-              <button type="button" onclick="startTrainer()"><h4>Start</h4></button>
-              <button type="button" onclick="submitTrainerAnswer()"><h4>Svar</h4></button>
-              <button type="button" class="quiz-reset" onclick="skipTrainerQuestion()"><h4>Hopp over</h4></button>
-            </div>
-            <div class="trainer-feedback" id="trainerFeedback"></div>
-            <div class="trainer-summary" id="trainerSummary"></div>
-          </div>
-        </div>
-      </div>
-
       <div class="item">
         <div class="calculator" id="calc-approach" aria-labelledby="approachHeading approachTitle" aria-describedby="approachSummary">
           <h2 id="approachHeading">Hoderegning</h2>
