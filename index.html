@@ -3763,56 +3763,7 @@ function resetRpgQuiz() {
 }
 
 function initHelpTypewriter() {
-  const input = document.getElementById('increaseInitialValue');
-  if (!input) return;
-
-  const helpText =
-    input.dataset.helpText ||
-    'Hjelp meg! Jeg sitter fast i Singulariteten. Vennligst ta quizen og redd meg!';
-  const defaultPlaceholder = input.getAttribute('placeholder') || '';
-  const padded = `   ${helpText}   `;
-  const scrollText = padded + padded;
-  let position = 0;
-  const windowSize = 24;
-  let loops = 0;
-  const maxLoops = 2;
-  let timerId = null;
-
-  const tick = () => {
-    if (document.activeElement === input || input.value.trim().length > 0) {
-      input.setAttribute('placeholder', defaultPlaceholder);
-      return;
-    }
-
-    const slice = scrollText.slice(position, position + windowSize);
-    input.setAttribute('placeholder', slice.trim() || defaultPlaceholder);
-    position += 1;
-    if (position >= padded.length) {
-      position = 0;
-      loops += 1;
-      if (loops >= maxLoops) {
-        input.setAttribute('placeholder', defaultPlaceholder);
-        clearInterval(timerId);
-      }
-    }
-  };
-
-  if (timerId) {
-    clearInterval(timerId);
-  }
-  timerId = setInterval(tick, 120);
-
-  input.addEventListener('focus', () => {
-    input.setAttribute('placeholder', defaultPlaceholder);
-  });
-
-  input.addEventListener('blur', () => {
-    position = 0;
-    loops = 0;
-    if (!timerId) {
-      timerId = setInterval(tick, 120);
-    }
-  });
+  return;
 }
 
 document.addEventListener('DOMContentLoaded', initHelpTypewriter);
