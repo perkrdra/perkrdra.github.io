@@ -16,7 +16,7 @@
     <title>Prosentregning | Renteberegning | Prosentkalkulator</title>
     <meta
       name="description"
-      content="Enkel og rask prosentregning med en prosentkalkulator. Beregn renter, rabatt, økning, reduksjon og prosentandeler. Perfekt for privatøkonomi og bedrifter."
+      content="Enkel og rask prosentregning med prosentkalkulator. Regn ut legg til prosent, trekk fra prosent, renter, rabatt, økning, reduksjon og prosentandeler. Perfekt for privatøkonomi og bedrifter."
     />
 
     <style>
@@ -1436,12 +1436,15 @@
 
     <div class="subheader">
       <p>
-        Enkel og nøyaktig prosentregning for alle formål. Regn ut prosent,
-        rabatt, økning og reduksjon med en prosentkalkulator.
+        Enkel og nøyaktig prosentregning for alle formål. Regn ut legg til
+        prosent, trekk fra prosent, rabatt, økning og reduksjon med en
+        prosentkalkulator.
       </p>
     </div>
 
     <nav class="top-nav">
+      <a href="#calc-add-percent">Legg til %</a>
+      <a href="#calc-subtract-percent">Trekk fra %</a>
       <a href="#calc-increase">Økning</a>
       <a href="#calc-decrease">Nedgang</a>
       <a href="#calc-total">Andel av total</a>
@@ -1459,6 +1462,88 @@
 
     <div class="container main-calculators">
       <div class="item1">
+        <div class="item">
+          <div class="calculator" id="calc-add-percent">
+            <h2>Legg til prosent på et beløp</h2>
+            <div class="input-group">
+              <label for="addPercentAmount"></label>
+              <input
+                type="number"
+                id="addPercentAmount"
+                placeholder="Beløp"
+              />
+              <label for="addPercentRate"></label>
+              <input
+                type="number"
+                id="addPercentRate"
+                placeholder="Prosent"
+              />
+              <button onclick="calculateAddPercent()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Nytt beløp: <span id="addPercentResult">0</span> kr</h3>
+            <h3>Økning i kroner: <span id="addPercentChange">0</span> kr</h3>
+            <h3>Utregning: <span id="addPercentCalculationDetails"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 500 kr + 12% = 560 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('addPercent')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-subtract-percent">
+            <h2>Trekk fra prosent på et beløp</h2>
+            <div class="input-group">
+              <label for="subtractPercentAmount"></label>
+              <input
+                type="number"
+                id="subtractPercentAmount"
+                placeholder="Beløp"
+              />
+              <label for="subtractPercentRate"></label>
+              <input
+                type="number"
+                id="subtractPercentRate"
+                placeholder="Prosent"
+              />
+              <button onclick="calculateSubtractPercent()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Nytt beløp: <span id="subtractPercentResult">0</span> kr</h3>
+            <h3>Trekk i kroner: <span id="subtractPercentChange">0</span> kr</h3>
+            <h3>Utregning: <span id="subtractPercentCalculationDetails"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Trekk 15% fra 500 kr = 425 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('subtractPercent')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
         <div class="item">
           <!-- Percentage Increase Calculator -->
           <div class="calculator" id="calc-increase">
@@ -2787,6 +2872,64 @@
         });
       }
 
+      function calculateAddPercent() {
+        const amount = parseFloat(
+          document.getElementById("addPercentAmount").value
+        );
+        const percent = parseFloat(
+          document.getElementById("addPercentRate").value
+        );
+
+        if (isNaN(amount) || isNaN(percent)) {
+          alert("Vennligst fyll inn gyldige tall");
+          return;
+        }
+
+        const newAmount = amount * (1 + percent / 100);
+        const increaseAmount = newAmount - amount;
+
+        document.getElementById("addPercentResult").textContent =
+          newAmount.toFixed(2);
+        document.getElementById("addPercentChange").textContent =
+          increaseAmount.toFixed(2);
+        document.getElementById("addPercentCalculationDetails").textContent =
+          `${amount.toFixed(2)} × (1 + ${percent.toFixed(2)} / 100) = ${newAmount.toFixed(2)}`;
+
+        triggerResultFeedback([
+          document.getElementById("addPercentResult"),
+          document.getElementById("addPercentChange"),
+        ]);
+      }
+
+      function calculateSubtractPercent() {
+        const amount = parseFloat(
+          document.getElementById("subtractPercentAmount").value
+        );
+        const percent = parseFloat(
+          document.getElementById("subtractPercentRate").value
+        );
+
+        if (isNaN(amount) || isNaN(percent)) {
+          alert("Vennligst fyll inn gyldige tall");
+          return;
+        }
+
+        const newAmount = amount * (1 - percent / 100);
+        const subtractAmount = amount - newAmount;
+
+        document.getElementById("subtractPercentResult").textContent =
+          newAmount.toFixed(2);
+        document.getElementById("subtractPercentChange").textContent =
+          subtractAmount.toFixed(2);
+        document.getElementById("subtractPercentCalculationDetails").textContent =
+          `${amount.toFixed(2)} × (1 - ${percent.toFixed(2)} / 100) = ${newAmount.toFixed(2)}`;
+
+        triggerResultFeedback([
+          document.getElementById("subtractPercentResult"),
+          document.getElementById("subtractPercentChange"),
+        ]);
+      }
+
       function calculatePercentageIncrease() {
         const initialValue = parseFloat(
           document.getElementById("increaseInitialValue").value
@@ -3652,6 +3795,18 @@ function applyExample(type) {
       document.getElementById('decreaseInitialValue').value = 250;
       document.getElementById('decreaseFinalValue').value = 200;
       calculatePercentageDecrease();
+      break;
+    }
+    case 'addPercent': {
+      document.getElementById('addPercentAmount').value = 500;
+      document.getElementById('addPercentRate').value = 12;
+      calculateAddPercent();
+      break;
+    }
+    case 'subtractPercent': {
+      document.getElementById('subtractPercentAmount').value = 500;
+      document.getElementById('subtractPercentRate').value = 15;
+      calculateSubtractPercent();
       break;
     }
     case 'percentageOfTotal': {
