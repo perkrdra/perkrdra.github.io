@@ -2219,16 +2219,36 @@
     </div>
 
     <!-- Interest Rate Slider -->
+    <div class="tax-calculation-type">
+      <button
+        onclick="setLoanRateType('nominal')"
+        id="loanNominalButton"
+        class="tax-type-button active"
+      >
+        <h4>Nominell rente</h4>
+      </button>
+      <button
+        onclick="setLoanRateType('effective')"
+        id="loanEffectiveButton"
+        class="tax-type-button"
+      >
+        <h4>Effektiv rente</h4>
+      </button>
+    </div>
+
     <div class="slider-container">
       <div class="slider-label">
-        <label for="interestRate">Rentesats: <span id="interestRateValue">5</span>%</label>
+        <label for="interestRate"
+          ><span id="interestRateLabelType">Nominell</span> rente:
+          <span id="interestRateValue">5</span>%</label
+        >
       </div>
       <input 
         type="range" 
         id="interestRate" 
         min="0" 
         max="20" 
-        step="0.1" 
+        step="0.01" 
         value="5"
         class="custom-slider"
         oninput="updateInterestRate(this.value)"
@@ -2264,6 +2284,8 @@
 
     <!-- Results display -->
     <div class="tax-results">
+      <h3>Nominell rente (årlig): <span id="nominalRateResult">0</span>%</h3>
+      <h3>Effektiv rente (årlig): <span id="effectiveRateResult">0</span>%</h3>
       <h3>Månedlig kostnad: <span id="finalAmount">0</span> kr</h3>
       <h3>Totale rentekostnader: <span id="totalInterest">0</span> kr</h3>
       <h3>Totalt å tilbakebetale: <span id="totalPayment">0</span> kr</h3>
@@ -3503,13 +3525,68 @@
       }
 
       // Update display values for sliders
+let loanRateType = 'nominal';
+
+function nominalToEffectiveRate(nominalRatePercent) {
+  const nominalDecimal = nominalRatePercent / 100;
+  return (Math.pow(1 + nominalDecimal / 12, 12) - 1) * 100;
+}
+
+function effectiveToNominalRate(effectiveRatePercent) {
+  const effectiveDecimal = effectiveRatePercent / 100;
+  return (Math.pow(1 + effectiveDecimal, 1 / 12) - 1) * 12 * 100;
+}
+
+function formatRate(value) {
+  return Number(value).toLocaleString('no', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+function setLoanRateType(type) {
+  if (type !== 'nominal' && type !== 'effective') {
+    return;
+  }
+
+  const slider = document.getElementById('interestRate');
+  const labelType = document.getElementById('interestRateLabelType');
+  const currentRate = parseFloat(slider.value);
+
+  if (loanRateType !== type && !isNaN(currentRate)) {
+    const convertedRate =
+      type === 'effective'
+        ? nominalToEffectiveRate(currentRate)
+        : effectiveToNominalRate(currentRate);
+    const clampedRate = Math.min(
+      parseFloat(slider.max),
+      Math.max(parseFloat(slider.min), convertedRate)
+    );
+    slider.value = clampedRate.toFixed(2);
+  }
+
+  loanRateType = type;
+  labelType.textContent = type === 'nominal' ? 'Nominell' : 'Effektiv';
+  document
+    .getElementById('loanNominalButton')
+    .classList.toggle('active', type === 'nominal');
+  document
+    .getElementById('loanEffectiveButton')
+    .classList.toggle('active', type === 'effective');
+
+  updateInterestRate(slider.value);
+}
+
 function updatePrincipal(value) {
   document.getElementById('principalAmountValue').textContent = Number(value).toLocaleString('no');
   calculateInterest();
 }
 
 function updateInterestRate(value) {
-  document.getElementById('interestRateValue').textContent = value;
+  document.getElementById('interestRateValue').textContent = Number(value).toLocaleString('no', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  });
   calculateInterest();
 }
 
@@ -3520,8 +3597,11 @@ function updateTimePeriod(value) {
 
 // Function to clear loan result fields
 function clearInterestResults() {
+  document.getElementById('nominalRateResult').textContent = '0';
+  document.getElementById('effectiveRateResult').textContent = '0';
   document.getElementById('finalAmount').textContent = '0';
   document.getElementById('totalInterest').textContent = '0';
+  document.getElementById('totalPayment').textContent = '0';
   document.getElementById('interestCalculation').textContent = '';
 }
 
@@ -3529,26 +3609,52 @@ function clearInterestResults() {
 function calculateInterest() {
   // Get input values
   const principal = parseFloat(document.getElementById('principalAmount').value);
-  const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+  const inputRate = parseFloat(document.getElementById('interestRate').value);
   const years = parseFloat(document.getElementById('timePeriod').value);
+
+  if (isNaN(principal) || isNaN(inputRate) || isNaN(years) || years <= 0) {
+    clearInterestResults();
+    return;
+  }
+
+  const nominalRatePercent =
+    loanRateType === 'nominal'
+      ? inputRate
+      : effectiveToNominalRate(inputRate);
+  const effectiveRatePercent =
+    loanRateType === 'effective'
+      ? inputRate
+      : nominalToEffectiveRate(inputRate);
+  const nominalRate = nominalRatePercent / 100;
   
   // Calculate monthly payment using mortgage formula: M = P[r(1 + r)^n]/[(1 + r)^n - 1]
-  const monthlyRate = rate / 12;
+  const monthlyRate = nominalRate / 12;
   const numberOfPayments = years * 12;
-  const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+  const monthlyPayment =
+    monthlyRate === 0
+      ? principal / numberOfPayments
+      : principal *
+        (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
+        (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
   
   const totalPayment = monthlyPayment * numberOfPayments;
   const totalInterest = totalPayment - principal;
   
-  let calculation = `Månedlig betaling = ${monthlyPayment.toFixed(0).toLocaleString('no')} kr × ${numberOfPayments} måneder`;
+  let calculation =
+    `Input (${loanRateType === 'nominal' ? 'nominell' : 'effektiv'}) ${formatRate(inputRate)}% ` +
+    `gir nominell ${formatRate(nominalRatePercent)}% og effektiv ${formatRate(effectiveRatePercent)}% per år.`;
   
   // Update display with Norwegian number formatting
+  document.getElementById('nominalRateResult').textContent = formatRate(nominalRatePercent);
+  document.getElementById('effectiveRateResult').textContent = formatRate(effectiveRatePercent);
   document.getElementById('finalAmount').textContent = Math.round(monthlyPayment).toLocaleString('no');
   document.getElementById('totalInterest').textContent = Math.round(totalInterest).toLocaleString('no');
   document.getElementById('totalPayment').textContent = Math.round(totalPayment).toLocaleString('no');
   document.getElementById('interestCalculation').textContent = calculation;
 
   triggerResultFeedback([
+    document.getElementById('nominalRateResult'),
+    document.getElementById('effectiveRateResult'),
     document.getElementById('finalAmount'),
     document.getElementById('totalInterest'),
     document.getElementById('totalPayment'),
