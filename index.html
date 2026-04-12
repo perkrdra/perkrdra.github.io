@@ -1474,6 +1474,7 @@
       <a href="#calc-increase">% økning</a>
       <a href="#calc-decrease">% nedgang</a>
       <a href="#calc-recovery">Gjenoppretting</a>
+      <a href="#calc-reverse-percent">Omvendt %</a>
       <a href="#calc-total">Andel av total</a>
       <a href="#calc-discount">Rabatt</a>
       <a href="#calc-part">Del av tallet</a>
@@ -1483,6 +1484,7 @@
       <a href="#calc-tax">MVA</a>
       <a href="#calc-holiday">Feriepenger</a>
       <a href="#calc-loan">Lån</a>
+      <a href="#calc-compound-interest">Renters rente</a>
       <a href="#calc-break-even">Break-even</a>
       <a href="#calc-salary-increase">Lønnsøkning</a>
     </nav>
@@ -1681,6 +1683,68 @@
                   type="button"
                   class="example-apply"
                   onclick="applyExample('recoveryAfterDrop')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-reverse-percent">
+            <h2>Omvendt prosent / prosent baklengs</h2>
+
+            <div class="tax-calculation-type">
+              <button
+                onclick="setReversePercentMode('increaseIncluded')"
+                id="reverseIncreaseButton"
+                class="tax-type-button active"
+              >
+                <h4>Beløp inkl. økning</h4>
+              </button>
+              <button
+                onclick="setReversePercentMode('decreaseIncluded')"
+                id="reverseDecreaseButton"
+                class="tax-type-button"
+              >
+                <h4>Beløp etter nedgang</h4>
+              </button>
+            </div>
+
+            <div class="input-group">
+              <label for="reverseFinalValue"></label>
+              <input
+                type="number"
+                id="reverseFinalValue"
+                placeholder="Beløp du har nå"
+              />
+              <label for="reversePercent"></label>
+              <input
+                type="number"
+                id="reversePercent"
+                placeholder="Prosent"
+                step="0.1"
+              />
+              <button onclick="calculateReversePercent()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+
+            <h3>Opprinnelig beløp: <span id="reverseOriginalValue">0</span> kr</h3>
+            <h3>Endring i kroner: <span id="reverseDifferenceValue">0</span> kr</h3>
+            <h3>Utregning: <span id="reverseCalculationDetails"></span></h3>
+
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 625 kr inkl. 25% betyr opprinnelig 500 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('reversePercent')"
                 >
                   <h4>Bruk eksempel</h4>
                 </button>
@@ -2375,6 +2439,58 @@
     </details>
   </div>
 </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-compound-interest">
+            <h2>Renters rente-kalkulator</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="compoundPrincipal"
+                placeholder="Startbeløp"
+              />
+              <input
+                type="number"
+                id="compoundRate"
+                placeholder="Årlig rente (%)"
+                step="0.01"
+              />
+              <input
+                type="number"
+                id="compoundYears"
+                placeholder="Antall år"
+                step="0.1"
+              />
+              <input
+                type="number"
+                id="compoundFrequency"
+                placeholder="Rentetilskriving per år"
+                step="1"
+              />
+              <button onclick="calculateCompoundInterest()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Sluttbeløp: <span id="compoundFinalAmount">0</span> kr</h3>
+            <h3>Opptjent rente: <span id="compoundInterestEarned">0</span> kr</h3>
+            <h3>Utregning: <span id="compoundCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 100 000 kr til 5% i 10 år med månedlig tilskriving.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('compoundInterest')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
 
         <div class="item">
           <div class="calculator" id="calc-break-even">
@@ -3117,6 +3233,72 @@
         ]);
       }
 
+      let reversePercentMode = "increaseIncluded";
+
+      function setReversePercentMode(mode) {
+        reversePercentMode = mode;
+
+        document
+          .getElementById("reverseIncreaseButton")
+          .classList.toggle("active", mode === "increaseIncluded");
+        document
+          .getElementById("reverseDecreaseButton")
+          .classList.toggle("active", mode === "decreaseIncluded");
+      }
+
+      function calculateReversePercent() {
+        const finalValue = parseFloat(
+          document.getElementById("reverseFinalValue").value
+        );
+        const percent = parseFloat(
+          document.getElementById("reversePercent").value
+        );
+
+        if (isNaN(finalValue) || isNaN(percent)) {
+          alert("Vennligst fyll inn gyldige tall");
+          return;
+        }
+
+        if (percent < 0) {
+          alert("Prosent må være 0 eller høyere");
+          return;
+        }
+
+        let originalValue;
+        let difference;
+        let details;
+
+        if (reversePercentMode === "increaseIncluded") {
+          originalValue = finalValue / (1 + percent / 100);
+          difference = finalValue - originalValue;
+          details = `${finalValue.toFixed(2)} / (1 + ${percent.toFixed(
+            2
+          )} / 100) = ${originalValue.toFixed(2)}`;
+        } else {
+          if (percent >= 100) {
+            alert("Ved nedgang må prosent være under 100");
+            return;
+          }
+          originalValue = finalValue / (1 - percent / 100);
+          difference = originalValue - finalValue;
+          details = `${finalValue.toFixed(2)} / (1 - ${percent.toFixed(
+            2
+          )} / 100) = ${originalValue.toFixed(2)}`;
+        }
+
+        document.getElementById("reverseOriginalValue").textContent =
+          originalValue.toFixed(2);
+        document.getElementById("reverseDifferenceValue").textContent =
+          difference.toFixed(2);
+        document.getElementById("reverseCalculationDetails").textContent =
+          details;
+
+        triggerResultFeedback([
+          document.getElementById("reverseOriginalValue"),
+          document.getElementById("reverseDifferenceValue"),
+        ]);
+      }
+
       function calculatePercentageOfTotal() {
         const partValue = parseFloat(
           document.getElementById("partValue").value
@@ -3760,6 +3942,50 @@ function calculateInterest() {
   ]);
 }
 
+function calculateCompoundInterest() {
+  const principal = parseFloat(document.getElementById('compoundPrincipal').value);
+  const annualRate = parseFloat(document.getElementById('compoundRate').value);
+  const years = parseFloat(document.getElementById('compoundYears').value);
+  const frequency = parseFloat(document.getElementById('compoundFrequency').value);
+
+  if (
+    isNaN(principal) ||
+    isNaN(annualRate) ||
+    isNaN(years) ||
+    isNaN(frequency)
+  ) {
+    alert('Vennligst fyll inn alle feltene');
+    return;
+  }
+
+  if (principal < 0 || annualRate < 0 || years <= 0 || frequency <= 0) {
+    alert('Sjekk verdiene: beløp/rente må være 0 eller mer, år og frekvens må være større enn 0');
+    return;
+  }
+
+  const finalAmount =
+    principal * Math.pow(1 + annualRate / 100 / frequency, frequency * years);
+  const earnedInterest = finalAmount - principal;
+
+  const formatCurrency = (value) =>
+    Number(value).toLocaleString('no', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+  document.getElementById('compoundFinalAmount').textContent =
+    formatCurrency(finalAmount);
+  document.getElementById('compoundInterestEarned').textContent =
+    formatCurrency(earnedInterest);
+  document.getElementById('compoundCalculation').textContent =
+    `${principal.toFixed(2)} × (1 + (${annualRate.toFixed(2)} / 100) / ${frequency})^(${frequency} × ${years}) = ${finalAmount.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('compoundFinalAmount'),
+    document.getElementById('compoundInterestEarned'),
+  ]);
+}
+
 function calculateBreakEven() {
   const fixedCosts = parseFloat(
     document.getElementById('breakEvenFixedCosts').value
@@ -4007,6 +4233,13 @@ function applyExample(type) {
       calculateRecoveryAfterDrop();
       break;
     }
+    case 'reversePercent': {
+      setReversePercentMode('increaseIncluded');
+      document.getElementById('reverseFinalValue').value = 625;
+      document.getElementById('reversePercent').value = 25;
+      calculateReversePercent();
+      break;
+    }
     case 'addPercent': {
       document.getElementById('addPercentAmount').value = 500;
       document.getElementById('addPercentRate').value = 12;
@@ -4090,6 +4323,14 @@ function applyExample(type) {
       updatePrincipal(principal);
       updateInterestRate(rate);
       updateTimePeriod(years);
+      break;
+    }
+    case 'compoundInterest': {
+      document.getElementById('compoundPrincipal').value = 100000;
+      document.getElementById('compoundRate').value = 5;
+      document.getElementById('compoundYears').value = 10;
+      document.getElementById('compoundFrequency').value = 12;
+      calculateCompoundInterest();
       break;
     }
     case 'breakEven': {
