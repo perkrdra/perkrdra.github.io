@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Roboto:wght@300;400;500;900&display=swap"
       rel="stylesheet"
     />
     <link rel="canonical" href="https://prosentregning.no" />
@@ -41,9 +41,9 @@
               }
 
               h1 {
-                font-family: "Roboto", sans-serif;
+                font-family: "Major Mono Display", monospace;
                 font-size: 42px;
-                font-weight: 900;
+                font-weight: 400;
                 line-height: 60px;
                 color: #000000;
                 margin-bottom: 10px;
@@ -1447,6 +1447,7 @@
       <a href="#calc-subtract-percent">Trekk fra %</a>
       <a href="#calc-increase">% økning</a>
       <a href="#calc-decrease">% nedgang</a>
+      <a href="#calc-recovery">Gjenoppretting</a>
       <a href="#calc-total">Andel av total</a>
       <a href="#calc-discount">Rabatt</a>
       <a href="#calc-part">Del av tallet</a>
@@ -1614,6 +1615,46 @@
                   type="button"
                   class="example-apply"
                   onclick="applyExample('percentageDecrease')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-recovery">
+            <h2>Gjenopprettingsprosent etter nedgang</h2>
+            <div class="input-group">
+              <label for="recoveryDropPercent"></label>
+              <input
+                type="number"
+                id="recoveryDropPercent"
+                placeholder="Nedgang i prosent"
+                step="0.1"
+              />
+              <button onclick="calculateRecoveryAfterDrop()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>
+              Må opp igjen med: <span id="recoveryPercentResult">0</span>%
+            </h3>
+            <h3>
+              Kontroll (base 100): <span id="recoveryControlResult"></span>
+            </h3>
+            <h3>Utregning: <span id="recoveryCalculationDetails"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Faller noe 20%, må det opp 25% for å komme tilbake.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('recoveryAfterDrop')"
                 >
                   <h4>Bruk eksempel</h4>
                 </button>
@@ -3018,6 +3059,38 @@
         );
       }
 
+      function calculateRecoveryAfterDrop() {
+        const dropPercent = parseFloat(
+          document.getElementById("recoveryDropPercent").value
+        );
+
+        if (isNaN(dropPercent)) {
+          alert("Vennligst fyll inn en gyldig nedgang i prosent");
+          return;
+        }
+
+        if (dropPercent < 0 || dropPercent >= 100) {
+          alert("Nedgang må være fra 0 til under 100 prosent");
+          return;
+        }
+
+        const recoveryPercent = (dropPercent / (100 - dropPercent)) * 100;
+        const afterDrop = 100 - dropPercent;
+        const backToStart = afterDrop * (1 + recoveryPercent / 100);
+
+        document.getElementById("recoveryPercentResult").textContent =
+          recoveryPercent.toFixed(2);
+        document.getElementById("recoveryControlResult").textContent =
+          `100 -> ${afterDrop.toFixed(2)} -> ${backToStart.toFixed(2)}`;
+        document.getElementById("recoveryCalculationDetails").textContent =
+          `(${dropPercent.toFixed(2)} / (100 - ${dropPercent.toFixed(2)})) * 100 = ${recoveryPercent.toFixed(2)}%`;
+
+        triggerResultFeedback([
+          document.getElementById("recoveryPercentResult"),
+          document.getElementById("recoveryControlResult"),
+        ]);
+      }
+
       function calculatePercentageOfTotal() {
         const partValue = parseFloat(
           document.getElementById("partValue").value
@@ -3901,6 +3974,11 @@ function applyExample(type) {
       document.getElementById('decreaseInitialValue').value = 250;
       document.getElementById('decreaseFinalValue').value = 200;
       calculatePercentageDecrease();
+      break;
+    }
+    case 'recoveryAfterDrop': {
+      document.getElementById('recoveryDropPercent').value = 20;
+      calculateRecoveryAfterDrop();
       break;
     }
     case 'addPercent': {
