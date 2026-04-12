@@ -1501,6 +1501,7 @@
       <a href="#calc-loan">Lån</a>
       <a href="#calc-compound-interest">Renters rente</a>
       <a href="#calc-break-even">Break-even</a>
+      <a href="#calc-salary-breakdown">Lønn per mnd/time</a>
       <a href="#calc-salary-increase">Lønnsøkning</a>
     </nav>
 
@@ -2599,6 +2600,46 @@
                   type="button"
                   class="example-apply"
                   onclick="applyExample('salaryIncrease')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-salary-breakdown">
+            <h2>Årslønn til månedslønn og timeslønn</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="salaryAnnual"
+                placeholder="Årslønn"
+              />
+              <input
+                type="number"
+                id="salaryWeeklyHours"
+                placeholder="Timer per uke (valgfritt, standard 37,5)"
+                step="0.1"
+              />
+              <button onclick="calculateSalaryBreakdown()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Månedslønn: <span id="salaryMonthlyResult">0</span> kr</h3>
+            <h3>Timeslønn: <span id="salaryHourlyResult">0</span> kr</h3>
+            <h3>Utregning: <span id="salaryBreakdownCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Årslønn 720 000 kr og 37,5 timer per uke.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('salaryBreakdown')"
                 >
                   <h4>Bruk eksempel</h4>
                 </button>
@@ -4206,6 +4247,38 @@ function calculateSalaryIncrease() {
   ]);
 }
 
+function calculateSalaryBreakdown() {
+  const annualSalary = parseFloat(document.getElementById('salaryAnnual').value);
+  const weeklyHoursInput = document.getElementById('salaryWeeklyHours').value;
+  const weeklyHours = weeklyHoursInput.trim() === ''
+    ? 37.5
+    : parseFloat(weeklyHoursInput);
+
+  if (isNaN(annualSalary) || isNaN(weeklyHours)) {
+    alert('Vennligst fyll inn gyldige lønnsverdier');
+    return;
+  }
+
+  if (annualSalary <= 0 || weeklyHours <= 0) {
+    alert('Årslønn og timer per uke må være større enn 0');
+    return;
+  }
+
+  const monthlySalary = annualSalary / 12;
+  const yearlyHours = weeklyHours * 52;
+  const hourlySalary = annualSalary / yearlyHours;
+
+  document.getElementById('salaryMonthlyResult').textContent = monthlySalary.toFixed(2);
+  document.getElementById('salaryHourlyResult').textContent = hourlySalary.toFixed(2);
+  document.getElementById('salaryBreakdownCalculation').textContent =
+    `Måned: ${annualSalary.toFixed(2)} / 12 = ${monthlySalary.toFixed(2)}. Time: ${annualSalary.toFixed(2)} / (${weeklyHours.toFixed(2)} × 52) = ${hourlySalary.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('salaryMonthlyResult'),
+    document.getElementById('salaryHourlyResult'),
+  ]);
+}
+
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
 
@@ -4492,6 +4565,12 @@ function applyExample(type) {
       document.getElementById('salaryOld').value = 550000;
       document.getElementById('salaryNew').value = 590000;
       calculateSalaryIncrease();
+      break;
+    }
+    case 'salaryBreakdown': {
+      document.getElementById('salaryAnnual').value = 720000;
+      document.getElementById('salaryWeeklyHours').value = 37.5;
+      calculateSalaryBreakdown();
       break;
     }
     case 'percentOfPercent': {
