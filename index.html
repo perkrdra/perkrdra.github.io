@@ -79,6 +79,10 @@
                 opacity: 100%;
               }
 
+              h3 span {
+                font-variant-numeric: tabular-nums;
+              }
+
               h4 {
                 font-family: "Roboto", sans-serif;
                 font-size: 16px;
@@ -415,6 +419,7 @@
               }
 
               #calc-holiday .holiday-group input[type="number"],
+              #calc-holiday .holiday-group input.formatted-number,
               #calc-holiday .holiday-group .tax-rate-select,
               #calc-holiday .holiday-group button {
                 margin-top: 0;
@@ -422,8 +427,11 @@
               }
 
               #calc-distribution input[type="number"],
+              #calc-distribution input.formatted-number,
               #calc-markup input[type="number"],
+              #calc-markup input.formatted-number,
               #calc-holiday input[type="number"],
+              #calc-holiday input.formatted-number,
               #calc-holiday .tax-rate-select,
               #calc-holiday .custom-rate-input {
                 max-width: none;
@@ -451,7 +459,8 @@
                 margin-bottom: 10px;
               }
 
-              input[type="number"] {
+              input[type="number"],
+              input.formatted-number {
                 flex: 1; /* Allows inputs to grow and fill available space */
                 min-width: 150px; /* Prevents inputs from becoming too narrow */
                 max-width: 320px;
@@ -488,6 +497,7 @@
               }
 
               .input-group input[type="number"],
+              .input-group input.formatted-number,
               .input-group button {
                 margin-top: 0;
                 margin-bottom: 0;
@@ -517,7 +527,8 @@
                 margin-bottom: 0;
               }
 
-              #calc-break-even .input-group input[type="number"] {
+              #calc-break-even .input-group input[type="number"],
+              #calc-break-even .input-group input.formatted-number {
                 min-width: 130px;
                 max-width: none;
                 flex: 1 1 130px;
@@ -533,7 +544,8 @@
                 gap: 8px;
               }
 
-              #calc-percent-fraction .input-group input[type="number"] {
+              #calc-percent-fraction .input-group input[type="number"],
+              #calc-percent-fraction .input-group input.formatted-number {
                 width: min(420px, 100%);
                 margin-bottom: 0;
               }
@@ -865,6 +877,7 @@
         }
 
         .markup-input-group input[type="number"],
+        .markup-input-group input.formatted-number,
         .markup-input-group button {
           margin-top: 0;
           margin-bottom: 0;
@@ -1391,12 +1404,14 @@
                 }
 
                 .input-group input[type="number"],
+                .input-group input.formatted-number,
                 .input-group button {
                   width: 100%;
                   max-width: none;
                 }
 
-                input[type="number"] {
+                input[type="number"],
+                input.formatted-number {
                   width: 100%;
                   margin-top: 6px;
                   margin-bottom: 12px;
@@ -3067,10 +3082,141 @@
     <button class="to-top" onclick="scrollToTop()">Til toppen</button>
 
     <script>
+      const nativeParseFloat = Number.parseFloat;
+
+      function normalizeNumericString(value) {
+        if (typeof value !== "string") {
+          return String(value ?? "");
+        }
+
+        let text = value.trim();
+        if (!text) return "";
+
+        text = text.replace(/\u00A0/g, " ").replace(/\s+/g, "");
+
+        const hasComma = text.includes(",");
+        const hasDot = text.includes(".");
+
+        if (hasComma && hasDot) {
+          if (text.lastIndexOf(",") > text.lastIndexOf(".")) {
+            text = text.replace(/\./g, "").replace(/,/g, ".");
+          } else {
+            text = text.replace(/,/g, "");
+          }
+        } else if (hasComma) {
+          text = text.replace(/,/g, ".");
+        }
+
+        return text;
+      }
+
+      window.parseFloat = function localizedParseFloat(value) {
+        if (typeof value === "string") {
+          return nativeParseFloat(normalizeNumericString(value));
+        }
+        return nativeParseFloat(value);
+      };
+
+      function formatInputFieldForDisplay(rawText) {
+        const normalized = normalizeNumericString(String(rawText || ""));
+        if (!/^-?\d+(?:\.\d+)?$/.test(normalized)) {
+          return null;
+        }
+
+        const value = Number(normalized);
+        if (!Number.isFinite(value)) {
+          return null;
+        }
+
+        const decimals = normalized.includes(".")
+          ? Math.min(normalized.split(".")[1].length, 4)
+          : 0;
+
+        return value
+          .toLocaleString("no-NO", {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals,
+          })
+          .replace(/\u00A0/g, " ");
+      }
+
+      function attachFormattedNumberBehavior(input) {
+        if (!input || input.dataset.numberFormattingBound === "true") {
+          return;
+        }
+
+        input.dataset.numberFormattingBound = "true";
+        input.classList.add("formatted-number");
+
+        if (input.type === "number") {
+          input.type = "text";
+        }
+
+        input.inputMode = "decimal";
+        input.autocomplete = "off";
+
+        input.addEventListener("focus", () => {
+          const normalized = normalizeNumericString(input.value);
+          if (/^-?\d+(?:\.\d+)?$/.test(normalized)) {
+            input.value = normalized;
+          }
+        });
+
+        input.addEventListener("blur", () => {
+          const formatted = formatInputFieldForDisplay(input.value);
+          if (formatted !== null) {
+            input.value = formatted;
+          }
+        });
+
+        const formattedOnInit = formatInputFieldForDisplay(input.value);
+        if (formattedOnInit !== null) {
+          input.value = formattedOnInit;
+        }
+      }
+
+      function initFormattedNumberInputs() {
+        const numberInputs = document.querySelectorAll('input[type="number"]');
+        numberInputs.forEach((input) => {
+          attachFormattedNumberBehavior(input);
+        });
+      }
+
+      function formatNumberForDisplay(rawText) {
+        const text = String(rawText || "").trim();
+        if (!text) return null;
+
+        const normalized = normalizeNumericString(text);
+
+        if (!/^-?\d+(?:\.\d+)?$/.test(normalized)) {
+          return null;
+        }
+
+        const value = Number(normalized);
+        if (!Number.isFinite(value)) {
+          return null;
+        }
+
+        const hasDecimals = Math.abs(value % 1) > 0;
+
+        return value
+          .toLocaleString("no-NO", {
+            minimumFractionDigits: hasDecimals ? 2 : 0,
+            maximumFractionDigits: 2,
+          })
+          .replace(/\u00A0/g, " ");
+      }
+
       function triggerResultFeedback(elements) {
         const list = Array.isArray(elements) ? elements : [elements];
         list.forEach((element) => {
           if (!element) return;
+
+          const formattedText = formatNumberForDisplay(element.textContent);
+          if (formattedText !== null) {
+            element.textContent = formattedText;
+          }
+
           element.classList.remove("result-pop");
           void element.offsetWidth;
           element.classList.add("result-pop");
@@ -3510,9 +3656,9 @@
         container.appendChild(newGroup);
 
         // Add event listener to new input
-        newGroup
-          .querySelector(".value-input")
-          .addEventListener("input", calculateDistribution);
+        const newInput = newGroup.querySelector(".value-input");
+        attachFormattedNumberBehavior(newInput);
+        newInput.addEventListener("input", calculateDistribution);
       }
 
       // Function to remove the last input field
@@ -3535,6 +3681,8 @@
           input.addEventListener("input", calculateDistribution);
         });
       });
+
+      document.addEventListener("DOMContentLoaded", initFormattedNumberInputs);
 
       let calculationType = "markup"; // Default calculation type
 
