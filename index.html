@@ -247,16 +247,6 @@
                 display: none;
               }
 
-              .nav-search-status {
-                grid-column: 1 / -1;
-                min-height: 18px;
-                padding: 0 4px;
-                font-family: "Roboto", sans-serif;
-                font-size: 13px;
-                line-height: 1.3;
-                opacity: 0.85;
-              }
-
               .top-nav .nav-link-hidden {
                 display: none;
               }
@@ -1561,14 +1551,12 @@
         <input
           type="search"
           id="calculatorSearch"
-          placeholder="Enkel og nøyaktig prosentregning for alle formål. Regn ut legg til prosent, trekk fra prosent, rabatt, økning og reduksjon med en prosentkalkulator."
           autocomplete="off"
         />
         <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
           <h4>Tøm</h4>
         </button>
       </div>
-      <p class="nav-search-status" id="calculatorSearchStatus" aria-live="polite"></p>
       <a href="#calc-add-percent" data-search="plus legge til">Legg til %</a>
       <a href="#calc-subtract-percent" data-search="minus trekk fra">Trekk fra %</a>
       <a href="#calc-increase" data-search="hvor mange prosent prosentendring fra til vekst opp">Prosentendring (opp)</a>
@@ -3317,9 +3305,8 @@
         const nav = document.querySelector(".top-nav");
         const searchInput = document.getElementById("calculatorSearch");
         const clearButton = document.getElementById("calculatorSearchClear");
-        const status = document.getElementById("calculatorSearchStatus");
 
-        if (!nav || !searchInput || !clearButton || !status) {
+        if (!nav || !searchInput || !clearButton) {
           return;
         }
 
@@ -3345,16 +3332,6 @@
           });
 
           clearButton.hidden = query.length === 0;
-
-          if (!query) {
-            status.textContent = `Viser alle ${links.length} kalkulatorer.`;
-          } else if (visibleCount === 0) {
-            status.textContent = `Ingen treff for "${rawQuery}".`;
-          } else if (visibleCount === 1) {
-            status.textContent = "1 treff. Trykk Enter for å hoppe til kalkulatoren.";
-          } else {
-            status.textContent = `${visibleCount} treff.`;
-          }
         };
 
         const jumpToFirstMatch = () => {
