@@ -1571,10 +1571,10 @@
       <p class="nav-search-status" id="calculatorSearchStatus" aria-live="polite"></p>
       <a href="#calc-add-percent" data-search="plus legge til">Legg til %</a>
       <a href="#calc-subtract-percent" data-search="minus trekk fra">Trekk fra %</a>
-      <a href="#calc-increase" data-search="vekst opp">% økning</a>
-      <a href="#calc-decrease" data-search="reduksjon ned">% nedgang</a>
+      <a href="#calc-increase" data-search="hvor mange prosent prosentendring fra til vekst opp">Prosentendring (opp)</a>
+      <a href="#calc-decrease" data-search="hvor mange prosent prosentendring fra til reduksjon ned">Prosentendring (ned)</a>
       <a href="#calc-recovery" data-search="hente inn tap">Gjenoppretting</a>
-      <a href="#calc-reverse-percent" data-search="baklengs opprinnelig pris">Omvendt %</a>
+      <a href="#calc-reverse-percent" data-search="finn hele tallet finn total fra prosent finn-total-fra-prosent baklengs opprinnelig pris">Finn total fra %</a>
       <a href="#calc-total" data-search="andel total prosent">Andel av total</a>
       <a href="#calc-discount" data-search="prisavslag">Rabatt</a>
       <a href="#calc-part" data-search="prosent av tall">Del av tallet</a>
@@ -1677,27 +1677,25 @@
         <div class="item">
           <!-- Percentage Increase Calculator -->
           <div class="calculator" id="calc-increase">
-            <h2>Prosentvis økning</h2>
+            <h2>Prosentendring fra verdi A til verdi B (økning)</h2>
             <div class="input-group">
               <label for="increaseInitialValue"></label>
               <input
                 type="number"
                 id="increaseInitialValue"
-                placeholder="Fra"
+                placeholder="Verdi A (fra)"
               />
               <label for="increaseFinalValue"></label>
               <input
                 type="number"
                 id="increaseFinalValue"
-                placeholder="Til"
+                placeholder="Verdi B (til)"
               />
               <button onclick="calculatePercentageIncrease()">
                 <h4>Regn ut</h4>
               </button>
             </div>
-            <h3>
-              Prosentvis økning: <span id="percentageIncreaseResult"></span>%
-            </h3>
+            <h3>Prosentendring: <span id="percentageIncreaseResult"></span>%</h3>
             <h3>Utregning: <span id="increaseCalculationDetails"></span></h3>
             <details class="example">
               <summary>Se eksempel</summary>
@@ -1720,19 +1718,17 @@
         <div class="item">
           <!-- Percentage Decrease Calculator -->
           <div class="calculator" id="calc-decrease">
-            <h2>Prosentvis nedgang</h2>
+            <h2>Prosentendring fra verdi A til verdi B (nedgang)</h2>
             <div class="input-group">
               <label for="decreaseInitialValue"></label>
-              <input type="number" id="decreaseInitialValue" placeholder="Fra" />
+              <input type="number" id="decreaseInitialValue" placeholder="Verdi A (fra)" />
               <label for="decreaseFinalValue"></label>
-              <input type="number" id="decreaseFinalValue" placeholder="Til" />
+              <input type="number" id="decreaseFinalValue" placeholder="Verdi B (til)" />
               <button onclick="calculatePercentageDecrease()">
                 <h4>Regn ut</h4>
               </button>
             </div>
-            <h3>
-              Prosentvis nedgang: <span id="percentageDecreaseResult"></span>%
-            </h3>
+            <h3>Prosentendring: <span id="percentageDecreaseResult"></span>%</h3>
             <h3>Utregning: <span id="decreaseCalculationDetails"></span></h3>
             <details class="example">
               <summary>Se eksempel</summary>
@@ -1794,7 +1790,7 @@
 
         <div class="item">
           <div class="calculator" id="calc-reverse-percent">
-            <h2>Omvendt prosent / prosent baklengs</h2>
+            <h2>Finn total fra prosent (omvendt prosent)</h2>
 
             <div class="tax-calculation-type">
               <button
@@ -1818,7 +1814,7 @@
               <input
                 type="number"
                 id="reverseFinalValue"
-                placeholder="Beløp du har nå"
+                placeholder="Beløp etter prosent"
               />
               <label for="reversePercent"></label>
               <input
@@ -1832,7 +1828,7 @@
               </button>
             </div>
 
-            <h3>Opprinnelig beløp: <span id="reverseOriginalValue">0</span> kr</h3>
+            <h3>Total før prosent: <span id="reverseOriginalValue">0</span> kr</h3>
             <h3>Endring i kroner: <span id="reverseDifferenceValue">0</span> kr</h3>
             <h3>Utregning: <span id="reverseCalculationDetails"></span></h3>
 
@@ -2797,7 +2793,7 @@
           <h2>Ofte stilte spørsmål</h2>
           <div class="faq-list">
             <details class="faq-item">
-              <summary>Hvordan regner jeg prosent baklengs?</summary>
+              <summary>Hvordan finner jeg hele tallet fra prosent?</summary>
               <div class="faq-body">Del prisen inkl. prosent på (1 + prosent/100). Eksempel: 625 kr med 25% MVA → 625 / 1.25 = 500 kr.</div>
             </details>
             <details class="faq-item">
