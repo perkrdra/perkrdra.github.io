@@ -222,6 +222,35 @@
                 margin: 0 auto 20px;
               }
 
+              .hub-menu {
+                margin-top: 10px;
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 8px;
+              }
+
+              .hub-button {
+                margin: 0;
+                min-width: 0;
+                padding: 10px;
+                font-size: 14px;
+                background: #ffe88b;
+              }
+
+              .hub-button.active {
+                background: #95f0a9;
+              }
+
+              .hub-missing {
+                margin-top: 8px;
+                min-height: 20px;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                line-height: 1.35;
+                opacity: 0.9;
+                text-align: left;
+              }
+
               #calculatorSearch {
                 width: 100%;
                 height: 38px;
@@ -254,6 +283,14 @@
 
               .top-nav .nav-link-hidden {
                 display: none;
+              }
+
+              .top-nav .hub-link-hidden {
+                display: none;
+              }
+
+              .hub-hidden {
+                display: none !important;
               }
 
               .to-top {
@@ -1426,6 +1463,10 @@
                   grid-template-columns: 1fr;
                 }
 
+                .hub-menu {
+                  grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
                 .nav-search-clear {
                   width: 100%;
                 }
@@ -1554,6 +1595,21 @@
           <h4>Tøm</h4>
         </button>
       </div>
+      <div class="hub-menu" role="tablist" aria-label="Kalkulatorkategorier">
+        <button type="button" class="hub-button active" data-hub="prosent" role="tab" aria-selected="true">
+          <h4>Prosentkalkulator</h4>
+        </button>
+        <button type="button" class="hub-button" data-hub="lonn-skatt" role="tab" aria-selected="false">
+          <h4>Lønn og skatt</h4>
+        </button>
+        <button type="button" class="hub-button" data-hub="sparing-renter" role="tab" aria-selected="false">
+          <h4>Sparing og renter</h4>
+        </button>
+        <button type="button" class="hub-button" data-hub="oppgaver" role="tab" aria-selected="false">
+          <h4>Oppgaver</h4>
+        </button>
+      </div>
+      <div class="hub-missing" id="hubMissingList" aria-live="polite"></div>
     </div>
 
     <nav class="top-nav" aria-label="Kalkulatornavigasjon">
@@ -1576,6 +1632,8 @@
       <a href="#calc-break-even" data-search="dekningspunkt nullpunkt">Break-even</a>
       <a href="#calc-salary-breakdown" data-search="lonn maaned time">Lønn per mnd/time</a>
       <a href="#calc-salary-increase" data-search="lonnsjustering">Lønnsøkning</a>
+      <a href="#calc-approach" data-search="hoderegning matte">Hoderegning</a>
+      <a href="#calc-quiz" data-search="prosent quiz oppgaver">Prosent-quiz</a>
     </nav>
 
     <div class="container main-calculators">
@@ -2824,7 +2882,7 @@
       </div>
 
       <div class="item">
-        <div class="calculator quiz">
+        <div class="calculator quiz" id="calc-quiz">
           <h2>Prosent-quiz</h2>
           <p class="quiz-intro">
             Svar på ett spørsmål om gangen. Når du velger et svar, vises neste spørsmål automatisk.
@@ -3301,6 +3359,108 @@
           .trim();
       }
 
+      const HUB_CALCULATOR_CONFIG = {
+        prosent: {
+          visibleIds: [
+            "calc-increase",
+            "calc-decrease",
+            "calc-reverse-percent",
+            "calc-total",
+            "calc-part",
+            "calc-discount",
+            "calc-tax",
+            "calc-point",
+            "calc-percent-fraction",
+          ],
+          missing: ["Brøk til prosent"],
+        },
+        "lonn-skatt": {
+          visibleIds: ["calc-holiday", "calc-salary-breakdown", "calc-salary-increase"],
+          missing: [
+            "Brutto til netto",
+            "Skattekalkulator",
+            "Overtidskalkulator",
+            "Arbeidsgiverkostnad",
+          ],
+        },
+        "sparing-renter": {
+          visibleIds: ["calc-compound-interest", "calc-loan"],
+          missing: [
+            "Avkastning kalkulator",
+            "CAGR kalkulator",
+            "Effektiv rente kalkulator",
+            "Inflasjonskalkulator",
+            "Prisjustering KPI",
+          ],
+        },
+        oppgaver: {
+          visibleIds: ["calc-approach", "calc-quiz"],
+          missing: [],
+        },
+      };
+
+      let activeHubKey = "prosent";
+
+      function initHubMenuFilter() {
+        const buttons = Array.from(document.querySelectorAll(".hub-button[data-hub]"));
+        const navLinks = Array.from(document.querySelectorAll('.top-nav a[href^="#"]'));
+        const missingList = document.getElementById("hubMissingList");
+        if (buttons.length === 0 || navLinks.length === 0 || !missingList) {
+          return;
+        }
+
+        const resolveBlock = (element) => element.closest(".item") || element;
+        const allTargets = Array.from(
+          document.querySelectorAll(".calculator[id], #calc-intro")
+        );
+        const allBlocks = Array.from(new Set(allTargets.map(resolveBlock)));
+
+        const applyHubFilter = (hubKey) => {
+          const config = HUB_CALCULATOR_CONFIG[hubKey] || HUB_CALCULATOR_CONFIG.prosent;
+          const visibleIds = new Set(config.visibleIds);
+          const visibleBlocks = new Set();
+
+          allTargets.forEach((target) => {
+            if (visibleIds.has(target.id)) {
+              visibleBlocks.add(resolveBlock(target));
+            }
+          });
+
+          allBlocks.forEach((block) => {
+            block.classList.toggle("hub-hidden", !visibleBlocks.has(block));
+          });
+
+          navLinks.forEach((link) => {
+            const href = link.getAttribute("href") || "";
+            const id = href.replace("#", "");
+            link.classList.toggle("hub-link-hidden", !visibleIds.has(id));
+          });
+
+          buttons.forEach((button) => {
+            const isActive = button.dataset.hub === hubKey;
+            button.classList.toggle("active", isActive);
+            button.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          if (config.missing.length > 0) {
+            missingList.textContent = `Kommer snart i denne kategorien: ${config.missing.join(", ")}`;
+          } else {
+            missingList.textContent = "";
+          }
+
+          activeHubKey = hubKey;
+          document.dispatchEvent(new CustomEvent("hubFilterChanged"));
+        };
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            applyHubFilter(button.dataset.hub || "prosent");
+          });
+        });
+
+        applyHubFilter(activeHubKey);
+      }
+
       function initCalculatorSearch() {
         const nav = document.querySelector(".top-nav");
         const searchInput = document.getElementById("calculatorSearch");
@@ -3336,7 +3496,9 @@
 
         const jumpToFirstMatch = () => {
           const firstVisible = links.find(
-            (link) => !link.classList.contains("nav-link-hidden")
+            (link) =>
+              !link.classList.contains("nav-link-hidden") &&
+              !link.classList.contains("hub-link-hidden")
           );
           if (!firstVisible) {
             return;
@@ -3375,6 +3537,8 @@
           updateSearch();
           searchInput.focus();
         });
+
+        document.addEventListener("hubFilterChanged", updateSearch);
 
         updateSearch();
       }
@@ -3880,6 +4044,7 @@
       });
 
       document.addEventListener("DOMContentLoaded", initFormattedNumberInputs);
+      document.addEventListener("DOMContentLoaded", initHubMenuFilter);
       document.addEventListener("DOMContentLoaded", initCalculatorSearch);
 
       let calculationType = "markup"; // Default calculation type
