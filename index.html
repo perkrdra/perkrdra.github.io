@@ -210,11 +210,16 @@
               }
 
               .nav-search {
-                grid-column: 1 / -1;
                 display: grid;
                 grid-template-columns: 1fr auto;
                 gap: 8px;
                 align-items: center;
+              }
+
+              .search-replace {
+                width: 90%;
+                max-width: 600px;
+                margin: 0 auto 20px;
               }
 
               #calculatorSearch {
@@ -1537,15 +1542,7 @@
 
     <hr size="4px" width="200px" color="#000" />
 
-    <div class="subheader">
-      <p>
-        Enkel og nøyaktig prosentregning for alle formål. Regn ut legg til
-        prosent, trekk fra prosent, rabatt, økning og reduksjon med en
-        prosentkalkulator.
-      </p>
-    </div>
-
-    <nav class="top-nav" aria-label="Kalkulatornavigasjon">
+    <div class="search-replace">
       <div class="nav-search" role="search" aria-label="Søk i kalkulatorer">
         <label for="calculatorSearch" class="sr-only">Søk etter kalkulator</label>
         <input
@@ -1557,6 +1554,9 @@
           <h4>Tøm</h4>
         </button>
       </div>
+    </div>
+
+    <nav class="top-nav" aria-label="Kalkulatornavigasjon">
       <a href="#calc-add-percent" data-search="plus legge til">Legg til %</a>
       <a href="#calc-subtract-percent" data-search="minus trekk fra">Trekk fra %</a>
       <a href="#calc-increase" data-search="hvor mange prosent prosentendring fra til vekst opp">Prosentendring (opp)</a>
