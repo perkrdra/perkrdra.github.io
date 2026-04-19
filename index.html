@@ -197,6 +197,70 @@
                 transform: translateY(-1px);
               }
 
+              .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+              }
+
+              .nav-search {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                gap: 8px;
+                align-items: center;
+              }
+
+              #calculatorSearch {
+                width: 100%;
+                height: 38px;
+                border: none;
+                border-radius: 10px;
+                padding: 10px 12px;
+                background: #ffe88b;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2),
+                  inset 0 1px 2px rgba(0, 0, 0, 0.18);
+              }
+
+              #calculatorSearch:focus-visible {
+                outline: 2px solid rgba(0, 0, 0, 0.4);
+                outline-offset: 2px;
+              }
+
+              .nav-search-clear {
+                margin: 0;
+                min-width: 74px;
+                height: 38px;
+                padding: 10px 12px;
+                font-size: 14px;
+              }
+
+              .nav-search-clear[hidden] {
+                display: none;
+              }
+
+              .nav-search-status {
+                grid-column: 1 / -1;
+                min-height: 18px;
+                padding: 0 4px;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                line-height: 1.3;
+                opacity: 0.85;
+              }
+
+              .top-nav .nav-link-hidden {
+                display: none;
+              }
+
               .to-top {
                 position: fixed;
                 left: 50%;
@@ -1363,6 +1427,14 @@
                   padding: 9px 10px;
                 }
 
+                .nav-search {
+                  grid-template-columns: 1fr;
+                }
+
+                .nav-search-clear {
+                  width: 100%;
+                }
+
                 .to-top {
                   position: fixed;
                   left: 50%;
@@ -1483,26 +1555,39 @@
       </p>
     </div>
 
-    <nav class="top-nav">
-      <a href="#calc-add-percent">Legg til %</a>
-      <a href="#calc-subtract-percent">Trekk fra %</a>
-      <a href="#calc-increase">% økning</a>
-      <a href="#calc-decrease">% nedgang</a>
-      <a href="#calc-recovery">Gjenoppretting</a>
-      <a href="#calc-reverse-percent">Omvendt %</a>
-      <a href="#calc-total">Andel av total</a>
-      <a href="#calc-discount">Rabatt</a>
-      <a href="#calc-part">Del av tallet</a>
-      <a href="#calc-point">Prosentpoeng</a>
-      <a href="#calc-distribution">Fordeling</a>
-      <a href="#calc-markup">Påslag/Margin</a>
-      <a href="#calc-tax">MVA</a>
-      <a href="#calc-holiday">Feriepenger</a>
-      <a href="#calc-loan">Lån</a>
-      <a href="#calc-compound-interest">Renters rente</a>
-      <a href="#calc-break-even">Break-even</a>
-      <a href="#calc-salary-breakdown">Lønn per mnd/time</a>
-      <a href="#calc-salary-increase">Lønnsøkning</a>
+    <nav class="top-nav" aria-label="Kalkulatornavigasjon">
+      <div class="nav-search" role="search" aria-label="Søk i kalkulatorer">
+        <label for="calculatorSearch" class="sr-only">Søk etter kalkulator</label>
+        <input
+          type="search"
+          id="calculatorSearch"
+          placeholder="Søk kalkulator..."
+          autocomplete="off"
+        />
+        <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
+          <h4>Tøm</h4>
+        </button>
+      </div>
+      <p class="nav-search-status" id="calculatorSearchStatus" aria-live="polite"></p>
+      <a href="#calc-add-percent" data-search="plus legge til">Legg til %</a>
+      <a href="#calc-subtract-percent" data-search="minus trekk fra">Trekk fra %</a>
+      <a href="#calc-increase" data-search="vekst opp">% økning</a>
+      <a href="#calc-decrease" data-search="reduksjon ned">% nedgang</a>
+      <a href="#calc-recovery" data-search="hente inn tap">Gjenoppretting</a>
+      <a href="#calc-reverse-percent" data-search="baklengs opprinnelig pris">Omvendt %</a>
+      <a href="#calc-total" data-search="andel total prosent">Andel av total</a>
+      <a href="#calc-discount" data-search="prisavslag">Rabatt</a>
+      <a href="#calc-part" data-search="prosent av tall">Del av tallet</a>
+      <a href="#calc-point" data-search="prosentpoeng forskjell">Prosentpoeng</a>
+      <a href="#calc-distribution" data-search="fordel prosent">Fordeling</a>
+      <a href="#calc-markup" data-search="margin avanse">Påslag/Margin</a>
+      <a href="#calc-tax" data-search="moms merverdiavgift">MVA</a>
+      <a href="#calc-holiday" data-search="feriepenger lønn">Feriepenger</a>
+      <a href="#calc-loan" data-search="annuitet finansiering">Lån</a>
+      <a href="#calc-compound-interest" data-search="rentes rente sparing">Renters rente</a>
+      <a href="#calc-break-even" data-search="dekningspunkt nullpunkt">Break-even</a>
+      <a href="#calc-salary-breakdown" data-search="lonn maaned time">Lønn per mnd/time</a>
+      <a href="#calc-salary-increase" data-search="lonnsjustering">Lønnsøkning</a>
     </nav>
 
     <div class="container main-calculators">
@@ -3223,6 +3308,104 @@
         });
       }
 
+      function normalizeSearchText(value) {
+        return String(value || "")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function initCalculatorSearch() {
+        const nav = document.querySelector(".top-nav");
+        const searchInput = document.getElementById("calculatorSearch");
+        const clearButton = document.getElementById("calculatorSearchClear");
+        const status = document.getElementById("calculatorSearchStatus");
+
+        if (!nav || !searchInput || !clearButton || !status) {
+          return;
+        }
+
+        const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+        if (links.length === 0) {
+          return;
+        }
+
+        const updateSearch = () => {
+          const rawQuery = searchInput.value.trim();
+          const query = normalizeSearchText(rawQuery);
+          let visibleCount = 0;
+
+          links.forEach((link) => {
+            const searchableText = normalizeSearchText(
+              `${link.textContent || ""} ${link.dataset.search || ""}`
+            );
+            const isMatch = !query || searchableText.includes(query);
+            link.classList.toggle("nav-link-hidden", !isMatch);
+            if (isMatch) {
+              visibleCount += 1;
+            }
+          });
+
+          clearButton.hidden = query.length === 0;
+
+          if (!query) {
+            status.textContent = `Viser alle ${links.length} kalkulatorer.`;
+          } else if (visibleCount === 0) {
+            status.textContent = `Ingen treff for "${rawQuery}".`;
+          } else if (visibleCount === 1) {
+            status.textContent = "1 treff. Trykk Enter for å hoppe til kalkulatoren.";
+          } else {
+            status.textContent = `${visibleCount} treff.`;
+          }
+        };
+
+        const jumpToFirstMatch = () => {
+          const firstVisible = links.find(
+            (link) => !link.classList.contains("nav-link-hidden")
+          );
+          if (!firstVisible) {
+            return;
+          }
+
+          const targetSelector = firstVisible.getAttribute("href");
+          if (!targetSelector) {
+            return;
+          }
+
+          const target = document.querySelector(targetSelector);
+          if (!target) {
+            return;
+          }
+
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          firstVisible.focus();
+          history.replaceState(null, "", targetSelector);
+        };
+
+        searchInput.addEventListener("input", updateSearch);
+        searchInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            jumpToFirstMatch();
+          }
+
+          if (event.key === "Escape") {
+            searchInput.value = "";
+            updateSearch();
+          }
+        });
+
+        clearButton.addEventListener("click", () => {
+          searchInput.value = "";
+          updateSearch();
+          searchInput.focus();
+        });
+
+        updateSearch();
+      }
+
       function formatNumberForDisplay(rawText) {
         const text = String(rawText || "").trim();
         if (!text) return null;
@@ -3724,6 +3907,7 @@
       });
 
       document.addEventListener("DOMContentLoaded", initFormattedNumberInputs);
+      document.addEventListener("DOMContentLoaded", initCalculatorSearch);
 
       let calculationType = "markup"; // Default calculation type
 
