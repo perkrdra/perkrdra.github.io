@@ -6212,7 +6212,8 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
           const nav = document.querySelector('.top-nav');
           if (!nav) return;
           let lastScrollY = window.scrollY;
-          const collapseOffset = 40;
+          const stickyStart = nav.offsetTop;
+          const collapseOffset = stickyStart + nav.offsetHeight;
           let upwardDistance = 0;
           const mobileRevealThreshold = 90;
           const desktopRevealThreshold = 30;
@@ -6226,12 +6227,20 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
               ? mobileRevealThreshold
               : desktopRevealThreshold;
 
+            // Keep menu visible until the user has actually scrolled past the nav region.
+            if (current <= stickyStart) {
+              nav.classList.remove('collapsed');
+              upwardDistance = 0;
+              lastScrollY = current;
+              return;
+            }
+
             if (scrollingDown && farEnough) {
               upwardDistance = 0;
               nav.classList.add('collapsed');
             } else if (delta < 0) {
               upwardDistance += Math.abs(delta);
-              if (current <= collapseOffset || upwardDistance >= revealThreshold) {
+              if (current <= stickyStart || upwardDistance >= revealThreshold) {
                 nav.classList.remove('collapsed');
                 upwardDistance = 0;
               }
