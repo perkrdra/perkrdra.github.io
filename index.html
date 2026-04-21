@@ -1628,6 +1628,10 @@
       <a href="#calc-markup" data-search="margin avanse">Påslag/Margin</a>
       <a href="#calc-tax" data-search="moms merverdiavgift">MVA</a>
       <a href="#calc-holiday" data-search="feriepenger lønn">Feriepenger</a>
+      <a href="#calc-gross-net" data-search="brutto netto skatt lonn">Brutto til netto</a>
+      <a href="#calc-tax-estimate" data-search="skattekalkulator skatt beregning">Skattekalkulator</a>
+      <a href="#calc-overtime" data-search="overtid overtidskalkulator timelonn">Overtidskalkulator</a>
+      <a href="#calc-employer-cost" data-search="arbeidsgiverkostnad aga otp">Arbeidsgiverkostnad</a>
       <a href="#calc-loan" data-search="annuitet finansiering">Lån</a>
       <a href="#calc-compound-interest" data-search="rentes rente sparing">Renters rente</a>
       <a href="#calc-return" data-search="avkastning investeringsavkastning gevinst tap">Avkastning</a>
@@ -2952,6 +2956,106 @@
           </div>
         </div>
 
+        <div class="item">
+          <div class="calculator" id="calc-gross-net">
+            <h2>Brutto til netto</h2>
+            <div class="input-group">
+              <input type="number" id="grossToNetGross" placeholder="Bruttolønn" />
+              <input type="number" id="grossToNetRate" placeholder="Skatt (%)" step="0.1" />
+              <button onclick="calculateGrossToNet()"><h4>Regn ut</h4></button>
+            </div>
+            <h3>Skatt: <span id="grossToNetTax">0</span> kr</h3>
+            <h3>Nettolønn: <span id="grossToNetNet">0</span> kr</h3>
+            <h3>Utregning: <span id="grossToNetCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">Eksempel: 55 000 kr med 30% skatt.</p>
+                <button type="button" class="example-apply" onclick="applyExample('grossToNet')">
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-tax-estimate">
+            <h2>Skattekalkulator (forenklet)</h2>
+            <div class="input-group">
+              <input type="number" id="taxEstimateIncome" placeholder="Årsinntekt" />
+              <input type="number" id="taxEstimateDeduction" placeholder="Fradrag" />
+              <input type="number" id="taxEstimateRate" placeholder="Skattesats (%)" step="0.1" />
+              <button onclick="calculateTaxEstimate()"><h4>Regn ut</h4></button>
+            </div>
+            <h3>Skattegrunnlag: <span id="taxEstimateBase">0</span> kr</h3>
+            <h3>Estimert skatt per år: <span id="taxEstimateTax">0</span> kr</h3>
+            <h3>Estimert netto per måned: <span id="taxEstimateMonthlyNet">0</span> kr</h3>
+            <h3>Utregning: <span id="taxEstimateCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">Eksempel: Årsinntekt 720 000 kr, fradrag 100 000 kr, skatt 32%.</p>
+                <button type="button" class="example-apply" onclick="applyExample('taxEstimate')">
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-overtime">
+            <h2>Overtidskalkulator</h2>
+            <div class="input-group">
+              <input type="number" id="overtimeMonthlySalary" placeholder="Månedslønn" />
+              <input type="number" id="overtimeWeeklyHours" placeholder="Timer per uke" step="0.1" />
+              <input type="number" id="overtimeHours" placeholder="Overtidstimer" step="0.1" />
+              <input type="number" id="overtimeRate" placeholder="Overtidstillegg (%)" step="0.1" />
+              <button onclick="calculateOvertime()"><h4>Regn ut</h4></button>
+            </div>
+            <h3>Timelønn: <span id="overtimeHourly">0</span> kr</h3>
+            <h3>Overtidssats: <span id="overtimeHourlyWithRate">0</span> kr</h3>
+            <h3>Overtidsbetaling: <span id="overtimeTotal">0</span> kr</h3>
+            <h3>Utregning: <span id="overtimeCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">Eksempel: Månedslønn 50 000 kr, 37,5 t/uke, 12 overtime timer, tillegg 50%.</p>
+                <button type="button" class="example-apply" onclick="applyExample('overtime')">
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-employer-cost">
+            <h2>Arbeidsgiverkostnad</h2>
+            <div class="input-group">
+              <input type="number" id="employerSalary" placeholder="Årslønn" />
+              <input type="number" id="employerAgaRate" placeholder="AGA (%)" step="0.1" />
+              <input type="number" id="employerOtpRate" placeholder="OTP (%)" step="0.1" />
+              <input type="number" id="employerOtherCost" placeholder="Andre kostnader (år)" />
+              <button onclick="calculateEmployerCost()"><h4>Regn ut</h4></button>
+            </div>
+            <h3>Arbeidsgiveravgift: <span id="employerAgaAmount">0</span> kr</h3>
+            <h3>OTP: <span id="employerOtpAmount">0</span> kr</h3>
+            <h3>Total årlig kostnad: <span id="employerTotalCost">0</span> kr</h3>
+            <h3>Utregning: <span id="employerCostCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">Eksempel: Årslønn 650 000 kr, AGA 14,1%, OTP 2%, andre kostnader 15 000 kr.</p>
+                <button type="button" class="example-apply" onclick="applyExample('employerCost')">
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
         <section class="loan-side-text" id="calc-intro">
           <h2>Prosent og prosentregning: En enkel innføring</h2>
           <p>
@@ -3558,13 +3662,16 @@
           missing: [],
         },
         "lonn-skatt": {
-          visibleIds: ["calc-holiday", "calc-salary-breakdown", "calc-salary-increase"],
-          missing: [
-            "Brutto til netto",
-            "Skattekalkulator",
-            "Overtidskalkulator",
-            "Arbeidsgiverkostnad",
+          visibleIds: [
+            "calc-holiday",
+            "calc-salary-breakdown",
+            "calc-salary-increase",
+            "calc-gross-net",
+            "calc-tax-estimate",
+            "calc-overtime",
+            "calc-employer-cost",
           ],
+          missing: [],
         },
         "sparing-renter": {
           visibleIds: [
@@ -4918,6 +5025,132 @@ function calculateSalaryBreakdown() {
   ]);
 }
 
+function calculateGrossToNet() {
+  const gross = parseFloat(document.getElementById('grossToNetGross').value);
+  const taxRate = parseFloat(document.getElementById('grossToNetRate').value);
+
+  if (isNaN(gross) || isNaN(taxRate) || gross < 0 || taxRate < 0) {
+    alert('Vennligst fyll inn gyldige verdier.');
+    return;
+  }
+
+  const tax = gross * (taxRate / 100);
+  const net = gross - tax;
+
+  document.getElementById('grossToNetTax').textContent = tax.toFixed(2);
+  document.getElementById('grossToNetNet').textContent = net.toFixed(2);
+  document.getElementById('grossToNetCalculation').textContent =
+    `${gross.toFixed(2)} - (${gross.toFixed(2)} × ${taxRate.toFixed(2)}%) = ${net.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('grossToNetTax'),
+    document.getElementById('grossToNetNet'),
+  ]);
+}
+
+function calculateTaxEstimate() {
+  const income = parseFloat(document.getElementById('taxEstimateIncome').value);
+  const deduction = parseFloat(document.getElementById('taxEstimateDeduction').value);
+  const rate = parseFloat(document.getElementById('taxEstimateRate').value);
+
+  if (isNaN(income) || isNaN(deduction) || isNaN(rate) || income < 0 || deduction < 0 || rate < 0) {
+    alert('Vennligst fyll inn gyldige verdier.');
+    return;
+  }
+
+  const taxableBase = Math.max(0, income - deduction);
+  const annualTax = taxableBase * (rate / 100);
+  const monthlyNet = (income - annualTax) / 12;
+
+  document.getElementById('taxEstimateBase').textContent = taxableBase.toFixed(2);
+  document.getElementById('taxEstimateTax').textContent = annualTax.toFixed(2);
+  document.getElementById('taxEstimateMonthlyNet').textContent = monthlyNet.toFixed(2);
+  document.getElementById('taxEstimateCalculation').textContent =
+    `max(0, ${income.toFixed(2)} - ${deduction.toFixed(2)}) × ${rate.toFixed(2)}% = ${annualTax.toFixed(2)} i skatt per år`;
+
+  triggerResultFeedback([
+    document.getElementById('taxEstimateBase'),
+    document.getElementById('taxEstimateTax'),
+    document.getElementById('taxEstimateMonthlyNet'),
+  ]);
+}
+
+function calculateOvertime() {
+  const monthlySalary = parseFloat(document.getElementById('overtimeMonthlySalary').value);
+  const weeklyHoursInput = document.getElementById('overtimeWeeklyHours').value;
+  const weeklyHours = weeklyHoursInput.trim() === '' ? 37.5 : parseFloat(weeklyHoursInput);
+  const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
+  const overtimeRate = parseFloat(document.getElementById('overtimeRate').value);
+
+  if (
+    isNaN(monthlySalary) ||
+    isNaN(weeklyHours) ||
+    isNaN(overtimeHours) ||
+    isNaN(overtimeRate) ||
+    monthlySalary < 0 ||
+    weeklyHours <= 0 ||
+    overtimeHours < 0 ||
+    overtimeRate < 0
+  ) {
+    alert('Vennligst fyll inn gyldige verdier.');
+    return;
+  }
+
+  const annualSalary = monthlySalary * 12;
+  const hourlyRate = annualSalary / (weeklyHours * 52);
+  const overtimeHourly = hourlyRate * (1 + overtimeRate / 100);
+  const overtimeTotal = overtimeHourly * overtimeHours;
+
+  document.getElementById('overtimeHourly').textContent = hourlyRate.toFixed(2);
+  document.getElementById('overtimeHourlyWithRate').textContent = overtimeHourly.toFixed(2);
+  document.getElementById('overtimeTotal').textContent = overtimeTotal.toFixed(2);
+  document.getElementById('overtimeCalculation').textContent =
+    `${hourlyRate.toFixed(2)} × (1 + ${overtimeRate.toFixed(2)}%) × ${overtimeHours.toFixed(2)} = ${overtimeTotal.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('overtimeHourly'),
+    document.getElementById('overtimeHourlyWithRate'),
+    document.getElementById('overtimeTotal'),
+  ]);
+}
+
+function calculateEmployerCost() {
+  const salary = parseFloat(document.getElementById('employerSalary').value);
+  const agaRate = parseFloat(document.getElementById('employerAgaRate').value);
+  const otpRate = parseFloat(document.getElementById('employerOtpRate').value);
+  const otherCost = parseFloat(document.getElementById('employerOtherCost').value);
+
+  if (
+    isNaN(salary) ||
+    isNaN(agaRate) ||
+    isNaN(otpRate) ||
+    isNaN(otherCost) ||
+    salary < 0 ||
+    agaRate < 0 ||
+    otpRate < 0 ||
+    otherCost < 0
+  ) {
+    alert('Vennligst fyll inn gyldige verdier.');
+    return;
+  }
+
+  const agaAmount = salary * (agaRate / 100);
+  const otpAmount = salary * (otpRate / 100);
+  const totalCost = salary + agaAmount + otpAmount + otherCost;
+
+  document.getElementById('employerAgaAmount').textContent = agaAmount.toFixed(2);
+  document.getElementById('employerOtpAmount').textContent = otpAmount.toFixed(2);
+  document.getElementById('employerTotalCost').textContent = totalCost.toFixed(2);
+  document.getElementById('employerCostCalculation').textContent =
+    `${salary.toFixed(2)} + ${agaAmount.toFixed(2)} + ${otpAmount.toFixed(2)} + ${otherCost.toFixed(2)} = ${totalCost.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('employerAgaAmount'),
+    document.getElementById('employerOtpAmount'),
+    document.getElementById('employerTotalCost'),
+  ]);
+}
+
 // Initialize calculation on page load
 document.addEventListener('DOMContentLoaded', calculateInterest);
 
@@ -5243,6 +5476,35 @@ function applyExample(type) {
       document.getElementById('salaryAnnual').value = 720000;
       document.getElementById('salaryWeeklyHours').value = 37.5;
       calculateSalaryBreakdown();
+      break;
+    }
+    case 'grossToNet': {
+      document.getElementById('grossToNetGross').value = 55000;
+      document.getElementById('grossToNetRate').value = 30;
+      calculateGrossToNet();
+      break;
+    }
+    case 'taxEstimate': {
+      document.getElementById('taxEstimateIncome').value = 720000;
+      document.getElementById('taxEstimateDeduction').value = 100000;
+      document.getElementById('taxEstimateRate').value = 32;
+      calculateTaxEstimate();
+      break;
+    }
+    case 'overtime': {
+      document.getElementById('overtimeMonthlySalary').value = 50000;
+      document.getElementById('overtimeWeeklyHours').value = 37.5;
+      document.getElementById('overtimeHours').value = 12;
+      document.getElementById('overtimeRate').value = 50;
+      calculateOvertime();
+      break;
+    }
+    case 'employerCost': {
+      document.getElementById('employerSalary').value = 650000;
+      document.getElementById('employerAgaRate').value = 14.1;
+      document.getElementById('employerOtpRate').value = 2;
+      document.getElementById('employerOtherCost').value = 15000;
+      calculateEmployerCost();
       break;
     }
     case 'percentOfPercent': {
