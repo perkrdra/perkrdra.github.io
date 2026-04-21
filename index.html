@@ -1589,6 +1589,7 @@
         <input
           type="search"
           id="calculatorSearch"
+          placeholder="Søk"
           autocomplete="off"
         />
         <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
@@ -1629,6 +1630,11 @@
       <a href="#calc-holiday" data-search="feriepenger lønn">Feriepenger</a>
       <a href="#calc-loan" data-search="annuitet finansiering">Lån</a>
       <a href="#calc-compound-interest" data-search="rentes rente sparing">Renters rente</a>
+      <a href="#calc-return" data-search="avkastning investeringsavkastning gevinst tap">Avkastning</a>
+      <a href="#calc-cagr" data-search="cagr annualisert avkastning vekstrate">CAGR</a>
+      <a href="#calc-effective-rate" data-search="effektiv rente nominell rente">Effektiv rente</a>
+      <a href="#calc-inflation" data-search="inflasjon prisstigning kjøpekraft">Inflasjon</a>
+      <a href="#calc-kpi-adjustment" data-search="kpi prisjustering konsumprisindeks">Prisjustering KPI</a>
       <a href="#calc-break-even" data-search="dekningspunkt nullpunkt">Break-even</a>
       <a href="#calc-salary-breakdown" data-search="lonn maaned time">Lønn per mnd/time</a>
       <a href="#calc-salary-increase" data-search="lonnsjustering">Lønnsøkning</a>
@@ -2736,6 +2742,177 @@
         </div>
 
         <div class="item">
+          <div class="calculator" id="calc-return">
+            <h2>Avkastning kalkulator</h2>
+            <div class="input-group">
+              <input type="number" id="returnStart" placeholder="Startverdi" />
+              <input type="number" id="returnEnd" placeholder="Sluttverdi" />
+              <button onclick="calculateReturn()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Avkastning i kroner: <span id="returnKrResult">0</span> kr</h3>
+            <h3>Avkastning i prosent: <span id="returnPercentResult">0</span>%</h3>
+            <h3>Utregning: <span id="returnCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Startverdi 100 000 kr og sluttverdi 124 000 kr.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('return')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-cagr">
+            <h2>CAGR kalkulator (årlig vekstrate)</h2>
+            <div class="input-group">
+              <input type="number" id="cagrStart" placeholder="Startverdi" />
+              <input type="number" id="cagrEnd" placeholder="Sluttverdi" />
+              <input type="number" id="cagrYears" placeholder="Antall år" step="0.1" />
+              <button onclick="calculateCagr()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>CAGR: <span id="cagrResult">0</span>%</h3>
+            <h3>Utregning: <span id="cagrCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Fra 100 000 kr til 180 000 kr over 8 år.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('cagr')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-effective-rate">
+            <h2>Effektiv rente kalkulator</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="effectiveNominalRate"
+                placeholder="Nominell rente (%)"
+                step="0.01"
+              />
+              <input
+                type="number"
+                id="effectivePeriods"
+                placeholder="Antall perioder per år"
+                step="1"
+              />
+              <button onclick="calculateEffectiveRateCalculator()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Effektiv rente: <span id="effectiveRateResultCalc">0</span>%</h3>
+            <h3>Utregning: <span id="effectiveRateCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Nominell rente 6,00% med 12 perioder per år.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('effectiveRate')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-inflation">
+            <h2>Inflasjonskalkulator</h2>
+            <div class="input-group">
+              <input type="number" id="inflationAmount" placeholder="Beløp i dag" />
+              <input
+                type="number"
+                id="inflationRate"
+                placeholder="Årlig inflasjon (%)"
+                step="0.01"
+              />
+              <input type="number" id="inflationYears" placeholder="Antall år" step="0.1" />
+              <button onclick="calculateInflation()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Prisjustert beløp: <span id="inflationFutureValue">0</span> kr</h3>
+            <h3>Kjøpekraft i dag: <span id="inflationPresentValue">0</span> kr</h3>
+            <h3>Utregning: <span id="inflationCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 10 000 kr, inflasjon 2,5% og 5 år.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('inflation')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-kpi-adjustment">
+            <h2>Prisjustering KPI</h2>
+            <div class="input-group">
+              <input type="number" id="kpiPrice" placeholder="Opprinnelig pris" />
+              <input type="number" id="kpiOld" placeholder="KPI gammel" step="0.1" />
+              <input type="number" id="kpiNew" placeholder="KPI ny" step="0.1" />
+              <button onclick="calculateKpiAdjustment()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Justert pris: <span id="kpiAdjustedPrice">0</span> kr</h3>
+            <h3>Endring i prosent: <span id="kpiPercentChange">0</span>%</h3>
+            <h3>Utregning: <span id="kpiCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: 5 000 kr justeres fra KPI 120,0 til 135,5.
+                </p>
+                <button
+                  type="button"
+                  class="example-apply"
+                  onclick="applyExample('kpiAdjustment')"
+                >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
           <div class="calculator" id="calc-salary-breakdown">
             <h2>Årslønn til månedslønn og timeslønn</h2>
             <div class="input-group">
@@ -3362,17 +3539,23 @@
       const HUB_CALCULATOR_CONFIG = {
         prosent: {
           visibleIds: [
+            "calc-add-percent",
+            "calc-subtract-percent",
             "calc-increase",
             "calc-decrease",
+            "calc-recovery",
             "calc-reverse-percent",
             "calc-total",
             "calc-part",
             "calc-discount",
             "calc-tax",
             "calc-point",
+            "calc-distribution",
             "calc-percent-fraction",
+            "calc-markup",
+            "calc-break-even",
           ],
-          missing: ["Brøk til prosent"],
+          missing: [],
         },
         "lonn-skatt": {
           visibleIds: ["calc-holiday", "calc-salary-breakdown", "calc-salary-increase"],
@@ -3384,17 +3567,19 @@
           ],
         },
         "sparing-renter": {
-          visibleIds: ["calc-compound-interest", "calc-loan"],
-          missing: [
-            "Avkastning kalkulator",
-            "CAGR kalkulator",
-            "Effektiv rente kalkulator",
-            "Inflasjonskalkulator",
-            "Prisjustering KPI",
+          visibleIds: [
+            "calc-compound-interest",
+            "calc-loan",
+            "calc-return",
+            "calc-cagr",
+            "calc-effective-rate",
+            "calc-inflation",
+            "calc-kpi-adjustment",
           ],
+          missing: [],
         },
         oppgaver: {
-          visibleIds: ["calc-approach", "calc-quiz"],
+          visibleIds: ["calc-approach", "calc-faq", "calc-quiz"],
           missing: [],
         },
       };
@@ -4497,6 +4682,138 @@ function calculateCompoundInterest() {
   ]);
 }
 
+function calculateReturn() {
+  const start = parseFloat(document.getElementById('returnStart').value);
+  const end = parseFloat(document.getElementById('returnEnd').value);
+
+  if (isNaN(start) || isNaN(end) || start <= 0) {
+    alert('Vennligst fyll inn gyldige verdier. Startverdi må være større enn 0.');
+    return;
+  }
+
+  const changeKr = end - start;
+  const changePercent = (changeKr / start) * 100;
+
+  document.getElementById('returnKrResult').textContent = changeKr.toFixed(2);
+  document.getElementById('returnPercentResult').textContent =
+    changePercent.toFixed(2);
+  document.getElementById('returnCalculation').textContent =
+    `(${end.toFixed(2)} - ${start.toFixed(2)}) / ${start.toFixed(2)} × 100 = ${changePercent.toFixed(2)}%`;
+
+  triggerResultFeedback([
+    document.getElementById('returnKrResult'),
+    document.getElementById('returnPercentResult'),
+  ]);
+}
+
+function calculateCagr() {
+  const start = parseFloat(document.getElementById('cagrStart').value);
+  const end = parseFloat(document.getElementById('cagrEnd').value);
+  const years = parseFloat(document.getElementById('cagrYears').value);
+
+  if (
+    isNaN(start) ||
+    isNaN(end) ||
+    isNaN(years) ||
+    start <= 0 ||
+    end <= 0 ||
+    years <= 0
+  ) {
+    alert('Vennligst fyll inn gyldige verdier. Start, slutt og år må være større enn 0.');
+    return;
+  }
+
+  const cagr = (Math.pow(end / start, 1 / years) - 1) * 100;
+
+  document.getElementById('cagrResult').textContent = cagr.toFixed(2);
+  document.getElementById('cagrCalculation').textContent =
+    `((${end.toFixed(2)} / ${start.toFixed(2)})^(1/${years.toFixed(2)}) - 1) × 100 = ${cagr.toFixed(2)}%`;
+
+  triggerResultFeedback(document.getElementById('cagrResult'));
+}
+
+function calculateEffectiveRateCalculator() {
+  const nominalRate = parseFloat(
+    document.getElementById('effectiveNominalRate').value
+  );
+  const periods = parseFloat(document.getElementById('effectivePeriods').value);
+
+  if (isNaN(nominalRate) || isNaN(periods) || periods <= 0) {
+    alert('Vennligst fyll inn gyldige verdier. Antall perioder må være større enn 0.');
+    return;
+  }
+
+  const effectiveRate =
+    (Math.pow(1 + nominalRate / 100 / periods, periods) - 1) * 100;
+
+  document.getElementById('effectiveRateResultCalc').textContent =
+    effectiveRate.toFixed(2);
+  document.getElementById('effectiveRateCalculation').textContent =
+    `(1 + (${nominalRate.toFixed(2)} / 100) / ${periods})^${periods} - 1 = ${(effectiveRate / 100).toFixed(6)} (${effectiveRate.toFixed(2)}%)`;
+
+  triggerResultFeedback(document.getElementById('effectiveRateResultCalc'));
+}
+
+function calculateInflation() {
+  const amount = parseFloat(document.getElementById('inflationAmount').value);
+  const rate = parseFloat(document.getElementById('inflationRate').value);
+  const years = parseFloat(document.getElementById('inflationYears').value);
+
+  if (isNaN(amount) || isNaN(rate) || isNaN(years) || years < 0 || amount < 0) {
+    alert('Vennligst fyll inn gyldige verdier. Beløp må være 0 eller mer, og år må være 0 eller mer.');
+    return;
+  }
+
+  const factor = Math.pow(1 + rate / 100, years);
+  const futureValue = amount * factor;
+  const presentValue = factor === 0 ? 0 : amount / factor;
+
+  document.getElementById('inflationFutureValue').textContent =
+    futureValue.toFixed(2);
+  document.getElementById('inflationPresentValue').textContent =
+    presentValue.toFixed(2);
+  document.getElementById('inflationCalculation').textContent =
+    `${amount.toFixed(2)} × (1 + ${rate.toFixed(2)} / 100)^${years.toFixed(2)} = ${futureValue.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('inflationFutureValue'),
+    document.getElementById('inflationPresentValue'),
+  ]);
+}
+
+function calculateKpiAdjustment() {
+  const price = parseFloat(document.getElementById('kpiPrice').value);
+  const oldKpi = parseFloat(document.getElementById('kpiOld').value);
+  const newKpi = parseFloat(document.getElementById('kpiNew').value);
+
+  if (
+    isNaN(price) ||
+    isNaN(oldKpi) ||
+    isNaN(newKpi) ||
+    oldKpi <= 0 ||
+    price < 0 ||
+    newKpi < 0
+  ) {
+    alert('Vennligst fyll inn gyldige verdier. Pris og KPI ny må være 0 eller mer, KPI gammel må være større enn 0.');
+    return;
+  }
+
+  const adjustedPrice = price * (newKpi / oldKpi);
+  const percentChange = ((newKpi - oldKpi) / oldKpi) * 100;
+
+  document.getElementById('kpiAdjustedPrice').textContent =
+    adjustedPrice.toFixed(2);
+  document.getElementById('kpiPercentChange').textContent =
+    percentChange.toFixed(2);
+  document.getElementById('kpiCalculation').textContent =
+    `${price.toFixed(2)} × (${newKpi.toFixed(2)} / ${oldKpi.toFixed(2)}) = ${adjustedPrice.toFixed(2)}`;
+
+  triggerResultFeedback([
+    document.getElementById('kpiAdjustedPrice'),
+    document.getElementById('kpiPercentChange'),
+  ]);
+}
+
 function calculateBreakEven() {
   const fixedCosts = parseFloat(
     document.getElementById('breakEvenFixedCosts').value
@@ -4874,6 +5191,39 @@ function applyExample(type) {
       document.getElementById('compoundYears').value = 10;
       document.getElementById('compoundFrequency').value = 12;
       calculateCompoundInterest();
+      break;
+    }
+    case 'return': {
+      document.getElementById('returnStart').value = 100000;
+      document.getElementById('returnEnd').value = 124000;
+      calculateReturn();
+      break;
+    }
+    case 'cagr': {
+      document.getElementById('cagrStart').value = 100000;
+      document.getElementById('cagrEnd').value = 180000;
+      document.getElementById('cagrYears').value = 8;
+      calculateCagr();
+      break;
+    }
+    case 'effectiveRate': {
+      document.getElementById('effectiveNominalRate').value = 6;
+      document.getElementById('effectivePeriods').value = 12;
+      calculateEffectiveRateCalculator();
+      break;
+    }
+    case 'inflation': {
+      document.getElementById('inflationAmount').value = 10000;
+      document.getElementById('inflationRate').value = 2.5;
+      document.getElementById('inflationYears').value = 5;
+      calculateInflation();
+      break;
+    }
+    case 'kpiAdjustment': {
+      document.getElementById('kpiPrice').value = 5000;
+      document.getElementById('kpiOld').value = 120.0;
+      document.getElementById('kpiNew').value = 135.5;
+      calculateKpiAdjustment();
       break;
     }
     case 'breakEven': {
