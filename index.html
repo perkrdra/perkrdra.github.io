@@ -1587,23 +1587,7 @@
   <canvas id="lamp-anim" class="lamp-anim" width="auto" height="auto"></canvas>
 
   <body id="top">
-    <div class="header">
-      <h1>PROSENTREGNING.NO</h1>
-    </div>
-
     <div class="search-replace">
-      <div class="nav-search" role="search" aria-label="Søk i kalkulatorer">
-        <label for="calculatorSearch" class="sr-only">Søk etter kalkulator</label>
-        <input
-          type="search"
-          id="calculatorSearch"
-          placeholder="Søk"
-          autocomplete="off"
-        />
-        <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
-          <h4>Tøm</h4>
-        </button>
-      </div>
       <div class="hub-menu" role="tablist" aria-label="Kalkulatorkategorier">
         <button type="button" class="hub-button active" data-hub="prosent" role="tab" aria-selected="true">
           <h4>Prosentkalkulator</h4>
@@ -1616,6 +1600,18 @@
         </button>
         <button type="button" class="hub-button" data-hub="oppgaver" role="tab" aria-selected="false">
           <h4>Oppgaver</h4>
+        </button>
+      </div>
+      <div class="nav-search" role="search" aria-label="Søk i kalkulatorer">
+        <label for="calculatorSearch" class="sr-only">Søk etter kalkulator</label>
+        <input
+          type="search"
+          id="calculatorSearch"
+          placeholder="Søk"
+          autocomplete="off"
+        />
+        <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
+          <h4>Tøm</h4>
         </button>
       </div>
       <div class="hub-missing" id="hubMissingList" aria-live="polite"></div>
