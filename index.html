@@ -210,8 +210,7 @@
               }
 
               .nav-search {
-                display: grid;
-                grid-template-columns: 1fr auto;
+                display: flex;
                 gap: 8px;
                 align-items: center;
                 margin: 0;
@@ -256,6 +255,8 @@
               }
 
               #calculatorSearch {
+                flex: 1 1 auto;
+                min-width: 0;
                 width: 100%;
                 height: 38px;
                 border: none;
@@ -274,6 +275,7 @@
               }
 
               .nav-search-clear {
+                flex: 0 0 auto;
                 margin: 0;
                 min-width: 74px;
                 height: 38px;
