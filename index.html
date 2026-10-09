@@ -3995,7 +3995,7 @@
         document.getElementById("addPercentChange").textContent =
           increaseAmount.toFixed(2);
         document.getElementById("addPercentCalculationDetails").textContent =
-          `${formatNumberForDisplay(amount)} × ${formatNumberForDisplay(percent)} / 100 = ${formatNumberForDisplay(increaseAmount)}; ${formatNumberForDisplay(amount)} + ${formatNumberForDisplay(increaseAmount)} = ${formatNumberForDisplay(newAmount)}`;
+          `${formatNumberForDisplay(amount)} × ${formatNumberForDisplay(percent)} / 100 = ${formatNumberForDisplay(increaseAmount)}. Deretter: ${formatNumberForDisplay(amount)} + ${formatNumberForDisplay(increaseAmount)} = ${formatNumberForDisplay(newAmount)}`;
         document.getElementById("addPercentAlternativeCalculationDetails").textContent =
           `${formatNumberForDisplay(amount)} × ${formatNumberForDisplay(1 + percent / 100)} = ${formatNumberForDisplay(newAmount)}`;
 
