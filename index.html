@@ -206,10 +206,16 @@
               }
 
               .nav-search {
-                display: flex;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
                 gap: 8px;
                 align-items: center;
                 margin: 0;
+              }
+
+              .nav-search h1 {
+                grid-column: 1 / -1;
+                margin-bottom: 0;
               }
 
               .search-replace {
@@ -1658,7 +1664,6 @@
     <a href="#top" class="corner-logo" aria-label="Til toppen">P</a>
 
     <div class="search-replace">
-      <h1>Søk prosentkalkulator</h1>
       <div class="hub-menu" role="tablist" aria-label="Kalkulatorkategorier">
         <button type="button" class="hub-button active" data-hub="prosent" role="tab" aria-selected="true">
           <h4>Prosentkalkulator</h4>
@@ -1674,11 +1679,12 @@
         </button>
       </div>
       <div class="nav-search" role="search" aria-label="Søk i kalkulatorer">
+        <h1>Søk prosentkalkulator</h1>
         <label for="calculatorSearch" class="sr-only">Søk etter kalkulator</label>
         <input
           type="search"
           id="calculatorSearch"
-          placeholder="Søk"
+          placeholder="Søk prosentkalkulator"
           autocomplete="off"
         />
         <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
