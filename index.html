@@ -748,6 +748,9 @@
               /* Example toggle styles */
               details.example {
                 margin-top: 12px;
+                width: calc(100% + 80px);
+                margin-right: -40px;
+                margin-left: -40px;
                 background: transparent;
                 border-radius: 4em 8em;
                 padding: 8px 12px 4px;
@@ -796,10 +799,11 @@
                 margin-top: 8px;
                 display: grid;
                 gap: 8px;
-                justify-items: center;
+                justify-items: stretch;
               }
 
               .example-text {
+                width: 100%;
                 font-family: "Roboto", sans-serif;
                 font-size: 14px;
                 line-height: 20px;
@@ -1479,6 +1483,12 @@
                   padding: 40px;
                 }
 
+                details.example {
+                  width: calc(100% + 40px);
+                  margin-right: -20px;
+                  margin-left: -20px;
+                }
+
                 /* Layout adjustments */
                 .item1,
                 .item3 {
@@ -1557,6 +1567,12 @@
                 .calculator {
                   padding: 28px 24px 32px;
                   gap: 6px;
+                }
+
+                details.example {
+                  width: calc(100% + 24px);
+                  margin-right: -12px;
+                  margin-left: -12px;
                 }
 
                 .item {
