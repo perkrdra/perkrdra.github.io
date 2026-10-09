@@ -1745,7 +1745,8 @@
             </div>
             <h3>Nytt beløp: <span id="addPercentResult">0</span> kr</h3>
             <h3>Økning i kroner: <span id="addPercentChange">0</span> kr</h3>
-            <h3>Utregning: <span id="addPercentCalculationDetails"></span></h3>
+            <h3>Enkel utregning: <span id="addPercentCalculationDetails"></span></h3>
+            <h3>Alternativ utregning: <span id="addPercentAlternativeCalculationDetails"></span></h3>
             <details class="example">
               <summary>Se eksempel</summary>
               <div class="example-body">
@@ -1754,6 +1755,9 @@
                 </p>
                 <p class="example-text">
                   <strong>Slik regner du:</strong> 12 % av 500 kr er 60 kr. Legg økningen til den opprinnelige prisen: 500 kr + 60 kr = 560 kr.
+                </p>
+                <p class="example-text">
+                  <strong>Alternativ metode:</strong> Gjør prosenten om til vekstfaktor: 1 + 0,12 = 1,12. Regn deretter 500 kr × 1,12 = 560 kr.
                 </p>
                 <button
                   type="button"
@@ -3991,7 +3995,9 @@
         document.getElementById("addPercentChange").textContent =
           increaseAmount.toFixed(2);
         document.getElementById("addPercentCalculationDetails").textContent =
-          `${amount.toFixed(2)} × (1 + ${percent.toFixed(2)} / 100) = ${newAmount.toFixed(2)}`;
+          `${formatNumberForDisplay(amount)} × ${formatNumberForDisplay(percent)} / 100 = ${formatNumberForDisplay(increaseAmount)}; ${formatNumberForDisplay(amount)} + ${formatNumberForDisplay(increaseAmount)} = ${formatNumberForDisplay(newAmount)}`;
+        document.getElementById("addPercentAlternativeCalculationDetails").textContent =
+          `${formatNumberForDisplay(amount)} × ${formatNumberForDisplay(1 + percent / 100)} = ${formatNumberForDisplay(newAmount)}`;
 
         triggerResultFeedback([
           document.getElementById("addPercentResult"),
