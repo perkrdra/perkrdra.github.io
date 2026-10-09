@@ -5617,7 +5617,504 @@ function addPedagogicalExamples() {
   });
 }
 
+function formatPedagogicalNumber(value) {
+  if (!Number.isFinite(value)) return '';
+
+  return value
+    .toLocaleString('no-NO', {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 0,
+    })
+    .replace(/\u00A0/g, ' ');
+}
+
+function getPedagogicalCalculation(calculatorId) {
+  const value = (id) => {
+    const rawValue = document.getElementById(id)?.value;
+    return rawValue === undefined || rawValue.trim() === ''
+      ? Number.NaN
+      : Number(rawValue);
+  };
+  const number = formatPedagogicalNumber;
+  const calculation = (simple, alternative) => ({ simple, alternative });
+
+  switch (calculatorId) {
+    case 'calc-add-percent': {
+      const amount = value('addPercentAmount');
+      const percent = value('addPercentRate');
+      if (!Number.isFinite(amount) || !Number.isFinite(percent)) return null;
+      const change = amount * percent / 100;
+      const result = amount + change;
+      return calculation(
+        `${number(amount)} × ${number(percent)} / 100 = ${number(change)}. Deretter: ${number(amount)} + ${number(change)} = ${number(result)}.`,
+        `${number(amount)} × ${number(1 + percent / 100)} = ${number(result)}.`
+      );
+    }
+    case 'calc-subtract-percent': {
+      const amount = value('subtractPercentAmount');
+      const percent = value('subtractPercentRate');
+      if (!Number.isFinite(amount) || !Number.isFinite(percent)) return null;
+      const change = amount * percent / 100;
+      const result = amount - change;
+      return calculation(
+        `${number(amount)} × ${number(percent)} / 100 = ${number(change)}. Deretter: ${number(amount)} − ${number(change)} = ${number(result)}.`,
+        `${number(amount)} × ${number(1 - percent / 100)} = ${number(result)}.`
+      );
+    }
+    case 'calc-increase': {
+      const from = value('increaseInitialValue');
+      const to = value('increaseFinalValue');
+      if (!Number.isFinite(from) || !Number.isFinite(to) || from === 0) return null;
+      const change = to - from;
+      const result = change / from * 100;
+      return calculation(
+        `${number(to)} − ${number(from)} = ${number(change)}. Deretter: ${number(change)} / ${number(from)} × 100 = ${number(result)} %.`,
+        `${number(to)} / ${number(from)} = ${number(to / from)}. Faktoren over 1 gir ${number(result)} % økning.`
+      );
+    }
+    case 'calc-decrease': {
+      const from = value('decreaseInitialValue');
+      const to = value('decreaseFinalValue');
+      if (!Number.isFinite(from) || !Number.isFinite(to) || from === 0) return null;
+      const change = from - to;
+      const result = change / from * 100;
+      return calculation(
+        `${number(from)} − ${number(to)} = ${number(change)}. Deretter: ${number(change)} / ${number(from)} × 100 = ${number(result)} %.`,
+        `${number(to)} / ${number(from)} = ${number(to / from)}. Det betyr at ${number(100 - result)} % gjenstår, altså ${number(result)} % nedgang.`
+      );
+    }
+    case 'calc-recovery': {
+      const drop = value('recoveryDropPercent');
+      if (!Number.isFinite(drop) || drop < 0 || drop >= 100) return null;
+      const remaining = 100 - drop;
+      const recovery = drop / remaining * 100;
+      return calculation(
+        `Start med 100. Etter ${number(drop)} % nedgang er verdien ${number(remaining)}. ${number(drop)} / ${number(remaining)} × 100 = ${number(recovery)} %.`,
+        `Gjenopprettingsfaktoren er 100 / ${number(remaining)} = ${number(100 / remaining)}. Det tilsvarer ${number(recovery)} % økning.`
+      );
+    }
+    case 'calc-reverse-percent': {
+      const finalValue = value('reverseFinalValue');
+      const percent = value('reversePercent');
+      if (!Number.isFinite(finalValue) || !Number.isFinite(percent)) return null;
+      const factor = reversePercentMode === 'increaseIncluded'
+        ? 1 + percent / 100
+        : 1 - percent / 100;
+      if (factor <= 0) return null;
+      const original = finalValue / factor;
+      const operation = reversePercentMode === 'increaseIncluded' ? '+' : '−';
+      return calculation(
+        `${number(percent)} % betyr faktoren ${number(factor)}. ${number(finalValue)} / ${number(factor)} = ${number(original)}.`,
+        `${number(finalValue)} / (1 ${operation} ${number(percent)} / 100) = ${number(original)}.`
+      );
+    }
+    case 'calc-total': {
+      const part = value('partValue');
+      const total = value('totalValue');
+      if (!Number.isFinite(part) || !Number.isFinite(total) || total === 0) return null;
+      const result = part / total * 100;
+      return calculation(
+        `Del delen på totalen: ${number(part)} / ${number(total)} = ${number(part / total)}. Gang deretter med 100: ${number(result)} %.`,
+        `${number(part)} / ${number(total)} × 100 = ${number(result)} %.`
+      );
+    }
+    case 'calc-discount': {
+      const price = value('originalPrice');
+      const percent = value('discountPercentage');
+      if (!Number.isFinite(price) || !Number.isFinite(percent)) return null;
+      const discount = price * percent / 100;
+      const result = price - discount;
+      return calculation(
+        `${number(price)} × ${number(percent)} / 100 = ${number(discount)}. Deretter: ${number(price)} − ${number(discount)} = ${number(result)}.`,
+        `Etter ${number(percent)} % rabatt gjenstår ${number(100 - percent)} %. ${number(price)} × ${number(1 - percent / 100)} = ${number(result)}.`
+      );
+    }
+    case 'calc-part': {
+      const whole = value('baseNumber');
+      const percent = value('percentageValue');
+      if (!Number.isFinite(whole) || !Number.isFinite(percent)) return null;
+      const result = whole * percent / 100;
+      return calculation(
+        `${number(percent)} / 100 = ${number(percent / 100)}. Deretter: ${number(whole)} × ${number(percent / 100)} = ${number(result)}.`,
+        `${number(whole)} × ${number(percent)} / 100 = ${number(result)}.`
+      );
+    }
+    case 'calc-point': {
+      const from = value('initialPercentage');
+      const to = value('finalPercentage');
+      if (!Number.isFinite(from) || !Number.isFinite(to)) return null;
+      const points = to - from;
+      const relative = from === 0 ? 0 : points / Math.abs(from) * 100;
+      return calculation(
+        `Prosentpoeng er forskjellen: ${number(to)} % − ${number(from)} % = ${number(points)} prosentpoeng.`,
+        `Relativ endring er noe annet: ${number(points)} / ${number(from)} × 100 = ${number(relative)} %.`
+      );
+    }
+    case 'calc-distribution': {
+      const values = [...document.querySelectorAll('#calc-distribution .value-input')]
+        .map((input) => Number(input.value));
+      if (!values.length || values.some((current) => !Number.isFinite(current))) return null;
+      const total = values.reduce((sum, current) => sum + current, 0);
+      if (total === 0) return null;
+      const shares = values.map((current) => current / total * 100);
+      return calculation(
+        `Legg først sammen verdiene: ${values.map(number).join(' + ')} = ${number(total)}. Del så hver verdi på ${number(total)} og gang med 100.`,
+        `${values.map((current, index) => `${number(current)} / ${number(total)} × 100 = ${number(shares[index])} %`).join('. ')}.`
+      );
+    }
+    case 'calc-percent-of-percent': {
+      const first = value('basePercent');
+      const second = value('percentOfPercent');
+      if (!Number.isFinite(first) || !Number.isFinite(second)) return null;
+      const result = first * second / 100;
+      return calculation(
+        `${number(first)} × ${number(second)} / 100 = ${number(result)} %.`,
+        `${number(first / 100)} × ${number(second / 100)} = ${number(result / 100)}, som er ${number(result)} %.`
+      );
+    }
+    case 'calc-percent-fraction': {
+      const percent = value('percentInput');
+      if (!Number.isFinite(percent)) return null;
+      const decimal = percent / 100;
+      return calculation(
+        `Del på 100: ${number(percent)} / 100 = ${number(decimal)}.`,
+        `Flytt desimaltegnet to plasser til venstre: ${number(percent)} % = ${number(decimal)}.`
+      );
+    }
+    case 'calc-markup': {
+      const cost = value('costPrice');
+      const percent = value('percentageInput');
+      if (!Number.isFinite(cost) || !Number.isFinite(percent)) return null;
+      if (calculationType === 'margin') {
+        const factor = 1 - percent / 100;
+        if (factor <= 0) return null;
+        const price = cost / factor;
+        return calculation(
+          `Ved ${number(percent)} % margin utgjør innkjøpsprisen ${number(100 - percent)} % av salgsprisen. ${number(cost)} / ${number(factor)} = ${number(price)}.`,
+          `${number(cost)} / (1 − ${number(percent / 100)}) = ${number(price)}.`
+        );
+      }
+      const gain = cost * percent / 100;
+      const price = cost + gain;
+      return calculation(
+        `${number(cost)} × ${number(percent)} / 100 = ${number(gain)}. Deretter: ${number(cost)} + ${number(gain)} = ${number(price)}.`,
+        `${number(cost)} × ${number(1 + percent / 100)} = ${number(price)}.`
+      );
+    }
+    case 'calc-tax': {
+      const amount = value('baseAmount');
+      const selectedRate = document.getElementById('taxRate')?.value;
+      const rate = selectedRate === 'custom' ? value('customTaxRate') : Number(selectedRate);
+      if (!Number.isFinite(amount) || !Number.isFinite(rate)) return null;
+      const factor = 1 + rate / 100;
+      if (taxCalculationType === 'removeTax') {
+        const excl = amount / factor;
+        return calculation(
+          `${number(amount)} kr inkluderer ${number(rate)} % MVA. Del på ${number(factor)}: ${number(amount)} / ${number(factor)} = ${number(excl)}.`,
+          `${number(amount)} / (1 + ${number(rate)} / 100) = ${number(excl)}.`
+        );
+      }
+      const tax = amount * rate / 100;
+      const incl = amount + tax;
+      return calculation(
+        `${number(amount)} × ${number(rate)} / 100 = ${number(tax)}. Deretter: ${number(amount)} + ${number(tax)} = ${number(incl)}.`,
+        `${number(amount)} × ${number(factor)} = ${number(incl)}.`
+      );
+    }
+    case 'calc-holiday': {
+      const base = value('holidayBase');
+      const selectedRate = document.getElementById('holidayRate')?.value;
+      const rate = selectedRate === 'custom' ? value('holidayCustomRate') : Number(selectedRate);
+      if (!Number.isFinite(base) || !Number.isFinite(rate)) return null;
+      const result = base * rate / 100;
+      return calculation(
+        `${number(base)} × ${number(rate)} / 100 = ${number(result)} i feriepenger før eventuelt lønnstrekk.`,
+        `${number(base)} × ${number(rate / 100)} = ${number(result)}.`
+      );
+    }
+    case 'calc-loan': {
+      const principal = value('principalAmount');
+      const rate = value('interestRate');
+      const years = value('timePeriod');
+      if (!Number.isFinite(principal) || !Number.isFinite(rate) || !Number.isFinite(years)) return null;
+      const nominalRate = loanRateType === 'effective' ? effectiveToNominalRate(rate) : rate;
+      const monthlyRate = nominalRate / 100 / 12;
+      const payments = years * 12;
+      const payment = monthlyRate === 0
+        ? principal / payments
+        : principal * (monthlyRate * Math.pow(1 + monthlyRate, payments)) / (Math.pow(1 + monthlyRate, payments) - 1);
+      return calculation(
+        `Lånet fordeles over ${number(payments)} måneder. Månedlig rente er ${number(monthlyRate * 100)} %, og månedsbeløpet blir ${number(payment)} kr.`,
+        `Annuitetsformel: ${number(principal)} × [${number(monthlyRate)} × (1 + ${number(monthlyRate)})^${number(payments)}] / [(1 + ${number(monthlyRate)})^${number(payments)} − 1] = ${number(payment)}.`
+      );
+    }
+    case 'calc-compound-interest': {
+      const principal = value('compoundPrincipal');
+      const rate = value('compoundRate');
+      const years = value('compoundYears');
+      const frequency = value('compoundFrequency');
+      if (![principal, rate, years, frequency].every(Number.isFinite) || frequency <= 0) return null;
+      const periodRate = rate / 100 / frequency;
+      const periods = frequency * years;
+      const result = principal * Math.pow(1 + periodRate, periods);
+      return calculation(
+        `Renten per periode er ${number(rate)} / ${number(frequency)} = ${number(periodRate * 100)} %. Den legges til ${number(periods)} ganger.`,
+        `${number(principal)} × (1 + ${number(periodRate)})^${number(periods)} = ${number(result)}.`
+      );
+    }
+    case 'calc-break-even': {
+      const fixed = value('breakEvenFixedCosts');
+      const price = value('breakEvenPrice');
+      const variable = value('breakEvenVariableCost');
+      if (![fixed, price, variable].every(Number.isFinite)) return null;
+      const contribution = price - variable;
+      if (contribution <= 0) return null;
+      const rawUnits = fixed / contribution;
+      return calculation(
+        `${number(price)} − ${number(variable)} = ${number(contribution)} i dekningsbidrag per enhet. Deretter: ${number(fixed)} / ${number(contribution)} = ${number(rawUnits)} enheter.`,
+        `Avrund opp fordi du ikke kan selge en del av en enhet: ${number(rawUnits)} blir ${number(Math.ceil(rawUnits))} enheter.`
+      );
+    }
+    case 'calc-salary-increase': {
+      const oldSalary = value('salaryOld');
+      const newSalary = value('salaryNew');
+      if (![oldSalary, newSalary].every(Number.isFinite) || oldSalary === 0) return null;
+      const increase = newSalary - oldSalary;
+      const percent = increase / oldSalary * 100;
+      return calculation(
+        `${number(newSalary)} − ${number(oldSalary)} = ${number(increase)}. Deretter: ${number(increase)} / ${number(oldSalary)} × 100 = ${number(percent)} %.`,
+        `${number(newSalary)} / ${number(oldSalary)} = ${number(newSalary / oldSalary)}. Faktoren over 1 gir ${number(percent)} % økning.`
+      );
+    }
+    case 'calc-return': {
+      const start = value('returnStart');
+      const end = value('returnEnd');
+      if (![start, end].every(Number.isFinite) || start === 0) return null;
+      const gain = end - start;
+      const percent = gain / start * 100;
+      return calculation(
+        `${number(end)} − ${number(start)} = ${number(gain)}. Deretter: ${number(gain)} / ${number(start)} × 100 = ${number(percent)} %.`,
+        `${number(end)} / ${number(start)} = ${number(end / start)}. Faktoren over 1 gir ${number(percent)} % avkastning.`
+      );
+    }
+    case 'calc-cagr': {
+      const start = value('cagrStart');
+      const end = value('cagrEnd');
+      const years = value('cagrYears');
+      if (![start, end, years].every(Number.isFinite) || start <= 0 || years <= 0) return null;
+      const factor = end / start;
+      const annualFactor = Math.pow(factor, 1 / years);
+      const result = (annualFactor - 1) * 100;
+      return calculation(
+        `Total vekstfaktor er ${number(end)} / ${number(start)} = ${number(factor)}. Den årlige faktoren er ${number(factor)}^(1/${number(years)}) = ${number(annualFactor)}.`,
+        `(${number(end)} / ${number(start)})^(1/${number(years)}) − 1 = ${number(result)} % per år.`
+      );
+    }
+    case 'calc-effective-rate': {
+      const nominal = value('effectiveNominalRate');
+      const periods = value('effectivePeriods');
+      if (![nominal, periods].every(Number.isFinite) || periods <= 0) return null;
+      const periodRate = nominal / 100 / periods;
+      const result = (Math.pow(1 + periodRate, periods) - 1) * 100;
+      return calculation(
+        `Renten per periode er ${number(nominal)} / ${number(periods)} = ${number(periodRate * 100)} %. La den vokse i ${number(periods)} perioder.`,
+        `(1 + ${number(periodRate)})^${number(periods)} − 1 = ${number(result)} %.`
+      );
+    }
+    case 'calc-inflation': {
+      const amount = value('inflationAmount');
+      const rate = value('inflationRate');
+      const years = value('inflationYears');
+      if (![amount, rate, years].every(Number.isFinite)) return null;
+      const factor = Math.pow(1 + rate / 100, years);
+      const result = amount * factor;
+      return calculation(
+        `${number(rate)} % inflasjon gir vekstfaktoren ${number(1 + rate / 100)} hvert år. Over ${number(years)} år blir faktoren ${number(factor)}.`,
+        `${number(amount)} × ${number(1 + rate / 100)}^${number(years)} = ${number(result)}.`
+      );
+    }
+    case 'calc-kpi-adjustment': {
+      const price = value('kpiPrice');
+      const oldKpi = value('kpiOld');
+      const newKpi = value('kpiNew');
+      if (![price, oldKpi, newKpi].every(Number.isFinite) || oldKpi === 0) return null;
+      const factor = newKpi / oldKpi;
+      const result = price * factor;
+      return calculation(
+        `Finn først KPI-faktoren: ${number(newKpi)} / ${number(oldKpi)} = ${number(factor)}. Gang så prisen med faktoren.`,
+        `${number(price)} × ${number(factor)} = ${number(result)}.`
+      );
+    }
+    case 'calc-salary-breakdown': {
+      const annual = value('salaryAnnual');
+      const weekly = value('salaryWeeklyHours') || 37.5;
+      if (![annual, weekly].every(Number.isFinite) || weekly === 0) return null;
+      const monthly = annual / 12;
+      const yearlyHours = weekly * 52;
+      const hourly = annual / yearlyHours;
+      return calculation(
+        `Månedslønn: ${number(annual)} / 12 = ${number(monthly)}. Antall timer i året: ${number(weekly)} × 52 = ${number(yearlyHours)}.`,
+        `Timeslønn: ${number(annual)} / ${number(yearlyHours)} = ${number(hourly)}.`
+      );
+    }
+    case 'calc-gross-net': {
+      const gross = value('grossToNetGross');
+      const rate = value('grossToNetRate');
+      if (![gross, rate].every(Number.isFinite)) return null;
+      const tax = gross * rate / 100;
+      const net = gross - tax;
+      return calculation(
+        `${number(gross)} × ${number(rate)} / 100 = ${number(tax)} i skatt. Deretter: ${number(gross)} − ${number(tax)} = ${number(net)}.`,
+        `Etter skatt gjenstår ${number(100 - rate)} %. ${number(gross)} × ${number(1 - rate / 100)} = ${number(net)}.`
+      );
+    }
+    case 'calc-tax-estimate': {
+      const income = value('taxEstimateIncome');
+      const deduction = value('taxEstimateDeduction');
+      const rate = value('taxEstimateRate');
+      if (![income, deduction, rate].every(Number.isFinite)) return null;
+      const base = Math.max(0, income - deduction);
+      const tax = base * rate / 100;
+      return calculation(
+        `${number(income)} − ${number(deduction)} = ${number(base)} i skattegrunnlag. Deretter: ${number(base)} × ${number(rate)} / 100 = ${number(tax)} i skatt.`,
+        `${number(income)} − ${number(tax)} = ${number(income - tax)} etter estimert skatt. Del på 12 for månedsbeløpet.`
+      );
+    }
+    case 'calc-overtime': {
+      const monthly = value('overtimeMonthlySalary');
+      const weekly = value('overtimeWeeklyHours') || 37.5;
+      const hours = value('overtimeHours');
+      const rate = value('overtimeRate');
+      if (![monthly, weekly, hours, rate].every(Number.isFinite) || weekly === 0) return null;
+      const hourly = monthly * 12 / (weekly * 52);
+      const overtimeHourly = hourly * (1 + rate / 100);
+      const result = overtimeHourly * hours;
+      return calculation(
+        `Timelønn: ${number(monthly)} × 12 / (${number(weekly)} × 52) = ${number(hourly)}. Med tillegg blir satsen ${number(hourly)} × ${number(1 + rate / 100)} = ${number(overtimeHourly)}.`,
+        `${number(overtimeHourly)} × ${number(hours)} overtidstimer = ${number(result)}.`
+      );
+    }
+    case 'calc-employer-cost': {
+      const salary = value('employerSalary');
+      const agaRate = value('employerAgaRate');
+      const otpRate = value('employerOtpRate');
+      const other = value('employerOtherCost');
+      if (![salary, agaRate, otpRate, other].every(Number.isFinite)) return null;
+      const aga = salary * agaRate / 100;
+      const otp = salary * otpRate / 100;
+      const total = salary + aga + otp + other;
+      return calculation(
+        `Arbeidsgiveravgift: ${number(salary)} × ${number(agaRate)} / 100 = ${number(aga)}. OTP: ${number(salary)} × ${number(otpRate)} / 100 = ${number(otp)}.`,
+        `${number(salary)} + ${number(aga)} + ${number(otp)} + ${number(other)} = ${number(total)}.`
+      );
+    }
+    default:
+      return null;
+  }
+}
+
+function initPedagogicalCalculations() {
+  const calculationTargets = [
+    ['calc-add-percent', 'addPercentCalculationDetails', 'addPercentAlternativeCalculationDetails'],
+    ['calc-subtract-percent', 'subtractPercentCalculationDetails'],
+    ['calc-increase', 'increaseCalculationDetails'],
+    ['calc-decrease', 'decreaseCalculationDetails'],
+    ['calc-recovery', 'recoveryCalculationDetails'],
+    ['calc-reverse-percent', 'reverseCalculationDetails'],
+    ['calc-total', 'calculationDetai'],
+    ['calc-discount', 'Utregning'],
+    ['calc-part', 'calculationD'],
+    ['calc-point', 'pointCalculationDetails'],
+    ['calc-distribution', null, null, 'totalSum'],
+    ['calc-percent-of-percent', 'percentOfPercentCalculation'],
+    ['calc-percent-fraction', 'percentToFractionCalculation'],
+    ['calc-markup', 'calculation'],
+    ['calc-tax', 'taxCalculation'],
+    ['calc-holiday', 'holidayCalculation'],
+    ['calc-loan', 'interestCalculation'],
+    ['calc-compound-interest', 'compoundCalculation'],
+    ['calc-break-even', 'breakEvenCalculation'],
+    ['calc-salary-increase', 'salaryIncreaseCalculation'],
+    ['calc-return', 'returnCalculation'],
+    ['calc-cagr', 'cagrCalculation'],
+    ['calc-effective-rate', 'effectiveRateCalculation'],
+    ['calc-inflation', 'inflationCalculation'],
+    ['calc-kpi-adjustment', 'kpiCalculation'],
+    ['calc-salary-breakdown', 'salaryBreakdownCalculation'],
+    ['calc-gross-net', 'grossToNetCalculation'],
+    ['calc-tax-estimate', 'taxEstimateCalculation'],
+    ['calc-overtime', 'overtimeCalculation'],
+    ['calc-employer-cost', 'employerCostCalculation'],
+  ];
+
+  calculationTargets.forEach(([calculatorId, primaryId, alternativeId, watchId]) => {
+    const calculator = document.getElementById(calculatorId);
+    if (!calculator) return;
+
+    let primary = primaryId ? document.getElementById(primaryId) : null;
+    let primaryHeading = primary?.closest('h3');
+
+    if (!primary) {
+      primaryHeading = document.createElement('h3');
+      primary = document.createElement('span');
+      primary.id = `${calculatorId}Calculation`;
+      primaryHeading.append('Enkel utregning: ', primary);
+      calculator.querySelector('.distribution-results')?.after(primaryHeading);
+    } else if (primaryHeading) {
+      const label = [...primaryHeading.childNodes].find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+      );
+      if (label) {
+        label.textContent = 'Enkel utregning: ';
+      } else {
+        primaryHeading.prepend('Enkel utregning: ');
+      }
+    }
+
+    let alternative = alternativeId ? document.getElementById(alternativeId) : null;
+    if (!alternative) {
+      const alternativeHeading = document.createElement('h3');
+      alternative = document.createElement('span');
+      alternative.id = `${primary.id}Alternative`;
+      alternativeHeading.append('Alternativ utregning: ', alternative);
+      primaryHeading?.after(alternativeHeading);
+    } else {
+      alternative.closest('h3')?.firstChild && (alternative.closest('h3').firstChild.textContent = 'Alternativ utregning: ');
+    }
+
+    const update = () => {
+      const details = getPedagogicalCalculation(calculatorId);
+      if (!details) return;
+      if (primary.textContent !== details.simple) {
+        primary.textContent = details.simple;
+      }
+      if (alternative.textContent !== details.alternative) {
+        alternative.textContent = details.alternative;
+      }
+    };
+
+    const watchedElement = watchId ? document.getElementById(watchId) : primary;
+    if (watchedElement) {
+      new MutationObserver(update).observe(watchedElement, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
+    }
+
+    calculator.querySelectorAll('input, select').forEach((input) => {
+      input.addEventListener('input', update);
+      input.addEventListener('change', update);
+    });
+
+    if (primary.textContent.trim()) {
+      update();
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', addPedagogicalExamples);
+document.addEventListener('DOMContentLoaded', initPedagogicalCalculations);
 
 // Apply example values per calculator
 function applyExample(type) {
