@@ -2061,7 +2061,7 @@
               <summary>Se eksempel</summary>
               <div class="example-body">
                 <p class="example-text">
-                  Eksempel: 999 kr med 25% rabatt gir ny pris 749 kr.
+                  Eksempel: 1 000 kr med 25% rabatt gir ny pris 750 kr.
                 </p>
                 <button
                   type="button"
@@ -2086,14 +2086,14 @@
                 <input
                   type="number"
                   id="baseNumber"
-                  placeholder="Prosent av tallet"
+                  placeholder="Hele tallet"
                 />
 
                 <label for="percentageValue"></label>
                 <input
                   type="number"
                   id="percentageValue"
-                  placeholder="Hele tallet"
+                  placeholder="Prosent"
                 />
 
                 <button onclick="calculatePercentageOfNumber()">
@@ -5422,6 +5422,186 @@ function scrollToTop() {
 
 let sequentialQuizState = null;
 
+function addPedagogicalExamples() {
+  const examples = {
+    'calc-subtract-percent': {
+      task: 'En vare koster 500 kr og settes ned med 15 %. Hva blir den nye prisen?',
+      method: 'Finn først avslaget: 500 × 15 / 100 = 75 kr. Trekk deretter avslaget fra prisen: 500 kr − 75 kr = 425 kr.',
+      alternative: 'Et avslag på 15 % betyr at 85 % av prisen gjenstår. Regn derfor 500 kr × 0,85 = 425 kr.',
+    },
+    'calc-increase': {
+      task: 'En verdi øker fra 200 til 250. Hvor mange prosent er økningen?',
+      method: 'Finn først forskjellen: 250 − 200 = 50. Sammenlign så økningen med startverdien: 50 / 200 × 100 = 25 %.',
+      alternative: 'Del sluttverdien på startverdien: 250 / 200 = 1,25. Faktoren 1,25 betyr 25 % økning.',
+    },
+    'calc-decrease': {
+      task: 'En verdi går ned fra 250 til 200. Hvor mange prosent er nedgangen?',
+      method: 'Finn først forskjellen: 250 − 200 = 50. Del deretter nedgangen på startverdien: 50 / 250 × 100 = 20 %.',
+      alternative: '200 er 80 % av 250. Da er resten, 100 % − 80 %, en nedgang på 20 %.',
+    },
+    'calc-recovery': {
+      task: 'En verdi faller med 20 %. Hvor mye må den øke for å komme tilbake til utgangspunktet?',
+      method: 'Tenk deg at verdien starter på 100. Etter et fall på 20 % er den 80. Den må da øke 20 fra 80 til 100: 20 / 80 × 100 = 25 %.',
+      alternative: 'Bruk formelen nedgang / (100 − nedgang) × 100: 20 / 80 × 100 = 25 %.',
+    },
+    'calc-reverse-percent': {
+      task: 'En pris på 625 kr inkluderer en økning på 25 %. Hva var prisen før økningen?',
+      method: '25 % økning betyr at 625 kr er 125 % av den opprinnelige prisen. Del derfor på 1,25: 625 / 1,25 = 500 kr.',
+      alternative: 'Prøv baklengs: 25 % av 500 kr er 125 kr. Da gir 500 kr + 125 kr = 625 kr.',
+    },
+    'calc-total': {
+      task: '45 av 180 skal uttrykkes i prosent. Hvor stor andel er det?',
+      method: 'Del delen på totalen og gang med 100: 45 / 180 × 100 = 25 %.',
+      alternative: '180 delt i fire like deler er 45. Én av fire like deler er en fjerdedel, altså 25 %.',
+    },
+    'calc-discount': {
+      task: 'En vare koster 1 000 kr og har 25 % rabatt. Hva blir den nye prisen?',
+      method: 'Finn rabatten først: 1 000 × 25 / 100 = 250 kr. Trekk så rabatten fra prisen: 1 000 kr − 250 kr = 750 kr.',
+      alternative: 'Etter 25 % rabatt gjenstår 75 % av prisen. Regn derfor 1 000 kr × 0,75 = 750 kr.',
+    },
+    'calc-part': {
+      task: 'Hva er 15 % av 200?',
+      method: 'Gjør prosenten om til desimaltall: 15 % = 0,15. Regn deretter 200 × 0,15 = 30.',
+      alternative: 'Finn 10 % og 5 % hver for seg: 10 % av 200 er 20, og 5 % er 10. Til sammen er 15 % lik 30.',
+    },
+    'calc-point': {
+      task: 'En andel øker fra 20 % til 27 %. Hva er endringen i prosentpoeng?',
+      method: 'Prosentpoeng er den direkte forskjellen mellom prosentene: 27 % − 20 % = 7 prosentpoeng.',
+      alternative: 'Skal du finne relativ prosentvis endring i stedet, regner du 7 / 20 × 100 = 35 %. Prosentpoeng og prosentvis endring er altså ikke det samme.',
+    },
+    'calc-distribution': {
+      task: 'Tre verdier er 30, 50 og 20. Hvor stor prosentandel utgjør hver verdi?',
+      method: 'Finn totalen først: 30 + 50 + 20 = 100. Del så hver verdi på totalen: 30 / 100 = 30 %, 50 / 100 = 50 % og 20 / 100 = 20 %.',
+      alternative: 'Når totalen er 100, er hver verdi allerede den samme som prosentandelen. Dette er en rask kontroll av svaret.',
+    },
+    'calc-percent-of-percent': {
+      task: 'Hva er 20 % av 15 %?',
+      method: 'Gang prosentene og del på 100: 15 × 20 / 100 = 3 %. Resultatet er en del av den opprinnelige helheten.',
+      alternative: 'Skriv prosentene som desimaltall: 0,15 × 0,20 = 0,03. Desimaltallet 0,03 er 3 %.',
+    },
+    'calc-percent-fraction': {
+      task: 'Gjør 12,5 % om til både desimaltall og brøk.',
+      method: 'Del prosenten på 100: 12,5 / 100 = 0,125. Som brøk blir det 125 / 1 000, som kan forkortes til 1 / 8.',
+      alternative: 'Flytt desimaltegnet to plasser til venstre: 12,5 % blir 0,125. Deretter kan du skrive 0,125 som en brøk.',
+    },
+    'calc-markup': {
+      task: 'En vare har innkjøpspris 100 kr og skal ha 25 % påslag. Hva blir salgsprisen?',
+      method: 'Finn påslaget først: 100 × 25 / 100 = 25 kr. Legg påslaget til innkjøpsprisen: 100 kr + 25 kr = 125 kr.',
+      alternative: 'Bruk vekstfaktor: 100 kr × 1,25 = 125 kr. Husk at påslag regnes av innkjøpsprisen, mens margin regnes av salgsprisen.',
+    },
+    'calc-tax': {
+      task: 'Et beløp uten MVA er 1 000 kr. Hva blir beløpet med 25 % MVA?',
+      method: 'Finn MVA-beløpet først: 1 000 × 25 / 100 = 250 kr. Legg det til: 1 000 kr + 250 kr = 1 250 kr.',
+      alternative: '25 % MVA gir faktoren 1,25. Regn derfor 1 000 kr × 1,25 = 1 250 kr.',
+    },
+    'calc-holiday': {
+      task: 'Lønnsgrunnlaget er 660 000 kr og feriepengesatsen er 12 %. Hvor mye blir feriepengene før eventuelle lønnstrekk?',
+      method: 'Regn feriepengene først: 660 000 × 12 / 100 = 79 200 kr. Eventuelt trekk i månedslønn vises separat, slik at du ser forskjellen på brutto feriepenger og netto utbetaling.',
+      alternative: 'Bruk desimalformen 0,12: 660 000 kr × 0,12 = 79 200 kr. Fjern avmerkingen for lønnstrekk hvis du bare vil se feriepengene.',
+    },
+    'calc-loan': {
+      task: 'Du låner 2 500 000 kr med 4,5 % rente over 25 år. Hva blir den omtrentlige månedlige kostnaden?',
+      method: 'Kalkulatoren deler den årlige renten i månedlige renter og fordeler lånet over 25 × 12 = 300 betalinger. Hver betaling dekker både renter og avdrag.',
+      alternative: 'Bruk effektiv rente når du sammenligner lån. Den tar hensyn til hvor ofte renten legges til, mens månedskostnaden beregnes fra den nominelle renten.',
+    },
+    'calc-compound-interest': {
+      task: 'Du setter inn 100 000 kr til 5 % rente i 10 år, med månedlig rentetilskriving. Hvor mye vokser beløpet til?',
+      method: 'Månedsrenten er 5 % / 12. Den legges til 12 × 10 = 120 ganger, slik at du også får rente på tidligere opptjent rente.',
+      alternative: 'Med årlig tilskriving kan du tenke 100 000 × 1,05^10. Månedlig tilskriving gir litt høyere beløp fordi renten legges til oftere.',
+    },
+    'calc-break-even': {
+      task: 'Faste kostnader er 120 000 kr. Salgspris er 500 kr og variable kostnader er 300 kr per enhet. Hvor mange enheter må selges?',
+      method: 'Finn dekningsbidraget først: 500 kr − 300 kr = 200 kr per enhet. Del så faste kostnader på dekningsbidraget: 120 000 / 200 = 600 enheter.',
+      alternative: 'Kontroller svaret: 600 enheter × 200 kr i dekningsbidrag = 120 000 kr. Da er de faste kostnadene dekket.',
+    },
+    'calc-salary-increase': {
+      task: 'Årslønnen øker fra 550 000 kr til 590 000 kr. Hvor stor er lønnsøkningen?',
+      method: 'Finn økningen i kroner først: 590 000 kr − 550 000 kr = 40 000 kr. Del så på gammel lønn: 40 000 / 550 000 × 100 = 7,27 %.',
+      alternative: 'Del ny lønn på gammel lønn: 590 000 / 550 000 = 1,0727. Faktoren over 1 viser en økning på 7,27 %.',
+    },
+    'calc-return': {
+      task: 'En investering øker fra 100 000 kr til 124 000 kr. Hva er avkastningen?',
+      method: 'Finn gevinsten først: 124 000 kr − 100 000 kr = 24 000 kr. Del gevinsten på startverdien: 24 000 / 100 000 × 100 = 24 %.',
+      alternative: 'Sluttverdien er 1,24 ganger startverdien: 124 000 / 100 000 = 1,24. Det tilsvarer 24 % avkastning.',
+    },
+    'calc-cagr': {
+      task: 'En investering vokser fra 100 000 kr til 180 000 kr på 8 år. Hva er gjennomsnittlig årlig vekst?',
+      method: 'Finn total vekstfaktor: 180 000 / 100 000 = 1,8. Finn så den årlige faktoren: 1,8^(1/8), trekk fra 1 og gang med 100.',
+      alternative: 'Ikke del samlet vekst på 80 % rett på 8. CAGR tar hensyn til renters rente og gir derfor et mer riktig årlig gjennomsnitt.',
+    },
+    'calc-effective-rate': {
+      task: 'Nominell rente er 6 % og renten legges til hver måned. Hva blir effektiv årlig rente?',
+      method: 'Månedsrenten er 6 % / 12 = 0,5 %. La den vokse i 12 måneder: (1 + 0,005)^12 − 1. Resultatet er den effektive årlige renten.',
+      alternative: 'Effektiv rente er best når du sammenligner lån og sparing, fordi den inkluderer virkningen av at renten legges til flere ganger i året.',
+    },
+    'calc-inflation': {
+      task: 'Et beløp på 10 000 kr påvirkes av 2,5 % årlig inflasjon i 5 år. Hva tilsvarer beløpet om fem år?',
+      method: 'Hvert år ganges beløpet med 1,025. Over fem år blir det 10 000 × 1,025^5.',
+      alternative: 'Du kan også regne år for år: start med 10 000 kr, legg til 2,5 %, og bruk det nye beløpet som utgangspunkt neste år.',
+    },
+    'calc-kpi-adjustment': {
+      task: 'En pris på 5 000 kr skal justeres når KPI går fra 120 til 135,5. Hva blir den justerte prisen?',
+      method: 'Finn endringsfaktoren ved å dele ny KPI på gammel KPI: 135,5 / 120. Gang deretter prisen med denne faktoren.',
+      alternative: 'Finn først prosentendringen i KPI: (135,5 − 120) / 120 × 100. Legg så den samme prosentvise økningen til prisen.',
+    },
+    'calc-salary-breakdown': {
+      task: 'Årslønnen er 720 000 kr og arbeidsuken er 37,5 timer. Hva tilsvarer det per måned og time?',
+      method: 'Månedslønn er årslønn delt på 12: 720 000 / 12 = 60 000 kr. Timelønn finnes ved å dele på 37,5 × 52 arbeidstimer i året.',
+      alternative: 'Regn først antall timer i året: 37,5 × 52 = 1 950. Del deretter 720 000 kr på 1 950 for å finne timelønnen.',
+    },
+    'calc-gross-net': {
+      task: 'Bruttolønnen er 55 000 kr og skatten er 30 %. Hva blir nettolønnen?',
+      method: 'Finn skatten først: 55 000 × 30 / 100 = 16 500 kr. Trekk skatten fra bruttolønnen: 55 000 kr − 16 500 kr = 38 500 kr.',
+      alternative: 'Etter 30 % skatt gjenstår 70 %. Regn derfor 55 000 kr × 0,70 = 38 500 kr.',
+    },
+    'calc-tax-estimate': {
+      task: 'Årsinntekten er 720 000 kr, fradraget er 100 000 kr og skattesatsen er 32 %. Hva blir et forenklet skatteestimat?',
+      method: 'Finn skattegrunnlaget først: 720 000 kr − 100 000 kr = 620 000 kr. Skatten er så 620 000 × 32 / 100 = 198 400 kr.',
+      alternative: 'Trekk estimert skatt fra inntekten og del på 12 for et anslag på netto per måned. Kalkulatoren er forenklet og erstatter ikke et offisielt skatteoppgjør.',
+    },
+    'calc-overtime': {
+      task: 'Månedslønnen er 50 000 kr, arbeidsuken er 37,5 timer, du jobber 12 overtidstimer og tillegget er 50 %. Hva blir overtidsbetalingen?',
+      method: 'Finn først timelønn fra årslønn og arbeidstimer per år. Legg så til 50 % på timelønnen og gang den nye satsen med 12 overtidstimer.',
+      alternative: 'Ved 50 % tillegg er overtidssatsen 1,5 ganger vanlig timelønn. Du kan derfor regne timelønn × 1,5 × antall overtidstimer.',
+    },
+    'calc-employer-cost': {
+      task: 'Årslønnen er 650 000 kr. Arbeidsgiveravgiften er 14,1 %, OTP er 2 % og andre kostnader er 15 000 kr. Hva koster medarbeideren totalt?',
+      method: 'Regn arbeidsgiveravgift og OTP hver for seg av lønnen. Legg deretter lønn, arbeidsgiveravgift, OTP og andre kostnader sammen.',
+      alternative: 'Se på kostnaden som lønn × (1 + 0,141 + 0,02), og legg deretter til øvrige kostnader. Da blir det tydelig hvilke deler som er prosentbaserte.',
+    },
+  };
+
+  Object.entries(examples).forEach(([calculatorId, example]) => {
+    const calculator = document.getElementById(calculatorId);
+    const exampleBody = calculator?.querySelector('.example-body');
+    const applyButton = exampleBody?.querySelector('.example-apply');
+    if (!exampleBody || !applyButton) return;
+
+    exampleBody.querySelectorAll('.example-text').forEach((paragraph) => {
+      paragraph.remove();
+    });
+
+    [
+      ['Oppgave:', example.task],
+      ['Slik regner du:', example.method],
+      ['Alternativ metode:', example.alternative],
+    ].forEach(([label, text]) => {
+      const paragraph = document.createElement('p');
+      const strong = document.createElement('strong');
+      strong.textContent = label;
+      paragraph.className = 'example-text';
+      paragraph.append(strong, document.createTextNode(` ${text}`));
+      exampleBody.insertBefore(paragraph, applyButton);
+    });
+  });
+
+  document.querySelectorAll('details.example > summary').forEach((summary) => {
+    summary.textContent = 'Se forklart eksempel';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', addPedagogicalExamples);
+
 // Apply example values per calculator
 function applyExample(type) {
   switch (type) {
@@ -5468,7 +5648,7 @@ function applyExample(type) {
       break;
     }
     case 'discount': {
-      document.getElementById('originalPrice').value = 999;
+      document.getElementById('originalPrice').value = 1000;
       document.getElementById('discountPercentage').value = 25;
       calculateDiscount();
       break;
