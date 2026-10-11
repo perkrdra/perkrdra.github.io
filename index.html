@@ -1730,6 +1730,8 @@
       <a href="#calc-overtime" data-search="overtid overtidskalkulator timelonn">Overtidskalkulator</a>
       <a href="#calc-employer-cost" data-search="arbeidsgiverkostnad aga otp">Arbeidsgiverkostnad</a>
       <a href="#calc-loan" data-search="annuitet finansiering">Lån</a>
+      <a href="#calc-monthly-savings" data-search="månedssparing spare fast beløp">Månedssparing</a>
+      <a href="#calc-savings-goal" data-search="sparemål spare mål hvor mye">Sparemål</a>
       <a href="#calc-compound-interest" data-search="rentes rente sparing">Renters rente</a>
       <a href="#calc-return" data-search="avkastning investeringsavkastning gevinst tap">Avkastning</a>
       <a href="#calc-cagr" data-search="cagr annualisert avkastning vekstrate">CAGR</a>
@@ -2742,6 +2744,119 @@
                   class="example-apply"
                   onclick="applyExample('compoundInterest')"
                 >
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-monthly-savings">
+            <h2>Månedssparing</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="monthlySavingsStart"
+                placeholder="Startbeløp"
+                aria-label="Startbeløp"
+                min="0"
+              />
+              <input
+                type="number"
+                id="monthlySavingsAmount"
+                placeholder="Sparing per måned"
+                aria-label="Sparing per måned"
+                min="0"
+              />
+              <input
+                type="number"
+                id="monthlySavingsRate"
+                placeholder="Årlig avkastning (%)"
+                aria-label="Årlig avkastning i prosent"
+                min="0"
+                step="0.01"
+              />
+              <input
+                type="number"
+                id="monthlySavingsYears"
+                placeholder="Antall år"
+                aria-label="Antall år"
+                min="1"
+                step="1"
+              />
+              <button type="button" onclick="calculateMonthlySavings()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Sluttbeløp: <span id="monthlySavingsFinal">0</span> kr</h3>
+            <h3>Totalt innskudd: <span id="monthlySavingsDeposits">0</span> kr</h3>
+            <h3>Opptjent avkastning: <span id="monthlySavingsReturn">0</span> kr</h3>
+            <h3>Utregning: <span id="monthlySavingsCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Start med 50 000 kr og spar 2 000 kr per måned i 10 år med 6 % årlig avkastning.
+                </p>
+                <button type="button" class="example-apply" onclick="applyExample('monthlySavings')">
+                  <h4>Bruk eksempel</h4>
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="calculator" id="calc-savings-goal">
+            <h2>Sparemål</h2>
+            <div class="input-group">
+              <input
+                type="number"
+                id="savingsGoalAmount"
+                placeholder="Sparemål"
+                aria-label="Sparemål"
+                min="0"
+              />
+              <input
+                type="number"
+                id="savingsGoalStart"
+                placeholder="Beløp spart i dag"
+                aria-label="Beløp spart i dag"
+                min="0"
+              />
+              <input
+                type="number"
+                id="savingsGoalRate"
+                placeholder="Årlig avkastning (%)"
+                aria-label="Årlig avkastning i prosent"
+                min="0"
+                step="0.01"
+              />
+              <input
+                type="number"
+                id="savingsGoalYears"
+                placeholder="Antall år"
+                aria-label="Antall år"
+                min="1"
+                step="1"
+              />
+              <button type="button" onclick="calculateSavingsGoal()">
+                <h4>Regn ut</h4>
+              </button>
+            </div>
+            <h3>Månedlig sparing: <span id="savingsGoalMonthly">0</span> kr</h3>
+            <h3>Estimert sluttbeløp: <span id="savingsGoalFinal">0</span> kr</h3>
+            <h3>Totalt innskudd: <span id="savingsGoalDeposits">0</span> kr</h3>
+            <h3>Estimert avkastning: <span id="savingsGoalReturn">0</span> kr</h3>
+            <h3>Utregning: <span id="savingsGoalCalculation"></span></h3>
+            <details class="example">
+              <summary>Se eksempel</summary>
+              <div class="example-body">
+                <p class="example-text">
+                  Eksempel: Spar til 500 000 kr om 8 år. Du har 50 000 kr fra før og forventer 5 % årlig avkastning.
+                </p>
+                <button type="button" class="example-apply" onclick="applyExample('savingsGoal')">
                   <h4>Bruk eksempel</h4>
                 </button>
               </div>
@@ -3795,6 +3910,8 @@
         },
         "sparing-renter": {
           visibleIds: [
+            "calc-monthly-savings",
+            "calc-savings-goal",
             "calc-compound-interest",
             "calc-loan",
             "calc-return",
@@ -4911,6 +5028,117 @@ function calculateCompoundInterest() {
   ]);
 }
 
+function calculateMonthlySavings() {
+  const startAmount = parseFloat(
+    document.getElementById('monthlySavingsStart').value
+  );
+  const monthlyAmount = parseFloat(
+    document.getElementById('monthlySavingsAmount').value
+  );
+  const annualRate = parseFloat(
+    document.getElementById('monthlySavingsRate').value
+  );
+  const years = parseFloat(
+    document.getElementById('monthlySavingsYears').value
+  );
+
+  if (
+    [startAmount, monthlyAmount, annualRate, years].some(Number.isNaN) ||
+    startAmount < 0 ||
+    monthlyAmount < 0 ||
+    annualRate < 0 ||
+    years <= 0
+  ) {
+    alert('Vennligst fyll inn gyldige verdier. Beløp og avkastning kan ikke være negative.');
+    return;
+  }
+
+  const months = Math.round(years * 12);
+  const monthlyRate = annualRate / 100 / 12;
+  const growthFactor = Math.pow(1 + monthlyRate, months);
+  const grownStartAmount = startAmount * growthFactor;
+  const grownMonthlySavings = monthlyRate === 0
+    ? monthlyAmount * months
+    : monthlyAmount * ((growthFactor - 1) / monthlyRate);
+  const finalAmount = grownStartAmount + grownMonthlySavings;
+  const totalDeposits = startAmount + monthlyAmount * months;
+  const investmentReturn = finalAmount - totalDeposits;
+
+  document.getElementById('monthlySavingsFinal').textContent =
+    finalAmount.toFixed(2);
+  document.getElementById('monthlySavingsDeposits').textContent =
+    totalDeposits.toFixed(2);
+  document.getElementById('monthlySavingsReturn').textContent =
+    investmentReturn.toFixed(2);
+  document.getElementById('monthlySavingsCalculation').textContent =
+    `${startAmount.toFixed(2)} kr i startbeløp og ${monthlyAmount.toFixed(2)} kr per måned i ${months} måneder gir ${finalAmount.toFixed(2)} kr.`;
+
+  triggerResultFeedback([
+    document.getElementById('monthlySavingsFinal'),
+    document.getElementById('monthlySavingsDeposits'),
+    document.getElementById('monthlySavingsReturn'),
+  ]);
+}
+
+function calculateSavingsGoal() {
+  const goalAmount = parseFloat(
+    document.getElementById('savingsGoalAmount').value
+  );
+  const startAmount = parseFloat(
+    document.getElementById('savingsGoalStart').value
+  );
+  const annualRate = parseFloat(
+    document.getElementById('savingsGoalRate').value
+  );
+  const years = parseFloat(
+    document.getElementById('savingsGoalYears').value
+  );
+
+  if (
+    [goalAmount, startAmount, annualRate, years].some(Number.isNaN) ||
+    goalAmount < 0 ||
+    startAmount < 0 ||
+    annualRate < 0 ||
+    years <= 0
+  ) {
+    alert('Vennligst fyll inn gyldige verdier. Beløp og avkastning kan ikke være negative.');
+    return;
+  }
+
+  const months = Math.round(years * 12);
+  const monthlyRate = annualRate / 100 / 12;
+  const growthFactor = Math.pow(1 + monthlyRate, months);
+  const grownStartAmount = startAmount * growthFactor;
+  const monthlyAmount = grownStartAmount >= goalAmount
+    ? 0
+    : monthlyRate === 0
+      ? (goalAmount - startAmount) / months
+      : (goalAmount - grownStartAmount) * monthlyRate / (growthFactor - 1);
+  const finalAmount = grownStartAmount + (monthlyRate === 0
+    ? monthlyAmount * months
+    : monthlyAmount * ((growthFactor - 1) / monthlyRate));
+  const totalDeposits = startAmount + monthlyAmount * months;
+  const investmentReturn = finalAmount - totalDeposits;
+
+  document.getElementById('savingsGoalMonthly').textContent =
+    monthlyAmount.toFixed(2);
+  document.getElementById('savingsGoalFinal').textContent =
+    finalAmount.toFixed(2);
+  document.getElementById('savingsGoalDeposits').textContent =
+    totalDeposits.toFixed(2);
+  document.getElementById('savingsGoalReturn').textContent =
+    investmentReturn.toFixed(2);
+  document.getElementById('savingsGoalCalculation').textContent =
+    `For å nå ${goalAmount.toFixed(2)} kr på ${months} måneder må du spare ${monthlyAmount.toFixed(2)} kr per måned.`;
+
+  triggerResultFeedback([
+    document.getElementById('savingsGoalMonthly'),
+    document.getElementById('savingsGoalFinal'),
+    document.getElementById('savingsGoalDeposits'),
+    document.getElementById('savingsGoalReturn'),
+  ]);
+}
+
 function calculateReturn() {
   const start = parseFloat(document.getElementById('returnStart').value);
   const end = parseFloat(document.getElementById('returnEnd').value);
@@ -5531,6 +5759,16 @@ function addPedagogicalExamples() {
       method: 'Månedsrenten er 5 % / 12. Den legges til 12 × 10 = 120 ganger, slik at du også får rente på tidligere opptjent rente.',
       alternative: 'Med årlig tilskriving kan du tenke 100 000 × 1,05^10. Månedlig tilskriving gir litt høyere beløp fordi renten legges til oftere.',
     },
+    'calc-monthly-savings': {
+      task: 'Du starter med 50 000 kr og sparer 2 000 kr hver måned i 10 år, med 6 % årlig avkastning. Hvor mye kan sparingen vokse til?',
+      method: 'Startbeløpet får avkastning gjennom hele perioden. Hver månedlige innbetaling får også avkastning, men i ulikt antall måneder.',
+      alternative: 'Del årsrenten på 12 for å få månedlig rente. Kalkulatoren legger til månedssparingen etter hver måned, slik at den får rente frem til sluttdatoen.',
+    },
+    'calc-savings-goal': {
+      task: 'Du vil ha 500 000 kr om 8 år. Du har 50 000 kr fra før og forventer 5 % årlig avkastning. Hvor mye må du spare hver måned?',
+      method: 'Først beregnes hva startbeløpet kan vokse til. Resten av målet fordeles deretter på månedlige innbetalinger som også får avkastning.',
+      alternative: 'Uten avkastning deler du manglende beløp på antall måneder. Med avkastning blir nødvendig månedsbeløp lavere fordi pengene får vokse underveis.',
+    },
     'calc-break-even': {
       task: 'Faste kostnader er 120 000 kr. Salgspris er 500 kr og variable kostnader er 300 kr per enhet. Hvor mange enheter må selges?',
       method: 'Finn dekningsbidraget først: 500 kr − 300 kr = 200 kr per enhet. Del så faste kostnader på dekningsbidraget: 120 000 / 200 = 600 enheter.',
@@ -5867,6 +6105,43 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(principal)} × (1 + ${number(periodRate)})^${number(periods)} = ${number(result)}.`
       );
     }
+    case 'calc-monthly-savings': {
+      const start = value('monthlySavingsStart');
+      const monthly = value('monthlySavingsAmount');
+      const rate = value('monthlySavingsRate');
+      const years = value('monthlySavingsYears');
+      if (![start, monthly, rate, years].every(Number.isFinite) || start < 0 || monthly < 0 || rate < 0 || years <= 0) return null;
+      const months = Math.round(years * 12);
+      const monthlyRate = rate / 100 / 12;
+      const growthFactor = Math.pow(1 + monthlyRate, months);
+      const result = start * growthFactor + (monthlyRate === 0
+        ? monthly * months
+        : monthly * ((growthFactor - 1) / monthlyRate));
+      return calculation(
+        `Årlig avkastning på ${number(rate)} % gir ${number(monthlyRate * 100)} % per måned. Sparingen varer i ${number(months)} måneder.`,
+        `${number(start)} × ${number(growthFactor)} + månedlige innbetalinger = ${number(result)} kr.`
+      );
+    }
+    case 'calc-savings-goal': {
+      const goal = value('savingsGoalAmount');
+      const start = value('savingsGoalStart');
+      const rate = value('savingsGoalRate');
+      const years = value('savingsGoalYears');
+      if (![goal, start, rate, years].every(Number.isFinite) || goal < 0 || start < 0 || rate < 0 || years <= 0) return null;
+      const months = Math.round(years * 12);
+      const monthlyRate = rate / 100 / 12;
+      const growthFactor = Math.pow(1 + monthlyRate, months);
+      const grownStart = start * growthFactor;
+      const monthly = grownStart >= goal
+        ? 0
+        : monthlyRate === 0
+          ? (goal - start) / months
+          : (goal - grownStart) * monthlyRate / (growthFactor - 1);
+      return calculation(
+        `Startbeløpet på ${number(start)} kr vokser til ${number(grownStart)} kr på ${number(months)} måneder.`,
+        `For å nå ${number(goal)} kr må du spare ${number(monthly)} kr hver måned.`
+      );
+    }
     case 'calc-break-even': {
       const fixed = value('breakEvenFixedCosts');
       const price = value('breakEvenPrice');
@@ -6038,6 +6313,8 @@ function initPedagogicalCalculations() {
     ['calc-holiday', 'holidayCalculation'],
     ['calc-loan', 'interestCalculation'],
     ['calc-compound-interest', 'compoundCalculation'],
+    ['calc-monthly-savings', 'monthlySavingsCalculation'],
+    ['calc-savings-goal', 'savingsGoalCalculation'],
     ['calc-break-even', 'breakEvenCalculation'],
     ['calc-salary-increase', 'salaryIncreaseCalculation'],
     ['calc-return', 'returnCalculation'],
@@ -6239,6 +6516,22 @@ function applyExample(type) {
       document.getElementById('compoundYears').value = 10;
       document.getElementById('compoundFrequency').value = 12;
       calculateCompoundInterest();
+      break;
+    }
+    case 'monthlySavings': {
+      document.getElementById('monthlySavingsStart').value = 50000;
+      document.getElementById('monthlySavingsAmount').value = 2000;
+      document.getElementById('monthlySavingsRate').value = 6;
+      document.getElementById('monthlySavingsYears').value = 10;
+      calculateMonthlySavings();
+      break;
+    }
+    case 'savingsGoal': {
+      document.getElementById('savingsGoalAmount').value = 500000;
+      document.getElementById('savingsGoalStart').value = 50000;
+      document.getElementById('savingsGoalRate').value = 5;
+      document.getElementById('savingsGoalYears').value = 8;
+      calculateSavingsGoal();
       break;
     }
     case 'return': {
