@@ -215,7 +215,8 @@
 
               .search-replace {
                 width: 90%;
-                max-width: 600px;
+                max-width: 1200px;
+                padding: 0 20px;
                 margin: 0 auto 8px;
                 display: flex;
                 flex-direction: column;
@@ -223,6 +224,9 @@
               }
 
               .hub-menu {
+                width: 100%;
+                max-width: 600px;
+                align-self: center;
                 margin-top: 0;
                 display: grid;
                 grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -351,6 +355,8 @@
               }
 
               .search-row {
+                width: 100%;
+                max-width: 600px;
                 display: grid;
                 grid-template-columns: 42px auto minmax(120px, 1fr);
                 align-items: center;
@@ -1534,7 +1540,8 @@
 
               /* Large desktop layout */
               @media (min-width: 1400px) {
-                .container {
+                .container,
+                .search-replace {
                   max-width: 1600px;
                 }
 
@@ -1618,7 +1625,8 @@
                   width: 90%;
                 }
 
-                .container {
+                .container,
+                .search-replace {
                   padding: 0;
                 }
 
