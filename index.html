@@ -544,8 +544,32 @@
               }
 
               .pin-calculator-button {
+                width: 28px;
+                height: 28px;
                 align-self: flex-end;
-                margin-bottom: 4px;
+                margin-bottom: 2px;
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+                font-size: 15px;
+                line-height: 1;
+                opacity: 0.4;
+                transition: opacity 120ms ease, transform 120ms ease;
+              }
+
+              .calculator .pin-calculator-button {
+                box-shadow: none;
+              }
+
+              .pin-calculator-button:hover,
+              .pin-calculator-button:focus-visible,
+              .pin-calculator-button[aria-pressed="true"] {
+                opacity: 1;
+              }
+
+              .pin-calculator-button:hover,
+              .pin-calculator-button:focus-visible {
+                transform: translateY(-1px);
               }
 
               .container.info-grid {
@@ -1715,8 +1739,12 @@
 
                 .pin-calculator-button,
                 .pinned-clear {
-                  width: auto;
                   margin: 0;
+                }
+
+                .pin-calculator-button {
+                  width: 28px;
+                  height: 28px;
                 }
 
                 .corner-logo {
@@ -4185,11 +4213,18 @@
           if (!button) return;
 
           const isPinned = pinnedIds.has(calculator.id);
-          button.textContent = isPinned ? "Løsne fra toppen" : "Fest øverst";
+          const calculatorTitle = calculator.querySelector("h2")?.textContent || "kalkulatoren";
+          button.textContent = "📌";
           button.setAttribute("aria-pressed", String(isPinned));
+          button.setAttribute(
+            "aria-label",
+            isPinned
+              ? `Løsne ${calculatorTitle} fra toppen`
+              : `Fest ${calculatorTitle} øverst`
+          );
           button.title = isPinned
-            ? "Flytt kalkulatoren tilbake til opprinnelig plassering"
-            : "Flytt kalkulatoren til toppen av siden";
+            ? "Løsne fra toppen"
+            : "Fest øverst";
         };
 
         const updatePinnedSection = () => {
