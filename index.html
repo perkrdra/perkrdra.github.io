@@ -513,18 +513,6 @@
                 margin: 18px auto 32px;
               }
 
-              .pinned-calculators-heading {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 12px;
-                margin-bottom: 12px;
-              }
-
-              .pinned-calculators-heading h2 {
-                margin-bottom: 0;
-              }
-
               .pinned-calculators-grid {
                 display: grid;
                 grid-template-columns: 1fr;
@@ -532,8 +520,7 @@
                 align-items: start;
               }
 
-              .pin-calculator-button,
-              .pinned-clear {
+              .pin-calculator-button {
                 min-width: 0;
                 height: auto;
                 margin: 0;
@@ -1737,8 +1724,7 @@
                   width: 100%;
                 }
 
-                .pin-calculator-button,
-                .pinned-clear {
+                .pin-calculator-button {
                   margin: 0;
                 }
 
@@ -1828,11 +1814,7 @@
       <a href="#calc-quiz" data-search="prosent quiz oppgaver">Prosent-quiz</a>
     </nav>
 
-    <section class="pinned-calculators" id="pinnedCalculatorsSection" aria-labelledby="pinnedCalculatorsHeading" hidden>
-      <div class="pinned-calculators-heading">
-        <h2 id="pinnedCalculatorsHeading">Festede kalkulatorer</h2>
-        <button type="button" class="pinned-clear" id="clearPinnedCalculators">Fjern alle</button>
-      </div>
+    <section class="pinned-calculators" id="pinnedCalculatorsSection" aria-label="Festede kalkulatorer" hidden>
       <div class="pinned-calculators-grid" id="pinnedCalculators"></div>
     </section>
 
@@ -4167,7 +4149,6 @@
         const storageKey = "pinnedCalculatorIds";
         const section = document.getElementById("pinnedCalculatorsSection");
         const pinnedGrid = document.getElementById("pinnedCalculators");
-        const clearButton = document.getElementById("clearPinnedCalculators");
         const excludedCalculatorIds = new Set([
           "calc-approach",
           "calc-faq",
@@ -4175,7 +4156,7 @@
           "rpgSection",
         ]);
 
-        if (!section || !pinnedGrid || !clearButton) {
+        if (!section || !pinnedGrid) {
           return;
         }
 
@@ -4289,10 +4270,6 @@
         });
 
         [...pinnedIds].forEach((calculatorId) => pinCalculator(calculatorId));
-
-        clearButton.addEventListener("click", () => {
-          [...pinnedIds].forEach(unpinCalculator);
-        });
 
         document.addEventListener("hubFilterChanged", updatePinnedSection);
         updatePinnedSection();
