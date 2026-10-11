@@ -141,7 +141,7 @@
                 color: #000;
                 line-height: 1;
                 background: #f9a66c;
-                padding-top: 48px; /* restore breathing room at top */
+                padding-top: 72px; /* Space for the logo and page title */
                 scroll-behavior: smooth;
               }
 
@@ -350,6 +350,28 @@
                 z-index: 90;
                 transition: transform 120ms ease, box-shadow 120ms ease,
                   background-color 120ms ease;
+              }
+
+              .site-title {
+                position: absolute;
+                top: 12px;
+                left: 66px;
+                max-width: calc(100% - 78px);
+                margin: 0;
+                font-size: clamp(20px, 3vw, 28px);
+                line-height: 42px;
+                text-align: left;
+                animation: none;
+                z-index: 90;
+              }
+
+              @media (max-width: 600px) {
+                .site-title {
+                  top: 8px;
+                  left: 56px;
+                  max-width: calc(100% - 64px);
+                  line-height: 36px;
+                }
               }
 
               .corner-logo:hover,
@@ -1748,6 +1770,7 @@
 
   <body id="top">
     <a href="#top" class="corner-logo" aria-label="Til toppen">P</a>
+    <h1 class="site-title">Prosentkalkulator</h1>
 
     <div class="search-replace">
       <div class="hub-menu" role="tablist" aria-label="Kalkulatorkategorier">
