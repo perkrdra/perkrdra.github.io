@@ -689,26 +689,26 @@
                 width: 100%;
               }
 
-              #calc-holiday .holiday-group {
+              #feriepengekalkulator .holiday-group {
                 gap: 8px;
               }
 
-              #calc-holiday .holiday-group input[type="number"],
-              #calc-holiday .holiday-group input.formatted-number,
-              #calc-holiday .holiday-group .tax-rate-select,
-              #calc-holiday .holiday-group button {
+              #feriepengekalkulator .holiday-group input[type="number"],
+              #feriepengekalkulator .holiday-group input.formatted-number,
+              #feriepengekalkulator .holiday-group .tax-rate-select,
+              #feriepengekalkulator .holiday-group button {
                 margin-top: 0;
                 margin-bottom: 0;
               }
 
-              #calc-distribution input[type="number"],
-              #calc-distribution input.formatted-number,
-              #calc-markup input[type="number"],
-              #calc-markup input.formatted-number,
-              #calc-holiday input[type="number"],
-              #calc-holiday input.formatted-number,
-              #calc-holiday .tax-rate-select,
-              #calc-holiday .custom-rate-input {
+              #prosentfordeling input[type="number"],
+              #prosentfordeling input.formatted-number,
+              #påslag-og-marginkalkulator input[type="number"],
+              #påslag-og-marginkalkulator input.formatted-number,
+              #feriepengekalkulator input[type="number"],
+              #feriepengekalkulator input.formatted-number,
+              #feriepengekalkulator .tax-rate-select,
+              #feriepengekalkulator .custom-rate-input {
                 max-width: none;
                 width: 100%;
               }
@@ -783,27 +783,27 @@
                 margin-bottom: 10px;
               }
 
-              #calc-recovery .input-group,
-              #calc-break-even .input-group {
+              #hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall .input-group,
+              #break-even-kalkulator-dekningspunkt .input-group {
                 align-items: center;
               }
 
-              #calc-recovery .input-group {
+              #hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall .input-group {
                 margin-bottom: 14px;
               }
 
-              #calc-break-even .input-group {
+              #break-even-kalkulator-dekningspunkt .input-group {
                 margin-top: 12px;
               }
 
-              #calc-recovery .input-group button,
-              #calc-break-even .input-group button {
+              #hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall .input-group button,
+              #break-even-kalkulator-dekningspunkt .input-group button {
                 margin-top: 0;
                 margin-bottom: 0;
               }
 
-              #calc-break-even .input-group input[type="number"],
-              #calc-break-even .input-group input.formatted-number {
+              #break-even-kalkulator-dekningspunkt .input-group input[type="number"],
+              #break-even-kalkulator-dekningspunkt .input-group input.formatted-number {
                 min-width: 130px;
                 max-width: none;
                 flex: 1 1 130px;
@@ -813,19 +813,19 @@
                 display: none;
               }
 
-              #calc-percent-fraction .input-group {
+              #prosent-til-desimal-og-brøk .input-group {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 8px;
               }
 
-              #calc-percent-fraction .input-group input[type="number"],
-              #calc-percent-fraction .input-group input.formatted-number {
+              #prosent-til-desimal-og-brøk .input-group input[type="number"],
+              #prosent-til-desimal-og-brøk .input-group input.formatted-number {
                 width: min(420px, 100%);
                 margin-bottom: 0;
               }
 
-              #calc-percent-fraction .input-group button {
+              #prosent-til-desimal-og-brøk .input-group button {
                 margin-top: 0;
               }
 
@@ -1402,7 +1402,7 @@
                 border: none;
               }
 
-              #calc-approach h2 {
+              #hoderegning h2 {
                 margin-bottom: 10px;
               }
 
@@ -1729,13 +1729,13 @@
                   max-width: none;
                 }
 
-                #calc-break-even .input-group {
+                #break-even-kalkulator-dekningspunkt .input-group {
                   align-items: center;
                 }
 
-                #calc-break-even .input-group input[type="number"],
-                #calc-break-even .input-group input.formatted-number,
-                #calc-break-even .input-group button {
+                #break-even-kalkulator-dekningspunkt .input-group input[type="number"],
+                #break-even-kalkulator-dekningspunkt .input-group input.formatted-number,
+                #break-even-kalkulator-dekningspunkt .input-group button {
                   width: min(280px, 100%);
                 }
 
@@ -1852,38 +1852,38 @@
     </div>
 
     <nav class="top-nav" aria-label="Kalkulatornavigasjon">
-      <a href="#calc-add-percent" data-search="plus legge til">Legg til %</a>
-      <a href="#calc-subtract-percent" data-search="minus trekk fra">Trekk fra %</a>
-      <a href="#calc-increase" data-search="hvor mange prosent prosentendring fra til vekst opp">Prosentendring (opp)</a>
-      <a href="#calc-decrease" data-search="hvor mange prosent prosentendring fra til reduksjon ned">Prosentendring (ned)</a>
-      <a href="#calc-recovery" data-search="hente inn tap">Gjenoppretting</a>
-      <a href="#calc-reverse-percent" data-search="finn hele tallet finn total fra prosent finn-total-fra-prosent baklengs opprinnelig pris">Finn total fra %</a>
-      <a href="#calc-total" data-search="andel total prosent">Andel av total</a>
-      <a href="#calc-discount" data-search="prisavslag">Rabatt</a>
-      <a href="#calc-part" data-search="prosent av tall">Del av tallet</a>
-      <a href="#calc-point" data-search="prosentpoeng forskjell">Prosentpoeng</a>
-      <a href="#calc-distribution" data-search="fordel prosent">Fordeling</a>
-      <a href="#calc-markup" data-search="margin avanse">Påslag/Margin</a>
-      <a href="#calc-tax" data-search="moms merverdiavgift">MVA</a>
-      <a href="#calc-holiday" data-search="feriepenger lønn">Feriepenger</a>
-      <a href="#calc-gross-net" data-search="brutto netto skatt lonn">Brutto til netto</a>
-      <a href="#calc-tax-estimate" data-search="skattekalkulator skatt beregning">Skattekalkulator</a>
-      <a href="#calc-overtime" data-search="overtid overtidskalkulator timelonn">Overtidskalkulator</a>
-      <a href="#calc-employer-cost" data-search="arbeidsgiverkostnad aga otp">Arbeidsgiverkostnad</a>
-      <a href="#calc-loan" data-search="annuitet finansiering">Lån</a>
-      <a href="#calc-monthly-savings" data-search="månedssparing spare fast beløp">Månedssparing</a>
-      <a href="#calc-savings-goal" data-search="sparemål spare mål hvor mye">Sparemål</a>
-      <a href="#calc-compound-interest" data-search="rentes rente sparing">Renters rente</a>
-      <a href="#calc-return" data-search="avkastning investeringsavkastning gevinst tap">Avkastning</a>
-      <a href="#calc-cagr" data-search="cagr annualisert avkastning vekstrate">CAGR</a>
-      <a href="#calc-effective-rate" data-search="effektiv rente nominell rente">Effektiv rente</a>
-      <a href="#calc-inflation" data-search="inflasjon prisstigning kjøpekraft">Inflasjon</a>
-      <a href="#calc-kpi-adjustment" data-search="kpi prisjustering konsumprisindeks">Prisjustering KPI</a>
-      <a href="#calc-break-even" data-search="dekningspunkt nullpunkt">Break-even</a>
-      <a href="#calc-salary-breakdown" data-search="lonn maaned time">Lønn per mnd/time</a>
-      <a href="#calc-salary-increase" data-search="lonnsjustering">Lønnsøkning</a>
-      <a href="#calc-approach" data-search="hoderegning matte">Hoderegning</a>
-      <a href="#calc-quiz" data-search="prosent quiz oppgaver">Prosent-quiz</a>
+      <a href="#legg-til-prosent-på-et-beløp" data-search="plus legge til">Legg til %</a>
+      <a href="#trekk-fra-prosent-på-et-beløp" data-search="minus trekk fra">Trekk fra %</a>
+      <a href="#prosentøkning-fra-verdi-a-til-verdi-b" data-search="hvor mange prosent prosentendring fra til vekst opp">Prosentendring (opp)</a>
+      <a href="#prosentnedgang-fra-verdi-a-til-verdi-b" data-search="hvor mange prosent prosentendring fra til reduksjon ned">Prosentendring (ned)</a>
+      <a href="#hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall" data-search="hente inn tap">Gjenoppretting</a>
+      <a href="#finn-total-fra-prosent-omvendt-prosent" data-search="finn hele tallet finn total fra prosent finn-total-fra-prosent baklengs opprinnelig pris">Finn total fra %</a>
+      <a href="#finn-prosentandel-av-totalen" data-search="andel total prosent">Andel av total</a>
+      <a href="#hvordan-regne-ut-rabatt" data-search="prisavslag">Rabatt</a>
+      <a href="#finn-delen-av-tallet" data-search="prosent av tall">Del av tallet</a>
+      <a href="#prosentpoeng-endring" data-search="prosentpoeng forskjell">Prosentpoeng</a>
+      <a href="#prosentfordeling" data-search="fordel prosent">Fordeling</a>
+      <a href="#påslag-og-marginkalkulator" data-search="margin avanse">Påslag/Margin</a>
+      <a href="#mva-kalkulator" data-search="moms merverdiavgift">MVA</a>
+      <a href="#feriepengekalkulator" data-search="feriepenger lønn">Feriepenger</a>
+      <a href="#brutto-til-netto" data-search="brutto netto skatt lonn">Brutto til netto</a>
+      <a href="#skattekalkulator-forenklet" data-search="skattekalkulator skatt beregning">Skattekalkulator</a>
+      <a href="#overtidskalkulator" data-search="overtid overtidskalkulator timelonn">Overtidskalkulator</a>
+      <a href="#arbeidsgiverkostnad" data-search="arbeidsgiverkostnad aga otp">Arbeidsgiverkostnad</a>
+      <a href="#lånekalkulator" data-search="annuitet finansiering">Lån</a>
+      <a href="#månedssparing" data-search="månedssparing spare fast beløp">Månedssparing</a>
+      <a href="#sparemål" data-search="sparemål spare mål hvor mye">Sparemål</a>
+      <a href="#renters-rente-kalkulator" data-search="rentes rente sparing">Renters rente</a>
+      <a href="#avkastning-kalkulator" data-search="avkastning investeringsavkastning gevinst tap">Avkastning</a>
+      <a href="#cagr-kalkulator-årlig-vekstrate" data-search="cagr annualisert avkastning vekstrate">CAGR</a>
+      <a href="#effektiv-rente-kalkulator" data-search="effektiv rente nominell rente">Effektiv rente</a>
+      <a href="#inflasjonskalkulator" data-search="inflasjon prisstigning kjøpekraft">Inflasjon</a>
+      <a href="#prisjustering-kpi" data-search="kpi prisjustering konsumprisindeks">Prisjustering KPI</a>
+      <a href="#break-even-kalkulator-dekningspunkt" data-search="dekningspunkt nullpunkt">Break-even</a>
+      <a href="#årslønn-til-månedslønn-og-timeslønn" data-search="lonn maaned time">Lønn per mnd/time</a>
+      <a href="#lønnsøkning-i-kroner-og-prosent" data-search="lonnsjustering">Lønnsøkning</a>
+      <a href="#hoderegning" data-search="hoderegning matte">Hoderegning</a>
+      <a href="#prosent-quiz" data-search="prosent quiz oppgaver">Prosent-quiz</a>
     </nav>
 
     <section class="pinned-calculators" id="pinnedCalculatorsSection" aria-label="Festede kalkulatorer" hidden>
@@ -1893,7 +1893,7 @@
     <div class="container main-calculators">
       <div class="item1">
         <div class="item">
-          <div class="calculator" id="calc-add-percent">
+          <div class="calculator" id="legg-til-prosent-på-et-beløp">
             <h2>Legg til prosent på et beløp</h2>
             <div class="input-group">
               <label for="addPercentAmount"></label>
@@ -1941,7 +1941,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-subtract-percent">
+          <div class="calculator" id="trekk-fra-prosent-på-et-beløp">
             <h2>Trekk fra prosent på et beløp</h2>
             <div class="input-group">
               <label for="subtractPercentAmount"></label>
@@ -1983,7 +1983,7 @@
 
         <div class="item">
           <!-- Percentage Increase Calculator -->
-          <div class="calculator" id="calc-increase">
+          <div class="calculator" id="prosentøkning-fra-verdi-a-til-verdi-b">
             <h2>Prosentøkning fra verdi A til verdi B</h2>
             <div class="input-group">
               <label for="increaseInitialValue"></label>
@@ -2024,7 +2024,7 @@
 
         <div class="item">
           <!-- Percentage Decrease Calculator -->
-          <div class="calculator" id="calc-decrease">
+          <div class="calculator" id="prosentnedgang-fra-verdi-a-til-verdi-b">
             <h2>Prosentnedgang fra verdi A til verdi B</h2>
             <div class="input-group">
               <label for="decreaseInitialValue"></label>
@@ -2056,7 +2056,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-recovery">
+          <div class="calculator" id="hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall">
             <h2>Hvor mye må verdien stige for å hente inn et fall?</h2>
             <div class="input-group">
               <label for="recoveryDropPercent"></label>
@@ -2096,7 +2096,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-reverse-percent">
+          <div class="calculator" id="finn-total-fra-prosent-omvendt-prosent">
             <h2>Finn total fra prosent (omvendt prosent)</h2>
 
             <div class="tax-calculation-type">
@@ -2159,7 +2159,7 @@
 
         <div class="item">
           <!-- Finn prosent av tallet -->
-          <div class="calculator" id="calc-total">
+          <div class="calculator" id="finn-prosentandel-av-totalen">
             <h2>Finn prosentandel av totalen</h2>
             <!-- Wrapping div for alignment -->
             <div class="input-group">
@@ -2204,7 +2204,7 @@
       <div class="item3">
         <div class="item">
           <!-- Regne rabatt -->
-          <div class="calculator" id="calc-discount">
+          <div class="calculator" id="hvordan-regne-ut-rabatt">
             <h2>Hvordan regne ut rabatt</h2>
             <div class="input-group">
               <label for="originalPrice"></label>
@@ -2247,7 +2247,7 @@
         <!-- Finne delen av tallet -->
 
         <div class="item">
-          <div class="calculator" id="calc-part">
+          <div class="calculator" id="finn-delen-av-tallet">
             <div class="input-container">
               <h2>Finn delen av tallet</h2>
               <div class="input-group">
@@ -2294,7 +2294,7 @@
         <!-- Finn prosentpoeng endring -->
 
         <div class="item">
-          <div class="calculator" id="calc-point">
+          <div class="calculator" id="prosentpoeng-endring">
             <h2>Prosentpoeng endring</h2>
             <div class="input-group">
               <label for="initialPercentage"></label>
@@ -2342,7 +2342,7 @@
 
         <!-- Prosentfordeling Kalkulator -->
         <div class="item">
-          <div class="calculator" id="calc-distribution">
+          <div class="calculator" id="prosentfordeling">
             <h2>Prosentfordeling</h2>
 
             <!-- Dynamic input container -->
@@ -2411,7 +2411,7 @@
 
         <!-- Prosent av prosent kalkulator -->
         <div class="item">
-          <div class="calculator" id="calc-percent-of-percent">
+          <div class="calculator" id="prosent-av-prosent">
             <h2>Prosent av prosent</h2>
             <div class="input-group">
               <label for="basePercent"></label>
@@ -2456,7 +2456,7 @@
 
         <!-- Prosent til desimal og brøk -->
         <div class="item">
-          <div class="calculator" id="calc-percent-fraction">
+          <div class="calculator" id="prosent-til-desimal-og-brøk">
             <h2>Prosent til desimal og brøk</h2>
             <div class="input-group">
               <label for="percentInput"></label>
@@ -2494,7 +2494,7 @@
         <!-- Påslag- og marginkalkulator -->
 
         <div class="item">
-          <div class="calculator" id="calc-markup">
+          <div class="calculator" id="påslag-og-marginkalkulator">
             <h2>Påslag- og marginkalkulator</h2>
 
             <!-- Cost input section -->
@@ -2567,7 +2567,7 @@
         <!-- MVA-kalkulator -->
 
         <div class="item">
-          <div class="calculator" id="calc-tax">
+          <div class="calculator" id="mva-kalkulator">
             <h2>MVA-kalkulator</h2>
 
             <!-- Amount input section -->
@@ -2644,7 +2644,7 @@
 
         <!-- Feriepengekalkulator -->
         <div class="item">
-          <div class="calculator" id="calc-holiday">
+          <div class="calculator" id="feriepengekalkulator">
             <h2>Feriepengekalkulator</h2>
 
             <div class="holiday-group">
@@ -2728,7 +2728,7 @@
 
         <!-- Interest Rate Calculator -->
 <div class="item">
-  <div class="calculator" id="calc-loan">
+  <div class="calculator" id="lånekalkulator">
     <h2>Lånekalkulator</h2>
     
     <!-- Loan Amount Slider -->
@@ -2845,7 +2845,7 @@
 </div>
 
         <div class="item">
-          <div class="calculator" id="calc-compound-interest">
+          <div class="calculator" id="renters-rente-kalkulator">
             <h2>Renters rente-kalkulator</h2>
             <div class="input-group">
               <input
@@ -2897,7 +2897,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-monthly-savings">
+          <div class="calculator" id="månedssparing">
             <h2>Månedssparing</h2>
             <div class="input-group">
               <input
@@ -2953,7 +2953,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-savings-goal">
+          <div class="calculator" id="sparemål">
             <h2>Sparemål</h2>
             <div class="input-group">
               <input
@@ -3010,7 +3010,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-break-even">
+          <div class="calculator" id="break-even-kalkulator-dekningspunkt">
             <h2>Break-even kalkulator (dekningspunkt)</h2>
             <div class="input-group">
               <input
@@ -3065,7 +3065,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-salary-increase">
+          <div class="calculator" id="lønnsøkning-i-kroner-og-prosent">
             <h2>Lønnsøkning i kroner og prosent</h2>
             <div class="input-group">
               <input
@@ -3110,7 +3110,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-return">
+          <div class="calculator" id="avkastning-kalkulator">
             <h2>Avkastning kalkulator</h2>
             <div class="input-group">
               <input type="number" id="returnStart" placeholder="Startverdi" />
@@ -3141,7 +3141,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-cagr">
+          <div class="calculator" id="cagr-kalkulator-årlig-vekstrate">
             <h2>CAGR kalkulator (årlig vekstrate)</h2>
             <div class="input-group">
               <input type="number" id="cagrStart" placeholder="Startverdi" />
@@ -3172,7 +3172,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-effective-rate">
+          <div class="calculator" id="effektiv-rente-kalkulator">
             <h2>Effektiv rente kalkulator</h2>
             <div class="input-group">
               <input
@@ -3212,7 +3212,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-inflation">
+          <div class="calculator" id="inflasjonskalkulator">
             <h2>Inflasjonskalkulator</h2>
             <div class="input-group">
               <input type="number" id="inflationAmount" placeholder="Beløp i dag" />
@@ -3249,7 +3249,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-kpi-adjustment">
+          <div class="calculator" id="prisjustering-kpi">
             <h2>Prisjustering KPI</h2>
             <div class="input-group">
               <input type="number" id="kpiPrice" placeholder="Opprinnelig pris" />
@@ -3281,7 +3281,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-salary-breakdown">
+          <div class="calculator" id="årslønn-til-månedslønn-og-timeslønn">
             <h2>Årslønn til månedslønn og timeslønn</h2>
             <div class="input-group">
               <input
@@ -3321,7 +3321,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-gross-net">
+          <div class="calculator" id="brutto-til-netto">
             <h2>Brutto til netto</h2>
             <div class="input-group">
               <input type="number" id="grossToNetGross" placeholder="Bruttolønn" />
@@ -3344,7 +3344,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-tax-estimate">
+          <div class="calculator" id="skattekalkulator-forenklet">
             <h2>Skattekalkulator (forenklet)</h2>
             <div class="input-group">
               <input type="number" id="taxEstimateIncome" placeholder="Årsinntekt" />
@@ -3369,7 +3369,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-overtime">
+          <div class="calculator" id="overtidskalkulator">
             <h2>Overtidskalkulator</h2>
             <div class="input-group">
               <input type="number" id="overtimeMonthlySalary" placeholder="Månedslønn" />
@@ -3395,7 +3395,7 @@
         </div>
 
         <div class="item">
-          <div class="calculator" id="calc-employer-cost">
+          <div class="calculator" id="arbeidsgiverkostnad">
             <h2>Arbeidsgiverkostnad</h2>
             <div class="input-group">
               <input type="number" id="employerSalary" placeholder="Årslønn" />
@@ -3420,7 +3420,7 @@
           </div>
         </div>
 
-        <section class="loan-side-text" id="calc-intro">
+        <section class="loan-side-text" id="prosent-og-prosentregning-en-enkel-innføring">
           <h2>Prosent og prosentregning: En enkel innføring</h2>
           <p>
             Prosent er en viktig del av matematikken som hjelper oss med å forstå og
@@ -3463,7 +3463,7 @@
 
     <div class="container info-grid">
       <div class="item">
-        <div class="calculator" id="calc-approach" aria-labelledby="approachHeading approachTitle" aria-describedby="approachSummary">
+        <div class="calculator" id="hoderegning" aria-labelledby="approachHeading approachTitle" aria-describedby="approachSummary">
           <h2 id="approachHeading">Hoderegning</h2>
           <div class="approach-panel">
             <h3 id="approachTitle">Prosentmetoder</h3>
@@ -3480,7 +3480,7 @@
       </div>
 
       <div class="item">
-        <div class="calculator" id="calc-faq">
+        <div class="calculator" id="ofte-stilte-spørsmål">
           <h2>Ofte stilte spørsmål</h2>
           <div class="faq-list">
             <details class="faq-item">
@@ -3527,7 +3527,7 @@
       </div>
 
       <div class="item">
-        <div class="calculator quiz" id="calc-quiz">
+        <div class="calculator quiz" id="prosent-quiz">
           <h2>Prosent-quiz</h2>
           <p class="quiz-intro">
             Svar på ett spørsmål om gangen. Når du velger et svar, vises neste spørsmål automatisk.
@@ -4019,56 +4019,213 @@
           .trim();
       }
 
+      const LEGACY_CALCULATOR_FRAGMENTS = new Map([
+  [
+    "calc-add-percent",
+    "legg-til-prosent-på-et-beløp"
+  ],
+  [
+    "calc-subtract-percent",
+    "trekk-fra-prosent-på-et-beløp"
+  ],
+  [
+    "calc-increase",
+    "prosentøkning-fra-verdi-a-til-verdi-b"
+  ],
+  [
+    "calc-decrease",
+    "prosentnedgang-fra-verdi-a-til-verdi-b"
+  ],
+  [
+    "calc-recovery",
+    "hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall"
+  ],
+  [
+    "calc-reverse-percent",
+    "finn-total-fra-prosent-omvendt-prosent"
+  ],
+  [
+    "calc-total",
+    "finn-prosentandel-av-totalen"
+  ],
+  [
+    "calc-discount",
+    "hvordan-regne-ut-rabatt"
+  ],
+  [
+    "calc-part",
+    "finn-delen-av-tallet"
+  ],
+  [
+    "calc-point",
+    "prosentpoeng-endring"
+  ],
+  [
+    "calc-distribution",
+    "prosentfordeling"
+  ],
+  [
+    "calc-percent-of-percent",
+    "prosent-av-prosent"
+  ],
+  [
+    "calc-percent-fraction",
+    "prosent-til-desimal-og-brøk"
+  ],
+  [
+    "calc-markup",
+    "påslag-og-marginkalkulator"
+  ],
+  [
+    "calc-tax",
+    "mva-kalkulator"
+  ],
+  [
+    "calc-holiday",
+    "feriepengekalkulator"
+  ],
+  [
+    "calc-loan",
+    "lånekalkulator"
+  ],
+  [
+    "calc-compound-interest",
+    "renters-rente-kalkulator"
+  ],
+  [
+    "calc-monthly-savings",
+    "månedssparing"
+  ],
+  [
+    "calc-savings-goal",
+    "sparemål"
+  ],
+  [
+    "calc-break-even",
+    "break-even-kalkulator-dekningspunkt"
+  ],
+  [
+    "calc-salary-increase",
+    "lønnsøkning-i-kroner-og-prosent"
+  ],
+  [
+    "calc-return",
+    "avkastning-kalkulator"
+  ],
+  [
+    "calc-cagr",
+    "cagr-kalkulator-årlig-vekstrate"
+  ],
+  [
+    "calc-effective-rate",
+    "effektiv-rente-kalkulator"
+  ],
+  [
+    "calc-inflation",
+    "inflasjonskalkulator"
+  ],
+  [
+    "calc-kpi-adjustment",
+    "prisjustering-kpi"
+  ],
+  [
+    "calc-salary-breakdown",
+    "årslønn-til-månedslønn-og-timeslønn"
+  ],
+  [
+    "calc-gross-net",
+    "brutto-til-netto"
+  ],
+  [
+    "calc-tax-estimate",
+    "skattekalkulator-forenklet"
+  ],
+  [
+    "calc-overtime",
+    "overtidskalkulator"
+  ],
+  [
+    "calc-employer-cost",
+    "arbeidsgiverkostnad"
+  ],
+  [
+    "calc-intro",
+    "prosent-og-prosentregning-en-enkel-innføring"
+  ],
+  [
+    "calc-approach",
+    "hoderegning"
+  ],
+  [
+    "calc-faq",
+    "ofte-stilte-spørsmål"
+  ],
+  [
+    "calc-quiz",
+    "prosent-quiz"
+  ]
+]);
+
+      function resolveCalculatorFragment(value) {
+        let id = String(value || "");
+        try {
+          id = decodeURIComponent(id);
+        } catch {
+          // Ugyldig URL-koding skal ikke hindre navigasjonen.
+        }
+        return LEGACY_CALCULATOR_FRAGMENTS.get(id) || id;
+      }
+
       const HUB_CALCULATOR_CONFIG = {
         prosent: {
           visibleIds: [
-            "calc-add-percent",
-            "calc-subtract-percent",
-            "calc-increase",
-            "calc-decrease",
-            "calc-recovery",
-            "calc-reverse-percent",
-            "calc-total",
-            "calc-part",
-            "calc-discount",
-            "calc-tax",
-            "calc-point",
-            "calc-distribution",
-            "calc-percent-of-percent",
-            "calc-percent-fraction",
-            "calc-markup",
-            "calc-break-even",
+            "legg-til-prosent-på-et-beløp",
+            "trekk-fra-prosent-på-et-beløp",
+            "prosentøkning-fra-verdi-a-til-verdi-b",
+            "prosentnedgang-fra-verdi-a-til-verdi-b",
+            "hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall",
+            "finn-total-fra-prosent-omvendt-prosent",
+            "finn-prosentandel-av-totalen",
+            "finn-delen-av-tallet",
+            "hvordan-regne-ut-rabatt",
+            "mva-kalkulator",
+            "prosentpoeng-endring",
+            "prosentfordeling",
+            "prosent-av-prosent",
+            "prosent-til-desimal-og-brøk",
+            "påslag-og-marginkalkulator",
+            "break-even-kalkulator-dekningspunkt",
           ],
           missing: [],
         },
         "lonn-skatt": {
           visibleIds: [
-            "calc-holiday",
-            "calc-salary-breakdown",
-            "calc-salary-increase",
-            "calc-gross-net",
-            "calc-tax-estimate",
-            "calc-overtime",
-            "calc-employer-cost",
+            "feriepengekalkulator",
+            "årslønn-til-månedslønn-og-timeslønn",
+            "lønnsøkning-i-kroner-og-prosent",
+            "brutto-til-netto",
+            "skattekalkulator-forenklet",
+            "overtidskalkulator",
+            "arbeidsgiverkostnad",
           ],
           missing: [],
         },
         "sparing-renter": {
           visibleIds: [
-            "calc-monthly-savings",
-            "calc-savings-goal",
-            "calc-compound-interest",
-            "calc-loan",
-            "calc-return",
-            "calc-cagr",
-            "calc-effective-rate",
-            "calc-inflation",
-            "calc-kpi-adjustment",
+            "månedssparing",
+            "sparemål",
+            "renters-rente-kalkulator",
+            "lånekalkulator",
+            "avkastning-kalkulator",
+            "cagr-kalkulator-årlig-vekstrate",
+            "effektiv-rente-kalkulator",
+            "inflasjonskalkulator",
+            "prisjustering-kpi",
           ],
           missing: [],
         },
         oppgaver: {
-          visibleIds: ["calc-approach", "calc-faq", "calc-quiz"],
+          visibleIds: ["hoderegning", "ofte-stilte-spørsmål", "prosent-quiz"],
           missing: [],
         },
       };
@@ -4085,7 +4242,7 @@
 
         const resolveBlock = (element) => element.closest(".item") || element;
         const allTargets = Array.from(
-          document.querySelectorAll(".calculator[id], #calc-intro")
+          document.querySelectorAll(".calculator[id], #prosent-og-prosentregning-en-enkel-innføring")
         );
         const allBlocks = Array.from(new Set(allTargets.map(resolveBlock)));
 
@@ -4106,7 +4263,7 @@
 
           navLinks.forEach((link) => {
             const href = link.getAttribute("href") || "";
-            const id = href.replace("#", "");
+            const id = resolveCalculatorFragment(href.slice(1));
             link.classList.toggle("hub-link-hidden", !visibleIds.has(id));
           });
 
@@ -4132,7 +4289,32 @@
           });
         });
 
+        const syncHubToFragment = () => {
+          const fragment = window.location.hash.slice(1);
+          const id = resolveCalculatorFragment(fragment);
+          const target = allTargets.find((element) => element.id === id);
+          if (!target) return;
+
+          const category = Object.entries(HUB_CALCULATOR_CONFIG).find(
+            ([, config]) => config.visibleIds.includes(id)
+          );
+          if (category && category[0] !== activeHubKey) {
+            applyHubFilter(category[0]);
+          } else if (!category) {
+            resolveBlock(target).classList.remove("hub-hidden");
+          }
+
+          if (LEGACY_CALCULATOR_FRAGMENTS.has(fragment)) {
+            history.replaceState(null, "", "#" + id);
+          }
+          requestAnimationFrame(() => {
+            target.scrollIntoView({ block: "start" });
+          });
+        };
+
         applyHubFilter(activeHubKey);
+        window.addEventListener("hashchange", syncHubToFragment);
+        requestAnimationFrame(syncHubToFragment);
       }
 
       function initCalculatorSearch() {
@@ -4183,7 +4365,7 @@
             return;
           }
 
-          const target = document.querySelector(targetSelector);
+          const target = document.getElementById(resolveCalculatorFragment(targetSelector.slice(1)));
           if (!target) {
             return;
           }
@@ -4222,9 +4404,9 @@
         const section = document.getElementById("pinnedCalculatorsSection");
         const pinnedGrid = document.getElementById("pinnedCalculators");
         const excludedCalculatorIds = new Set([
-          "calc-approach",
-          "calc-faq",
-          "calc-quiz",
+          "hoderegning",
+          "ofte-stilte-spørsmål",
+          "prosent-quiz",
           "rpgSection",
         ]);
 
@@ -4244,7 +4426,7 @@
           try {
             const storedIds = JSON.parse(localStorage.getItem(storageKey) || "[]");
             return Array.isArray(storedIds)
-              ? storedIds.filter((id) => calculatorsById.has(id))
+              ? storedIds.map(resolveCalculatorFragment).filter((id) => calculatorsById.has(id))
               : [];
           } catch {
             return [];
@@ -5950,157 +6132,157 @@ let sequentialQuizState = null;
 
 function addPedagogicalExamples() {
   const examples = {
-    'calc-subtract-percent': {
+    'trekk-fra-prosent-på-et-beløp': {
       task: 'En vare koster 500 kr og settes ned med 15 %. Hva blir den nye prisen?',
       method: 'Finn først avslaget: 500 × 15 / 100 = 75 kr. Trekk deretter avslaget fra prisen: 500 kr − 75 kr = 425 kr.',
       alternative: 'Et avslag på 15 % betyr at 85 % av prisen gjenstår. Regn derfor 500 kr × 0,85 = 425 kr.',
     },
-    'calc-increase': {
+    'prosentøkning-fra-verdi-a-til-verdi-b': {
       task: 'En verdi øker fra 200 til 250. Hvor mange prosent er økningen?',
       method: 'Finn først forskjellen: 250 − 200 = 50. Sammenlign så økningen med startverdien: 50 / 200 × 100 = 25 %.',
       alternative: 'Del sluttverdien på startverdien: 250 / 200 = 1,25. Faktoren 1,25 betyr 25 % økning.',
     },
-    'calc-decrease': {
+    'prosentnedgang-fra-verdi-a-til-verdi-b': {
       task: 'En verdi går ned fra 250 til 200. Hvor mange prosent er nedgangen?',
       method: 'Finn først forskjellen: 250 − 200 = 50. Del deretter nedgangen på startverdien: 50 / 250 × 100 = 20 %.',
       alternative: '200 er 80 % av 250. Da er resten, 100 % − 80 %, en nedgang på 20 %.',
     },
-    'calc-recovery': {
+    'hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall': {
       task: 'En verdi faller med 20 %. Hvor mye må den øke for å komme tilbake til utgangspunktet?',
       method: 'Tenk deg at verdien starter på 100. Etter et fall på 20 % er den 80. Den må da øke 20 fra 80 til 100: 20 / 80 × 100 = 25 %.',
       alternative: 'Bruk formelen nedgang / (100 − nedgang) × 100: 20 / 80 × 100 = 25 %.',
     },
-    'calc-reverse-percent': {
+    'finn-total-fra-prosent-omvendt-prosent': {
       task: 'En pris på 625 kr inkluderer en økning på 25 %. Hva var prisen før økningen?',
       method: '25 % økning betyr at 625 kr er 125 % av den opprinnelige prisen. Del derfor på 1,25: 625 / 1,25 = 500 kr.',
       alternative: 'Prøv baklengs: 25 % av 500 kr er 125 kr. Da gir 500 kr + 125 kr = 625 kr.',
     },
-    'calc-total': {
+    'finn-prosentandel-av-totalen': {
       task: '45 av 180 skal uttrykkes i prosent. Hvor stor andel er det?',
       method: 'Del delen på totalen og gang med 100: 45 / 180 × 100 = 25 %.',
       alternative: '180 delt i fire like deler er 45. Én av fire like deler er en fjerdedel, altså 25 %.',
     },
-    'calc-discount': {
+    'hvordan-regne-ut-rabatt': {
       task: 'En vare koster 1 000 kr og har 25 % rabatt. Hva blir den nye prisen?',
       method: 'Finn rabatten først: 1 000 × 25 / 100 = 250 kr. Trekk så rabatten fra prisen: 1 000 kr − 250 kr = 750 kr.',
       alternative: 'Etter 25 % rabatt gjenstår 75 % av prisen. Regn derfor 1 000 kr × 0,75 = 750 kr.',
     },
-    'calc-part': {
+    'finn-delen-av-tallet': {
       task: 'Hva er 15 % av 200?',
       method: 'Gjør prosenten om til desimaltall: 15 % = 0,15. Regn deretter 200 × 0,15 = 30.',
       alternative: 'Finn 10 % og 5 % hver for seg: 10 % av 200 er 20, og 5 % er 10. Til sammen er 15 % lik 30.',
     },
-    'calc-point': {
+    'prosentpoeng-endring': {
       task: 'En andel øker fra 20 % til 27 %. Hva er endringen i prosentpoeng?',
       method: 'Prosentpoeng er den direkte forskjellen mellom prosentene: 27 % − 20 % = 7 prosentpoeng.',
       alternative: 'Skal du finne relativ prosentvis endring i stedet, regner du 7 / 20 × 100 = 35 %. Prosentpoeng og prosentvis endring er altså ikke det samme.',
     },
-    'calc-distribution': {
+    'prosentfordeling': {
       task: 'Tre verdier er 30, 50 og 20. Hvor stor prosentandel utgjør hver verdi?',
       method: 'Finn totalen først: 30 + 50 + 20 = 100. Del så hver verdi på totalen: 30 / 100 = 30 %, 50 / 100 = 50 % og 20 / 100 = 20 %.',
       alternative: 'Når totalen er 100, er hver verdi allerede den samme som prosentandelen. Dette er en rask kontroll av svaret.',
     },
-    'calc-percent-of-percent': {
+    'prosent-av-prosent': {
       task: 'Hva er 20 % av 15 %?',
       method: 'Gang prosentene og del på 100: 15 × 20 / 100 = 3 %. Resultatet er en del av den opprinnelige helheten.',
       alternative: 'Skriv prosentene som desimaltall: 0,15 × 0,20 = 0,03. Desimaltallet 0,03 er 3 %.',
     },
-    'calc-percent-fraction': {
+    'prosent-til-desimal-og-brøk': {
       task: 'Gjør 12,5 % om til både desimaltall og brøk.',
       method: 'Del prosenten på 100: 12,5 / 100 = 0,125. Som brøk blir det 125 / 1 000, som kan forkortes til 1 / 8.',
       alternative: 'Flytt desimaltegnet to plasser til venstre: 12,5 % blir 0,125. Deretter kan du skrive 0,125 som en brøk.',
     },
-    'calc-markup': {
+    'påslag-og-marginkalkulator': {
       task: 'En vare har innkjøpspris 100 kr og skal ha 25 % påslag. Hva blir salgsprisen?',
       method: 'Finn påslaget først: 100 × 25 / 100 = 25 kr. Legg påslaget til innkjøpsprisen: 100 kr + 25 kr = 125 kr.',
       alternative: 'Bruk vekstfaktor: 100 kr × 1,25 = 125 kr. Husk at påslag regnes av innkjøpsprisen, mens margin regnes av salgsprisen.',
     },
-    'calc-tax': {
+    'mva-kalkulator': {
       task: 'Et beløp uten MVA er 1 000 kr. Hva blir beløpet med 25 % MVA?',
       method: 'Finn MVA-beløpet først: 1 000 × 25 / 100 = 250 kr. Legg det til: 1 000 kr + 250 kr = 1 250 kr.',
       alternative: '25 % MVA gir faktoren 1,25. Regn derfor 1 000 kr × 1,25 = 1 250 kr.',
     },
-    'calc-holiday': {
+    'feriepengekalkulator': {
       task: 'Lønnsgrunnlaget er 660 000 kr og feriepengesatsen er 12 %. Hvor mye blir feriepengene før eventuelle lønnstrekk?',
       method: 'Regn feriepengene først: 660 000 × 12 / 100 = 79 200 kr. Eventuelt trekk i månedslønn vises separat, slik at du ser forskjellen på brutto feriepenger og netto utbetaling.',
       alternative: 'Bruk desimalformen 0,12: 660 000 kr × 0,12 = 79 200 kr. Fjern avmerkingen for lønnstrekk hvis du bare vil se feriepengene.',
     },
-    'calc-loan': {
+    'lånekalkulator': {
       task: 'Du låner 2 500 000 kr med 4,5 % rente over 25 år. Hva blir den omtrentlige månedlige kostnaden?',
       method: 'Kalkulatoren deler den årlige renten i månedlige renter og fordeler lånet over 25 × 12 = 300 betalinger. Hver betaling dekker både renter og avdrag.',
       alternative: 'Bruk effektiv rente når du sammenligner lån. Den tar hensyn til hvor ofte renten legges til, mens månedskostnaden beregnes fra den nominelle renten.',
     },
-    'calc-compound-interest': {
+    'renters-rente-kalkulator': {
       task: 'Du setter inn 100 000 kr til 5 % rente i 10 år, med månedlig rentetilskriving. Hvor mye vokser beløpet til?',
       method: 'Månedsrenten er 5 % / 12. Den legges til 12 × 10 = 120 ganger, slik at du også får rente på tidligere opptjent rente.',
       alternative: 'Med årlig tilskriving kan du tenke 100 000 × 1,05^10. Månedlig tilskriving gir litt høyere beløp fordi renten legges til oftere.',
     },
-    'calc-monthly-savings': {
+    'månedssparing': {
       task: 'Du starter med 50 000 kr og sparer 2 000 kr hver måned i 10 år, med 6 % årlig avkastning. Hvor mye kan sparingen vokse til?',
       method: 'Startbeløpet får avkastning gjennom hele perioden. Hver månedlige innbetaling får også avkastning, men i ulikt antall måneder.',
       alternative: 'Del årsrenten på 12 for å få månedlig rente. Kalkulatoren legger til månedssparingen etter hver måned, slik at den får rente frem til sluttdatoen.',
     },
-    'calc-savings-goal': {
+    'sparemål': {
       task: 'Du vil ha 500 000 kr om 8 år. Du har 50 000 kr fra før og forventer 5 % årlig avkastning. Hvor mye må du spare hver måned?',
       method: 'Først beregnes hva startbeløpet kan vokse til. Resten av målet fordeles deretter på månedlige innbetalinger som også får avkastning.',
       alternative: 'Uten avkastning deler du manglende beløp på antall måneder. Med avkastning blir nødvendig månedsbeløp lavere fordi pengene får vokse underveis.',
     },
-    'calc-break-even': {
+    'break-even-kalkulator-dekningspunkt': {
       task: 'Faste kostnader er 120 000 kr. Salgspris er 500 kr og variable kostnader er 300 kr per enhet. Hvor mange enheter må selges?',
       method: 'Finn dekningsbidraget først: 500 kr − 300 kr = 200 kr per enhet. Del så faste kostnader på dekningsbidraget: 120 000 / 200 = 600 enheter.',
       alternative: 'Kontroller svaret: 600 enheter × 200 kr i dekningsbidrag = 120 000 kr. Da er de faste kostnadene dekket.',
     },
-    'calc-salary-increase': {
+    'lønnsøkning-i-kroner-og-prosent': {
       task: 'Årslønnen øker fra 550 000 kr til 590 000 kr. Hvor stor er lønnsøkningen?',
       method: 'Finn økningen i kroner først: 590 000 kr − 550 000 kr = 40 000 kr. Del så på gammel lønn: 40 000 / 550 000 × 100 = 7,27 %.',
       alternative: 'Del ny lønn på gammel lønn: 590 000 / 550 000 = 1,0727. Faktoren over 1 viser en økning på 7,27 %.',
     },
-    'calc-return': {
+    'avkastning-kalkulator': {
       task: 'En investering øker fra 100 000 kr til 124 000 kr. Hva er avkastningen?',
       method: 'Finn gevinsten først: 124 000 kr − 100 000 kr = 24 000 kr. Del gevinsten på startverdien: 24 000 / 100 000 × 100 = 24 %.',
       alternative: 'Sluttverdien er 1,24 ganger startverdien: 124 000 / 100 000 = 1,24. Det tilsvarer 24 % avkastning.',
     },
-    'calc-cagr': {
+    'cagr-kalkulator-årlig-vekstrate': {
       task: 'En investering vokser fra 100 000 kr til 180 000 kr på 8 år. Hva er gjennomsnittlig årlig vekst?',
       method: 'Finn total vekstfaktor: 180 000 / 100 000 = 1,8. Finn så den årlige faktoren: 1,8^(1/8), trekk fra 1 og gang med 100.',
       alternative: 'Ikke del samlet vekst på 80 % rett på 8. CAGR tar hensyn til renters rente og gir derfor et mer riktig årlig gjennomsnitt.',
     },
-    'calc-effective-rate': {
+    'effektiv-rente-kalkulator': {
       task: 'Nominell rente er 6 % og renten legges til hver måned. Hva blir effektiv årlig rente?',
       method: 'Månedsrenten er 6 % / 12 = 0,5 %. La den vokse i 12 måneder: (1 + 0,005)^12 − 1. Resultatet er den effektive årlige renten.',
       alternative: 'Effektiv rente er best når du sammenligner lån og sparing, fordi den inkluderer virkningen av at renten legges til flere ganger i året.',
     },
-    'calc-inflation': {
+    'inflasjonskalkulator': {
       task: 'Et beløp på 10 000 kr påvirkes av 2,5 % årlig inflasjon i 5 år. Hva tilsvarer beløpet om fem år?',
       method: 'Hvert år ganges beløpet med 1,025. Over fem år blir det 10 000 × 1,025^5.',
       alternative: 'Du kan også regne år for år: start med 10 000 kr, legg til 2,5 %, og bruk det nye beløpet som utgangspunkt neste år.',
     },
-    'calc-kpi-adjustment': {
+    'prisjustering-kpi': {
       task: 'En pris på 5 000 kr skal justeres når KPI går fra 120 til 135,5. Hva blir den justerte prisen?',
       method: 'Finn endringsfaktoren ved å dele ny KPI på gammel KPI: 135,5 / 120. Gang deretter prisen med denne faktoren.',
       alternative: 'Finn først prosentendringen i KPI: (135,5 − 120) / 120 × 100. Legg så den samme prosentvise økningen til prisen.',
     },
-    'calc-salary-breakdown': {
+    'årslønn-til-månedslønn-og-timeslønn': {
       task: 'Årslønnen er 720 000 kr og arbeidsuken er 37,5 timer. Hva tilsvarer det per måned og time?',
       method: 'Månedslønn er årslønn delt på 12: 720 000 / 12 = 60 000 kr. Timelønn finnes ved å dele på 37,5 × 52 arbeidstimer i året.',
       alternative: 'Regn først antall timer i året: 37,5 × 52 = 1 950. Del deretter 720 000 kr på 1 950 for å finne timelønnen.',
     },
-    'calc-gross-net': {
+    'brutto-til-netto': {
       task: 'Bruttolønnen er 55 000 kr og skatten er 30 %. Hva blir nettolønnen?',
       method: 'Finn skatten først: 55 000 × 30 / 100 = 16 500 kr. Trekk skatten fra bruttolønnen: 55 000 kr − 16 500 kr = 38 500 kr.',
       alternative: 'Etter 30 % skatt gjenstår 70 %. Regn derfor 55 000 kr × 0,70 = 38 500 kr.',
     },
-    'calc-tax-estimate': {
+    'skattekalkulator-forenklet': {
       task: 'Årsinntekten er 720 000 kr, fradraget er 100 000 kr og skattesatsen er 32 %. Hva blir et forenklet skatteestimat?',
       method: 'Finn skattegrunnlaget først: 720 000 kr − 100 000 kr = 620 000 kr. Skatten er så 620 000 × 32 / 100 = 198 400 kr.',
       alternative: 'Trekk estimert skatt fra inntekten og del på 12 for et anslag på netto per måned. Kalkulatoren er forenklet og erstatter ikke et offisielt skatteoppgjør.',
     },
-    'calc-overtime': {
+    'overtidskalkulator': {
       task: 'Månedslønnen er 50 000 kr, arbeidsuken er 37,5 timer, du jobber 12 overtidstimer og tillegget er 50 %. Hva blir overtidsbetalingen?',
       method: 'Finn først timelønn fra årslønn og arbeidstimer per år. Legg så til 50 % på timelønnen og gang den nye satsen med 12 overtidstimer.',
       alternative: 'Ved 50 % tillegg er overtidssatsen 1,5 ganger vanlig timelønn. Du kan derfor regne timelønn × 1,5 × antall overtidstimer.',
     },
-    'calc-employer-cost': {
+    'arbeidsgiverkostnad': {
       task: 'Årslønnen er 650 000 kr. Arbeidsgiveravgiften er 14,1 %, OTP er 2 % og andre kostnader er 15 000 kr. Hva koster medarbeideren totalt?',
       method: 'Regn arbeidsgiveravgift og OTP hver for seg av lønnen. Legg deretter lønn, arbeidsgiveravgift, OTP og andre kostnader sammen.',
       alternative: 'Se på kostnaden som lønn × (1 + 0,141 + 0,02), og legg deretter til øvrige kostnader. Da blir det tydelig hvilke deler som er prosentbaserte.',
@@ -6158,7 +6340,7 @@ function getPedagogicalCalculation(calculatorId) {
   const calculation = (simple, alternative) => ({ simple, alternative });
 
   switch (calculatorId) {
-    case 'calc-add-percent': {
+    case 'legg-til-prosent-på-et-beløp': {
       const amount = value('addPercentAmount');
       const percent = value('addPercentRate');
       if (!Number.isFinite(amount) || !Number.isFinite(percent)) return null;
@@ -6169,7 +6351,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(amount)} × ${number(1 + percent / 100)} = ${number(result)}.`
       );
     }
-    case 'calc-subtract-percent': {
+    case 'trekk-fra-prosent-på-et-beløp': {
       const amount = value('subtractPercentAmount');
       const percent = value('subtractPercentRate');
       if (!Number.isFinite(amount) || !Number.isFinite(percent)) return null;
@@ -6180,7 +6362,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(amount)} × ${number(1 - percent / 100)} = ${number(result)}.`
       );
     }
-    case 'calc-increase': {
+    case 'prosentøkning-fra-verdi-a-til-verdi-b': {
       const from = value('increaseInitialValue');
       const to = value('increaseFinalValue');
       if (!Number.isFinite(from) || !Number.isFinite(to) || from === 0) return null;
@@ -6191,7 +6373,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(to)} / ${number(from)} = ${number(to / from)}. Faktoren over 1 gir ${number(result)} % økning.`
       );
     }
-    case 'calc-decrease': {
+    case 'prosentnedgang-fra-verdi-a-til-verdi-b': {
       const from = value('decreaseInitialValue');
       const to = value('decreaseFinalValue');
       if (!Number.isFinite(from) || !Number.isFinite(to) || from === 0) return null;
@@ -6202,7 +6384,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(to)} / ${number(from)} = ${number(to / from)}. Det betyr at ${number(100 - result)} % gjenstår, altså ${number(result)} % nedgang.`
       );
     }
-    case 'calc-recovery': {
+    case 'hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall': {
       const drop = value('recoveryDropPercent');
       if (!Number.isFinite(drop) || drop < 0 || drop >= 100) return null;
       const remaining = 100 - drop;
@@ -6212,7 +6394,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Gjenopprettingsfaktoren er 100 / ${number(remaining)} = ${number(100 / remaining)}. Det tilsvarer ${number(recovery)} % økning.`
       );
     }
-    case 'calc-reverse-percent': {
+    case 'finn-total-fra-prosent-omvendt-prosent': {
       const finalValue = value('reverseFinalValue');
       const percent = value('reversePercent');
       if (!Number.isFinite(finalValue) || !Number.isFinite(percent)) return null;
@@ -6227,7 +6409,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(finalValue)} / (1 ${operation} ${number(percent)} / 100) = ${number(original)}.`
       );
     }
-    case 'calc-total': {
+    case 'finn-prosentandel-av-totalen': {
       const part = value('partValue');
       const total = value('totalValue');
       if (!Number.isFinite(part) || !Number.isFinite(total) || total === 0) return null;
@@ -6237,7 +6419,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(part)} / ${number(total)} × 100 = ${number(result)} %.`
       );
     }
-    case 'calc-discount': {
+    case 'hvordan-regne-ut-rabatt': {
       const price = value('originalPrice');
       const percent = value('discountPercentage');
       if (!Number.isFinite(price) || !Number.isFinite(percent)) return null;
@@ -6248,7 +6430,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Etter ${number(percent)} % rabatt gjenstår ${number(100 - percent)} %. ${number(price)} × ${number(1 - percent / 100)} = ${number(result)}.`
       );
     }
-    case 'calc-part': {
+    case 'finn-delen-av-tallet': {
       const whole = value('baseNumber');
       const percent = value('percentageValue');
       if (!Number.isFinite(whole) || !Number.isFinite(percent)) return null;
@@ -6258,7 +6440,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(whole)} × ${number(percent)} / 100 = ${number(result)}.`
       );
     }
-    case 'calc-point': {
+    case 'prosentpoeng-endring': {
       const from = value('initialPercentage');
       const to = value('finalPercentage');
       if (!Number.isFinite(from) || !Number.isFinite(to)) return null;
@@ -6269,8 +6451,8 @@ function getPedagogicalCalculation(calculatorId) {
         `Relativ endring er noe annet: ${number(points)} / ${number(from)} × 100 = ${number(relative)} %.`
       );
     }
-    case 'calc-distribution': {
-      const values = [...document.querySelectorAll('#calc-distribution .value-input')]
+    case 'prosentfordeling': {
+      const values = [...document.querySelectorAll('#prosentfordeling .value-input')]
         .map((input) => Number(input.value));
       if (!values.length || values.some((current) => !Number.isFinite(current))) return null;
       const total = values.reduce((sum, current) => sum + current, 0);
@@ -6281,7 +6463,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${values.map((current, index) => `${number(current)} / ${number(total)} × 100 = ${number(shares[index])} %`).join('. ')}.`
       );
     }
-    case 'calc-percent-of-percent': {
+    case 'prosent-av-prosent': {
       const first = value('basePercent');
       const second = value('percentOfPercent');
       if (!Number.isFinite(first) || !Number.isFinite(second)) return null;
@@ -6291,7 +6473,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(first / 100)} × ${number(second / 100)} = ${number(result / 100)}, som er ${number(result)} %.`
       );
     }
-    case 'calc-percent-fraction': {
+    case 'prosent-til-desimal-og-brøk': {
       const percent = value('percentInput');
       if (!Number.isFinite(percent)) return null;
       const decimal = percent / 100;
@@ -6300,7 +6482,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Flytt desimaltegnet to plasser til venstre: ${number(percent)} % = ${number(decimal)}.`
       );
     }
-    case 'calc-markup': {
+    case 'påslag-og-marginkalkulator': {
       const cost = value('costPrice');
       const percent = value('percentageInput');
       if (!Number.isFinite(cost) || !Number.isFinite(percent)) return null;
@@ -6320,7 +6502,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(cost)} × ${number(1 + percent / 100)} = ${number(price)}.`
       );
     }
-    case 'calc-tax': {
+    case 'mva-kalkulator': {
       const amount = value('baseAmount');
       const selectedRate = document.getElementById('taxRate')?.value;
       const rate = selectedRate === 'custom' ? value('customTaxRate') : Number(selectedRate);
@@ -6340,7 +6522,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(amount)} × ${number(factor)} = ${number(incl)}.`
       );
     }
-    case 'calc-holiday': {
+    case 'feriepengekalkulator': {
       const base = value('holidayBase');
       const selectedRate = document.getElementById('holidayRate')?.value;
       const rate = selectedRate === 'custom' ? value('holidayCustomRate') : Number(selectedRate);
@@ -6351,7 +6533,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(base)} × ${number(rate / 100)} = ${number(result)}.`
       );
     }
-    case 'calc-loan': {
+    case 'lånekalkulator': {
       const principal = value('principalAmount');
       const rate = value('interestRate');
       const years = value('timePeriod');
@@ -6367,7 +6549,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Annuitetsformel: ${number(principal)} × [${number(monthlyRate)} × (1 + ${number(monthlyRate)})^${number(payments)}] / [(1 + ${number(monthlyRate)})^${number(payments)} − 1] = ${number(payment)}.`
       );
     }
-    case 'calc-compound-interest': {
+    case 'renters-rente-kalkulator': {
       const principal = value('compoundPrincipal');
       const rate = value('compoundRate');
       const years = value('compoundYears');
@@ -6381,7 +6563,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(principal)} × (1 + ${number(periodRate)})^${number(periods)} = ${number(result)}.`
       );
     }
-    case 'calc-monthly-savings': {
+    case 'månedssparing': {
       const start = value('monthlySavingsStart');
       const monthly = value('monthlySavingsAmount');
       const rate = value('monthlySavingsRate');
@@ -6398,7 +6580,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(start)} × ${number(growthFactor)} + månedlige innbetalinger = ${number(result)} kr.`
       );
     }
-    case 'calc-savings-goal': {
+    case 'sparemål': {
       const goal = value('savingsGoalAmount');
       const start = value('savingsGoalStart');
       const rate = value('savingsGoalRate');
@@ -6418,7 +6600,7 @@ function getPedagogicalCalculation(calculatorId) {
         `For å nå ${number(goal)} kr må du spare ${number(monthly)} kr hver måned.`
       );
     }
-    case 'calc-break-even': {
+    case 'break-even-kalkulator-dekningspunkt': {
       const fixed = value('breakEvenFixedCosts');
       const price = value('breakEvenPrice');
       const variable = value('breakEvenVariableCost');
@@ -6431,7 +6613,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Avrund opp fordi du ikke kan selge en del av en enhet: ${number(rawUnits)} blir ${number(Math.ceil(rawUnits))} enheter.`
       );
     }
-    case 'calc-salary-increase': {
+    case 'lønnsøkning-i-kroner-og-prosent': {
       const oldSalary = value('salaryOld');
       const newSalary = value('salaryNew');
       if (![oldSalary, newSalary].every(Number.isFinite) || oldSalary === 0) return null;
@@ -6442,7 +6624,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(newSalary)} / ${number(oldSalary)} = ${number(newSalary / oldSalary)}. Faktoren over 1 gir ${number(percent)} % økning.`
       );
     }
-    case 'calc-return': {
+    case 'avkastning-kalkulator': {
       const start = value('returnStart');
       const end = value('returnEnd');
       if (![start, end].every(Number.isFinite) || start === 0) return null;
@@ -6453,7 +6635,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(end)} / ${number(start)} = ${number(end / start)}. Faktoren over 1 gir ${number(percent)} % avkastning.`
       );
     }
-    case 'calc-cagr': {
+    case 'cagr-kalkulator-årlig-vekstrate': {
       const start = value('cagrStart');
       const end = value('cagrEnd');
       const years = value('cagrYears');
@@ -6466,7 +6648,7 @@ function getPedagogicalCalculation(calculatorId) {
         `(${number(end)} / ${number(start)})^(1/${number(years)}) − 1 = ${number(result)} % per år.`
       );
     }
-    case 'calc-effective-rate': {
+    case 'effektiv-rente-kalkulator': {
       const nominal = value('effectiveNominalRate');
       const periods = value('effectivePeriods');
       if (![nominal, periods].every(Number.isFinite) || periods <= 0) return null;
@@ -6477,7 +6659,7 @@ function getPedagogicalCalculation(calculatorId) {
         `(1 + ${number(periodRate)})^${number(periods)} − 1 = ${number(result)} %.`
       );
     }
-    case 'calc-inflation': {
+    case 'inflasjonskalkulator': {
       const amount = value('inflationAmount');
       const rate = value('inflationRate');
       const years = value('inflationYears');
@@ -6489,7 +6671,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(amount)} × ${number(1 + rate / 100)}^${number(years)} = ${number(result)}.`
       );
     }
-    case 'calc-kpi-adjustment': {
+    case 'prisjustering-kpi': {
       const price = value('kpiPrice');
       const oldKpi = value('kpiOld');
       const newKpi = value('kpiNew');
@@ -6501,7 +6683,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(price)} × ${number(factor)} = ${number(result)}.`
       );
     }
-    case 'calc-salary-breakdown': {
+    case 'årslønn-til-månedslønn-og-timeslønn': {
       const annual = value('salaryAnnual');
       const weekly = value('salaryWeeklyHours') || 37.5;
       if (![annual, weekly].every(Number.isFinite) || weekly === 0) return null;
@@ -6513,7 +6695,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Timeslønn: ${number(annual)} / ${number(yearlyHours)} = ${number(hourly)}.`
       );
     }
-    case 'calc-gross-net': {
+    case 'brutto-til-netto': {
       const gross = value('grossToNetGross');
       const rate = value('grossToNetRate');
       if (![gross, rate].every(Number.isFinite)) return null;
@@ -6524,7 +6706,7 @@ function getPedagogicalCalculation(calculatorId) {
         `Etter skatt gjenstår ${number(100 - rate)} %. ${number(gross)} × ${number(1 - rate / 100)} = ${number(net)}.`
       );
     }
-    case 'calc-tax-estimate': {
+    case 'skattekalkulator-forenklet': {
       const income = value('taxEstimateIncome');
       const deduction = value('taxEstimateDeduction');
       const rate = value('taxEstimateRate');
@@ -6536,7 +6718,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(income)} − ${number(tax)} = ${number(income - tax)} etter estimert skatt. Del på 12 for månedsbeløpet.`
       );
     }
-    case 'calc-overtime': {
+    case 'overtidskalkulator': {
       const monthly = value('overtimeMonthlySalary');
       const weekly = value('overtimeWeeklyHours') || 37.5;
       const hours = value('overtimeHours');
@@ -6550,7 +6732,7 @@ function getPedagogicalCalculation(calculatorId) {
         `${number(overtimeHourly)} × ${number(hours)} overtidstimer = ${number(result)}.`
       );
     }
-    case 'calc-employer-cost': {
+    case 'arbeidsgiverkostnad': {
       const salary = value('employerSalary');
       const agaRate = value('employerAgaRate');
       const otpRate = value('employerOtpRate');
@@ -6571,38 +6753,38 @@ function getPedagogicalCalculation(calculatorId) {
 
 function initPedagogicalCalculations() {
   const calculationTargets = [
-    ['calc-add-percent', 'addPercentCalculationDetails', 'addPercentAlternativeCalculationDetails'],
-    ['calc-subtract-percent', 'subtractPercentCalculationDetails'],
-    ['calc-increase', 'increaseCalculationDetails'],
-    ['calc-decrease', 'decreaseCalculationDetails'],
-    ['calc-recovery', 'recoveryCalculationDetails'],
-    ['calc-reverse-percent', 'reverseCalculationDetails'],
-    ['calc-total', 'calculationDetai'],
-    ['calc-discount', 'Utregning'],
-    ['calc-part', 'calculationD'],
-    ['calc-point', 'pointCalculationDetails'],
-    ['calc-distribution', null, null, 'totalSum'],
-    ['calc-percent-of-percent', 'percentOfPercentCalculation'],
-    ['calc-percent-fraction', 'percentToFractionCalculation'],
-    ['calc-markup', 'calculation'],
-    ['calc-tax', 'taxCalculation'],
-    ['calc-holiday', 'holidayCalculation'],
-    ['calc-loan', 'interestCalculation'],
-    ['calc-compound-interest', 'compoundCalculation'],
-    ['calc-monthly-savings', 'monthlySavingsCalculation'],
-    ['calc-savings-goal', 'savingsGoalCalculation'],
-    ['calc-break-even', 'breakEvenCalculation'],
-    ['calc-salary-increase', 'salaryIncreaseCalculation'],
-    ['calc-return', 'returnCalculation'],
-    ['calc-cagr', 'cagrCalculation'],
-    ['calc-effective-rate', 'effectiveRateCalculation'],
-    ['calc-inflation', 'inflationCalculation'],
-    ['calc-kpi-adjustment', 'kpiCalculation'],
-    ['calc-salary-breakdown', 'salaryBreakdownCalculation'],
-    ['calc-gross-net', 'grossToNetCalculation'],
-    ['calc-tax-estimate', 'taxEstimateCalculation'],
-    ['calc-overtime', 'overtimeCalculation'],
-    ['calc-employer-cost', 'employerCostCalculation'],
+    ['legg-til-prosent-på-et-beløp', 'addPercentCalculationDetails', 'addPercentAlternativeCalculationDetails'],
+    ['trekk-fra-prosent-på-et-beløp', 'subtractPercentCalculationDetails'],
+    ['prosentøkning-fra-verdi-a-til-verdi-b', 'increaseCalculationDetails'],
+    ['prosentnedgang-fra-verdi-a-til-verdi-b', 'decreaseCalculationDetails'],
+    ['hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall', 'recoveryCalculationDetails'],
+    ['finn-total-fra-prosent-omvendt-prosent', 'reverseCalculationDetails'],
+    ['finn-prosentandel-av-totalen', 'calculationDetai'],
+    ['hvordan-regne-ut-rabatt', 'Utregning'],
+    ['finn-delen-av-tallet', 'calculationD'],
+    ['prosentpoeng-endring', 'pointCalculationDetails'],
+    ['prosentfordeling', null, null, 'totalSum'],
+    ['prosent-av-prosent', 'percentOfPercentCalculation'],
+    ['prosent-til-desimal-og-brøk', 'percentToFractionCalculation'],
+    ['påslag-og-marginkalkulator', 'calculation'],
+    ['mva-kalkulator', 'taxCalculation'],
+    ['feriepengekalkulator', 'holidayCalculation'],
+    ['lånekalkulator', 'interestCalculation'],
+    ['renters-rente-kalkulator', 'compoundCalculation'],
+    ['månedssparing', 'monthlySavingsCalculation'],
+    ['sparemål', 'savingsGoalCalculation'],
+    ['break-even-kalkulator-dekningspunkt', 'breakEvenCalculation'],
+    ['lønnsøkning-i-kroner-og-prosent', 'salaryIncreaseCalculation'],
+    ['avkastning-kalkulator', 'returnCalculation'],
+    ['cagr-kalkulator-årlig-vekstrate', 'cagrCalculation'],
+    ['effektiv-rente-kalkulator', 'effectiveRateCalculation'],
+    ['inflasjonskalkulator', 'inflationCalculation'],
+    ['prisjustering-kpi', 'kpiCalculation'],
+    ['årslønn-til-månedslønn-og-timeslønn', 'salaryBreakdownCalculation'],
+    ['brutto-til-netto', 'grossToNetCalculation'],
+    ['skattekalkulator-forenklet', 'taxEstimateCalculation'],
+    ['overtidskalkulator', 'overtimeCalculation'],
+    ['arbeidsgiverkostnad', 'employerCostCalculation'],
   ];
 
   calculationTargets.forEach(([calculatorId, primaryId, alternativeId, watchId]) => {
