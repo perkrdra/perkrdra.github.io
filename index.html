@@ -507,6 +507,47 @@
                 margin-bottom: 28px;
               }
 
+              .pinned-calculators {
+                width: 90%;
+                max-width: 1600px;
+                margin: 18px auto 32px;
+              }
+
+              .pinned-calculators-heading {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                margin-bottom: 12px;
+              }
+
+              .pinned-calculators-heading h2 {
+                margin-bottom: 0;
+              }
+
+              .pinned-calculators-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+                align-items: start;
+              }
+
+              .pin-calculator-button,
+              .pinned-clear {
+                min-width: 0;
+                height: auto;
+                margin: 0;
+                padding: 8px 10px;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                line-height: 1.2;
+              }
+
+              .pin-calculator-button {
+                align-self: flex-end;
+                margin-bottom: 4px;
+              }
+
               .container.info-grid {
                 margin-top: 28px;
               }
@@ -1433,6 +1474,10 @@
                 .item3 {
                   grid-template-columns: repeat(2, minmax(0, 1fr));
                 }
+
+                .pinned-calculators-grid {
+                  grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
               }
 
               /* Large desktop layout */
@@ -1447,6 +1492,10 @@
 
                 .item1,
                 .item3 {
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                }
+
+                .pinned-calculators-grid {
                   grid-template-columns: repeat(3, minmax(0, 1fr));
                 }
               }
@@ -1664,6 +1713,12 @@
                   width: 100%;
                 }
 
+                .pin-calculator-button,
+                .pinned-clear {
+                  width: auto;
+                  margin: 0;
+                }
+
                 .corner-logo {
                   top: 8px;
                   left: 8px;
@@ -1744,6 +1799,14 @@
       <a href="#calc-approach" data-search="hoderegning matte">Hoderegning</a>
       <a href="#calc-quiz" data-search="prosent quiz oppgaver">Prosent-quiz</a>
     </nav>
+
+    <section class="pinned-calculators" id="pinnedCalculatorsSection" aria-labelledby="pinnedCalculatorsHeading" hidden>
+      <div class="pinned-calculators-heading">
+        <h2 id="pinnedCalculatorsHeading">Festede kalkulatorer</h2>
+        <button type="button" class="pinned-clear" id="clearPinnedCalculators">Fjern alle</button>
+      </div>
+      <div class="pinned-calculators-grid" id="pinnedCalculators"></div>
+    </section>
 
     <div class="container main-calculators">
       <div class="item1">
@@ -4072,6 +4135,134 @@
         updateSearch();
       }
 
+      function initPinnedCalculators() {
+        const storageKey = "pinnedCalculatorIds";
+        const section = document.getElementById("pinnedCalculatorsSection");
+        const pinnedGrid = document.getElementById("pinnedCalculators");
+        const clearButton = document.getElementById("clearPinnedCalculators");
+        const excludedCalculatorIds = new Set([
+          "calc-approach",
+          "calc-faq",
+          "calc-quiz",
+          "rpgSection",
+        ]);
+
+        if (!section || !pinnedGrid || !clearButton) {
+          return;
+        }
+
+        const calculators = Array.from(
+          document.querySelectorAll(".calculator[id]")
+        ).filter((calculator) => !excludedCalculatorIds.has(calculator.id));
+        const calculatorsById = new Map(
+          calculators.map((calculator) => [calculator.id, calculator])
+        );
+        const placements = new Map();
+
+        const readPinnedIds = () => {
+          try {
+            const storedIds = JSON.parse(localStorage.getItem(storageKey) || "[]");
+            return Array.isArray(storedIds)
+              ? storedIds.filter((id) => calculatorsById.has(id))
+              : [];
+          } catch {
+            return [];
+          }
+        };
+
+        const pinnedIds = new Set(readPinnedIds());
+
+        const savePinnedIds = () => {
+          try {
+            localStorage.setItem(storageKey, JSON.stringify([...pinnedIds]));
+          } catch {
+            // Brukeren kan fortsatt feste kalkulatorer i den åpne økten.
+          }
+        };
+
+        const updatePinButton = (calculator) => {
+          const button = calculator.querySelector(".pin-calculator-button");
+          if (!button) return;
+
+          const isPinned = pinnedIds.has(calculator.id);
+          button.textContent = isPinned ? "Løsne fra toppen" : "Fest øverst";
+          button.setAttribute("aria-pressed", String(isPinned));
+          button.title = isPinned
+            ? "Flytt kalkulatoren tilbake til opprinnelig plassering"
+            : "Flytt kalkulatoren til toppen av siden";
+        };
+
+        const updatePinnedSection = () => {
+          const hasVisiblePinnedCalculator = [...pinnedIds].some((id) => {
+            const calculator = calculatorsById.get(id);
+            const item = calculator?.closest(".item");
+            return item && !item.classList.contains("hub-hidden");
+          });
+
+          section.hidden = !hasVisiblePinnedCalculator;
+        };
+
+        const pinCalculator = (calculatorId) => {
+          const calculator = calculatorsById.get(calculatorId);
+          const item = calculator?.closest(".item");
+          if (!calculator || !item || placements.has(calculatorId)) return;
+
+          const marker = document.createComment(
+            `Opprinnelig plassering for ${calculatorId}`
+          );
+          item.parentNode?.insertBefore(marker, item);
+          placements.set(calculatorId, { item, marker });
+          pinnedGrid.append(item);
+          pinnedIds.add(calculatorId);
+          updatePinButton(calculator);
+          savePinnedIds();
+          updatePinnedSection();
+        };
+
+        const unpinCalculator = (calculatorId) => {
+          const calculator = calculatorsById.get(calculatorId);
+          const placement = placements.get(calculatorId);
+          if (!calculator || !placement) return;
+
+          if (placement.marker.parentNode) {
+            placement.marker.replaceWith(placement.item);
+          }
+
+          placements.delete(calculatorId);
+          pinnedIds.delete(calculatorId);
+          updatePinButton(calculator);
+          savePinnedIds();
+          updatePinnedSection();
+        };
+
+        calculators.forEach((calculator) => {
+          const heading = calculator.querySelector("h2");
+          if (!heading) return;
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "pin-calculator-button";
+          button.addEventListener("click", () => {
+            if (pinnedIds.has(calculator.id)) {
+              unpinCalculator(calculator.id);
+            } else {
+              pinCalculator(calculator.id);
+            }
+          });
+          heading.before(button);
+          updatePinButton(calculator);
+        });
+
+        [...pinnedIds].forEach((calculatorId) => pinCalculator(calculatorId));
+
+        clearButton.addEventListener("click", () => {
+          [...pinnedIds].forEach(unpinCalculator);
+        });
+
+        document.addEventListener("hubFilterChanged", updatePinnedSection);
+        updatePinnedSection();
+      }
+
       function formatNumberForDisplay(rawText) {
         const text = String(rawText || "").trim();
         if (!text) return null;
@@ -4577,6 +4768,7 @@
       document.addEventListener("DOMContentLoaded", initFormattedNumberInputs);
       document.addEventListener("DOMContentLoaded", initHubMenuFilter);
       document.addEventListener("DOMContentLoaded", initCalculatorSearch);
+      document.addEventListener("DOMContentLoaded", initPinnedCalculators);
 
       let calculationType = "markup"; // Default calculation type
 
