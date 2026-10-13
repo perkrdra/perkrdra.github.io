@@ -1944,6 +1944,26 @@
                   align-self: start;
                 }
               }
+
+              .search-controls {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                grid-column: 1;
+                grid-row: 2;
+                justify-self: center;
+                width: 100%;
+                max-width: 600px;
+                min-width: 0;
+              }
+
+              @media (min-width: 1400px) {
+                .search-controls {
+                  grid-column: 2;
+                  grid-row: 1;
+                  align-self: start;
+                }
+              }
     </style>
   </head>
 
@@ -1959,18 +1979,20 @@
             <button type="button" class="all-calculators-toggle" id="allCalculatorsSummary" aria-expanded="false" aria-controls="allCalculatorsMenu">Alle prosentkalkulatorer</button>
           </div>
         </div>
-        <div class="nav-search" role="search" aria-label="Søk i alle kalkulatorer">
-          <label for="calculatorSearch" class="sr-only">Søk i alle kalkulatorer</label>
-          <input type="search" id="calculatorSearch" placeholder="Søk" autocomplete="off" aria-controls="calculatorSearchResults">
-          <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden><h4>Tøm</h4></button>
+        <div class="search-controls">
+          <div class="nav-search" role="search" aria-label="Søk i alle kalkulatorer">
+            <label for="calculatorSearch" class="sr-only">Søk i alle kalkulatorer</label>
+            <input type="search" id="calculatorSearch" placeholder="Søk" autocomplete="off" aria-controls="calculatorSearchResults">
+            <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden><h4>Tøm</h4></button>
+          </div>
+          <nav class="hub-menu" aria-label="Kalkulatorkategorier">
+            <button type="button" class="hub-button active" data-hub="prosent" aria-pressed="true"><h4>Prosent</h4></button>
+            <button type="button" class="hub-button" data-hub="lonn-skatt" aria-pressed="false"><h4>Lønn og skatt</h4></button>
+            <button type="button" class="hub-button" data-hub="sparing-renter" aria-pressed="false"><h4>Sparing og renter</h4></button>
+            <button type="button" class="hub-button" data-hub="oppgaver" aria-pressed="false"><h4>Lær prosent</h4></button>
+          </nav>
         </div>
       </div>
-      <nav class="hub-menu" aria-label="Kalkulatorkategorier">
-        <button type="button" class="hub-button active" data-hub="prosent" aria-pressed="true"><h4>Prosent</h4></button>
-        <button type="button" class="hub-button" data-hub="lonn-skatt" aria-pressed="false"><h4>Lønn og skatt</h4></button>
-        <button type="button" class="hub-button" data-hub="sparing-renter" aria-pressed="false"><h4>Sparing og renter</h4></button>
-        <button type="button" class="hub-button" data-hub="oppgaver" aria-pressed="false"><h4>Lær prosent</h4></button>
-      </nav>
     </div>
 
     <nav class="top-nav" aria-label="Kalkulatornavigasjon">
