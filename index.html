@@ -1806,15 +1806,6 @@
                 line-height: 1.4;
               }
 
-              .calculator-menu-all summary {
-                min-height: 44px;
-                padding: 12px 0;
-                font-family: "Roboto", sans-serif;
-                font-size: 14px;
-                line-height: 1.4;
-                cursor: pointer;
-              }
-
               .all-calculator-links {
                 display: grid;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1880,6 +1871,55 @@
                   max-width: 1560px;
                 }
               }
+
+              .search-brand-copy {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                min-width: 0;
+                gap: 4px;
+              }
+
+              .all-calculators-toggle {
+                display: inline-block;
+                align-self: flex-start;
+                width: auto;
+                height: auto;
+                min-height: 32px;
+                margin: 0;
+                padding: 4px 0;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                color: #000;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 1.4;
+                text-align: left;
+                cursor: pointer;
+              }
+
+              .all-calculators-toggle::before {
+                content: "▸";
+                display: inline-block;
+                margin-right: 6px;
+              }
+
+              .all-calculators-toggle[aria-expanded="true"]::before {
+                content: "▾";
+              }
+
+              .all-calculators-toggle:hover {
+                background: transparent;
+              }
+
+              @media (pointer: coarse) {
+                .all-calculators-toggle {
+                  min-height: 44px;
+                }
+              }
     </style>
   </head>
 
@@ -1890,7 +1930,10 @@
       <div class="search-row">
         <div class="search-brand">
           <a href="#top" class="corner-logo" aria-label="Til toppen">P</a>
-          <h1 class="site-title" id="calculatorSearchHeading">Finn prosentkalkulator</h1>
+          <div class="search-brand-copy">
+            <h1 class="site-title" id="calculatorSearchHeading">Finn prosentkalkulator</h1>
+            <button type="button" class="all-calculators-toggle" id="allCalculatorsSummary" aria-expanded="false" aria-controls="allCalculatorsMenu">Alle prosentkalkulatorer</button>
+          </div>
         </div>
         <div class="nav-search" role="search" aria-label="Søk i alle kalkulatorer">
           <label for="calculatorSearch" class="sr-only">Søk i alle kalkulatorer</label>
@@ -1911,8 +1954,7 @@
         <p class="menu-search-status" id="calculatorSearchStatus" role="status" aria-live="polite"></p>
         <div class="all-calculator-links" id="calculatorSearchMatches"></div>
       </div>
-      <details class="calculator-menu-all" id="allCalculatorsMenu">
-        <summary id="allCalculatorsSummary">Alle prosentkalkulatorer</summary>
+      <div class="calculator-menu-all" id="allCalculatorsMenu" hidden>
         <div class="all-calculator-links" id="allCalculatorLinks">
           <a href="#legg-til-prosent-på-et-beløp" data-hub="prosent" data-search="plus legge til Legg til prosent på et beløp "><span class="menu-link-title">Legg til prosent</span></a>
           <a href="#trekk-fra-prosent-på-et-beløp" data-hub="prosent" data-search="minus trekk fra Trekk fra prosent på et beløp "><span class="menu-link-title">Trekk fra prosent</span></a>
@@ -1950,7 +1992,7 @@
           <a href="#ofte-stilte-spørsmål" data-hub="oppgaver" data-search=" Ofte stilte spørsmål "><span class="menu-link-title">Vanlige spørsmål</span></a>
           <a href="#prosent-quiz" data-hub="oppgaver" data-search="prosent quiz oppgaver Prosent-quiz "><span class="menu-link-title">Prosent-quiz</span></a>
         </div>
-      </details>
+      </div>
     </nav>
 
     <section class="pinned-calculators" id="pinnedCalculatorsSection" aria-label="Festede kalkulatorer" hidden>
@@ -4322,6 +4364,14 @@
 
       let calculatorMenuController = null;
 
+      function setCalculatorMenuOpen(open) {
+        const menu = document.getElementById("allCalculatorsMenu");
+        const toggle = document.getElementById("allCalculatorsSummary");
+        if (!menu || !toggle) return;
+        menu.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+      }
+
       function initHubMenuFilter() {
         const buttons = Array.from(document.querySelectorAll(".hub-button[data-hub]"));
         const nav = document.querySelector(".top-nav");
@@ -4359,7 +4409,7 @@
           if (!target) return;
           const category = Object.entries(HUB_CALCULATOR_CONFIG).find(([, config]) => config.visibleIds.includes(id));
           if (category && category[0] !== activeHubKey) {
-            fullMenu.open = false;
+            setCalculatorMenuOpen(false);
             applyHubFilter(category[0]);
           } else if (!category) {
             resolveBlock(target).classList.remove("hub-hidden");
@@ -4377,10 +4427,22 @@
         };
 
         calculatorMenuController = { allLinks, navigate };
+        summary.addEventListener("click", () => {
+          const open = summary.getAttribute("aria-expanded") !== "true";
+          searchInput.value = "";
+          setCalculatorMenuOpen(open);
+          document.dispatchEvent(new CustomEvent("hubFilterChanged"));
+        });
+        fullMenu.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setCalculatorMenuOpen(false);
+            summary.focus();
+          }
+        });
         buttons.forEach((button) => {
           button.addEventListener("click", () => {
             searchInput.value = "";
-            fullMenu.open = false;
+            setCalculatorMenuOpen(false);
             applyHubFilter(button.dataset.hub);
           });
         });
@@ -4436,7 +4498,7 @@
             ? "Ingen kalkulatorer funnet. Prøv for eksempel prosent, rabatt eller lønn."
             : matches.length === 1 ? "1 kalkulator funnet" : matches.length + " kalkulatorer funnet";
           results.hidden = !searching;
-          fullMenu.hidden = searching;
+          fullMenu.hidden = searching || document.getElementById("allCalculatorsSummary").getAttribute("aria-expanded") !== "true";
           clearButton.hidden = !searching;
         };
 
