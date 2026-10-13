@@ -1920,6 +1920,30 @@
                   min-height: 44px;
                 }
               }
+
+              @media (min-width: 1400px) {
+                .search-row {
+                  align-items: start;
+                }
+
+                .search-brand {
+                  align-items: flex-start;
+                }
+
+                .search-brand-copy {
+                  display: grid;
+                  grid-template-rows: var(--search-control-size) auto;
+                  gap: 0;
+                }
+
+                .search-brand-copy .site-title {
+                  align-self: center;
+                }
+
+                .search-row .nav-search {
+                  align-self: start;
+                }
+              }
     </style>
   </head>
 
