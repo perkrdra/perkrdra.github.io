@@ -146,25 +146,16 @@
               }
 
               .top-nav {
-                position: sticky;
-                top: 0;
-                z-index: 50;
-                display: grid;
-                grid-template-columns: repeat(7, minmax(0, 1fr));
-                gap: 8px 10px;
-                width: 90%;
-                max-width: 1160px;
+                position: static;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                width: calc(90% - 40px);
+                max-width: 600px;
                 margin: 0 auto 12px;
-                padding: 12px 6px;
+                padding: 0;
                 background: transparent;
                 border-radius: 14px;
-                transition: transform 180ms ease, opacity 180ms ease;
-              }
-
-              .top-nav.collapsed {
-                transform: translateY(-110%);
-                opacity: 0;
-                pointer-events: none;
               }
 
               .top-nav a {
@@ -359,9 +350,9 @@
               .search-row {
                 width: 100%;
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 600px) minmax(0, 1fr);
+                grid-template-columns: minmax(0, 1fr);
                 align-items: center;
-                gap: 12px 0;
+                gap: 16px;
               }
 
               .search-brand {
@@ -375,7 +366,8 @@
               .search-row .nav-search {
                 position: relative;
                 grid-template-columns: minmax(0, 1fr);
-                grid-column: 2;
+                grid-column: 1;
+                grid-row: 2;
                 min-width: 0;
                 width: 100%;
                 max-width: 600px;
@@ -1564,9 +1556,7 @@
                   max-width: 1600px;
                 }
 
-                .top-nav {
-                  max-width: 1560px;
-                }
+                
 
                 .item1,
                 .item3 {
@@ -1584,14 +1574,7 @@
                   line-height: 1.2;
                 }
 
-                .top-nav {
-                  position: sticky;
-                  top: 0;
-                  margin: 0 auto 10px;
-                  padding: 10px 8px;
-                  gap: 8px;
-                  grid-template-columns: repeat(3, minmax(0, 1fr));
-                }
+                
 
                 .top-nav a {
                   font-size: 14px;
@@ -1649,15 +1632,7 @@
                   padding: 0;
                 }
 
-                .top-nav {
-                  position: sticky;
-                  top: 0;
-                  margin: 0 auto 10px;
-                  padding: 8px 8px;
-                  gap: 6px;
-                  grid-template-columns: repeat(2, minmax(0, 1fr));
-                  box-shadow: none;
-                }
+                
 
                 .top-nav a {
                   text-align: center;
@@ -1809,6 +1784,98 @@
                   font-size: 28px;
                 }
               }
+
+              .hub-button.active h4 {
+                font-weight: 500;
+                text-decoration: underline;
+                text-underline-offset: 5px;
+                text-decoration-thickness: 2px;
+              }
+
+              .shortcut-heading,
+              .menu-search-status {
+                margin: 0;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                line-height: 1.4;
+                text-align: left;
+              }
+
+              .shortcut-links {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 10px;
+              }
+
+              .shortcut-links a {
+                min-width: 0;
+                min-height: 86px;
+                padding: 14px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                line-height: 1.4;
+                text-align: left;
+              }
+
+              .shortcut-links .menu-link-title {
+                font-size: 16px;
+                font-weight: 500;
+              }
+
+              .shortcut-example,
+              .menu-result-category {
+                font-size: 13px;
+                line-height: 1.4;
+              }
+
+              .calculator-menu-all summary {
+                min-height: 44px;
+                padding: 12px 0;
+                font-family: "Roboto", sans-serif;
+                font-size: 14px;
+                line-height: 1.4;
+                cursor: pointer;
+              }
+
+              .all-calculator-links {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+                padding: 8px 0 12px;
+              }
+
+              .all-calculator-links a {
+                min-width: 0;
+                min-height: 44px;
+                line-height: 1.4;
+                text-align: left;
+              }
+
+              #calculatorSearchMatches a {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+              }
+
+              .top-nav [hidden],
+              .top-nav .hub-link-hidden {
+                display: none;
+              }
+
+              @media (max-width: 600px) {
+                .top-nav {
+                  width: 90%;
+                }
+
+                .shortcut-links {
+                  grid-template-columns: minmax(0, 1fr);
+                }
+
+                .shortcut-links a {
+                  min-height: 72px;
+                }
+              }
     </style>
   </head>
 
@@ -1816,74 +1883,76 @@
 
   <body id="top">
     <div class="search-replace">
-      <div class="hub-menu" role="tablist" aria-label="Kalkulatorkategorier">
-        <button type="button" class="hub-button active" data-hub="prosent" role="tab" aria-selected="true">
-          <h4>Prosentkalkulator</h4>
-        </button>
-        <button type="button" class="hub-button" data-hub="lonn-skatt" role="tab" aria-selected="false">
-          <h4>Lønn og skatt</h4>
-        </button>
-        <button type="button" class="hub-button" data-hub="sparing-renter" role="tab" aria-selected="false">
-          <h4>Sparing og renter</h4>
-        </button>
-        <button type="button" class="hub-button" data-hub="oppgaver" role="tab" aria-selected="false">
-          <h4>Oppgaver</h4>
-        </button>
-      </div>
       <div class="search-row">
         <div class="search-brand">
           <a href="#top" class="corner-logo" aria-label="Til toppen">P</a>
           <h1 class="site-title" id="calculatorSearchHeading">Finn prosentkalkulator</h1>
         </div>
-        <div class="nav-search" role="search" aria-labelledby="calculatorSearchHeading">
-          <label for="calculatorSearch" class="sr-only">Søk etter kalkulator</label>
-          <input
-            type="search"
-            id="calculatorSearch"
-            placeholder="Søk"
-            autocomplete="off"
-          />
-          <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden>
-            <h4>Tøm</h4>
-          </button>
+        <div class="nav-search" role="search" aria-label="Søk i alle kalkulatorer">
+          <label for="calculatorSearch" class="sr-only">Søk i alle kalkulatorer</label>
+          <input type="search" id="calculatorSearch" placeholder="Søk" autocomplete="off" aria-controls="calculatorSearchResults">
+          <button type="button" id="calculatorSearchClear" class="nav-search-clear" hidden><h4>Tøm</h4></button>
         </div>
       </div>
-      <div class="hub-missing" id="hubMissingList" aria-live="polite"></div>
+      <nav class="hub-menu" aria-label="Kalkulatorkategorier">
+        <button type="button" class="hub-button active" data-hub="prosent" aria-pressed="true"><h4>Prosent</h4></button>
+        <button type="button" class="hub-button" data-hub="lonn-skatt" aria-pressed="false"><h4>Lønn og skatt</h4></button>
+        <button type="button" class="hub-button" data-hub="sparing-renter" aria-pressed="false"><h4>Sparing og renter</h4></button>
+        <button type="button" class="hub-button" data-hub="oppgaver" aria-pressed="false"><h4>Lær prosent</h4></button>
+      </nav>
     </div>
 
     <nav class="top-nav" aria-label="Kalkulatornavigasjon">
-      <a href="#legg-til-prosent-på-et-beløp" data-search="plus legge til">Legg til %</a>
-      <a href="#trekk-fra-prosent-på-et-beløp" data-search="minus trekk fra">Trekk fra %</a>
-      <a href="#prosentøkning-fra-verdi-a-til-verdi-b" data-search="hvor mange prosent prosentendring fra til vekst opp">Prosentendring (opp)</a>
-      <a href="#prosentnedgang-fra-verdi-a-til-verdi-b" data-search="hvor mange prosent prosentendring fra til reduksjon ned">Prosentendring (ned)</a>
-      <a href="#hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall" data-search="hente inn tap">Gjenoppretting</a>
-      <a href="#finn-total-fra-prosent-omvendt-prosent" data-search="finn hele tallet finn total fra prosent finn-total-fra-prosent baklengs opprinnelig pris">Finn total fra %</a>
-      <a href="#finn-prosentandel-av-totalen" data-search="andel total prosent">Andel av total</a>
-      <a href="#hvordan-regne-ut-rabatt" data-search="prisavslag">Rabatt</a>
-      <a href="#finn-delen-av-tallet" data-search="prosent av tall">Del av tallet</a>
-      <a href="#prosentpoeng-endring" data-search="prosentpoeng forskjell">Prosentpoeng</a>
-      <a href="#prosentfordeling" data-search="fordel prosent">Fordeling</a>
-      <a href="#påslag-og-marginkalkulator" data-search="margin avanse">Påslag/Margin</a>
-      <a href="#mva-kalkulator" data-search="moms merverdiavgift">MVA</a>
-      <a href="#feriepengekalkulator" data-search="feriepenger lønn">Feriepenger</a>
-      <a href="#brutto-til-netto" data-search="brutto netto skatt lonn">Brutto til netto</a>
-      <a href="#skattekalkulator-forenklet" data-search="skattekalkulator skatt beregning">Skattekalkulator</a>
-      <a href="#overtidskalkulator" data-search="overtid overtidskalkulator timelonn">Overtidskalkulator</a>
-      <a href="#arbeidsgiverkostnad" data-search="arbeidsgiverkostnad aga otp">Arbeidsgiverkostnad</a>
-      <a href="#lånekalkulator" data-search="annuitet finansiering">Lån</a>
-      <a href="#månedssparing" data-search="månedssparing spare fast beløp">Månedssparing</a>
-      <a href="#sparemål" data-search="sparemål spare mål hvor mye">Sparemål</a>
-      <a href="#renters-rente-kalkulator" data-search="rentes rente sparing">Renters rente</a>
-      <a href="#avkastning-kalkulator" data-search="avkastning investeringsavkastning gevinst tap">Avkastning</a>
-      <a href="#cagr-kalkulator-årlig-vekstrate" data-search="cagr annualisert avkastning vekstrate">CAGR</a>
-      <a href="#effektiv-rente-kalkulator" data-search="effektiv rente nominell rente">Effektiv rente</a>
-      <a href="#inflasjonskalkulator" data-search="inflasjon prisstigning kjøpekraft">Inflasjon</a>
-      <a href="#prisjustering-kpi" data-search="kpi prisjustering konsumprisindeks">Prisjustering KPI</a>
-      <a href="#break-even-kalkulator-dekningspunkt" data-search="dekningspunkt nullpunkt">Break-even</a>
-      <a href="#årslønn-til-månedslønn-og-timeslønn" data-search="lonn maaned time">Lønn per mnd/time</a>
-      <a href="#lønnsøkning-i-kroner-og-prosent" data-search="lonnsjustering">Lønnsøkning</a>
-      <a href="#hoderegning" data-search="hoderegning matte">Hoderegning</a>
-      <a href="#prosent-quiz" data-search="prosent quiz oppgaver">Prosent-quiz</a>
+      <p class="shortcut-heading" id="calculatorShortcutHeading">Snarveier til prosentregning</p>
+      <div class="shortcut-links" id="calculatorShortcuts" aria-labelledby="calculatorShortcutHeading">
+        <a href="#finn-delen-av-tallet" data-hub="prosent" data-search="prosent av tall Finn delen av tallet Hva er 20 % av 500?"><span class="menu-link-title">Prosent av et tall</span><span class="shortcut-example">Hva er 20 % av 500?</span></a>
+        <a href="#finn-prosentandel-av-totalen" data-hub="prosent" data-search="andel total prosent Finn prosentandel av totalen Hvor mange % er 30 av 150?"><span class="menu-link-title">Finn prosentandelen</span><span class="shortcut-example">Hvor mange % er 30 av 150?</span></a>
+        <a href="#prosentøkning-fra-verdi-a-til-verdi-b" data-hub="prosent" data-search="hvor mange prosent prosentendring fra til vekst opp Prosentøkning fra verdi A til verdi B Fra 200 til 250"><span class="menu-link-title">Prosentøkning</span><span class="shortcut-example">Fra 200 til 250</span></a>
+      </div>
+      <div class="search-results" id="calculatorSearchResults" hidden>
+        <p class="menu-search-status" id="calculatorSearchStatus" role="status" aria-live="polite"></p>
+        <div class="all-calculator-links" id="calculatorSearchMatches"></div>
+      </div>
+      <details class="calculator-menu-all" id="allCalculatorsMenu">
+        <summary id="allCalculatorsSummary">Alle prosentkalkulatorer</summary>
+        <div class="all-calculator-links" id="allCalculatorLinks">
+          <a href="#legg-til-prosent-på-et-beløp" data-hub="prosent" data-search="plus legge til Legg til prosent på et beløp "><span class="menu-link-title">Legg til prosent</span></a>
+          <a href="#trekk-fra-prosent-på-et-beløp" data-hub="prosent" data-search="minus trekk fra Trekk fra prosent på et beløp "><span class="menu-link-title">Trekk fra prosent</span></a>
+          <a href="#prosentøkning-fra-verdi-a-til-verdi-b" data-hub="prosent" data-search="hvor mange prosent prosentendring fra til vekst opp Prosentøkning fra verdi A til verdi B "><span class="menu-link-title">Prosentøkning</span></a>
+          <a href="#prosentnedgang-fra-verdi-a-til-verdi-b" data-hub="prosent" data-search="hvor mange prosent prosentendring fra til reduksjon ned Prosentnedgang fra verdi A til verdi B "><span class="menu-link-title">Prosentnedgang</span></a>
+          <a href="#hvor-mye-må-verdien-stige-for-å-hente-inn-et-fall" data-hub="prosent" data-search="hente inn tap Hvor mye må verdien stige for å hente inn et fall? "><span class="menu-link-title">Hente inn et fall</span></a>
+          <a href="#finn-total-fra-prosent-omvendt-prosent" data-hub="prosent" data-search="finn hele tallet finn total fra prosent finn-total-fra-prosent baklengs opprinnelig pris Finn total fra prosent (omvendt prosent) "><span class="menu-link-title">Finn opprinnelig beløp</span></a>
+          <a href="#finn-prosentandel-av-totalen" data-hub="prosent" data-search="andel total prosent Finn prosentandel av totalen "><span class="menu-link-title">Finn prosentandelen</span></a>
+          <a href="#finn-delen-av-tallet" data-hub="prosent" data-search="prosent av tall Finn delen av tallet "><span class="menu-link-title">Prosent av et tall</span></a>
+          <a href="#hvordan-regne-ut-rabatt" data-hub="prosent" data-search="prisavslag Hvordan regne ut rabatt "><span class="menu-link-title">Rabatt</span></a>
+          <a href="#mva-kalkulator" data-hub="prosent" data-search="moms merverdiavgift MVA-kalkulator "><span class="menu-link-title">MVA</span></a>
+          <a href="#prosentpoeng-endring" data-hub="prosent" data-search="prosentpoeng forskjell Prosentpoeng endring "><span class="menu-link-title">Prosentpoeng</span></a>
+          <a href="#prosentfordeling" data-hub="prosent" data-search="fordel prosent Prosentfordeling "><span class="menu-link-title">Prosentfordeling</span></a>
+          <a href="#prosent-av-prosent" data-hub="prosent" data-search=" Prosent av prosent "><span class="menu-link-title">Prosent av prosent</span></a>
+          <a href="#prosent-til-desimal-og-brøk" data-hub="prosent" data-search=" Prosent til desimal og brøk "><span class="menu-link-title">Prosent til desimal og brøk</span></a>
+          <a href="#påslag-og-marginkalkulator" data-hub="prosent" data-search="margin avanse Påslag- og marginkalkulator "><span class="menu-link-title">Påslag og margin</span></a>
+          <a href="#break-even-kalkulator-dekningspunkt" data-hub="prosent" data-search="dekningspunkt nullpunkt Break-even kalkulator (dekningspunkt) "><span class="menu-link-title">Break-even / dekningspunkt</span></a>
+          <a href="#feriepengekalkulator" data-hub="lonn-skatt" data-search="feriepenger lønn Feriepengekalkulator "><span class="menu-link-title">Feriepenger</span></a>
+          <a href="#årslønn-til-månedslønn-og-timeslønn" data-hub="lonn-skatt" data-search="lonn maaned time Årslønn til månedslønn og timeslønn "><span class="menu-link-title">Månedslønn og timeslønn</span></a>
+          <a href="#lønnsøkning-i-kroner-og-prosent" data-hub="lonn-skatt" data-search="lonnsjustering Lønnsøkning i kroner og prosent "><span class="menu-link-title">Lønnsøkning</span></a>
+          <a href="#brutto-til-netto" data-hub="lonn-skatt" data-search="brutto netto skatt lonn Brutto til netto "><span class="menu-link-title">Brutto til netto</span></a>
+          <a href="#skattekalkulator-forenklet" data-hub="lonn-skatt" data-search="skattekalkulator skatt beregning Skattekalkulator (forenklet) "><span class="menu-link-title">Skatt (forenklet)</span></a>
+          <a href="#overtidskalkulator" data-hub="lonn-skatt" data-search="overtid overtidskalkulator timelonn Overtidskalkulator "><span class="menu-link-title">Overtid</span></a>
+          <a href="#arbeidsgiverkostnad" data-hub="lonn-skatt" data-search="arbeidsgiverkostnad aga otp Arbeidsgiverkostnad "><span class="menu-link-title">Arbeidsgiverkostnad</span></a>
+          <a href="#månedssparing" data-hub="sparing-renter" data-search="månedssparing spare fast beløp Månedssparing "><span class="menu-link-title">Månedssparing</span></a>
+          <a href="#sparemål" data-hub="sparing-renter" data-search="sparemål spare mål hvor mye Sparemål "><span class="menu-link-title">Sparemål</span></a>
+          <a href="#renters-rente-kalkulator" data-hub="sparing-renter" data-search="rentes rente sparing Renters rente-kalkulator "><span class="menu-link-title">Renters rente</span></a>
+          <a href="#lånekalkulator" data-hub="sparing-renter" data-search="annuitet finansiering Lånekalkulator "><span class="menu-link-title">Lån</span></a>
+          <a href="#avkastning-kalkulator" data-hub="sparing-renter" data-search="avkastning investeringsavkastning gevinst tap Avkastning kalkulator "><span class="menu-link-title">Avkastning</span></a>
+          <a href="#cagr-kalkulator-årlig-vekstrate" data-hub="sparing-renter" data-search="cagr annualisert avkastning vekstrate CAGR kalkulator (årlig vekstrate) "><span class="menu-link-title">Årlig vekstrate (CAGR)</span></a>
+          <a href="#effektiv-rente-kalkulator" data-hub="sparing-renter" data-search="effektiv rente nominell rente Effektiv rente kalkulator "><span class="menu-link-title">Effektiv rente</span></a>
+          <a href="#inflasjonskalkulator" data-hub="sparing-renter" data-search="inflasjon prisstigning kjøpekraft Inflasjonskalkulator "><span class="menu-link-title">Inflasjon</span></a>
+          <a href="#prisjustering-kpi" data-hub="sparing-renter" data-search="kpi prisjustering konsumprisindeks Prisjustering KPI "><span class="menu-link-title">Prisjustering med KPI</span></a>
+          <a href="#hoderegning" data-hub="oppgaver" data-search="hoderegning matte Hoderegning "><span class="menu-link-title">Hoderegning</span></a>
+          <a href="#ofte-stilte-spørsmål" data-hub="oppgaver" data-search=" Ofte stilte spørsmål "><span class="menu-link-title">Vanlige spørsmål</span></a>
+          <a href="#prosent-quiz" data-hub="oppgaver" data-search="prosent quiz oppgaver Prosent-quiz "><span class="menu-link-title">Prosent-quiz</span></a>
+        </div>
+      </details>
     </nav>
 
     <section class="pinned-calculators" id="pinnedCalculatorsSection" aria-label="Festede kalkulatorer" hidden>
@@ -4015,6 +4084,8 @@
           .toLowerCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
+          .replace(/ø/g, "o")
+          .replace(/æ/g, "ae")
           .replace(/\s+/g, " ")
           .trim();
       }
@@ -4232,170 +4303,244 @@
 
       let activeHubKey = "prosent";
 
+      const HUB_MENU_CONTENT = {
+  "prosent": {
+    "label": "Prosent",
+    "caption": "Snarveier til prosentregning",
+    "allLabel": "Alle prosentkalkulatorer",
+    "shortcuts": [
+      [
+        "finn-delen-av-tallet",
+        "Hva er 20 % av 500?"
+      ],
+      [
+        "finn-prosentandel-av-totalen",
+        "Hvor mange % er 30 av 150?"
+      ],
+      [
+        "prosentøkning-fra-verdi-a-til-verdi-b",
+        "Fra 200 til 250"
+      ]
+    ]
+  },
+  "lonn-skatt": {
+    "label": "Lønn og skatt",
+    "caption": "Snarveier til lønn og skatt",
+    "allLabel": "Alle kalkulatorer for lønn og skatt",
+    "shortcuts": [
+      [
+        "feriepengekalkulator",
+        "Beregn feriepengene dine"
+      ],
+      [
+        "brutto-til-netto",
+        "Lønn etter skatt"
+      ],
+      [
+        "lønnsøkning-i-kroner-og-prosent",
+        "Økning i kroner og prosent"
+      ]
+    ]
+  },
+  "sparing-renter": {
+    "label": "Sparing og renter",
+    "caption": "Snarveier til sparing og renter",
+    "allLabel": "Alle kalkulatorer for sparing og renter",
+    "shortcuts": [
+      [
+        "renters-rente-kalkulator",
+        "Hvordan vokser sparepengene?"
+      ],
+      [
+        "månedssparing",
+        "Spar et fast beløp hver måned"
+      ],
+      [
+        "sparemål",
+        "Hvor mye må du spare?"
+      ]
+    ]
+  },
+  "oppgaver": {
+    "label": "Lær prosent",
+    "caption": "Lær og øv på prosent",
+    "allLabel": "Alle oppgaver og forklaringer",
+    "shortcuts": [
+      [
+        "hoderegning",
+        "Lær enkle prosentmetoder"
+      ],
+      [
+        "prosent-quiz",
+        "Øv på prosentregning"
+      ],
+      [
+        "ofte-stilte-spørsmål",
+        "Svar på vanlige spørsmål"
+      ]
+    ]
+  }
+};
+
+      let calculatorMenuController = null;
+
       function initHubMenuFilter() {
         const buttons = Array.from(document.querySelectorAll(".hub-button[data-hub]"));
-        const navLinks = Array.from(document.querySelectorAll('.top-nav a[href^="#"]'));
-        const missingList = document.getElementById("hubMissingList");
-        if (buttons.length === 0 || navLinks.length === 0 || !missingList) {
-          return;
-        }
+        const nav = document.querySelector(".top-nav");
+        const allLinks = Array.from(document.querySelectorAll("#allCalculatorLinks a"));
+        const shortcuts = document.getElementById("calculatorShortcuts");
+        const heading = document.getElementById("calculatorShortcutHeading");
+        const fullMenu = document.getElementById("allCalculatorsMenu");
+        const summary = document.getElementById("allCalculatorsSummary");
+        const searchInput = document.getElementById("calculatorSearch");
+        if (!buttons.length || !nav || !allLinks.length || !shortcuts || !heading || !fullMenu || !summary || !searchInput) return;
 
         const resolveBlock = (element) => element.closest(".item") || element;
-        const allTargets = Array.from(
-          document.querySelectorAll(".calculator[id], #prosent-og-prosentregning-en-enkel-innføring")
-        );
+        const allTargets = Array.from(document.querySelectorAll(".calculator[id], #prosent-og-prosentregning-en-enkel-innføring"));
         const allBlocks = Array.from(new Set(allTargets.map(resolveBlock)));
+        const linksById = new Map(allLinks.map((link) => [resolveCalculatorFragment(link.getAttribute("href").slice(1)), link]));
 
         const applyHubFilter = (hubKey) => {
-          const config = HUB_CALCULATOR_CONFIG[hubKey] || HUB_CALCULATOR_CONFIG.prosent;
+          const key = HUB_CALCULATOR_CONFIG[hubKey] ? hubKey : "prosent";
+          const config = HUB_CALCULATOR_CONFIG[key];
+          const menu = HUB_MENU_CONTENT[key];
           const visibleIds = new Set(config.visibleIds);
-          const visibleBlocks = new Set();
-
-          allTargets.forEach((target) => {
-            if (visibleIds.has(target.id)) {
-              visibleBlocks.add(resolveBlock(target));
-            }
-          });
-
-          allBlocks.forEach((block) => {
-            block.classList.toggle("hub-hidden", !visibleBlocks.has(block));
-          });
-
-          navLinks.forEach((link) => {
-            const href = link.getAttribute("href") || "";
-            const id = resolveCalculatorFragment(href.slice(1));
-            link.classList.toggle("hub-link-hidden", !visibleIds.has(id));
-          });
-
+          const visibleBlocks = new Set(allTargets.filter((target) => visibleIds.has(target.id)).map(resolveBlock));
+          allBlocks.forEach((block) => block.classList.toggle("hub-hidden", !visibleBlocks.has(block)));
+          allLinks.forEach((link) => link.classList.toggle("hub-link-hidden", link.dataset.hub !== key));
           buttons.forEach((button) => {
-            const isActive = button.dataset.hub === hubKey;
-            button.classList.toggle("active", isActive);
-            button.setAttribute("aria-selected", isActive ? "true" : "false");
+            const active = button.dataset.hub === key;
+            button.classList.toggle("active", active);
+            button.setAttribute("aria-pressed", String(active));
           });
-
-          if (config.missing.length > 0) {
-            missingList.textContent = `Kommer snart i denne kategorien: ${config.missing.join(", ")}`;
-          } else {
-            missingList.textContent = "";
-          }
-
-          activeHubKey = hubKey;
+          const shortcutLinks = menu.shortcuts.map(([id, example]) => {
+            const source = linksById.get(id);
+            if (!source) return null;
+            const link = source.cloneNode(true);
+            link.classList.remove("hub-link-hidden");
+            const description = document.createElement("span");
+            description.className = "shortcut-example";
+            description.textContent = example;
+            link.append(description);
+            return link;
+          }).filter(Boolean);
+          shortcuts.replaceChildren(...shortcutLinks);
+          heading.textContent = menu.caption;
+          summary.textContent = menu.allLabel;
+          activeHubKey = key;
           document.dispatchEvent(new CustomEvent("hubFilterChanged"));
         };
 
-        buttons.forEach((button) => {
-          button.addEventListener("click", () => {
-            applyHubFilter(button.dataset.hub || "prosent");
-          });
-        });
-
-        const syncHubToFragment = () => {
-          const fragment = window.location.hash.slice(1);
-          const id = resolveCalculatorFragment(fragment);
+        const navigate = (value, options = {}) => {
+          const id = resolveCalculatorFragment(value);
           const target = allTargets.find((element) => element.id === id);
           if (!target) return;
-
-          const category = Object.entries(HUB_CALCULATOR_CONFIG).find(
-            ([, config]) => config.visibleIds.includes(id)
-          );
+          const category = Object.entries(HUB_CALCULATOR_CONFIG).find(([, config]) => config.visibleIds.includes(id));
           if (category && category[0] !== activeHubKey) {
+            fullMenu.open = false;
             applyHubFilter(category[0]);
           } else if (!category) {
             resolveBlock(target).classList.remove("hub-hidden");
           }
-
-          if (LEGACY_CALCULATOR_FRAGMENTS.has(fragment)) {
-            history.replaceState(null, "", "#" + id);
+          if (options.updateHistory && resolveCalculatorFragment(window.location.hash.slice(1)) !== id) {
+            history.pushState(null, "", "#" + id);
           }
           requestAnimationFrame(() => {
-            target.scrollIntoView({ block: "start" });
+            target.scrollIntoView({ behavior: options.behavior || "smooth", block: "start" });
+            if (options.focus) {
+              target.setAttribute("tabindex", "-1");
+              target.focus({ preventScroll: true });
+            }
           });
         };
 
+        calculatorMenuController = { allLinks, navigate };
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            searchInput.value = "";
+            fullMenu.open = false;
+            applyHubFilter(button.dataset.hub);
+          });
+        });
+        nav.addEventListener("click", (event) => {
+          const link = event.target.closest("a[href^='#']");
+          if (!link || !nav.contains(link)) return;
+          event.preventDefault();
+          navigate(link.getAttribute("href").slice(1), { updateHistory: true, focus: true });
+        });
+
+        const syncHubToFragment = () => {
+          const fragment = window.location.hash.slice(1);
+          if (LEGACY_CALCULATOR_FRAGMENTS.has(fragment)) {
+            history.replaceState(null, "", "#" + resolveCalculatorFragment(fragment));
+          }
+          navigate(fragment, { behavior: "auto" });
+        };
         applyHubFilter(activeHubKey);
         window.addEventListener("hashchange", syncHubToFragment);
         requestAnimationFrame(syncHubToFragment);
       }
 
       function initCalculatorSearch() {
-        const nav = document.querySelector(".top-nav");
         const searchInput = document.getElementById("calculatorSearch");
         const clearButton = document.getElementById("calculatorSearchClear");
-
-        if (!nav || !searchInput || !clearButton) {
-          return;
-        }
-
-        const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
-        if (links.length === 0) {
-          return;
-        }
+        const shortcuts = document.getElementById("calculatorShortcuts");
+        const shortcutHeading = document.getElementById("calculatorShortcutHeading");
+        const fullMenu = document.getElementById("allCalculatorsMenu");
+        const results = document.getElementById("calculatorSearchResults");
+        const matchesContainer = document.getElementById("calculatorSearchMatches");
+        const status = document.getElementById("calculatorSearchStatus");
+        if (!calculatorMenuController || !searchInput || !clearButton || !shortcuts || !shortcutHeading || !fullMenu || !results || !matchesContainer || !status) return;
+        const links = calculatorMenuController.allLinks;
+        let matches = [];
 
         const updateSearch = () => {
-          const rawQuery = searchInput.value.trim();
-          const query = normalizeSearchText(rawQuery);
-          let visibleCount = 0;
-
-          links.forEach((link) => {
-            const searchableText = normalizeSearchText(
-              `${link.textContent || ""} ${link.dataset.search || ""}`
-            );
-            const isMatch = !query || searchableText.includes(query);
-            link.classList.toggle("nav-link-hidden", !isMatch);
-            if (isMatch) {
-              visibleCount += 1;
-            }
+          const query = normalizeSearchText(searchInput.value);
+          const searching = query.length > 0;
+          const terms = query.split(" ").filter(Boolean);
+          matches = searching ? links.filter((link) => {
+            const searchable = normalizeSearchText(link.textContent + " " + (link.dataset.search || ""));
+            return terms.every((term) => searchable.includes(term));
+          }) : [];
+          const resultLinks = matches.map((source) => {
+            const link = source.cloneNode(true);
+            link.classList.remove("hub-link-hidden");
+            const category = document.createElement("span");
+            category.className = "menu-result-category";
+            category.textContent = HUB_MENU_CONTENT[link.dataset.hub].label;
+            link.append(category);
+            return link;
           });
-
-          clearButton.hidden = query.length === 0;
+          matchesContainer.replaceChildren(...resultLinks);
+          status.textContent = !searching ? "" : matches.length === 0
+            ? "Ingen kalkulatorer funnet. Prøv for eksempel prosent, rabatt eller lønn."
+            : matches.length === 1 ? "1 kalkulator funnet" : matches.length + " kalkulatorer funnet";
+          results.hidden = !searching;
+          shortcuts.hidden = searching;
+          shortcutHeading.hidden = searching;
+          fullMenu.hidden = searching;
+          clearButton.hidden = !searching;
         };
 
-        const jumpToFirstMatch = () => {
-          const firstVisible = links.find(
-            (link) =>
-              !link.classList.contains("nav-link-hidden") &&
-              !link.classList.contains("hub-link-hidden")
-          );
-          if (!firstVisible) {
-            return;
-          }
-
-          const targetSelector = firstVisible.getAttribute("href");
-          if (!targetSelector) {
-            return;
-          }
-
-          const target = document.getElementById(resolveCalculatorFragment(targetSelector.slice(1)));
-          if (!target) {
-            return;
-          }
-
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-          firstVisible.focus();
-          history.replaceState(null, "", targetSelector);
+        const clearSearch = () => {
+          searchInput.value = "";
+          updateSearch();
+          searchInput.focus();
         };
-
         searchInput.addEventListener("input", updateSearch);
         searchInput.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-            jumpToFirstMatch();
-          }
-
-          if (event.key === "Escape") {
-            searchInput.value = "";
-            updateSearch();
+            if (matches.length) calculatorMenuController.navigate(matches[0].getAttribute("href").slice(1), { updateHistory: true, focus: true });
+          } else if (event.key === "Escape") {
+            clearSearch();
+          } else if (event.key === "ArrowDown" && matches.length) {
+            event.preventDefault();
+            matchesContainer.querySelector("a")?.focus();
           }
         });
-
-        clearButton.addEventListener("click", () => {
-          searchInput.value = "";
-          updateSearch();
-          searchInput.focus();
-        });
-
+        clearButton.addEventListener("click", clearSearch);
         document.addEventListener("hubFilterChanged", updateSearch);
-
         updateSearch();
       }
 
@@ -7772,49 +7917,6 @@ document.addEventListener('DOMContentLoaded', initHelpTypewriter);
 
         document.addEventListener('DOMContentLoaded', () => {
           renderApproach(approachIndex);
-        });
-
-        /* Collapse top nav on scroll down */
-        document.addEventListener('DOMContentLoaded', () => {
-          const nav = document.querySelector('.top-nav');
-          if (!nav) return;
-          let lastScrollY = window.scrollY;
-          const stickyStart = nav.offsetTop;
-          const collapseOffset = stickyStart + nav.offsetHeight;
-          let upwardDistance = 0;
-          const mobileRevealThreshold = 90;
-          const desktopRevealThreshold = 30;
-
-          window.addEventListener('scroll', () => {
-            const current = window.scrollY;
-            const delta = current - lastScrollY;
-            const scrollingDown = delta > 0;
-            const farEnough = current > collapseOffset;
-            const revealThreshold = window.matchMedia('(max-width: 800px)').matches
-              ? mobileRevealThreshold
-              : desktopRevealThreshold;
-
-            // Keep menu visible until the user has actually scrolled past the nav region.
-            if (current <= stickyStart) {
-              nav.classList.remove('collapsed');
-              upwardDistance = 0;
-              lastScrollY = current;
-              return;
-            }
-
-            if (scrollingDown && farEnough) {
-              upwardDistance = 0;
-              nav.classList.add('collapsed');
-            } else if (delta < 0) {
-              upwardDistance += Math.abs(delta);
-              if (current <= stickyStart || upwardDistance >= revealThreshold) {
-                nav.classList.remove('collapsed');
-                upwardDistance = 0;
-              }
-            }
-
-            lastScrollY = current;
-          }, { passive: true });
         });
 
         /* FAQ toggle: show/hide extra questions */
