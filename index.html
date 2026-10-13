@@ -1876,6 +1876,42 @@
                   min-height: 72px;
                 }
               }
+
+              /* Align the desktop menu with the calculator grid. */
+              @media (min-width: 1024px) {
+                .top-nav {
+                  max-width: 1160px;
+                }
+
+                .shortcut-links,
+                .all-calculator-links {
+                  gap: 20px;
+                }
+
+                .all-calculator-links {
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                }
+
+                .main-calculators {
+                  margin-top: 32px;
+                }
+              }
+
+              @media (min-width: 1400px) {
+                .search-row {
+                  grid-template-columns: minmax(0, 1fr) minmax(0, 600px) minmax(0, 1fr);
+                  gap: 0;
+                }
+
+                .search-row .nav-search {
+                  grid-column: 2;
+                  grid-row: 1;
+                }
+
+                .top-nav {
+                  max-width: 1560px;
+                }
+              }
     </style>
   </head>
 
