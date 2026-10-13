@@ -1792,7 +1792,6 @@
                 text-decoration-thickness: 2px;
               }
 
-              .shortcut-heading,
               .menu-search-status {
                 margin: 0;
                 font-family: "Roboto", sans-serif;
@@ -1801,29 +1800,6 @@
                 text-align: left;
               }
 
-              .shortcut-links {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 10px;
-              }
-
-              .shortcut-links a {
-                min-width: 0;
-                min-height: 86px;
-                padding: 14px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-                line-height: 1.4;
-                text-align: left;
-              }
-
-              .shortcut-links .menu-link-title {
-                font-size: 16px;
-                font-weight: 500;
-              }
-
-              .shortcut-example,
               .menu-result-category {
                 font-size: 13px;
                 line-height: 1.4;
@@ -1867,14 +1843,6 @@
                 .top-nav {
                   width: 90%;
                 }
-
-                .shortcut-links {
-                  grid-template-columns: minmax(0, 1fr);
-                }
-
-                .shortcut-links a {
-                  min-height: 72px;
-                }
               }
 
               /* Align the desktop menu with the calculator grid. */
@@ -1883,7 +1851,6 @@
                   max-width: 1160px;
                 }
 
-                .shortcut-links,
                 .all-calculator-links {
                   gap: 20px;
                 }
@@ -1939,12 +1906,6 @@
     </div>
 
     <nav class="top-nav" aria-label="Kalkulatornavigasjon">
-      <p class="shortcut-heading" id="calculatorShortcutHeading">Snarveier til prosentregning</p>
-      <div class="shortcut-links" id="calculatorShortcuts" aria-labelledby="calculatorShortcutHeading">
-        <a href="#finn-delen-av-tallet" data-hub="prosent" data-search="prosent av tall Finn delen av tallet Hva er 20 % av 500?"><span class="menu-link-title">Prosent av et tall</span><span class="shortcut-example">Hva er 20 % av 500?</span></a>
-        <a href="#finn-prosentandel-av-totalen" data-hub="prosent" data-search="andel total prosent Finn prosentandel av totalen Hvor mange % er 30 av 150?"><span class="menu-link-title">Finn prosentandelen</span><span class="shortcut-example">Hvor mange % er 30 av 150?</span></a>
-        <a href="#prosentøkning-fra-verdi-a-til-verdi-b" data-hub="prosent" data-search="hvor mange prosent prosentendring fra til vekst opp Prosentøkning fra verdi A til verdi B Fra 200 til 250"><span class="menu-link-title">Prosentøkning</span><span class="shortcut-example">Fra 200 til 250</span></a>
-      </div>
       <div class="search-results" id="calculatorSearchResults" hidden>
         <p class="menu-search-status" id="calculatorSearchStatus" role="status" aria-live="polite"></p>
         <div class="all-calculator-links" id="calculatorSearchMatches"></div>
@@ -4342,79 +4303,19 @@
       const HUB_MENU_CONTENT = {
   "prosent": {
     "label": "Prosent",
-    "caption": "Snarveier til prosentregning",
-    "allLabel": "Alle prosentkalkulatorer",
-    "shortcuts": [
-      [
-        "finn-delen-av-tallet",
-        "Hva er 20 % av 500?"
-      ],
-      [
-        "finn-prosentandel-av-totalen",
-        "Hvor mange % er 30 av 150?"
-      ],
-      [
-        "prosentøkning-fra-verdi-a-til-verdi-b",
-        "Fra 200 til 250"
-      ]
-    ]
+    "allLabel": "Alle prosentkalkulatorer"
   },
   "lonn-skatt": {
     "label": "Lønn og skatt",
-    "caption": "Snarveier til lønn og skatt",
-    "allLabel": "Alle kalkulatorer for lønn og skatt",
-    "shortcuts": [
-      [
-        "feriepengekalkulator",
-        "Beregn feriepengene dine"
-      ],
-      [
-        "brutto-til-netto",
-        "Lønn etter skatt"
-      ],
-      [
-        "lønnsøkning-i-kroner-og-prosent",
-        "Økning i kroner og prosent"
-      ]
-    ]
+    "allLabel": "Alle kalkulatorer for lønn og skatt"
   },
   "sparing-renter": {
     "label": "Sparing og renter",
-    "caption": "Snarveier til sparing og renter",
-    "allLabel": "Alle kalkulatorer for sparing og renter",
-    "shortcuts": [
-      [
-        "renters-rente-kalkulator",
-        "Hvordan vokser sparepengene?"
-      ],
-      [
-        "månedssparing",
-        "Spar et fast beløp hver måned"
-      ],
-      [
-        "sparemål",
-        "Hvor mye må du spare?"
-      ]
-    ]
+    "allLabel": "Alle kalkulatorer for sparing og renter"
   },
   "oppgaver": {
     "label": "Lær prosent",
-    "caption": "Lær og øv på prosent",
-    "allLabel": "Alle oppgaver og forklaringer",
-    "shortcuts": [
-      [
-        "hoderegning",
-        "Lær enkle prosentmetoder"
-      ],
-      [
-        "prosent-quiz",
-        "Øv på prosentregning"
-      ],
-      [
-        "ofte-stilte-spørsmål",
-        "Svar på vanlige spørsmål"
-      ]
-    ]
+    "allLabel": "Alle oppgaver og forklaringer"
   }
 };
 
@@ -4424,17 +4325,14 @@
         const buttons = Array.from(document.querySelectorAll(".hub-button[data-hub]"));
         const nav = document.querySelector(".top-nav");
         const allLinks = Array.from(document.querySelectorAll("#allCalculatorLinks a"));
-        const shortcuts = document.getElementById("calculatorShortcuts");
-        const heading = document.getElementById("calculatorShortcutHeading");
         const fullMenu = document.getElementById("allCalculatorsMenu");
         const summary = document.getElementById("allCalculatorsSummary");
         const searchInput = document.getElementById("calculatorSearch");
-        if (!buttons.length || !nav || !allLinks.length || !shortcuts || !heading || !fullMenu || !summary || !searchInput) return;
+        if (!buttons.length || !nav || !allLinks.length || !fullMenu || !summary || !searchInput) return;
 
         const resolveBlock = (element) => element.closest(".item") || element;
         const allTargets = Array.from(document.querySelectorAll(".calculator[id], #prosent-og-prosentregning-en-enkel-innføring"));
         const allBlocks = Array.from(new Set(allTargets.map(resolveBlock)));
-        const linksById = new Map(allLinks.map((link) => [resolveCalculatorFragment(link.getAttribute("href").slice(1)), link]));
 
         const applyHubFilter = (hubKey) => {
           const key = HUB_CALCULATOR_CONFIG[hubKey] ? hubKey : "prosent";
@@ -4449,19 +4347,6 @@
             button.classList.toggle("active", active);
             button.setAttribute("aria-pressed", String(active));
           });
-          const shortcutLinks = menu.shortcuts.map(([id, example]) => {
-            const source = linksById.get(id);
-            if (!source) return null;
-            const link = source.cloneNode(true);
-            link.classList.remove("hub-link-hidden");
-            const description = document.createElement("span");
-            description.className = "shortcut-example";
-            description.textContent = example;
-            link.append(description);
-            return link;
-          }).filter(Boolean);
-          shortcuts.replaceChildren(...shortcutLinks);
-          heading.textContent = menu.caption;
           summary.textContent = menu.allLabel;
           activeHubKey = key;
           document.dispatchEvent(new CustomEvent("hubFilterChanged"));
@@ -4520,13 +4405,11 @@
       function initCalculatorSearch() {
         const searchInput = document.getElementById("calculatorSearch");
         const clearButton = document.getElementById("calculatorSearchClear");
-        const shortcuts = document.getElementById("calculatorShortcuts");
-        const shortcutHeading = document.getElementById("calculatorShortcutHeading");
         const fullMenu = document.getElementById("allCalculatorsMenu");
         const results = document.getElementById("calculatorSearchResults");
         const matchesContainer = document.getElementById("calculatorSearchMatches");
         const status = document.getElementById("calculatorSearchStatus");
-        if (!calculatorMenuController || !searchInput || !clearButton || !shortcuts || !shortcutHeading || !fullMenu || !results || !matchesContainer || !status) return;
+        if (!calculatorMenuController || !searchInput || !clearButton || !fullMenu || !results || !matchesContainer || !status) return;
         const links = calculatorMenuController.allLinks;
         let matches = [];
 
@@ -4552,8 +4435,6 @@
             ? "Ingen kalkulatorer funnet. Prøv for eksempel prosent, rabatt eller lønn."
             : matches.length === 1 ? "1 kalkulator funnet" : matches.length + " kalkulatorer funnet";
           results.hidden = !searching;
-          shortcuts.hidden = searching;
-          shortcutHeading.hidden = searching;
           fullMenu.hidden = searching;
           clearButton.hidden = !searching;
         };
